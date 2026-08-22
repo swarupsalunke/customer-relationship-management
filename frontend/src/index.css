@@ -1,0 +1,421 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+/* =====================================================
+   TOP NAVBAR
+===================================================== */
+
+.top-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  width: 100%;
+  height: 67px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e8ebef;
+}
+
+
+/* =====================================================
+   LEFT SIDE
+===================================================== */
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+
+  gap: 25px;
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.navbar-menu-btn {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+
+  color: #344054;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.navbar-menu-btn:hover {
+  background: #f4f6f8;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.navbar-search {
+  width: 320px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 0 12px;
+
+  background: #f9fafb;
+
+  border: 1px solid #e1e6eb;
+
+  border-radius: 7px;
+
+  color: #667085;
+}
+
+.navbar-search input {
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #344054;
+
+  font-size: 11px;
+}
+
+.navbar-search input::placeholder {
+  color: #667085;
+}
+
+/* Search shortcut */
+
+.search-shortcut {
+  color: #667085;
+
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+/* =====================================================
+   COMMON ICON BUTTON
+===================================================== */
+
+.navbar-icon-btn {
+  position: relative;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: transparent;
+
+  color: #101828;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.navbar-icon-btn:hover {
+  background: #f3f5f7;
+}
+
+
+/* =====================================================
+   ORANGE PLUS BUTTON
+===================================================== */
+
+.add-btn {
+  width: 31px;
+  height: 31px;
+
+  margin-right: 8px;
+
+  background: #ff6b00;
+
+  color: #ffffff;
+
+  box-shadow: 0 3px 8px rgba(255, 107, 0, 0.25);
+}
+
+.add-btn:hover {
+  background: #ed6100;
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.notification-btn {
+  margin-right: 2px;
+}
+
+/* Notification number */
+
+.notification-count {
+  position: absolute;
+
+  top: -1px;
+  right: -1px;
+
+  min-width: 16px;
+  height: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 4px;
+
+  background: #e51d2a;
+
+  color: #ffffff;
+
+  border: 2px solid #ffffff;
+
+  border-radius: 20px;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.navbar-profile {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-left: 8px;
+
+  padding-left: 5px;
+
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   PROFILE IMAGE
+===================================================== */
+
+.navbar-profile-image {
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eef2f5;
+
+  color: #344054;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  overflow: hidden;
+}
+
+
+/* =====================================================
+   PROFILE TEXT
+===================================================== */
+
+.navbar-profile-info {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.navbar-profile-info strong {
+  color: #101828;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.navbar-profile-info span {
+  color: #667085;
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   PROFILE ARROW
+===================================================== */
+
+.profile-arrow {
+  margin-left: 3px;
+
+  color: #344054;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+
+  .navbar-search {
+    width: 260px;
+  }
+
+  .navbar-right {
+    gap: 4px;
+  }
+
+  .navbar-profile-info {
+    display: none;
+  }
+
+  .navbar-profile {
+    margin-left: 4px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .top-navbar {
+    height: 62px;
+
+    padding: 0 10px;
+  }
+
+  .navbar-left {
+    gap: 8px;
+  }
+
+  /* Search becomes icon */
+
+  .navbar-search {
+    width: 36px;
+
+    padding: 0;
+
+    justify-content: center;
+
+    border: none;
+
+    background: transparent;
+  }
+
+  .navbar-search input,
+  .search-shortcut {
+    display: none;
+  }
+
+  /* Hide some icons on mobile (uses :nth-of-type so it only
+     counts .navbar-icon-btn siblings, not every child of
+     .navbar-right — the old :nth-child version could
+     mis-target elements if a non-icon-btn child was added) */
+
+  .navbar-right .navbar-icon-btn:nth-of-type(4),
+  .navbar-right .navbar-icon-btn:nth-of-type(5),
+  .navbar-right .navbar-icon-btn:nth-of-type(6) {
+    display: none;
+  }
+
+  .navbar-right {
+    gap: 2px;
+  }
+
+  .navbar-profile {
+    margin-left: 2px;
+    padding-left: 0;
+  }
+
+  .profile-arrow {
+    display: none;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+
+  .notification-btn,
+  .navbar-right .navbar-icon-btn:nth-of-type(3) {
+    display: none;
+  }
+
+}
