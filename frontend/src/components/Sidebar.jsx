@@ -11,15 +11,15 @@ import {
   Gift,
   Factory,
   Warehouse,
-  WalletCards,
   UserRoundCog,
-  BarChart3,
   Settings,
   Headphones,
   Phone,
   ChevronRight,
   ChevronDown,
   FileText,
+  Wallet,
+  FileBarChart,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
@@ -34,6 +34,10 @@ const Sidebar = () => {
   const [leadOpen, setLeadOpen] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
   const [rewardOpen, setRewardOpen] = useState(false);
+  const [schemeOpen, setSchemeOpen] = useState(false);
+  const [financeOpen, setFinanceOpen] = useState(false);
+  const [reportsOpen, setReportsOpen] = useState(false);
+  const [systemSettingsOpen, setSystemSettingsOpen] = useState(false);
 
   return (
     <aside className="dashboard-sidebar">
@@ -338,6 +342,146 @@ const Sidebar = () => {
 
         </div>
 
+        {/* Scheme Management */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setSchemeOpen(!schemeOpen)}
+          >
+            <Gift size={19} />
+
+            <span>Scheme Management</span>
+
+            {schemeOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Scheme List */}
+          {schemeOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/scheme-management"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <FileText size={16} />
+
+                <span>All Schemes</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
+
+
+        {/* Finance Management */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setFinanceOpen(!financeOpen)}
+          >
+            <Wallet size={19} />
+
+            <span>Finance Management</span>
+
+            {financeOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Finance Dashboard */}
+          {financeOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/finance-dashboard"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <FileText size={16} />
+
+                <span>Finance Dashboard</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
+
+
+        {/* Reports Management */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setReportsOpen(!reportsOpen)}
+          >
+            <FileBarChart size={19} />
+
+            <span>Reports Management</span>
+
+            {reportsOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Reports */}
+          {reportsOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/reports"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <FileText size={16} />
+
+                <span>All Reports</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
+
 
         {/* Manufacturing */}
         <NavLink
@@ -360,14 +504,7 @@ const Sidebar = () => {
         </NavLink>
 
 
-        {/* Finance Management */}
-        <NavLink
-          to="/finance"
-          className="dashboard-nav-item"
-        >
-          <WalletCards size={19} />
-          <span>Finance Management</span>
-        </NavLink>
+
 
 
         {/* HR Management */}
@@ -380,25 +517,54 @@ const Sidebar = () => {
         </NavLink>
 
 
-        {/* Reports & Analytics */}
-        <NavLink
-          to="/reports"
-          className="dashboard-nav-item"
-        >
-          <BarChart3 size={19} />
-          <span>Reports & Analytics</span>
-          <ChevronRight className="menu-arrow" size={16} />
-        </NavLink>
+
 
 
         {/* System Settings */}
-        <NavLink
-          to="/settings"
-          className="dashboard-nav-item"
-        >
-          <Settings size={19} />
-          <span>System Settings</span>
-        </NavLink>
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setSystemSettingsOpen(!systemSettingsOpen)}
+          >
+            <Settings size={19} />
+
+            <span>System Settings</span>
+
+            {systemSettingsOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* General Settings */}
+          {systemSettingsOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/system-settings"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <FileText size={16} />
+
+                <span>General Settings</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
 
       </nav>
 

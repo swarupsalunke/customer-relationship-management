@@ -23,6 +23,16 @@ const qrRoutes = require("./routes/qrRoutes");
 
 const rewardRoutes = require("./routes/rewardRoutes");
 
+const schemeRoutes = require("./routes/schemeRoutes");
+
+const financeRoutes = require("./routes/financeRoutes");
+
+const reportRoutes = require("./routes/reportRoutes");
+
+const systemSettingsRoutes = require("./routes/systemSettingsRoutes");
+
+const path = require("path");
+
 dotenv.config();
 
 const app = express();
@@ -43,6 +53,11 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/leads", leadRoutes);
 app.use("/api/qr", qrRoutes);
 app.use("/api/rewards", rewardRoutes);
+app.use("/api/schemes", schemeRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/api/finance", financeRoutes);
+app.use("/api/reports", reportRoutes);
+app.use("/api/system-settings", systemSettingsRoutes);
 
 app.get("/", (req, res) => {
   res.json({

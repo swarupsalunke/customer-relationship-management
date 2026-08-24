@@ -115,7 +115,7 @@ const Dashboard = () => {
     { label: "Add Product", icon: PackagePlus, to: "/products" },
     { label: "Add Dealer", icon: Store, to: "/users" },
     { label: "Create Order", icon: ShoppingCart, to: "/order-management" },
-    { label: "Add Scheme", icon: Gift },
+    // { label: "Add Scheme", icon: Gift, to: "/scheme-management" },
     { label: "Send Notification", icon: Bell },
   ];
 

@@ -18,7 +18,11 @@ import OrderManagement from "./pages/OrderManagement";
 import LeadManagement from "./pages/LeadManagement";
 import QRManagement from "./pages/QRManagement";
 import RewardDashboard from "./pages/RewardDashboard";
+import SchemeManagement from "./pages/SchemeManagement";
+import FinanceDashboard from "./pages/FinanceDashboard";
 import DashboardLayout from "./layouts/DashboardLayout";
+import Reports from "./pages/Reports";
+import SystemSettings from "./pages/SystemSettings";
 
 
 const App = () => {
@@ -140,6 +144,42 @@ const App = () => {
           element={
             <DashboardLayout>
               <RewardDashboard />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/scheme-management"
+          element={
+            <DashboardLayout>
+              <SchemeManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/finance-dashboard"
+          element={
+            <DashboardLayout>
+              <FinanceDashboard />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/reports"
+          element={
+            <DashboardLayout>
+              <Reports />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/system-settings"
+          element={
+            <DashboardLayout>
+              <SystemSettings />
             </DashboardLayout>
           }
         />
