@@ -1008,13 +1008,6 @@ const ProductManagement = () => {
 
                         <div className="product-modal-header">
                             <h2>Add Product</h2>
-
-                            <button
-                                type="button"
-                                onClick={() => setShowAddModal(false)}
-                            >
-                                ×
-                            </button>
                         </div>
 
                         <form onSubmit={handleAddProduct}>

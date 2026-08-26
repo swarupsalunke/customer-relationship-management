@@ -1506,15 +1506,6 @@ const PriceManagement = () => {
                     : "Create a new price list"}
                 </p>
               </div>
-
-              <button
-                type="button"
-                className="price-modal-close"
-                onClick={handleClosePriceModal}
-              >
-                ×
-              </button>
-
             </div>
 
 

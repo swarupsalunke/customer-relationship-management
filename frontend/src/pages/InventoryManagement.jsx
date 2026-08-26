@@ -945,7 +945,6 @@ const InventoryManagement = () => {
                                 <h2>{modalType === "INWARD" ? "Add Stock" : modalType === "OUTWARD" ? "Outward Material" : "Stock Adjustment"}</h2>
                                 <p>{modalType === "INWARD" ? "Record incoming material into a warehouse." : modalType === "OUTWARD" ? "Record material consumption." : "Adjust current stock quantity."}</p>
                             </div>
-                            <button type="button" className="inventory-close-btn" onClick={closeModal} disabled={savingAction}><X size={18} /></button>
                         </div>
 
                         <form className="inventory-modal-form" onSubmit={handleMovementSubmit}>

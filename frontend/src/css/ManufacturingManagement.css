@@ -96,14 +96,14 @@
 }
 
 .manufacturing-primary-btn {
-    border: 1px solid #2563eb;
-    background: #2563eb;
+    border: 1px solid #ff6900;
+    background: #ff6900;
     color: #ffffff;
 }
 
 .manufacturing-primary-btn:hover {
-    background: #1d4ed8;
-    border-color: #1d4ed8;
+    background: #e96000;
+    border-color: #e96000;
 }
 
 .manufacturing-primary-btn:disabled,
@@ -1207,7 +1207,7 @@
     margin-bottom: 5px;
 
     color: #344054;
-    font-size: 9px;
+    font-size: 12px;
     font-weight: 600;
 }
 
@@ -1233,7 +1233,7 @@
 
 .manufacturing-form-group input,
 .manufacturing-form-group select {
-    height: 36px;
+    height: 40px;
     padding: 0 9px;
 }
 
@@ -1247,8 +1247,7 @@
 .manufacturing-form-group input:focus,
 .manufacturing-form-group select:focus,
 .manufacturing-form-group textarea:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.07);
+    border-color: #ff6900;
 }
 
 .manufacturing-form-group input:disabled {
@@ -1321,7 +1320,7 @@
 }
 
 .manufacturing-packing-card input:focus {
-    border-color: #2563eb;
+    border-color: #ff6900;
 }
 
 .manufacturing-check-label {
@@ -1379,6 +1378,9 @@
     align-items: center;
     justify-content: flex-end;
     gap: 7px;
+}
+.manufacturing-modal-footer button{
+    height: 40px;
 }
 
 /*      =======

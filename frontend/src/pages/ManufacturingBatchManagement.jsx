@@ -3150,19 +3150,6 @@ const ManufacturingBatchManagement = () => {
                                     </p>
                                 </div>
 
-                                <button
-                                    type="button"
-                                    className="manufacturing-close-btn"
-                                    onClick={
-                                        showEditModal
-                                            ? closeEditModal
-                                            : closeCreateModal
-                                    }
-                                    disabled={savingBatch}
-                                >
-                                    <X size={18} />
-                                </button>
-
                             </div>
 
                             {renderBatchForm()}

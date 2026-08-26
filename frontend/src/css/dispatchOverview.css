@@ -78,14 +78,14 @@
     align-items: center;
     justify-content: center;
     gap: 7px;
-    background: #2563eb;
+    background: #ff6900;
     color: #fff;
     font-size: 13px;
     font-weight: 600;
 }
 
 .dispatch-primary-btn:hover {
-    background: #1d4ed8;
+    background: #e96000;
 }
 
 .dispatch-primary-btn:disabled {
@@ -340,7 +340,7 @@ label.dispatch-secondary-btn input[type="file"] {
 .dispatch-filter-field select,
 .dispatch-form-group input,
 .dispatch-form-group select {
-    height: 39px;
+    height: 40px;
     padding: 0 11px;
 }
 
@@ -355,8 +355,7 @@ label.dispatch-secondary-btn input[type="file"] {
 .dispatch-form-group input:focus,
 .dispatch-form-group select:focus,
 .dispatch-form-group textarea:focus {
-    border-color: #93c5fd;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+    border-color: #ff6900;
 }
 
 .dispatch-date-range {
@@ -1029,6 +1028,10 @@ label.dispatch-secondary-btn input[type="file"] {
     align-items: center;
     justify-content: flex-end;
     gap: 8px;
+}
+
+.dispatch-modal-footer button{
+    height: 40px;
 }
 
 /* view */

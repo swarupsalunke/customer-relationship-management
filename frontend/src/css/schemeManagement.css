@@ -1124,7 +1124,7 @@
 
 .form-group input,
 .form-group select {
-  height: 39px;
+  height: 40px;
   padding: 0 11px;
 }
 
@@ -1139,7 +1139,6 @@
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: #ff5a1f;
-  box-shadow: 0 0 0 3px rgba(255, 90, 31, 0.1);
 }
 
 .file-input-wrapper {

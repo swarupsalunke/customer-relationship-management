@@ -1914,15 +1914,6 @@ const InboundMaterialManagement = () => {
                                         : "Update inbound material details."}
                                 </p>
                             </div>
-
-                            <button
-                                type="button"
-                                className="inbound-close-btn"
-                                onClick={closeModal}
-                                disabled={saving}
-                            >
-                                <X size={18} />
-                            </button>
                         </div>
 
                         <form

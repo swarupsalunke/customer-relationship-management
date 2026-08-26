@@ -1406,10 +1406,6 @@ const FinanceDashboard = () => {
                 <h2>Add Income</h2>
                 <p>Add a new income transaction</p>
               </div>
-
-              <button onClick={() => setShowIncomeModal(false)}>
-                <X size={20} />
-              </button>
             </div>
 
             <form onSubmit={handleIncomeSubmit} className="finance-form">
@@ -1547,10 +1543,6 @@ const FinanceDashboard = () => {
                 <h2>Add Expense</h2>
                 <p>Add a new expense transaction</p>
               </div>
-
-              <button onClick={() => setShowExpenseModal(false)}>
-                <X size={20} />
-              </button>
             </div>
 
             <form onSubmit={handleExpenseSubmit} className="finance-form">

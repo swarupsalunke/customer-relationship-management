@@ -677,6 +677,7 @@
   justify-content: flex-end;
   padding: 16px 24px;
   border-top: 1px solid #edf0f4;
+  gap: 6px;
 }
 
 .product-modal-footer button {
@@ -686,6 +687,7 @@
   background: #ffffff;
   cursor: pointer;
   font-weight: 600;
+  height: 40px;
 }
 
 .product-edit-grid {

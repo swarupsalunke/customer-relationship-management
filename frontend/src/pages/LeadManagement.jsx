@@ -1085,16 +1085,8 @@ const LeadManagement = () => {
                         <div className="lead-modal-header">
                             <div>
                                 <h2>{editingLead ? "Edit Lead" : "Add New Lead"}</h2>
-                                <p>{editingLead ? "Update lead information." : "Create a new lead."}</p>
+                                <p>{editingLead ? "Update lead information." : ""}</p>
                             </div>
-
-                            <button
-                                type="button"
-                                className="lead-modal-close"
-                                onClick={() => setShowAddModal(false)}
-                            >
-                                <X size={20} />
-                            </button>
                         </div>
 
                         <form onSubmit={handleSubmitLead}>

@@ -951,13 +951,6 @@ const RewardDashboard = () => {
                                 <h3>Add Points</h3>
                                 <p>Add reward points to Dealer or Painter wallet</p>
                             </div>
-                            <button
-                                type="button"
-                                className="reward-modal-close"
-                                onClick={() => setShowAddPointsModal(false)}
-                            >
-                                <X size={18} />
-                            </button>
                         </div>
 
                         <form
@@ -1049,13 +1042,6 @@ const RewardDashboard = () => {
                                 <h3>Add Cash Reward</h3>
                                 <p>Add cash reward to Dealer or Painter wallet</p>
                             </div>
-                            <button
-                                type="button"
-                                className="reward-modal-close"
-                                onClick={() => setShowCashRewardModal(false)}
-                            >
-                                <X size={18} />
-                            </button>
                         </div>
 
                         <form

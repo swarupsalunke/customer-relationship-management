@@ -2281,14 +2281,6 @@ const QRManagement = () => {
                 </p>
               </div>
 
-              <button
-                onClick={() =>
-                  setShowGenerateModal(false)
-                }
-              >
-                <X size={18} />
-              </button>
-
             </div>
 
             <form

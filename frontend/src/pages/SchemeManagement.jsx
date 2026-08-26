@@ -1361,10 +1361,6 @@ const SchemeManagement = () => {
                 <h2>Add New Scheme</h2>
                 <p>Create a new promotional scheme</p>
               </div>
-
-              <button onClick={closeAddModal}>
-                <X size={20} />
-              </button>
             </div>
 
             <SchemeForm

@@ -793,7 +793,7 @@ const DispatchManagement = () => {
       {(modal === "CREATE" || modal === "EDIT") && (
         <div className="dispatch-modal-overlay" onClick={closeModal}>
           <div className="dispatch-modal large" onClick={(e) => e.stopPropagation()}>
-            <div className="dispatch-modal-header"><div><h2>{modal === "CREATE" ? "Add Dispatch" : "Edit Dispatch"}</h2><p>{modal === "CREATE" ? "Create a new outbound dispatch entry." : "Update dispatch details and documents."}</p></div><button type="button" className="dispatch-close-btn" onClick={closeModal}><X size={18} /></button></div>
+            <div className="dispatch-modal-header"><div><h2>{modal === "CREATE" ? "Add Dispatch" : "Edit Dispatch"}</h2><p>{modal === "CREATE" ? "Create a new outbound dispatch entry." : "Update dispatch details and documents."}</p></div></div>
             <form className="dispatch-modal-form" onSubmit={modal === "CREATE" ? submitCreate : submitEdit}>
               <div className="dispatch-form-grid">
                 <div className="dispatch-form-group"><label>Customer *</label><input name="customer" value={form.customer} onChange={changeForm} required /></div>

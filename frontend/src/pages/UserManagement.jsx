@@ -1264,15 +1264,6 @@ const UserManagement = () => {
                                     Create a new user account.
                                 </p>
                             </div>
-
-                            <button
-                                type="button"
-                                className="add-user-close-btn"
-                                onClick={() => setShowAddUser(false)}
-                            >
-                                ×
-                            </button>
-
                         </div>
 
 

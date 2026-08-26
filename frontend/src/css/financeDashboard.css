@@ -1645,7 +1645,6 @@
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--fd-accent);
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
 }
 
 .finance-modal-footer {
@@ -1668,15 +1667,13 @@
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
+  height: 40px;
 }
 
 .cancel-btn:hover {
   background: #f3f4f6;
 }
 
-/*      =======
-   TRANSACTION DETAILS
-     ======= */
 
 .transaction-details {
   padding: 20px;

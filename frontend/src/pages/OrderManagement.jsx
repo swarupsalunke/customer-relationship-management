@@ -1150,10 +1150,6 @@ const OrderManagement = () => {
                                 <h2>Create New Order</h2>
                                 <p>Create a new dealer order.</p>
                             </div>
-
-                            <button type="button" className="order-modal-close" onClick={closeCreateOrderModal}>
-                                <XCircle size={20} />
-                            </button>
                         </div>
 
                         <form className="order-create-form" onSubmit={handleCreateOrder}>

@@ -670,7 +670,7 @@ const Sidebar = () => {
               >
                 <FileText size={16} />
 
-                <span>Inbound Material Overview</span>
+                <span>Overview</span>
               </NavLink>
 
             </div>

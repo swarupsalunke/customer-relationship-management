@@ -1465,7 +1465,7 @@ input {
 .price-form-group input,
 .price-form-group select {
   width: 100%;
-  height: 42px;
+  height: 40px;
 
   padding: 0 12px;
 
@@ -1491,15 +1491,13 @@ input {
 
 .price-form-group input::placeholder {
   color: #9ca3af;
+  font-size: 10px;
 }
 
 
 .price-form-group input:focus,
 .price-form-group select:focus {
-  border-color: #2563eb;
-
-  box-shadow:
-    0 0 0 3px rgba(37, 99, 235, 0.08);
+  border-color: #f28c28;
 }
 
 
@@ -1554,17 +1552,17 @@ input {
 
 
 .price-modal-submit {
-  border: 1px solid #2563eb;
+  border: 1px solid #f28c28;
 
-  background: #2563eb;
+  background: #f28c28;
 
   color: #ffffff;
 }
 
 
 .price-modal-submit:hover {
-  background: #1d4ed8;
-  border-color: #1d4ed8;
+  background: #e87d16;
+  border-color: #e87d16;
 }
 
 

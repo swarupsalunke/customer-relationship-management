@@ -78,14 +78,14 @@
     align-items: center;
     justify-content: center;
     gap: 7px;
-    background: #2563eb;
+    background: #ff6900;
     color: #fff;
     font-size: 13px;
     font-weight: 600;
 }
 
 .inbound-primary-btn:hover {
-    background: #1d4ed8;
+    background: #e96000;
 }
 
 .inbound-primary-btn:disabled,
@@ -331,7 +331,7 @@ label.inbound-secondary-btn input[type="file"] {
 .inbound-filter-field select,
 .inbound-form-group input,
 .inbound-form-group select {
-    height: 39px;
+    height: 40px;
     padding: 0 11px;
 }
 
@@ -346,8 +346,7 @@ label.inbound-secondary-btn input[type="file"] {
 .inbound-form-group input:focus,
 .inbound-form-group select:focus,
 .inbound-form-group textarea:focus {
-    border-color: #93c5fd;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+    border-color: #ff6900;
 }
 
 .inbound-date-range {
