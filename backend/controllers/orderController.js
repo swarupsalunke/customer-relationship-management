@@ -1,10 +1,5 @@
 const Order = require("../models/Order");
 
-
-// ==========================================
-// CREATE ORDER
-// ==========================================
-
 const createOrder = async (req, res) => {
     try {
         const {
@@ -347,7 +342,6 @@ const deleteOrder = async (req, res) => {
         });
     }
 };
-
 
 module.exports = {
     createOrder,

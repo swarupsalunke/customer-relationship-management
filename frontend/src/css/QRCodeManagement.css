@@ -1,6 +1,6 @@
-/* =========================================================
+/*      =======
    QR CODE MANAGEMENT
-========================================================= */
+     ======= */
 
 .qr-management-page {
   width: 100%;
@@ -17,9 +17,9 @@
   box-sizing: border-box;
 }
 
-/* =========================================================
+/*      =======
    HEADER
-========================================================= */
+     ======= */
 
 .qr-page-header {
   display: flex;
@@ -60,9 +60,9 @@
   flex-wrap: wrap;
 }
 
-/* =========================================================
+/*      =======
    BUTTONS
-========================================================= */
+     ======= */
 
 .qr-primary-btn,
 .qr-outline-btn,
@@ -118,9 +118,9 @@
   background: #f7f8fa;
 }
 
-/* =========================================================
+/*      =======
    STAT CARDS
-========================================================= */
+     ======= */
 
 .qr-stat-grid {
   display: grid;
@@ -181,7 +181,7 @@
   background: #ffecef;
 }
 
-.qr-stat-card > div {
+.qr-stat-card>div {
   min-width: 0;
 }
 
@@ -211,9 +211,9 @@
   font-size: 8px;
 }
 
-/* =========================================================
+/*      =======
    MAIN GRID
-========================================================= */
+     ======= */
 
 .qr-main-grid {
   display: grid;
@@ -226,22 +226,15 @@
   min-width: 0;
 }
 
-/* =========================================================
+/*      =======
    FILTER CARD
-========================================================= */
+     ======= */
 
 .qr-filter-card {
   width: 100%;
   display: grid;
   grid-template-columns:
-    minmax(185px, 1.5fr)
-    minmax(110px, 1fr)
-    minmax(110px, 1fr)
-    minmax(110px, 1fr)
-    minmax(105px, 1fr)
-    minmax(210px, 1.45fr)
-    auto
-    auto;
+    minmax(185px, 1.5fr) minmax(110px, 1fr) minmax(110px, 1fr) minmax(110px, 1fr) minmax(105px, 1fr) minmax(210px, 1.45fr) auto auto;
   gap: 8px;
   align-items: end;
   padding: 11px;
@@ -345,7 +338,7 @@
   background: #fff;
 }
 
-.qr-date-wrapper > svg {
+.qr-date-wrapper>svg {
   flex-shrink: 0;
   color: #667085;
 }
@@ -391,9 +384,9 @@
   border-color: #c5ccd6;
 }
 
-/* =========================================================
+/*      =======
    TABS
-========================================================= */
+     ======= */
 
 .qr-tabs {
   min-height: 39px;
@@ -439,9 +432,9 @@
   background: #ff6b00;
 }
 
-/* =========================================================
+/*      =======
    TABLE
-========================================================= */
+     ======= */
 
 .qr-table-card {
   overflow: visible;
@@ -665,9 +658,9 @@
   }
 }
 
-/* =========================================================
+/*      =======
    PAGINATION
-========================================================= */
+     ======= */
 
 .qr-pagination {
   min-height: 48px;
@@ -729,9 +722,9 @@
   cursor: pointer;
 }
 
-/* =========================================================
+/*      =======
    RIGHT SIDEBAR
-========================================================= */
+     ======= */
 
 .qr-right-sidebar {
   min-width: 0;
@@ -773,9 +766,9 @@
   cursor: pointer;
 }
 
-/* =========================================================
+/*      =======
    DONUT
-========================================================= */
+     ======= */
 
 .qr-donut-area {
   display: flex;
@@ -878,9 +871,9 @@
   font-size: 8px;
 }
 
-/* =========================================================
+/*      =======
    SCAN SUMMARY
-========================================================= */
+     ======= */
 
 .qr-scan-summary-grid {
   display: grid;
@@ -888,7 +881,7 @@
   gap: 7px;
 }
 
-.qr-scan-summary-grid > div {
+.qr-scan-summary-grid>div {
   padding: 8px;
   border: 1px solid #edf0f4;
   border-radius: 6px;
@@ -939,9 +932,9 @@
   font-size: 13px;
 }
 
-/* =========================================================
+/*      =======
    TOP PRODUCTS
-========================================================= */
+     ======= */
 
 .qr-top-products {
   display: flex;
@@ -986,7 +979,7 @@
   white-space: nowrap;
 }
 
-.qr-top-product > span:last-child {
+.qr-top-product>span:last-child {
   color: #667085;
   font-size: 7px;
   white-space: nowrap;
@@ -999,9 +992,9 @@
   text-align: center;
 }
 
-/* =========================================================
+/*      =======
    QUICK ACTIONS
-========================================================= */
+     ======= */
 
 .qr-quick-actions {
   display: flex;
@@ -1029,7 +1022,7 @@
   background: #fbfcfe;
 }
 
-.qr-quick-actions button > span {
+.qr-quick-actions button>span {
   width: 30px;
   height: 30px;
   flex: 0 0 30px;
@@ -1055,9 +1048,9 @@
   font-size: 7px;
 }
 
-/* =========================================================
+/*      =======
    MODAL
-========================================================= */
+     ======= */
 
 .qr-modal-overlay {
   position: fixed;
@@ -1109,7 +1102,7 @@
   font-size: 9px;
 }
 
-.qr-modal-header > button {
+.qr-modal-header>button {
   width: 30px;
   height: 30px;
   flex-shrink: 0;
@@ -1123,7 +1116,7 @@
   cursor: pointer;
 }
 
-.qr-modal-header > button:hover {
+.qr-modal-header>button:hover {
   background: #eef0f3;
 }
 
@@ -1158,7 +1151,7 @@
   gap: 10px;
 }
 
-.qr-detail-grid > div {
+.qr-detail-grid>div {
   min-width: 0;
   padding: 10px;
   border: 1px solid #edf0f4;
@@ -1230,21 +1223,15 @@
   flex-wrap: wrap;
 }
 
-/* =========================================================
+/*      =======
    RESPONSIVE
-========================================================= */
+     ======= */
 
 /* Large desktop / laptop */
 @media (max-width: 1560px) {
   .qr-filter-card {
     grid-template-columns:
-      minmax(185px, 1.4fr)
-      minmax(105px, 1fr)
-      minmax(105px, 1fr)
-      minmax(105px, 1fr)
-      minmax(190px, 1.3fr)
-      auto
-      auto;
+      minmax(185px, 1.4fr) minmax(105px, 1fr) minmax(105px, 1fr) minmax(105px, 1fr) minmax(190px, 1.3fr) auto auto;
   }
 
   .qr-filter-card .qr-filter-field:nth-child(5) {

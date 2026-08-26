@@ -1,14 +1,8 @@
 const SystemSettings = require("../models/systemSettingsModel");
 
-// =========================================
-// GET SYSTEM SETTINGS
-// =========================================
 exports.getSystemSettings = async (req, res) => {
   try {
     let settings = await SystemSettings.findOne();
-
-    // Agar settings document abhi database me nahi hai
-    // to default values ke saath create kar do
     if (!settings) {
       settings = await SystemSettings.create({});
     }

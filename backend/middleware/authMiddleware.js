@@ -35,7 +35,6 @@ const authMiddleware = (req, res, next) => {
       process.env.JWT_SECRET
     );
 
-    // User information request ke andar store
     req.user = decoded;
 
     next();

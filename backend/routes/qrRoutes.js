@@ -12,11 +12,6 @@ const {
 
 const router = express.Router();
 
-
-// ==========================================
-// QR / BARCODE MANAGEMENT
-// ==========================================
-
 // Create QR / Barcode
 router.post("/", createQR);
 

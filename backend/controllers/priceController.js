@@ -1,10 +1,4 @@
 const Price = require("../models/Price");
-const Product = require("../models/Product");
-
-
-// ======================================================
-// GET PRICE MANAGEMENT PRODUCTS
-// ======================================================
 
 const getPriceProducts = async (req, res) => {
   try {
@@ -16,13 +10,12 @@ const getPriceProducts = async (req, res) => {
       effectiveDate,
     } = req.query;
 
-    const productFilter = {
-      status: "ACTIVE",
-    };
+    const filter = {};
+
 
     // Search
     if (search) {
-      productFilter.$or = [
+      filter.$or = [
         {
           productName: {
             $regex: search,
@@ -44,120 +37,48 @@ const getPriceProducts = async (req, res) => {
       ];
     }
 
+    // Category
     if (category) {
-      productFilter.category = category;
+      filter.category = category;
     }
 
+    // Brand
     if (brand) {
-      productFilter.brand = brand;
+      filter.brand = brand;
     }
 
-    const products = await Product.find(productFilter)
-      .sort({ createdAt: -1 })
-      .lean();
-
-    const productIds = products.map(
-      (product) => product._id
-    );
-
-    // Get approved prices
-    const priceFilter = {
-      product: { $in: productIds },
-      approvalStatus: "APPROVED",
-    };
-
+    // Price List
     if (priceListType) {
-      priceFilter.priceListType = priceListType;
+      filter.priceListType = priceListType;
     }
 
+    // Effective Date
     if (effectiveDate) {
       const start = new Date(effectiveDate);
-
       const end = new Date(effectiveDate);
+
       end.setDate(end.getDate() + 1);
 
-      priceFilter.effectiveDate = {
+      filter.effectiveDate = {
         $gte: start,
         $lt: end,
       };
     }
 
-    const prices = await Price.find(priceFilter)
-      .sort({ effectiveDate: -1, createdAt: -1 })
+    const prices = await Price.find(filter)
+      .sort({
+        effectiveDate: -1,
+        createdAt: -1,
+      })
       .lean();
-
-    // Latest price per product + price list
-    const priceMap = {};
-
-    prices.forEach((price) => {
-      const key =
-        `${price.product}_${price.priceListType}`;
-
-      if (!priceMap[key]) {
-        priceMap[key] = price;
-      }
-    });
-
-    const result = products.map((product) => {
-      const price =
-        priceMap[
-          `${product._id}_DEALER`
-        ] ||
-        priceMap[
-          `${product._id}_PAINTER`
-        ] ||
-        priceMap[
-          `${product._id}_SEASONAL`
-        ] ||
-        priceMap[
-          `${product._id}_PROMOTIONAL`
-        ];
-
-      return {
-        ...product,
-
-        priceId: price?._id || null,
-
-        priceList: price
-          ? price.priceListType
-          : null,
-
-        basePrice: price
-          ? price.basePrice
-          : product.mrp,
-
-        gstPercent: price
-          ? price.gstPercent
-          : 0,
-
-        discountPercent: price
-          ? price.discountPercent
-          : 0,
-
-        priceDiscountPrice: price
-          ? price.discountPrice
-          : product.discountPrice,
-
-        effectiveDate: price
-          ? price.effectiveDate
-          : null,
-
-        approvalStatus: price
-          ? price.approvalStatus
-          : null,
-      };
-    });
 
     res.status(200).json({
       success: true,
-      count: result.length,
-      products: result,
+      count: prices.length,
+      products: prices,
     });
   } catch (error) {
-    console.error(
-      "Get price products error:",
-      error
-    );
+    console.error("Get price products error:", error);
 
     res.status(500).json({
       success: false,
@@ -166,7 +87,6 @@ const getPriceProducts = async (req, res) => {
   }
 };
 
-
 // ======================================================
 // CREATE PRICE REVISION
 // ======================================================
@@ -174,7 +94,12 @@ const getPriceProducts = async (req, res) => {
 const createPrice = async (req, res) => {
   try {
     const {
-      product,
+      productName,
+      sku,
+      barcode,
+      category,
+      brand,
+      packingSize,
       priceListType,
       customerId,
       basePrice,
@@ -185,7 +110,11 @@ const createPrice = async (req, res) => {
     } = req.body;
 
     if (
-      !product ||
+      !productName ||
+      !sku ||
+      !category ||
+      !brand ||
+      !packingSize ||
       !priceListType ||
       basePrice === undefined ||
       discountPercent === undefined ||
@@ -194,24 +123,17 @@ const createPrice = async (req, res) => {
     ) {
       return res.status(400).json({
         success: false,
-        message:
-          "Please provide all required price fields",
+        message: "Please provide all required price fields",
       });
     }
 
-    const existingProduct =
-      await Product.findById(product);
-
-    if (!existingProduct) {
-      return res.status(404).json({
-        success: false,
-        message: "Product not found",
-      });
-    }
-
-    // Every new revision starts as PENDING
     const price = await Price.create({
-      product,
+      productName,
+      sku,
+      barcode: barcode || "",
+      category,
+      brand,
+      packingSize,
       priceListType,
       customerId: customerId || null,
       basePrice,
@@ -228,19 +150,82 @@ const createPrice = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message:
-        "Price revision submitted for approval",
+      message: "Price list created successfully",
       price,
     });
   } catch (error) {
-    console.error(
-      "Create price error:",
-      error
-    );
+    console.error("Create price error:", error);
 
     res.status(500).json({
       success: false,
-      message: "Failed to create price revision",
+      message: "Failed to create price list",
+    });
+  }
+};
+
+
+const updatePrice = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const {
+      productName,
+      sku,
+      barcode,
+      category,
+      brand,
+      packingSize,
+      priceListType,
+      customerId,
+      basePrice,
+      gstPercent,
+      discountPercent,
+      discountPrice,
+      effectiveDate,
+    } = req.body;
+
+    const price = await Price.findById(id);
+
+    if (!price) {
+      return res.status(404).json({
+        success: false,
+        message: "Price list not found",
+      });
+    }
+
+    price.productName = productName;
+    price.sku = sku;
+    price.barcode = barcode || "";
+    price.category = category;
+    price.brand = brand;
+    price.packingSize = packingSize;
+    price.priceListType = priceListType;
+    price.customerId = customerId || null;
+    price.basePrice = basePrice;
+    price.gstPercent = gstPercent || 0;
+    price.discountPercent = discountPercent;
+    price.discountPrice = discountPrice;
+    price.effectiveDate = effectiveDate;
+
+    // Updated price needs approval again
+    price.approvalStatus = "PENDING";
+    price.approvedBy = null;
+    price.approvedAt = null;
+    price.rejectionReason = "";
+
+    await price.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Price list updated successfully",
+      price,
+    });
+  } catch (error) {
+    console.error("Update price error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to update price list",
     });
   }
 };
@@ -407,19 +392,25 @@ const rejectPrice = async (req, res) => {
 
 const getPriceHistory = async (req, res) => {
   try {
-    const { productId } = req.params;
+    const { priceId } = req.params;
+
+    const price = await Price.findById(priceId)
+      .populate("createdBy", "name email")
+      .populate("approvedBy", "name email");
+
+    if (!price) {
+      return res.status(404).json({
+        success: false,
+        message: "Price list not found",
+      });
+    }
 
     const prices = await Price.find({
-      product: productId,
+      sku: price.sku,
+      productName: price.productName,
     })
-      .populate(
-        "createdBy",
-        "name email"
-      )
-      .populate(
-        "approvedBy",
-        "name email"
-      )
+      .populate("createdBy", "name email")
+      .populate("approvedBy", "name email")
       .sort({ createdAt: -1 });
 
     res.status(200).json({
@@ -428,10 +419,7 @@ const getPriceHistory = async (req, res) => {
       prices,
     });
   } catch (error) {
-    console.error(
-      "Get price history error:",
-      error
-    );
+    console.error("Get price history error:", error);
 
     res.status(500).json({
       success: false,
@@ -447,73 +435,64 @@ const getPriceHistory = async (req, res) => {
 
 const getPriceStats = async (req, res) => {
   try {
-    const totalProducts =
-      await Product.countDocuments({
-        status: "ACTIVE",
-      });
+    const totalProducts = await Price.distinct("sku", {
+      approvalStatus: "APPROVED",
+    });
 
-    const priceListResult =
-      await Price.distinct(
-        "priceListType",
-        {
-          approvalStatus: "APPROVED",
-        }
-      );
+    const priceListResult = await Price.distinct(
+      "priceListType",
+      {
+        approvalStatus: "APPROVED",
+      }
+    );
 
     const startOfDay = new Date();
     startOfDay.setHours(0, 0, 0, 0);
 
-    const updatedToday =
-      await Price.countDocuments({
-        approvalStatus: "APPROVED",
-        approvedAt: {
-          $gte: startOfDay,
-        },
-      });
+    const updatedToday = await Price.countDocuments({
+      approvalStatus: "APPROVED",
+      approvedAt: {
+        $gte: startOfDay,
+      },
+    });
 
     const startOfMonth = new Date();
-
     startOfMonth.setDate(1);
     startOfMonth.setHours(0, 0, 0, 0);
 
-    const priceChanges =
-      await Price.countDocuments({
-        approvalStatus: "APPROVED",
-        approvedAt: {
-          $gte: startOfMonth,
-        },
-      });
+    const priceChanges = await Price.countDocuments({
+      approvalStatus: "APPROVED",
+      approvedAt: {
+        $gte: startOfMonth,
+      },
+    });
 
-    const discountResult =
-      await Price.aggregate([
-        {
-          $match: {
-            approvalStatus: "APPROVED",
+    const discountResult = await Price.aggregate([
+      {
+        $match: {
+          approvalStatus: "APPROVED",
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          averageDiscount: {
+            $avg: "$discountPercent",
           },
         },
-        {
-          $group: {
-            _id: null,
-            averageDiscount: {
-              $avg: "$discountPercent",
-            },
-          },
-        },
-      ]);
+      },
+    ]);
 
-    const averageDiscount =
-      discountResult.length
-        ? Number(
-            discountResult[0]
-              .averageDiscount
-          ).toFixed(1)
-        : 0;
+    const averageDiscount = discountResult.length
+      ? Number(
+        discountResult[0].averageDiscount
+      ).toFixed(1)
+      : 0;
 
     res.status(200).json({
       success: true,
-
       stats: {
-        totalProducts,
+        totalProducts: totalProducts.length,
         priceLists: priceListResult.length,
         updatedToday,
         priceChanges,
@@ -521,10 +500,7 @@ const getPriceStats = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error(
-      "Get price stats error:",
-      error
-    );
+    console.error("Get price stats error:", error);
 
     res.status(500).json({
       success: false,
@@ -595,6 +571,7 @@ const bulkCreatePrices = async (req, res) => {
 module.exports = {
   getPriceProducts,
   createPrice,
+  updatePrice,
   getPendingPrices,
   approvePrice,
   rejectPrice,

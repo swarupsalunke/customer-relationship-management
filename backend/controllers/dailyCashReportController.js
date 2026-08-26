@@ -1,9 +1,5 @@
 const DailyCashReport = require("../models/DailyCashReport");
 
-// ==========================================
-// CREATE DAILY CASH REPORT
-// ==========================================
-
 const createDailyCashReport = async (req, res) => {
   try {
     const {

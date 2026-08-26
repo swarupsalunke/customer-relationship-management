@@ -583,9 +583,9 @@ const RewardDashboard = () => {
                                                         <small>
                                                             {item.createdAt
                                                                 ? new Date(item.createdAt).toLocaleTimeString("en-IN", {
-                                                                      hour: "2-digit",
-                                                                      minute: "2-digit",
-                                                                  })
+                                                                    hour: "2-digit",
+                                                                    minute: "2-digit",
+                                                                })
                                                                 : "-"}
                                                         </small>
                                                     </div>
@@ -1107,7 +1107,7 @@ const RewardDashboard = () => {
                             </div>
 
                             <div className="reward-form-group">
-                                <label>Cash Amount (₹)</label>  
+                                <label>Cash Amount (₹)</label>
                                 <input type="number" name="cashAmount" min="1" placeholder="Enter cash amount" required />
                             </div>
 

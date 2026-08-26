@@ -1,14 +1,8 @@
 const mongoose = require("mongoose");
-
 const QR = require("../models/QR");
 const QRScanHistory = require("../models/QRScanHistory");
 const Product = require("../models/Product");
 const User = require("../models/User");
-
-
-// =====================================================
-// CREATE QR / BARCODE
-// =====================================================
 
 const createQR = async (req, res) => {
   try {

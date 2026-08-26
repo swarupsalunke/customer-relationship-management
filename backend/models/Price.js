@@ -2,11 +2,40 @@ const mongoose = require("mongoose");
 
 const priceSchema = new mongoose.Schema(
   {
-    product: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
+    productName: {
+      type: String,
       required: true,
-      index: true,
+      trim: true,
+    },
+
+    sku: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    barcode: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    category: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    brand: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    packingSize: {
+      type: String,
+      required: true,
+      trim: true,
     },
 
     priceListType: {
@@ -58,11 +87,7 @@ const priceSchema = new mongoose.Schema(
 
     approvalStatus: {
       type: String,
-      enum: [
-        "PENDING",
-        "APPROVED",
-        "REJECTED",
-      ],
+      enum: ["PENDING", "APPROVED", "REJECTED"],
       default: "PENDING",
       index: true,
     },

@@ -20,13 +20,13 @@ import {
   FileText,
   Wallet,
   FileBarChart,
+  Boxes,
+  Truck,
+  PackageCheck,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
 import "../css/sidebar.css";
-
-
-
 
 const Sidebar = () => {
   const [storeOpen, setStoreOpen] = useState(false);
@@ -38,6 +38,10 @@ const Sidebar = () => {
   const [financeOpen, setFinanceOpen] = useState(false);
   const [reportsOpen, setReportsOpen] = useState(false);
   const [systemSettingsOpen, setSystemSettingsOpen] = useState(false);
+  const [manufacturingOpen, setManufacturingOpen] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [dispatchOpen, setDispatchOpen] = useState(false);
+  const [inboundOpen, setInboundOpen] = useState(false);
 
   return (
     <aside className="dashboard-sidebar">
@@ -483,29 +487,196 @@ const Sidebar = () => {
         </div>
 
 
-        {/* Manufacturing */}
-        <NavLink
-          to="/manufacturing"
-          className="dashboard-nav-item"
-        >
-          <Factory size={19} />
-          <span>Manufacturing</span>
-        </NavLink>
+        {/* Manufacturing Management */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() =>
+              setManufacturingOpen(!manufacturingOpen)
+            }
+          >
+            <Factory size={19} />
+
+            <span>Manufacturing</span>
+
+            {manufacturingOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Manufacturing - Batch Management */}
+          {manufacturingOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/manufacturing-batch-management"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""
+                  }`
+                }
+              >
+                <FileText size={16} />
+
+                <span>Batch Management</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
 
 
         {/* Inventory Management */}
-        <NavLink
-          to="/inventory"
-          className="dashboard-nav-item"
-        >
-          <Warehouse size={19} />
-          <span>Inventory Management</span>
-          <ChevronRight className="menu-arrow" size={16} />
-        </NavLink>
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() =>
+              setInventoryOpen(!inventoryOpen)
+            }
+          >
+            <Boxes size={19} />
+
+            <span>Inventory Management</span>
+
+            {inventoryOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {inventoryOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/inventory-management"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""
+                  }`
+                }
+              >
+                <FileText size={16} />
+
+                <span>Inventory Overview</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
+
+        {/* Dispatch Management */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setDispatchOpen(!dispatchOpen)}
+          >
+            <Truck size={19} />
+
+            <span>Dispatch Management</span>
+
+            {dispatchOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Dispatch Dashboard */}
+          {dispatchOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/dispatch-management"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <FileText size={16} />
+
+                <span>Overview</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
 
 
+        {/* Inbound Material Management */}
+        <div className="store-management-menu">
 
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setInboundOpen(!inboundOpen)}
+          >
+            <PackageCheck size={19} />
 
+            <span>Inbound Material Management</span>
+
+            {inboundOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Inbound Dashboard */}
+          {inboundOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/inbound-material-management"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <FileText size={16} />
+
+                <span>Inbound Material Overview</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
 
         {/* HR Management */}
         <NavLink

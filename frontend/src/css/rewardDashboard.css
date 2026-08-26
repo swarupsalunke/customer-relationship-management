@@ -1,6 +1,6 @@
-/* =========================================================
+/*      =======
    REWARD DASHBOARD
-========================================================= */
+     ======= */
 
 .reward-dashboard-page {
   width: 100%;
@@ -184,14 +184,7 @@
   width: 100%;
   display: grid;
   grid-template-columns:
-    minmax(170px, 1.4fr)
-    minmax(95px, 0.8fr)
-    minmax(105px, 0.9fr)
-    minmax(105px, 0.9fr)
-    minmax(105px, 0.9fr)
-    minmax(170px, 1.2fr)
-    auto
-    auto;
+    minmax(170px, 1.4fr) minmax(95px, 0.8fr) minmax(105px, 0.9fr) minmax(105px, 0.9fr) minmax(105px, 0.9fr) minmax(170px, 1.2fr) auto auto;
   gap: 7px;
   align-items: end;
   padding: 10px;
@@ -366,7 +359,7 @@
   margin-bottom: 9px;
 }
 
-.reward-mini-summary > div {
+.reward-mini-summary>div {
   min-width: 0;
   display: flex;
   align-items: center;
@@ -377,7 +370,7 @@
   border-radius: 7px;
 }
 
-.reward-mini-summary > div > svg {
+.reward-mini-summary>div>svg {
   flex-shrink: 0;
   color: #20a568;
 }
@@ -481,11 +474,11 @@
   gap: 6px;
 }
 
-.user-cell > div:last-child strong {
+.user-cell>div:last-child strong {
   display: block;
 }
 
-.user-cell > div:last-child small {
+.user-cell>div:last-child small {
   display: block;
   margin-top: 2px;
   color: #98a2b3;
@@ -551,7 +544,7 @@
 }
 
 .table-actions button {
-  width:28px;
+  width: 28px;
   height: 28px;
   display: flex;
   align-items: center;
@@ -657,7 +650,7 @@
   color: #159447;
 }
 
-.wallet-balance > div:last-child strong {
+.wallet-balance>div:last-child strong {
   color: #1671d9;
 }
 
@@ -762,7 +755,7 @@
   margin: 17px 0 12px;
 }
 
-.chart-values > div:last-child {
+.chart-values>div:last-child {
   text-align: right;
 }
 
@@ -772,7 +765,7 @@
   font-size: 14px;
 }
 
-.chart-values > div:last-child strong {
+.chart-values>div:last-child strong {
   color: #d92d20;
 }
 
@@ -826,7 +819,7 @@
   margin-top: 13px;
 }
 
-.top-user-row > b {
+.top-user-row>b {
   width: 10px;
   color: #344054;
   font-size: 8px;
@@ -837,7 +830,7 @@
   height: 24px;
 }
 
-.top-user-row > span {
+.top-user-row>span {
   min-width: 0;
   flex: 1;
   overflow: hidden;
@@ -847,7 +840,7 @@
   white-space: nowrap;
 }
 
-.top-user-row > strong {
+.top-user-row>strong {
   color: #159447;
   font-size: 7px;
   white-space: nowrap;
@@ -1006,9 +999,9 @@
 }
 
 
-/* =========================================================
+/*      =======
    RESPONSIVE
-========================================================= */
+     ======= */
 
 @media (max-width: 1250px) {
 

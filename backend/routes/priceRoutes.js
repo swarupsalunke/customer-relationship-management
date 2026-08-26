@@ -5,6 +5,7 @@ const router = express.Router();
 const {
   getPriceProducts,
   createPrice,
+  updatePrice,
   getPendingPrices,
   approvePrice,
   rejectPrice,
@@ -80,6 +81,19 @@ router.post(
 );
 
 
+
+router.put(
+  "/:id",
+  authMiddleware,
+  roleMiddleware(
+    "SUPER_ADMIN",
+    "DIRECTOR",
+    "MANAGER"
+  ),
+  updatePrice
+);
+
+
 // BULK PRICE UPDATE
 
 router.post(
@@ -97,7 +111,7 @@ router.post(
 // PRICE HISTORY
 
 router.get(
-  "/history/:productId",
+  "/history/:priceId",
   authMiddleware,
   roleMiddleware(
     "SUPER_ADMIN",

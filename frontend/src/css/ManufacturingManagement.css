@@ -1,0 +1,1708 @@
+/*      =======
+   MANUFACTURING BATCH MANAGEMENT
+     ======= */
+
+* {
+    box-sizing: border-box;
+}
+
+.manufacturing-batch-page {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #ffffff;
+    color: #101828;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/*      =======
+   HEADER
+     ======= */
+
+.manufacturing-page-header {
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.manufacturing-page-header>div {
+    min-width: 0;
+}
+
+.manufacturing-page-header h1 {
+    margin: 0;
+    color: #101828;
+    font-size: 23px;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.manufacturing-breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 7px;
+
+    color: #667085;
+    font-size: 10px;
+}
+
+.manufacturing-breadcrumb span:last-child {
+    color: #344054;
+    font-weight: 600;
+}
+
+/*      =======
+   COMMON BUTTONS
+     ======= */
+
+.manufacturing-primary-btn,
+.manufacturing-secondary-btn,
+.manufacturing-filter-btn,
+.manufacturing-reset-btn,
+.manufacturing-danger-btn {
+    min-height: 36px;
+    padding: 0 12px;
+    box-sizing: border-box;
+
+    border-radius: 6px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+
+    cursor: pointer;
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.manufacturing-primary-btn {
+    border: 1px solid #2563eb;
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.manufacturing-primary-btn:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.manufacturing-primary-btn:disabled,
+.manufacturing-secondary-btn:disabled,
+.manufacturing-danger-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.manufacturing-secondary-btn {
+    border: 1px solid #d9dee7;
+    background: #ffffff;
+    color: #344054;
+}
+
+.manufacturing-secondary-btn:hover {
+    border-color: #bfc7d4;
+    background: #f8fafc;
+}
+
+.manufacturing-danger-btn {
+    border: 1px solid #fecaca;
+    background: #fff1f2;
+    color: #dc2626;
+}
+
+.manufacturing-danger-btn:hover {
+    border-color: #fca5a5;
+    background: #fee2e2;
+}
+
+/*      =======
+   STATS
+     ======= */
+
+.manufacturing-stats-grid {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.manufacturing-stat-card {
+    min-width: 0;
+    min-height: 86px;
+    padding: 13px;
+    box-sizing: border-box;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+}
+
+.manufacturing-stat-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+
+    border-radius: 7px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.manufacturing-stat-icon.blue {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.manufacturing-stat-icon.orange {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.manufacturing-stat-icon.green {
+    background: #ecfdf3;
+    color: #16a34a;
+}
+
+.manufacturing-stat-icon.purple {
+    background: #f5f3ff;
+    color: #7c3aed;
+}
+
+.manufacturing-stat-icon.red {
+    background: #fff1f2;
+    color: #dc2626;
+}
+
+.manufacturing-stat-card>div:last-child {
+    min-width: 0;
+}
+
+.manufacturing-stat-card span {
+    display: block;
+    margin-bottom: 4px;
+
+    color: #667085;
+    font-size: 9px;
+    line-height: 1.3;
+}
+
+.manufacturing-stat-card strong {
+    display: block;
+
+    color: #101828;
+    font-size: 19px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+/*      =======
+   FILTER CARD
+     ======= */
+
+.manufacturing-filter-card {
+    width: 100%;
+    min-width: 0;
+    padding: 13px;
+    box-sizing: border-box;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+    background: #ffffff;
+
+    display: grid;
+    grid-template-columns: 1.35fr 0.9fr 1fr 1fr auto;
+    gap: 10px;
+    align-items: end;
+
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+}
+
+.manufacturing-date-group,
+.manufacturing-filter-field {
+    min-width: 0;
+}
+
+.manufacturing-date-group label,
+.manufacturing-filter-field label {
+    display: block;
+    margin-bottom: 5px;
+
+    color: #344054;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.manufacturing-date-inputs {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 6px;
+    align-items: center;
+}
+
+.manufacturing-date-inputs span {
+    color: #98a2b3;
+    font-size: 9px;
+}
+
+.manufacturing-filter-card input,
+.manufacturing-filter-card select {
+    width: 100%;
+    height: 36px;
+    min-width: 0;
+    padding: 0 9px;
+    box-sizing: border-box;
+
+    border: 1px solid #d9dee7;
+    border-radius: 6px;
+
+    background: #ffffff;
+    color: #344054;
+
+    font-size: 10px;
+    outline: none;
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.manufacturing-filter-card input:focus,
+.manufacturing-filter-card select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.07);
+}
+
+.manufacturing-filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.manufacturing-filter-btn {
+    border: 1px solid #2563eb;
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.manufacturing-filter-btn:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.manufacturing-reset-btn {
+    border: 1px solid #d9dee7;
+    background: #ffffff;
+    color: #475467;
+}
+
+.manufacturing-reset-btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+/*      =======
+   TABS
+     ======= */
+
+.manufacturing-tabs {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    border-bottom: 1px solid #e4e7ec;
+}
+
+.manufacturing-tab {
+    min-height: 38px;
+    padding: 0 13px;
+
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+
+    color: #667085;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.manufacturing-tab:hover {
+    color: #2563eb;
+}
+
+.manufacturing-tab.active {
+    color: #2563eb;
+    border-bottom-color: #2563eb;
+}
+
+/*      =======
+   GENERIC CARD SHELL (listing / details / qc / cost)
+     ======= */
+
+.manufacturing-listing-panel,
+.manufacturing-details-card,
+.manufacturing-qc-card,
+.manufacturing-cost-section,
+.manufacturing-cost-panel {
+    width: 100%;
+    min-width: 0;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+    background: #ffffff;
+
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+}
+
+/*      =======
+   PANEL / CARD HEADER
+     ======= */
+
+.manufacturing-panel-header,
+.manufacturing-card-header {
+    min-height: 62px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    border-bottom: 1px solid #edf1f5;
+}
+
+.manufacturing-panel-header h2,
+.manufacturing-card-header h2 {
+    margin: 0;
+
+    color: #101828;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.manufacturing-panel-header p,
+.manufacturing-card-header p {
+    margin: 4px 0 0;
+
+    color: #98a2b3;
+    font-size: 9px;
+}
+
+.manufacturing-card-header>div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+}
+
+.manufacturing-card-header-actions,
+.manufacturing-panel-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.manufacturing-record-count {
+    padding: 5px 8px;
+
+    border-radius: 20px;
+    background: #f2f4f7;
+    color: #667085;
+
+    font-size: 8px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Search box inside the batch listing header */
+
+.manufacturing-search-box {
+    height: 34px;
+    padding: 0 10px;
+    box-sizing: border-box;
+
+    border: 1px solid #d9dee7;
+    border-radius: 6px;
+    background: #ffffff;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #98a2b3;
+}
+
+.manufacturing-search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+
+    width: 150px;
+    max-width: 40vw;
+
+    color: #344054;
+    font-size: 10px;
+}
+
+/*      =======
+   TABLE
+     ======= */
+
+.manufacturing-table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.manufacturing-table {
+    width: 100%;
+    min-width: 920px;
+
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.manufacturing-table th {
+    height: 38px;
+    padding: 0 10px;
+    box-sizing: border-box;
+
+    border-bottom: 1px solid #e4e7ec;
+
+    background: #f8fafc;
+    color: #667085;
+
+    font-size: 8px;
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.manufacturing-table td {
+    min-height: 49px;
+    padding: 9px 10px;
+
+    border-bottom: 1px solid #f0f2f5;
+
+    color: #475467;
+    font-size: 9px;
+    vertical-align: middle;
+}
+
+.manufacturing-table tbody tr {
+    cursor: pointer;
+    transition: background 0.16s ease;
+}
+
+.manufacturing-table tbody tr:hover {
+    background: #f8fbff;
+}
+
+.manufacturing-table tbody tr.selected-row {
+    background: #eff6ff;
+}
+
+.manufacturing-table td strong {
+    color: #344054;
+    font-weight: 600;
+}
+
+.manufacturing-empty-cell {
+    height: 180px !important;
+    text-align: center;
+    color: #98a2b3 !important;
+    font-size: 10px !important;
+}
+
+/*      =======
+   STATUS
+     ======= */
+
+.manufacturing-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 21px;
+    padding: 0 7px;
+
+    border-radius: 20px;
+
+    font-size: 7px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.manufacturing-status.planned {
+    background: #f2f4f7;
+    color: #667085;
+}
+
+.manufacturing-status.production {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.manufacturing-status.completed {
+    background: #ecfdf3;
+    color: #15803d;
+}
+
+.manufacturing-status.qc-pending {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.manufacturing-status.rejected {
+    background: #fff1f2;
+    color: #be123c;
+}
+
+/*      =======
+   ACTIONS
+     ======= */
+
+.manufacturing-action-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.manufacturing-icon-btn {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 5px;
+
+    background: #ffffff;
+    color: #667085;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: 0.18s ease;
+}
+
+.manufacturing-icon-btn:hover {
+    border-color: #bfdbfe;
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+/*      =======
+   BATCH DETAILS + LAB QC ROW  (full width, side by side)
+     ======= */
+
+.manufacturing-details-row {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.manufacturing-details-card,
+.manufacturing-qc-card {
+    overflow: hidden;
+}
+
+.manufacturing-detail-section {
+    padding: 14px;
+    border-bottom: 1px solid #edf1f5;
+}
+
+.manufacturing-detail-section:last-child {
+    border-bottom: none;
+}
+
+.manufacturing-detail-section h3 {
+    margin: 0 0 11px;
+
+    color: #344054;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.manufacturing-section-heading {
+    margin-bottom: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.manufacturing-section-heading h3 {
+    margin: 0;
+}
+
+.manufacturing-section-heading>span {
+    color: #667085;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+/*      =======
+   DETAIL GRID (boxed key/value cards)
+     ======= */
+
+.manufacturing-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.manufacturing-detail-grid>div {
+    min-width: 0;
+    padding: 8px;
+
+    border: 1px solid #eef1f4;
+    border-radius: 6px;
+    background: #fafbfc;
+}
+
+.manufacturing-detail-grid>div.full-width-detail {
+    grid-column: 1 / -1;
+}
+
+.manufacturing-detail-grid span {
+    display: block;
+    margin-bottom: 4px;
+
+    color: #98a2b3;
+    font-size: 8px;
+}
+
+.manufacturing-detail-grid strong {
+    display: block;
+
+    color: #344054;
+    font-size: 9px;
+    line-height: 1.4;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+/*      =======
+   KV LIST (plain label / value rows - matches reference UI
+   for Lab QC panel and Cost Verification panel)
+     ======= */
+
+.manufacturing-kv-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.manufacturing-kv-row {
+    padding: 10px 0;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.manufacturing-kv-row:last-child {
+    border-bottom: none;
+}
+
+.manufacturing-kv-row span {
+    min-width: 120px;
+    color: #98a2b3;
+    font-size: 9px;
+}
+
+.manufacturing-kv-row strong {
+    flex: 1;
+    text-align: right;
+
+    color: #344054;
+    font-size: 10px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.manufacturing-muted-text {
+    margin: 4px 0 14px;
+    color: #98a2b3;
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+/*      =======
+   PACKING
+     ======= */
+
+.manufacturing-packing-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.manufacturing-packing-row {
+    min-width: 0;
+    padding: 8px;
+
+    border: 1px solid #eef1f4;
+    border-radius: 6px;
+
+    background: #fafbfc;
+
+    display: grid;
+    grid-template-columns: 0.7fr 1fr 1fr auto;
+    gap: 8px;
+    align-items: center;
+}
+
+.manufacturing-packing-row strong {
+    color: #344054;
+    font-size: 9px;
+}
+
+.manufacturing-packing-row span {
+    color: #667085;
+    font-size: 8px;
+}
+
+.label-success,
+.label-pending {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 20px;
+    padding: 0 6px;
+    border-radius: 20px;
+
+    font-size: 7px;
+    font-weight: 700;
+}
+
+.label-success {
+    background: #ecfdf3;
+    color: #15803d;
+}
+
+.label-pending {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+/*      =======
+   FILE LINK
+     ======= */
+
+.manufacturing-file-link {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+
+    color: #2563eb !important;
+}
+
+/*      =======
+   NO SELECTION / EMPTY
+     ======= */
+
+.manufacturing-no-selection {
+    min-height: 220px;
+    padding: 30px 18px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    text-align: center;
+    color: #98a2b3;
+}
+
+.manufacturing-no-selection-standalone {
+    width: 100%;
+
+    border: 1px dashed #e4e7ec;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.manufacturing-no-selection svg {
+    color: #cbd5e1;
+    margin-bottom: 8px;
+}
+
+.manufacturing-no-selection h3 {
+    margin: 0 0 5px;
+
+    color: #475467;
+    font-size: 12px;
+}
+
+.manufacturing-no-selection p {
+    max-width: 280px;
+    margin: 0;
+
+    color: #98a2b3;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+/*      =======
+   COST VERIFICATION SECTION (shared, used in both tabs)
+     ======= */
+
+.manufacturing-cost-section {
+    width: 100%;
+    overflow: hidden;
+}
+
+.manufacturing-cost-section-grid {
+    padding: 16px;
+
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.manufacturing-cost-left {
+    min-width: 0;
+}
+
+.manufacturing-cost-right {
+    min-width: 0;
+    padding: 14px;
+
+    border: 1px solid #eef1f4;
+    border-radius: 8px;
+    background: #fafbfc;
+}
+
+.manufacturing-cost-right h3 {
+    margin: 0 0 10px;
+
+    color: #344054;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.manufacturing-cost-right-actions {
+    margin-top: 14px;
+    padding-top: 14px;
+
+    border-top: 1px solid #edf1f5;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.manufacturing-cost-right-actions button {
+    flex: 1;
+    min-width: 110px;
+}
+
+.manufacturing-cost-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 23px;
+    padding: 0 8px;
+
+    border-radius: 20px;
+
+    font-size: 8px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.manufacturing-cost-status.pending {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.manufacturing-cost-status.verified {
+    background: #ecfdf3;
+    color: #15803d;
+}
+
+.manufacturing-cost-status.rejected {
+    background: #fff1f2;
+    color: #be123c;
+}
+
+.manufacturing-inline-error {
+    margin-bottom: 12px;
+    padding: 9px 10px;
+
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+
+    background: #fff1f2;
+    color: #be123c;
+
+    font-size: 9px;
+}
+
+/*      =======
+   BATCH COST VERIFICATION TAB (dedicated batch picker view)
+     ======= */
+
+.manufacturing-cost-panel {
+    overflow: hidden;
+}
+
+.manufacturing-cost-layout {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 0;
+    min-width: 0;
+}
+
+.manufacturing-cost-batch-list {
+    min-width: 0;
+    padding: 14px;
+
+    border-right: 1px solid #edf1f5;
+}
+
+.manufacturing-cost-batch-list h3 {
+    margin: 0 0 10px;
+
+    color: #344054;
+    font-size: 11px;
+}
+
+.manufacturing-cost-batch {
+    width: 100%;
+    min-height: 52px;
+    margin-bottom: 6px;
+    padding: 8px;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 6px;
+
+    background: #ffffff;
+    color: #344054;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    text-align: left;
+    cursor: pointer;
+    transition: 0.18s ease;
+}
+
+.manufacturing-cost-batch:hover,
+.manufacturing-cost-batch.active {
+    border-color: #bfdbfe;
+    background: #eff6ff;
+}
+
+.manufacturing-cost-batch span {
+    min-width: 0;
+}
+
+.manufacturing-cost-batch strong,
+.manufacturing-cost-batch small {
+    display: block;
+}
+
+.manufacturing-cost-batch strong {
+    margin-bottom: 3px;
+    color: #344054;
+    font-size: 9px;
+}
+
+.manufacturing-cost-batch small {
+    overflow: hidden;
+    color: #667085;
+    font-size: 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.manufacturing-cost-details {
+    min-width: 0;
+}
+
+.manufacturing-empty-small {
+    padding: 14px 0;
+    color: #98a2b3;
+    font-size: 9px;
+}
+
+/*      =======
+   MODAL
+     ======= */
+
+.manufacturing-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    padding: 18px;
+    box-sizing: border-box;
+
+    background: rgba(15, 23, 42, 0.48);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow-y: auto;
+}
+
+.manufacturing-modal {
+    width: min(650px, 100%);
+    max-height: calc(100vh - 36px);
+
+    background: #ffffff;
+    border: 1px solid #e4e7ec;
+    border-radius: 10px;
+
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.2);
+
+    overflow-y: auto;
+}
+
+.manufacturing-modal.large {
+    width: min(920px, 100%);
+}
+
+/*      =======
+   MODAL HEADER
+     ======= */
+
+.manufacturing-modal-header {
+    min-height: 62px;
+    padding: 13px 16px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    border-bottom: 1px solid #edf1f5;
+}
+
+.manufacturing-modal-header>div {
+    min-width: 0;
+}
+
+.manufacturing-modal-header h2 {
+    margin: 0;
+
+    color: #101828;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.manufacturing-modal-header p {
+    margin: 4px 0 0;
+
+    color: #98a2b3;
+    font-size: 9px;
+}
+
+.manufacturing-close-btn {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    padding: 0;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 6px;
+
+    background: #ffffff;
+    color: #667085;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.manufacturing-close-btn:hover {
+    background: #f8fafc;
+    color: #dc2626;
+}
+
+/*      =======
+   MODAL FORM
+     ======= */
+
+.manufacturing-modal-form {
+    padding: 16px;
+}
+
+.manufacturing-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px 15px;
+}
+
+.manufacturing-form-group {
+    min-width: 0;
+}
+
+.manufacturing-form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.manufacturing-form-group label {
+    display: block;
+    margin-bottom: 5px;
+
+    color: #344054;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.manufacturing-form-group input,
+.manufacturing-form-group select,
+.manufacturing-form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    border: 1px solid #d9dee7;
+    border-radius: 6px;
+
+    background: #ffffff;
+    color: #344054;
+
+    font-size: 10px;
+    outline: none;
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.manufacturing-form-group input,
+.manufacturing-form-group select {
+    height: 36px;
+    padding: 0 9px;
+}
+
+.manufacturing-form-group textarea {
+    min-height: 75px;
+    padding: 9px;
+    resize: vertical;
+    line-height: 1.45;
+}
+
+.manufacturing-form-group input:focus,
+.manufacturing-form-group select:focus,
+.manufacturing-form-group textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.07);
+}
+
+.manufacturing-form-group input:disabled {
+    background: #f8fafc;
+    color: #98a2b3;
+}
+
+/*      =======
+   FORM SECTION
+     ======= */
+
+.manufacturing-form-section {
+    margin-top: 18px;
+    padding-top: 16px;
+
+    border-top: 1px solid #edf1f5;
+}
+
+.manufacturing-form-section h3 {
+    margin: 0 0 11px;
+
+    color: #344054;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/*      =======
+   PACKING FORM
+     ======= */
+
+.manufacturing-packing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.manufacturing-packing-card {
+    min-width: 0;
+    padding: 9px;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 7px;
+
+    background: #fafbfc;
+
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.manufacturing-packing-card>strong {
+    color: #344054;
+    font-size: 9px;
+}
+
+.manufacturing-packing-card input {
+    width: 100%;
+    height: 32px;
+    padding: 0 8px;
+    box-sizing: border-box;
+
+    border: 1px solid #d9dee7;
+    border-radius: 5px;
+
+    background: #ffffff;
+    color: #344054;
+
+    font-size: 9px;
+    outline: none;
+}
+
+.manufacturing-packing-card input:focus {
+    border-color: #2563eb;
+}
+
+.manufacturing-check-label {
+    display: flex !important;
+    align-items: center;
+    gap: 5px;
+
+    margin: 0 !important;
+
+    color: #667085 !important;
+    font-size: 8px !important;
+    font-weight: 500 !important;
+}
+
+.manufacturing-check-label input {
+    width: 13px !important;
+    height: 13px !important;
+    margin: 0;
+}
+
+/*      =======
+   UPLOAD FIELD
+     ======= */
+
+.manufacturing-upload-field {
+    width: 100%;
+    min-height: 36px;
+    padding: 0 10px;
+    box-sizing: border-box;
+
+    border: 1px dashed #cbd5e1;
+    border-radius: 6px;
+
+    background: #f8fafc;
+    color: #667085;
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    font-size: 9px;
+}
+
+/*      =======
+   MODAL FOOTER
+     ======= */
+
+.manufacturing-modal-footer {
+    margin-top: 17px;
+    padding-top: 13px;
+
+    border-top: 1px solid #edf1f5;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+}
+
+/*      =======
+   VIEW CONTENT
+     ======= */
+
+.manufacturing-view-content {
+    padding: 16px;
+}
+
+/*      =======
+   LOADING
+     ======= */
+
+.manufacturing-modal-loading {
+    min-height: 200px;
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #98a2b3;
+    font-size: 10px;
+}
+
+/*      =======
+   RESPONSIVE - 1280
+     ======= */
+
+@media (max-width: 1280px) {
+
+    .manufacturing-batch-page {
+        padding: 18px;
+        gap: 14px;
+    }
+
+    .manufacturing-stats-grid {
+        gap: 10px;
+    }
+
+    .manufacturing-filter-card {
+        grid-template-columns:
+            1.25fr 0.9fr 0.9fr 0.9fr auto;
+    }
+
+    .manufacturing-details-row {
+        grid-template-columns: 1.15fr 1fr;
+    }
+
+    .manufacturing-cost-section-grid {
+        grid-template-columns: 1.2fr 1fr;
+    }
+
+}
+
+/*      =======
+   RESPONSIVE - 1100
+     ======= */
+
+@media (max-width: 1100px) {
+
+    .manufacturing-stats-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .manufacturing-filter-card {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .manufacturing-filter-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-end;
+    }
+
+    .manufacturing-details-row {
+        grid-template-columns: 1fr;
+    }
+
+    .manufacturing-cost-section-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .manufacturing-cost-right-actions button {
+        flex: unset;
+        width: 100%;
+    }
+
+    .manufacturing-packing-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+/*      =======
+   RESPONSIVE - 850
+     ======= */
+
+@media (max-width: 850px) {
+
+    .manufacturing-page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .manufacturing-page-header .manufacturing-primary-btn {
+        align-self: flex-start;
+    }
+
+    .manufacturing-cost-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .manufacturing-cost-batch-list {
+        border-right: none;
+        border-bottom: 1px solid #edf1f5;
+
+        display: grid;
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .manufacturing-cost-batch-list h3 {
+        grid-column: 1 / -1;
+    }
+
+    .manufacturing-cost-batch {
+        margin-bottom: 0;
+    }
+
+    .manufacturing-cost-details {
+        padding: 0;
+    }
+
+    .manufacturing-panel-header,
+    .manufacturing-card-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .manufacturing-panel-header-right,
+    .manufacturing-card-header-actions {
+        justify-content: flex-start;
+    }
+
+    .manufacturing-search-box input {
+        width: 100%;
+        max-width: none;
+    }
+
+}
+
+/*      =======
+   RESPONSIVE - 700
+     ======= */
+
+@media (max-width: 700px) {
+
+    .manufacturing-batch-page {
+        padding: 13px;
+        gap: 12px;
+    }
+
+    .manufacturing-page-header h1 {
+        font-size: 20px;
+    }
+
+    .manufacturing-stats-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .manufacturing-filter-card {
+        grid-template-columns: 1fr;
+    }
+
+    .manufacturing-filter-actions {
+        grid-column: auto;
+        justify-content: flex-start;
+    }
+
+    .manufacturing-date-inputs {
+        grid-template-columns:
+            minmax(0, 1fr) auto minmax(0, 1fr);
+    }
+
+    .manufacturing-tabs {
+        overflow-x: auto;
+        scrollbar-width: thin;
+    }
+
+    .manufacturing-tab {
+        flex-shrink: 0;
+    }
+
+    .manufacturing-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .manufacturing-form-group.full-width {
+        grid-column: auto;
+    }
+
+    .manufacturing-packing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .manufacturing-cost-batch-list {
+        grid-template-columns: 1fr;
+    }
+
+    .manufacturing-modal-overlay {
+        padding: 10px;
+        align-items: flex-start;
+    }
+
+    .manufacturing-modal {
+        max-height: calc(100vh - 20px);
+    }
+
+    .manufacturing-modal.large {
+        width: 100%;
+    }
+
+}
+
+/*      =======
+   RESPONSIVE - 520
+     ======= */
+
+@media (max-width: 520px) {
+
+    .manufacturing-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .manufacturing-stat-card {
+        min-height: 75px;
+    }
+
+    .manufacturing-filter-actions {
+        width: 100%;
+    }
+
+    .manufacturing-filter-btn,
+    .manufacturing-reset-btn {
+        flex: 1;
+    }
+
+    .manufacturing-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .manufacturing-detail-grid>div.full-width-detail {
+        grid-column: auto;
+    }
+
+    .manufacturing-packing-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .manufacturing-packing-row strong {
+        grid-column: 1 / -1;
+    }
+
+    .manufacturing-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .manufacturing-kv-row {
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .manufacturing-kv-row strong {
+        text-align: left;
+    }
+
+    .manufacturing-card-header-actions {
+        width: 100%;
+    }
+
+    .manufacturing-card-header-actions button {
+        flex: 1;
+    }
+
+}
+
+/*      =======
+   VERY SMALL MOBILE
+     ======= */
+
+@media (max-width: 380px) {
+
+    .manufacturing-batch-page {
+        padding: 9px;
+    }
+
+    .manufacturing-page-header h1 {
+        font-size: 18px;
+    }
+
+    .manufacturing-modal-form,
+    .manufacturing-view-content,
+    .manufacturing-cost-section-grid {
+        padding: 12px;
+    }
+
+    .manufacturing-modal-header {
+        padding: 11px 12px;
+    }
+
+    .manufacturing-modal-footer {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .manufacturing-modal-footer button {
+        width: 100%;
+    }
+
+}

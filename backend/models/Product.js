@@ -31,6 +31,23 @@ const productSchema = new mongoose.Schema(
       trim: true,
     },
 
+    // ======================================================
+    // PRODUCT GROUP
+    // ======================================================
+
+    group: {
+      type: String,
+      enum: [
+        "Paints",
+        "Primers",
+        "Putty & Fillers",
+        "Thinners",
+        "Others",
+      ],
+      default: "Others",
+      trim: true,
+    },
+
     brand: {
       type: String,
       required: true,

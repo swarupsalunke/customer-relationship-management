@@ -7,15 +7,15 @@ const API_BASE_URL = "http://localhost:5000/api";
 
 
 const PriceManagement = () => {
-  // =========================================================
+
   // TAB
-  // =========================================================
+
 
   const [activeTab, setActiveTab] = useState("priceList");
 
-  // =========================================================
+
   // FILTER STATES
-  // =========================================================
+
 
   const [search, setSearch] = useState("");
 
@@ -30,9 +30,9 @@ const PriceManagement = () => {
 
   const [effectiveDate, setEffectiveDate] = useState("");
 
-  // =========================================================
+
   // DATA STATES
-  // =========================================================
+
 
   const [products, setProducts] = useState([]);
 
@@ -44,9 +44,9 @@ const PriceManagement = () => {
     averageDiscount: 0,
   });
 
-  // =========================================================
+
   // UI STATES
-  // =========================================================
+
 
   const [loading, setLoading] = useState(true);
   const [statsLoading, setStatsLoading] = useState(true);
@@ -54,17 +54,38 @@ const PriceManagement = () => {
   const [error, setError] = useState("");
   const [statsError, setStatsError] = useState("");
 
-  // =========================================================
+  const [showPriceModal, setShowPriceModal] =
+    useState(false);
+
+  const [editingPrice, setEditingPrice] =
+    useState(null);
+
+  const [priceForm, setPriceForm] = useState({
+    productName: "",
+    sku: "",
+    barcode: "",
+    category: "",
+    brand: "",
+    packingSize: "",
+    basePrice: "",
+    gstPercent: "",
+    discountPercent: "",
+    discountPrice: "",
+    effectiveDate: "",
+    priceListType: "",
+  });
+
+
   // SELECTED PRODUCTS
-  // =========================================================
+
 
   const [selectedProducts, setSelectedProducts] = useState([]);
 
   const [selectAll, setSelectAll] = useState(false);
 
-  // =========================================================
+
   // PRICE LIST OPTIONS
-  // =========================================================
+
 
   const priceListOptions = [
     {
@@ -89,9 +110,9 @@ const PriceManagement = () => {
     },
   ];
 
-  // =========================================================
+
   // GET TOKEN
-  // =========================================================
+
 
   const getToken = () => {
     return (
@@ -101,9 +122,9 @@ const PriceManagement = () => {
     );
   };
 
-  // =========================================================
+
   // COMMON AXIOS CONFIG
-  // =========================================================
+
 
   const getAuthConfig = () => {
     const token = getToken();
@@ -115,9 +136,8 @@ const PriceManagement = () => {
     };
   };
 
-  // =========================================================
+
   // FETCH PRODUCTS
-  // =========================================================
 
   const fetchPriceProducts = async () => {
     try {
@@ -213,9 +233,8 @@ const PriceManagement = () => {
     }
   };
 
-  // =========================================================
+
   // FETCH PRICE STATISTICS
-  // =========================================================
 
   const fetchPriceStats = async () => {
     try {
@@ -269,18 +288,15 @@ const PriceManagement = () => {
     }
   };
 
-  // =========================================================
   // INITIAL LOAD
-  // =========================================================
 
   useEffect(() => {
     fetchPriceProducts();
     fetchPriceStats();
   }, []);
 
-  // =========================================================
+
   // FILTER CHANGE
-  // =========================================================
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -296,9 +312,8 @@ const PriceManagement = () => {
     effectiveDate,
   ]);
 
-  // =========================================================
+
   // CATEGORY OPTIONS
-  // =========================================================
 
   const categoryOptions = useMemo(() => {
     const categories = products
@@ -311,9 +326,8 @@ const PriceManagement = () => {
     ];
   }, [products]);
 
-  // =========================================================
+
   // BRAND OPTIONS
-  // =========================================================
 
   const brandOptions = useMemo(() => {
     const brands = products
@@ -326,9 +340,8 @@ const PriceManagement = () => {
     ];
   }, [products]);
 
-  // =========================================================
+
   // RESET FILTERS
-  // =========================================================
 
   const handleReset = () => {
     setSearch("");
@@ -352,9 +365,8 @@ const PriceManagement = () => {
     setSelectAll(false);
   };
 
-  // =========================================================
+
   // SELECT SINGLE PRODUCT
-  // =========================================================
 
   const handleSelectProduct = (productId) => {
     setSelectedProducts((previous) => {
@@ -371,9 +383,8 @@ const PriceManagement = () => {
     });
   };
 
-  // =========================================================
+
   // SELECT ALL PRODUCTS
-  // =========================================================
 
   const handleSelectAll = () => {
     if (selectAll) {
@@ -391,9 +402,8 @@ const PriceManagement = () => {
     setSelectAll(true);
   };
 
-  // =========================================================
+
   // FORMAT CURRENCY
-  // =========================================================
 
   const formatCurrency = (value) => {
     const amount = Number(value || 0);
@@ -406,9 +416,8 @@ const PriceManagement = () => {
     );
   };
 
-  // =========================================================
+
   // FORMAT DATE
-  // =========================================================
 
   const formatDate = (date) => {
     if (!date) {
@@ -431,9 +440,8 @@ const PriceManagement = () => {
     );
   };
 
-  // =========================================================
+
   // PRICE LIST LABEL
-  // =========================================================
 
   const getPriceListLabel = (value) => {
     switch (value) {
@@ -454,9 +462,8 @@ const PriceManagement = () => {
     }
   };
 
-  // =========================================================
+
   // LOADING SKELETON
-  // =========================================================
 
   const renderLoadingRows = () => {
     return Array.from(
@@ -473,9 +480,139 @@ const PriceManagement = () => {
     );
   };
 
-  // =========================================================
-  // EMPTY STATE
-  // =========================================================
+  const handleCreatePrice = () => {
+    setEditingPrice(null);
+
+    setPriceForm({
+      productName: "",
+      sku: "",
+      barcode: "",
+      category: "",
+      brand: "",
+      packingSize: "",
+      basePrice: "",
+      gstPercent: "",
+      discountPercent: "",
+      discountPrice: "",
+      effectiveDate: "",
+      priceListType: "",
+    });
+
+    setShowPriceModal(true);
+  };
+
+  const handlePriceFormChange = (e) => {
+    const { name, value } = e.target;
+
+    setPriceForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmitPrice = async (e) => {
+    e.preventDefault();
+
+    try {
+      const payload = {
+        ...priceForm,
+        basePrice: Number(priceForm.basePrice),
+        gstPercent: Number(priceForm.gstPercent || 0),
+        discountPercent: Number(
+          priceForm.discountPercent || 0
+        ),
+        discountPrice: Number(
+          priceForm.discountPrice
+        ),
+      };
+
+      let response;
+
+      if (editingPrice) {
+        response = await axios.put(
+          `${API_BASE_URL}/prices/${editingPrice._id}`,
+          payload,
+          getAuthConfig()
+        );
+      } else {
+        response = await axios.post(
+          `${API_BASE_URL}/prices`,
+          payload,
+          getAuthConfig()
+        );
+      }
+
+      if (response.data?.success) {
+        setShowPriceModal(false);
+        setEditingPrice(null);
+
+        await fetchPriceProducts();
+        await fetchPriceStats();
+      }
+    } catch (error) {
+      console.error(
+        "Save price error:",
+        error
+      );
+
+      alert(
+        error.response?.data?.message ||
+        "Failed to save price list"
+      );
+    }
+  };
+
+
+
+  const handleEditPrice = (price) => {
+    setEditingPrice(price);
+
+    setPriceForm({
+      productName: price.productName || "",
+      sku: price.sku || "",
+      barcode: price.barcode || "",
+      category: price.category || "",
+      brand: price.brand || "",
+      packingSize: price.packingSize || "",
+      basePrice: price.basePrice ?? "",
+      gstPercent: price.gstPercent ?? "",
+      discountPercent:
+        price.discountPercent ?? "",
+      discountPrice:
+        price.discountPrice ?? "",
+      effectiveDate: price.effectiveDate
+        ? new Date(price.effectiveDate)
+          .toISOString()
+          .split("T")[0]
+        : "",
+      priceListType:
+        price.priceListType || "",
+    });
+
+    setShowPriceModal(true);
+  };
+
+  const handleClosePriceModal = () => {
+    setShowPriceModal(false);
+    setEditingPrice(null);
+
+    setPriceForm({
+      productName: "",
+      sku: "",
+      barcode: "",
+      category: "",
+      brand: "",
+      packingSize: "",
+      basePrice: "",
+      gstPercent: "",
+      discountPercent: "",
+      discountPrice: "",
+      effectiveDate: "",
+      priceListType: "",
+    });
+  };
+
+
 
   const renderEmptyState = () => {
     return (
@@ -511,9 +648,7 @@ const PriceManagement = () => {
     );
   };
 
-  // =========================================================
   // ERROR STATE
-  // =========================================================
 
   const renderErrorState = () => {
     return (
@@ -551,16 +686,12 @@ const PriceManagement = () => {
     );
   };
 
-  // =========================================================
   // RENDER
-  // =========================================================
 
   return (
     <div className="price-management-page">
 
-      {/* ==================================================
-          PAGE HEADER
-      ================================================== */}
+      {/*           PAGE HEADER            */}
 
       <div className="price-page-header">
 
@@ -589,9 +720,7 @@ const PriceManagement = () => {
         </div>
 
 
-        {/* ==================================================
-            HEADER ACTIONS
-        ================================================== */}
+        {/*                  HEADER ACTIONS              */}
 
         <div className="price-header-actions">
 
@@ -609,6 +738,7 @@ const PriceManagement = () => {
           <button
             type="button"
             className="price-primary-btn"
+            onClick={handleCreatePrice}
           >
             + Create Price List
           </button>
@@ -618,9 +748,7 @@ const PriceManagement = () => {
       </div>
 
 
-      {/* ==================================================
-          STATISTICS CARDS
-      ================================================== */}
+      {/*                STATISTICS CARDS            */}
 
       <div className="price-stats-grid">
 
@@ -773,9 +901,7 @@ const PriceManagement = () => {
       </div>
 
 
-      {/* ==================================================
-          STATS ERROR
-      ================================================== */}
+      {/*                STATS ERROR            */}
 
       {statsError && (
         <div className="price-inline-error">
@@ -784,9 +910,7 @@ const PriceManagement = () => {
       )}
 
 
-      {/* ==================================================
-          TABS
-      ================================================== */}
+      {/*               TABS            */}
 
       <div className="price-tabs">
 
@@ -822,17 +946,15 @@ const PriceManagement = () => {
       </div>
 
 
-      {/* ==================================================
-          PRICE LIST VIEW
-      ================================================== */}
+      {/*                PRICE LIST VIEW            */}
 
       {activeTab === "priceList" && (
 
         <>
 
-          {/* ==================================================
+          {/*      
               FILTERS
-          ================================================== */}
+                */}
 
           <div className="price-filter-section">
 
@@ -981,9 +1103,7 @@ const PriceManagement = () => {
           </div>
 
 
-          {/* ==================================================
-              PRICE TABLE
-          ================================================== */}
+          {/*                  PRICE TABLE                */}
 
           <div className="price-table-wrapper">
 
@@ -1202,10 +1322,12 @@ const PriceManagement = () => {
                           <td>
 
                             <strong className="price-mrp">
+
                               ₹
                               {formatCurrency(
-                                product.mrp
+                                product.basePrice
                               )}
+
                             </strong>
 
                           </td>
@@ -1221,6 +1343,7 @@ const PriceManagement = () => {
                                 product.discountPercent ||
                                 0
                               )}
+
                               %
 
                             </span>
@@ -1236,7 +1359,6 @@ const PriceManagement = () => {
 
                               ₹
                               {formatCurrency(
-                                product.priceDiscountPrice ??
                                 product.discountPrice
                               )}
 
@@ -1248,9 +1370,11 @@ const PriceManagement = () => {
                           {/* EFFECTIVE DATE */}
 
                           <td>
+
                             {formatDate(
                               product.effectiveDate
                             )}
+
                           </td>
 
 
@@ -1261,7 +1385,7 @@ const PriceManagement = () => {
                             <span className="price-list-badge">
 
                               {getPriceListLabel(
-                                product.priceList
+                                product.priceListType
                               )}
 
                             </span>
@@ -1275,16 +1399,21 @@ const PriceManagement = () => {
 
                             <span
                               className={
-                                product.status ===
-                                  "ACTIVE"
+                                product.approvalStatus ===
+                                  "APPROVED"
                                   ? "price-status active"
-                                  : "price-status inactive"
+                                  : product.approvalStatus ===
+                                    "PENDING"
+                                    ? "price-status pending"
+                                    : "price-status inactive"
                               }
                             >
+
                               {
-                                product.status ||
+                                product.approvalStatus ||
                                 "-"
                               }
+
                             </span>
 
                           </td>
@@ -1296,10 +1425,14 @@ const PriceManagement = () => {
 
                             <button
                               className="price-action"
-                              title="Edit User"
-                              onClick={() => handleEditUser(user._id)}
+                              title="Edit Price"
+                              onClick={() =>
+                                handleEditPrice(product)
+                              }
                             >
+
                               <Pencil size={17} />
+
                             </button>
 
                           </td>
@@ -1320,9 +1453,7 @@ const PriceManagement = () => {
       )}
 
 
-      {/* ==================================================
-          PRICE HISTORY TAB
-      ================================================== */}
+      {/*                PRICE HISTORY TAB            */}
 
       {activeTab === "history" && (
 
@@ -1349,6 +1480,381 @@ const PriceManagement = () => {
 
         </div>
 
+      )}
+
+      {/*         CREATE / EDIT PRICE LIST MODAL      */}
+
+      {showPriceModal && (
+        <div className="price-modal-overlay">
+
+          <div className="price-modal">
+
+            {/* HEADER */}
+
+            <div className="price-modal-header">
+
+              <div>
+                <h2>
+                  {editingPrice
+                    ? "Edit Price List"
+                    : "Create Price List"}
+                </h2>
+
+                <p>
+                  {editingPrice
+                    ? "Update price list details"
+                    : "Create a new price list"}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                className="price-modal-close"
+                onClick={handleClosePriceModal}
+              >
+                ×
+              </button>
+
+            </div>
+
+
+            {/* FORM */}
+
+            <form
+              className="price-modal-form"
+              onSubmit={handleSubmitPrice}
+            >
+
+              {/* PRODUCT INFORMATION */}
+
+              <div className="price-form-section">
+
+                <h3>
+                  Product Information
+                </h3>
+
+                <div className="price-form-grid">
+
+                  {/* PRODUCT NAME */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      Product Name
+                      <span>*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      name="productName"
+                      value={priceForm.productName}
+                      onChange={handlePriceFormChange}
+                      placeholder="Enter product name"
+                      required
+                    />
+
+                  </div>
+
+
+                  {/* SKU */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      SKU
+                      <span>*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      name="sku"
+                      value={priceForm.sku}
+                      onChange={handlePriceFormChange}
+                      placeholder="Enter SKU"
+                      required
+                    />
+
+                  </div>
+
+
+                  {/* BARCODE */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      Barcode
+                    </label>
+
+                    <input
+                      type="text"
+                      name="barcode"
+                      value={priceForm.barcode}
+                      onChange={handlePriceFormChange}
+                      placeholder="Enter barcode"
+                    />
+
+                  </div>
+
+
+                  {/* CATEGORY */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      Category
+                      <span>*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      name="category"
+                      value={priceForm.category}
+                      onChange={handlePriceFormChange}
+                      placeholder="Enter category"
+                      required
+                    />
+
+                  </div>
+
+
+                  {/* BRAND */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      Brand
+                      <span>*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      name="brand"
+                      value={priceForm.brand}
+                      onChange={handlePriceFormChange}
+                      placeholder="Enter brand"
+                      required
+                    />
+
+                  </div>
+
+
+                  {/* PACKING SIZE */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      Packing Size
+                      <span>*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      name="packingSize"
+                      value={priceForm.packingSize}
+                      onChange={handlePriceFormChange}
+                      placeholder="e.g. 1 Litre"
+                      required
+                    />
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              {/* PRICE INFORMATION */}
+
+              <div className="price-form-section">
+
+                <h3>
+                  Price Information
+                </h3>
+
+                <div className="price-form-grid">
+
+                  {/* BASE PRICE */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      Base Price (MRP)
+                      <span>*</span>
+                    </label>
+
+                    <input
+                      type="number"
+                      name="basePrice"
+                      value={priceForm.basePrice}
+                      onChange={handlePriceFormChange}
+                      placeholder="Enter base price"
+                      min="0"
+                      step="0.01"
+                      required
+                    />
+
+                  </div>
+
+
+                  {/* GST */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      GST %
+                    </label>
+
+                    <input
+                      type="number"
+                      name="gstPercent"
+                      value={priceForm.gstPercent}
+                      onChange={handlePriceFormChange}
+                      placeholder="0"
+                      min="0"
+                      step="0.01"
+                    />
+
+                  </div>
+
+
+                  {/* DISCOUNT */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      Discount %
+                    </label>
+
+                    <input
+                      type="number"
+                      name="discountPercent"
+                      value={priceForm.discountPercent}
+                      onChange={handlePriceFormChange}
+                      placeholder="0"
+                      min="0"
+                      max="100"
+                      step="0.01"
+                    />
+
+                  </div>
+
+
+                  {/* DISCOUNT PRICE */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      Discount Price
+                      <span>*</span>
+                    </label>
+
+                    <input
+                      type="number"
+                      name="discountPrice"
+                      value={priceForm.discountPrice}
+                      onChange={handlePriceFormChange}
+                      placeholder="Enter discount price"
+                      min="0"
+                      step="0.01"
+                      required
+                    />
+
+                  </div>
+
+
+                  {/* EFFECTIVE DATE */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      Effective Date
+                      <span>*</span>
+                    </label>
+
+                    <input
+                      type="date"
+                      name="effectiveDate"
+                      value={priceForm.effectiveDate}
+                      onChange={handlePriceFormChange}
+                      required
+                    />
+
+                  </div>
+
+
+                  {/* PRICE LIST */}
+
+                  <div className="price-form-group">
+
+                    <label>
+                      Price List
+                      <span>*</span>
+                    </label>
+
+                    <select
+                      name="priceListType"
+                      value={priceForm.priceListType}
+                      onChange={handlePriceFormChange}
+                      required
+                    >
+
+                      <option value="">
+                        Select Price List
+                      </option>
+
+                      <option value="DEALER">
+                        Dealer
+                      </option>
+
+                      <option value="PAINTER">
+                        Painter
+                      </option>
+
+                      <option value="SEASONAL">
+                        Seasonal
+                      </option>
+
+                      <option value="PROMOTIONAL">
+                        Promotional
+                      </option>
+
+                    </select>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              {/* FOOTER */}
+
+              <div className="price-modal-footer">
+
+                <button
+                  type="button"
+                  className="price-modal-cancel"
+                  onClick={handleClosePriceModal}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="submit"
+                  className="price-modal-submit"
+                >
+                  {editingPrice
+                    ? "Update Price List"
+                    : "Create Price List"}
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
       )}
 
     </div>

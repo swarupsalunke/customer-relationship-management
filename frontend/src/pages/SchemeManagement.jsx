@@ -31,8 +31,7 @@ import "../css/schemeManagement.css";
 
 const API_URL = "http://localhost:5000/api/schemes";
 
-// Used only if the API is unreachable, so the screen never renders empty
-// during local development. Safe to delete once the backend is wired up.
+
 const FALLBACK_SCHEMES = [
   { _id: "f1", schemeId: "SCHM-2026-0024", schemeName: "Summer Bonanza 2026", description: "Big savings this summer", schemeType: "CASHBACK", applicableTo: "DEALERS", startDate: "2026-05-25", endDate: "2026-06-30", status: "ACTIVE", createdAt: "2026-05-20" },
   { _id: "f2", schemeId: "SCHM-2026-0023", schemeName: "Painter Power Reward", description: "Extra rewards for painters", schemeType: "REWARD", applicableTo: "PAINTERS", startDate: "2026-05-20", endDate: "2026-06-20", status: "ACTIVE", createdAt: "2026-05-18" },
@@ -46,19 +45,7 @@ const FALLBACK_SCHEMES = [
   { _id: "f10", schemeId: "SCHM-2026-0015", schemeName: "End of Season Clearance", description: "Clearance sale on select items", schemeType: "DISCOUNT", applicableTo: "DEALERS", startDate: "2026-03-01", endDate: "2026-03-31", status: "EXPIRED", createdAt: "2026-02-25" },
 ];
 
-/* =========================================================
-   SCHEME FORM
-   IMPORTANT: This component lives OUTSIDE SchemeManagement.
-   Previously it was defined *inside* SchemeManagement's render
-   body, so every keystroke (which triggers a state update and
-   re-render of the parent) created a brand-new SchemeForm
-   function reference. React treats that as a completely new
-   component type, unmounts the old <input> DOM nodes and mounts
-   fresh ones on every render — killing focus after every single
-   character. Defining it at module scope (or via useCallback,
-   but module scope is simplest) fixes it because the component
-   reference stays stable across renders.
-========================================================= */
+
 const SchemeForm = ({ formData, onChange, onSubmit, onCancel, saving, submitText }) => (
   <form className="scheme-form" onSubmit={onSubmit}>
     <div className="scheme-form-grid">
@@ -190,17 +177,13 @@ const SchemeForm = ({ formData, onChange, onSubmit, onCancel, saving, submitText
 );
 
 const SchemeManagement = () => {
-  /* =========================
-     DATA
-  ========================= */
+  /* =========================     DATA  ========================= */
 
   const [schemes, setSchemes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [usingFallback, setUsingFallback] = useState(false);
 
-  /* =========================
-     FILTERS
-  ========================= */
+  /* =========================     FILTERS  ========================= */
 
   const [searchInput, setSearchInput] = useState("");
   const [schemeTypeInput, setSchemeTypeInput] = useState("");
@@ -209,22 +192,16 @@ const SchemeManagement = () => {
   const [startDateInput, setStartDateInput] = useState("");
   const [endDateInput, setEndDateInput] = useState("");
 
-  /* =========================
-     PAGINATION
-  ========================= */
+  /* =========================     PAGINATION  ========================= */
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
 
-  /* =========================
-     CHECKBOX
-  ========================= */
+  /* =========================     CHECKBOX  ========================= */
 
   const [selectedSchemes, setSelectedSchemes] = useState([]);
 
-  /* =========================
-     MODALS
-  ========================= */
+  /* =========================     MODALS  ========================= */
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
@@ -232,15 +209,11 @@ const SchemeManagement = () => {
 
   const [selectedScheme, setSelectedScheme] = useState(null);
 
-  /* =========================
-     MORE MENU
-  ========================= */
+  /* =========================     MORE MENU  ========================= */
 
   const [openMenu, setOpenMenu] = useState(null);
 
-  /* =========================
-     FORM
-  ========================= */
+  /* =========================     FORM  ========================= */
 
   const initialForm = {
     schemeName: "",
@@ -257,9 +230,7 @@ const SchemeManagement = () => {
   const [formData, setFormData] = useState(initialForm);
   const [saving, setSaving] = useState(false);
 
-  /* =========================
-     GET ALL SCHEMES
-  ========================= */
+  /* =========================     GET ALL SCHEMES  ========================= */
 
   const fetchSchemes = async () => {
     try {
@@ -273,8 +244,7 @@ const SchemeManagement = () => {
       }
     } catch (error) {
       console.error("Fetch schemes error:", error);
-      // Backend not reachable yet — fall back to sample data so the
-      // screen is still usable while the API is being wired up.
+
       setSchemes(FALLBACK_SCHEMES);
       setUsingFallback(true);
     } finally {
@@ -284,10 +254,8 @@ const SchemeManagement = () => {
 
   useEffect(() => {
     fetchSchemes();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Close the "more actions" menu when clicking anywhere else on the page
   useEffect(() => {
     const closeMenu = () => setOpenMenu(null);
     if (openMenu) {
@@ -296,11 +264,6 @@ const SchemeManagement = () => {
     return () => document.removeEventListener("click", closeMenu);
   }, [openMenu]);
 
-  /* =========================
-     FILTER
-     Filters are applied live as the user types/selects, so the
-     "Filters" button is a convenience action, not a requirement.
-  ========================= */
 
   const filters = useMemo(
     () => ({
@@ -321,15 +284,11 @@ const SchemeManagement = () => {
     ]
   );
 
-  // Reset back to page 1 whenever a filter changes so results are never
-  // hidden on a page that no longer has any rows.
   useEffect(() => {
     setCurrentPage(1);
   }, [filters]);
 
   const applyFilters = () => {
-    // Filters already apply live; this just guarantees page 1 + closes
-    // any open row menu, useful when triggered from the button/Enter key.
     setCurrentPage(1);
     setOpenMenu(null);
   };
@@ -388,9 +347,7 @@ const SchemeManagement = () => {
     });
   }, [schemes, filters]);
 
-  /* =========================
-     PAGINATED DATA
-  ========================= */
+  /* =========================     PAGINATED DATA  ========================= */
 
   const totalPages = Math.max(
     1,
@@ -403,7 +360,6 @@ const SchemeManagement = () => {
   );
 
   const pageNumbers = useMemo(() => {
-    // Show at most 5 page buttons, centred around the current page
     const maxButtons = 5;
     let start = Math.max(1, currentPage - Math.floor(maxButtons / 2));
     let end = Math.min(totalPages, start + maxButtons - 1);
@@ -414,9 +370,7 @@ const SchemeManagement = () => {
     return pages;
   }, [currentPage, totalPages]);
 
-  /* =========================
-     STATS
-  ========================= */
+  /* =========================     STATS  ========================= */
 
   const totalSchemes = schemes.length;
   const activeSchemes = schemes.filter((item) => item.status === "ACTIVE").length;
@@ -424,9 +378,7 @@ const SchemeManagement = () => {
   const expiredSchemes = schemes.filter((item) => item.status === "EXPIRED").length;
   const draftSchemes = schemes.filter((item) => item.status === "DRAFT").length;
 
-  /* =========================
-     SELECT CHECKBOX
-  ========================= */
+  /* =========================     SELECT CHECKBOX  ========================= */
 
   const handleSelectScheme = (id) => {
     setSelectedSchemes((prev) =>
@@ -449,9 +401,7 @@ const SchemeManagement = () => {
     }
   };
 
-  /* =========================
-     FORM HANDLERS
-  ========================= */
+  /* =========================     FORM HANDLERS  ========================= */
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
@@ -477,9 +427,7 @@ const SchemeManagement = () => {
     resetForm();
   };
 
-  /* =========================
-     ADD SCHEME
-  ========================= */
+  /* =========================     ADD SCHEME  ========================= */
 
   const handleAddScheme = async (e) => {
     e.preventDefault();
@@ -528,8 +476,6 @@ const SchemeManagement = () => {
       console.error("Add scheme error:", error);
 
       if (usingFallback) {
-        // No live backend right now — add locally so the UI still reflects
-        // the action instead of silently failing.
         const newScheme = {
           _id: `local-${Date.now()}`,
           schemeId: `SCHM-2026-${String(schemes.length + 1).padStart(4, "0")}`,
@@ -550,9 +496,7 @@ const SchemeManagement = () => {
     }
   };
 
-  /* =========================
-     VIEW SCHEME
-  ========================= */
+  /* =========================     VIEW SCHEME  ========================= */
 
   const handleView = (scheme) => {
     setSelectedScheme(scheme);
@@ -560,9 +504,7 @@ const SchemeManagement = () => {
     setOpenMenu(null);
   };
 
-  /* =========================
-     EDIT SCHEME
-  ========================= */
+  /* =========================     EDIT SCHEME  ========================= */
 
   const handleEdit = (scheme) => {
     setSelectedScheme(scheme);
@@ -583,9 +525,7 @@ const SchemeManagement = () => {
     setOpenMenu(null);
   };
 
-  /* =========================
-     UPDATE SCHEME
-  ========================= */
+  /* =========================     UPDATE SCHEME  ========================= */
 
   const handleUpdateScheme = async (e) => {
     e.preventDefault();
@@ -655,9 +595,7 @@ const SchemeManagement = () => {
     }
   };
 
-  /* =========================
-     DELETE
-  ========================= */
+  /* =========================     DELETE  ========================= */
 
   const handleDelete = async (scheme) => {
     setOpenMenu(null);
@@ -687,9 +625,7 @@ const SchemeManagement = () => {
     }
   };
 
-  /* =========================
-     EXPORT
-  ========================= */
+  /* =========================     EXPORT  ========================= */
 
   const handleExport = () => {
     if (!filteredSchemes.length) {
@@ -735,9 +671,7 @@ const SchemeManagement = () => {
     URL.revokeObjectURL(url);
   };
 
-  /* =========================
-     IMPORT
-  ========================= */
+  /* =========================     IMPORT  ========================= */
 
   const handleImport = () => {
     document.getElementById("schemeImportInput")?.click();
@@ -754,9 +688,7 @@ const SchemeManagement = () => {
     e.target.value = "";
   };
 
-  /* =========================
-     QUICK ACTIONS
-  ========================= */
+  /* =========================     QUICK ACTIONS  ========================= */
 
   const goToTable = () => {
     document
@@ -782,9 +714,7 @@ const SchemeManagement = () => {
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  /* =========================
-     HELPERS
-  ========================= */
+  /* =========================     HELPERS  ========================= */
 
   function formatDate(date) {
     if (!date) return "-";
@@ -848,8 +778,6 @@ const SchemeManagement = () => {
     },
   ];
 
-  // Build conic-gradient stops from the (possibly non-100%-summing,
-  // due to rounding) percentages above.
   const donutColors = {
     active: "#16a34a",
     upcoming: "#2563eb",
@@ -988,7 +916,7 @@ const SchemeManagement = () => {
           {/* FILTERS */}
           <div className="scheme-filter-box">
             <div className="scheme-search-box">
-              
+
               <input
                 type="text"
                 placeholder="Search by scheme name, type, user, status..."
@@ -1064,7 +992,7 @@ const SchemeManagement = () => {
             </button>
 
             <button className="scheme-reset-btn" onClick={resetFilters}>
-              
+
               Reset
             </button>
           </div>

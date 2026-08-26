@@ -23,6 +23,10 @@ import FinanceDashboard from "./pages/FinanceDashboard";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Reports from "./pages/Reports";
 import SystemSettings from "./pages/SystemSettings";
+import ManufacturingBatchManagement from "./pages/ManufacturingBatchManagement";
+import InventoryManagement from "./pages/InventoryManagement";
+import DispatchManagement from "./pages/DispatchOverview";
+import InboundMaterialManagement from "./pages/InboundMaterialOverview";
 
 
 const App = () => {
@@ -184,6 +188,41 @@ const App = () => {
           }
         />
 
+        <Route
+          path="/manufacturing-batch-management"
+          element={
+            <DashboardLayout>
+              <ManufacturingBatchManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/inventory-management"
+          element={
+            <DashboardLayout>
+              <InventoryManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/dispatch-management"
+          element={
+            <DashboardLayout>
+              <DispatchManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/inbound-material-management"
+          element={
+            <DashboardLayout>
+              <InboundMaterialManagement />
+            </DashboardLayout>
+          }
+        />
 
 
       </Routes>

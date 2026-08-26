@@ -405,17 +405,17 @@ const Dashboard = () => {
           <div className="recent-activity-list">
             {hasActivities
               ? stats.recentActivities.map((activity, index) => (
-                  <div className="recent-activity-item" key={activity._id || activity.id || index}>
-                    <div className="activity-icon">
-                      <Activity size={16} />
-                    </div>
-                    <div className="activity-info">
-                      <strong>{activity.title || activity.message || "Activity"}</strong>
-                      <span>{activity.description || activity.by || "—"}</span>
-                    </div>
-                    <small>{activity.time || "—"}</small>
+                <div className="recent-activity-item" key={activity._id || activity.id || index}>
+                  <div className="activity-icon">
+                    <Activity size={16} />
                   </div>
-                ))
+                  <div className="activity-info">
+                    <strong>{activity.title || activity.message || "Activity"}</strong>
+                    <span>{activity.description || activity.by || "—"}</span>
+                  </div>
+                  <small>{activity.time || "—"}</small>
+                </div>
+              ))
               : renderEmptyState("No recent activity found")}
           </div>
         </div>
@@ -431,17 +431,17 @@ const Dashboard = () => {
           <div className="system-overview">
             {hasSystemData
               ? stats.systemOverview.map((item, index) => (
-                  <div className="system-overview-item" key={item.name || index}>
-                    <div className="system-overview-left">
-                      <span className={`system-status-dot ${item.status || "active"}`} />
-                      <div>
-                        <strong>{item.name || "System"}</strong>
-                        <small>{item.message || item.value || "—"}</small>
-                      </div>
+                <div className="system-overview-item" key={item.name || index}>
+                  <div className="system-overview-left">
+                    <span className={`system-status-dot ${item.status || "active"}`} />
+                    <div>
+                      <strong>{item.name || "System"}</strong>
+                      <small>{item.message || item.value || "—"}</small>
                     </div>
-                    {item.icon === "database" ? <Database size={18} /> : <Server size={18} />}
                   </div>
-                ))
+                  {item.icon === "database" ? <Database size={18} /> : <Server size={18} />}
+                </div>
+              ))
               : renderEmptyState("No system data found")}
           </div>
         </div>

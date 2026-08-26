@@ -1,6 +1,6 @@
-/* =========================================
+/*     
    SIDEBAR
-========================================= */
+     */
 
 .dashboard-sidebar {
   position: fixed;
@@ -27,9 +27,9 @@
 }
 
 
-/* =========================================
+/*     
    LOGO
-========================================= */
+     */
 
 .dashboard-logo {
   text-align: center;
@@ -60,9 +60,9 @@
 }
 
 
-/* =========================================
+/*     
    NAVIGATION
-========================================= */
+     */
 
 .dashboard-nav {
   display: flex;
@@ -127,9 +127,9 @@
 }
 
 
-/* =========================================
+/*     
    HOVER
-========================================= */
+     */
 
 .dashboard-nav-item:hover {
   background: rgba(255, 255, 255, 0.08);
@@ -141,16 +141,14 @@
 }
 
 
-/* =========================================
+/*     
    ACTIVE
-========================================= */
+     */
 
 .dashboard-nav-item.active {
-  background: linear-gradient(
-    90deg,
-    #ff6500,
-    #ff7b00
-  );
+  background: linear-gradient(90deg,
+      #ff6500,
+      #ff7b00);
 
   color: #ffffff;
 
@@ -163,9 +161,9 @@
 }
 
 
-/* =========================================
+/*     
    SIDEBAR BOTTOM
-========================================= */
+     */
 
 .dashboard-sidebar-bottom {
   margin-top: auto;
@@ -219,9 +217,9 @@
 }
 
 
-/* =========================================
+/*     
    MAIN CONTENT OFFSET
-========================================= */
+     */
 
 .dashboard-main {
   margin-left: 210px;
@@ -231,9 +229,9 @@
 }
 
 
-/* =========================================
+/*     
    TABLET / SLIGHTLY NARROWER DESKTOP
-========================================= */
+     */
 
 @media (max-width: 900px) {
 
@@ -252,11 +250,11 @@
 }
 
 
-/* =========================================
+/*     
    TABLET / ICON RAIL
    (sidebar collapses to icons only, still a
    left rail — good for tablets & landscape)
-========================================= */
+     */
 
 @media (max-width: 650px) {
 
@@ -318,13 +316,13 @@
 }
 
 
-/* =========================================
+/*     
    PHONE / BOTTOM TAB BAR
    Left rails eat too much width on real phones
    and put the thumb far from the nav, so below
    480px the sidebar becomes a fixed bottom bar
    instead — the standard mobile app pattern.
-========================================= */
+     */
 
 @media (max-width: 480px) {
 
@@ -410,9 +408,9 @@
 }
 
 
-/* =========================================
+/*     
    VERY SMALL PHONE
-========================================= */
+     */
 
 @media (max-width: 360px) {
 
@@ -436,9 +434,9 @@
 
 }
 
-/* =========================================
+/*     
    STORE MANAGEMENT SUB MENU
-========================================= */
+     */
 
 .store-management-menu {
   display: flex;

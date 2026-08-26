@@ -14,10 +14,6 @@ const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
 
 // ==========================================
-// DAILY CASH REPORT
-// ==========================================
-
-// ==========================================
 // CREATE
 // ==========================================
 

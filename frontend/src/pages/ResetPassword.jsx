@@ -92,7 +92,7 @@ const ResetPassword = () => {
 
       setError(
         error.response?.data?.message ||
-          "Unable to reset password. Please try again."
+        "Unable to reset password. Please try again."
       );
     } finally {
       setLoading(false);

@@ -27,9 +27,9 @@ import "../css/reports.css";
 const API_BASE_URL = "http://localhost:5000/api/reports";
 
 const Reports = () => {
-  // =========================
+
   // STATE
-  // =========================
+
 
   const [dashboard, setDashboard] = useState({
     totalReports: 0,
@@ -68,9 +68,9 @@ const Reports = () => {
     status: "ACTIVE",
   });
 
-  // =========================
+
   // FETCH DASHBOARD
-  // =========================
+
 
   const fetchDashboard = async () => {
     try {
@@ -84,9 +84,9 @@ const Reports = () => {
     }
   };
 
-  // =========================
+
   // FETCH REPORTS
-  // =========================
+
 
   const fetchReports = async () => {
     try {
@@ -104,9 +104,9 @@ const Reports = () => {
     }
   };
 
-  // =========================
+
   // FETCH SCHEDULED REPORTS
-  // =========================
+
 
   const fetchScheduledReports = async () => {
     try {
@@ -122,9 +122,9 @@ const Reports = () => {
     }
   };
 
-  // =========================
+
   // INITIAL LOAD
-  // =========================
+
 
   useEffect(() => {
     fetchDashboard();
@@ -132,9 +132,9 @@ const Reports = () => {
     fetchScheduledReports();
   }, []);
 
-  // =========================
+
   // REPORT CATEGORIES
-  // =========================
+
 
   const categoryData = useMemo(() => {
     const categories = [
@@ -196,9 +196,9 @@ const Reports = () => {
     }));
   }, [reports]);
 
-  // =========================
+
   // UNIQUE REPORT TYPES
-  // =========================
+
 
   const reportTypes = useMemo(() => {
     return [...new Set(reports.map((report) => report.reportType))]
@@ -206,9 +206,9 @@ const Reports = () => {
       .sort();
   }, [reports]);
 
-  // =========================
+
   // FILTER REPORTS
-  // =========================
+
 
   const filteredReports = useMemo(() => {
     return reports.filter((report) => {
@@ -252,9 +252,9 @@ const Reports = () => {
     });
   }, [reports, filters]);
 
-  // =========================
+
   // RESET FILTERS
-  // =========================
+
 
   const handleReset = () => {
     setFilters({
@@ -267,9 +267,9 @@ const Reports = () => {
     setShowFilters(false);
   };
 
-  // =========================
+
   // VIEW REPORT
-  // =========================
+
 
   const handleViewReport = async (id) => {
     try {
@@ -287,9 +287,9 @@ const Reports = () => {
     }
   };
 
-  // =========================
+
   // DOWNLOAD REPORT
-  // =========================
+
 
   const handleDownloadReport = async (id) => {
     try {
@@ -314,9 +314,9 @@ const Reports = () => {
     }
   };
 
-  // =========================
+
   // EDIT SCHEDULED REPORT
-  // =========================
+
 
   const handleEditScheduled = (scheduledReport) => {
     setSelectedScheduled(scheduledReport);
@@ -337,9 +337,9 @@ const Reports = () => {
     setShowEditModal(true);
   };
 
-  // =========================
+
   // UPDATE SCHEDULED REPORT
-  // =========================
+
 
   const handleUpdateScheduled = async (e) => {
     e.preventDefault();
@@ -380,9 +380,9 @@ const Reports = () => {
     }
   };
 
-  // =========================
+
   // PAUSE / RESUME
-  // =========================
+
 
   const handleToggleScheduled = async (scheduledReport) => {
     try {
@@ -416,9 +416,9 @@ const Reports = () => {
     }
   };
 
-  // =========================
+
   // DELETE SCHEDULED REPORT
-  // =========================
+
 
   const handleDeleteScheduled = async (id) => {
     const confirmDelete = window.confirm(
@@ -442,9 +442,9 @@ const Reports = () => {
     }
   };
 
-  // =========================
+
   // EXPORT DATA
-  // =========================
+
 
   const handleExportData = () => {
     if (!filteredReports.length) {
@@ -500,9 +500,9 @@ const Reports = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  // =========================
+
   // FORMAT DATE
-  // =========================
+
 
   const formatDate = (date) => {
     if (!date) return "-";
@@ -516,9 +516,9 @@ const Reports = () => {
     });
   };
 
-  // =========================
+
   // JSX
-  // =========================
+
 
   return (
     <div className="reports-page">
@@ -713,9 +713,8 @@ const Reports = () => {
         <div className="report-filter-actions">
 
           <button
-            className={`filter-btn ${
-              showFilters ? "active" : ""
-            }`}
+            className={`filter-btn ${showFilters ? "active" : ""
+              }`}
             onClick={() => setShowFilters(!showFilters)}
           >
             <Filter size={16} />
@@ -866,9 +865,8 @@ const Reports = () => {
 
                       <td>
                         <span
-                          className={`format-badge ${
-                            report.format?.toLowerCase()
-                          }`}
+                          className={`format-badge ${report.format?.toLowerCase()
+                            }`}
                         >
                           {report.format}
                         </span>
@@ -1003,9 +1001,8 @@ const Reports = () => {
 
                     <td>
                       <span
-                        className={`format-badge ${
-                          report.format?.toLowerCase()
-                        }`}
+                        className={`format-badge ${report.format?.toLowerCase()
+                          }`}
                       >
                         {report.format}
                       </span>
@@ -1020,9 +1017,8 @@ const Reports = () => {
                     <td>
 
                       <span
-                        className={`status-badge ${
-                          report.status?.toLowerCase()
-                        }`}
+                        className={`status-badge ${report.status?.toLowerCase()
+                          }`}
                       >
                         {report.status}
                       </span>

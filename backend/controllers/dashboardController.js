@@ -1,10 +1,5 @@
 const User = require("../models/User");
 
-// ==========================================
-// GET DASHBOARD STATS
-// GET /api/dashboard/stats
-// ==========================================
-
 const getDashboardStats = async (req, res) => {
   try {
     const totalUsers = await User.countDocuments();

@@ -31,6 +31,7 @@ const ProductManagement = () => {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [topConsumedItems, setTopConsumedItems] = useState([]);
 
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showViewModal, setShowViewModal] = useState(false);
@@ -54,6 +55,7 @@ const ProductManagement = () => {
         sku: "",
         barcode: "",
         category: "",
+        group: "",
         brand: "",
         packingSize: "",
         mrp: "",
@@ -66,9 +68,9 @@ const ProductManagement = () => {
 
     const API_URL = "http://localhost:5000/api/products";
 
-    // ==========================================
+    //     =
     // FETCH PRODUCTS
-    // ==========================================
+    //     =
 
     const fetchProducts = async () => {
         try {
@@ -87,9 +89,9 @@ const ProductManagement = () => {
         }
     };
 
-    // ==========================================
+    //     =
     // FETCH PRODUCT STATS
-    // ==========================================
+    //     =
 
     const fetchProductStats = async () => {
         try {
@@ -232,6 +234,7 @@ const ProductManagement = () => {
                 sku: "",
                 barcode: "",
                 category: "",
+                group: "",
                 brand: "",
                 packingSize: "",
                 mrp: "",
@@ -284,9 +287,9 @@ const ProductManagement = () => {
         );
     });
 
-    // ==========================================
+    //     =
     // INITIAL LOAD
-    // ==========================================
+    //     =
 
     useEffect(() => {
         const loadData = async () => {
@@ -444,6 +447,8 @@ const ProductManagement = () => {
                             onChange={(e) => setSelectedCategory(e.target.value)}
                         >
                             <option value="">All Categories</option>
+                            <option value="Raw Material">Raw Material</option>
+                            <option value="Packing Material">Packing Material</option>
                             <option value="Emulsion">Emulsion</option>
                             <option value="Primer">Primer</option>
                             <option value="Putty">Putty</option>
@@ -452,6 +457,7 @@ const ProductManagement = () => {
                             <option value="Wood Finish">Wood Finish</option>
                             <option value="Waterproofing">Waterproofing</option>
                             <option value="Accessories">Accessories</option>
+                            <option value="Work in Progress">Work in Progress</option>
                         </select>
 
                         {/* Sub Category */}
@@ -830,6 +836,8 @@ const ProductManagement = () => {
                                         }
                                     >
                                         <option value="">Select Category</option>
+                                        <option value="Raw Material">Raw Material</option>
+                                        <option value="Packing Material">Packing Material</option>
                                         <option value="Emulsion">Emulsion</option>
                                         <option value="Primer">Primer</option>
                                         <option value="Putty">Putty</option>
@@ -838,6 +846,43 @@ const ProductManagement = () => {
                                         <option value="Wood Finish">Wood Finish</option>
                                         <option value="Waterproofing">Waterproofing</option>
                                         <option value="Accessories">Accessories</option>
+                                        <option value="Work in Progress">Work in Progress</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label>Group</label>
+
+                                    <select
+                                        value={editingProduct.group || ""}
+                                        onChange={(e) =>
+                                            setEditingProduct({
+                                                ...editingProduct,
+                                                group: e.target.value,
+                                            })
+                                        }
+                                    >
+                                        <option value="">Select Group</option>
+
+                                        <option value="Paints">
+                                            Paints
+                                        </option>
+
+                                        <option value="Primers">
+                                            Primers
+                                        </option>
+
+                                        <option value="Putty & Fillers">
+                                            Putty & Fillers
+                                        </option>
+
+                                        <option value="Thinners">
+                                            Thinners
+                                        </option>
+
+                                        <option value="Others">
+                                            Others
+                                        </option>
                                     </select>
                                 </div>
 
@@ -1033,6 +1078,8 @@ const ProductManagement = () => {
                                         }
                                     >
                                         <option value="">Select Category</option>
+                                        <option value="Raw Material">Raw Material</option>
+                                        <option value="Packing Material">Packing Material</option>
                                         <option value="Emulsion">Emulsion</option>
                                         <option value="Primer">Primer</option>
                                         <option value="Putty">Putty</option>
@@ -1041,6 +1088,7 @@ const ProductManagement = () => {
                                         <option value="Wood Finish">Wood Finish</option>
                                         <option value="Waterproofing">Waterproofing</option>
                                         <option value="Accessories">Accessories</option>
+                                        <option value="Work in Progress">Work in Progress</option>
                                     </select>
                                 </div>
 
@@ -1057,6 +1105,45 @@ const ProductManagement = () => {
                                             })
                                         }
                                     />
+                                </div>
+
+                                <div>
+                                    <label>Group</label>
+
+                                    <select
+                                        required
+                                        value={newProduct.group}
+                                        onChange={(e) =>
+                                            setNewProduct({
+                                                ...newProduct,
+                                                group: e.target.value,
+                                            })
+                                        }
+                                    >
+                                        <option value="">
+                                            Select Group
+                                        </option>
+
+                                        <option value="Paints">
+                                            Paints
+                                        </option>
+
+                                        <option value="Primers">
+                                            Primers
+                                        </option>
+
+                                        <option value="Putty & Fillers">
+                                            Putty & Fillers
+                                        </option>
+
+                                        <option value="Thinners">
+                                            Thinners
+                                        </option>
+
+                                        <option value="Others">
+                                            Others
+                                        </option>
+                                    </select>
                                 </div>
 
                                 <div>

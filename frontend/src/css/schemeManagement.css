@@ -1,6 +1,6 @@
-/* =========================================================
+/*      =======
    SCHEME MANAGEMENT
-   ========================================================= */
+        ======= */
 
 .scheme-management-page {
   width: 100%;
@@ -16,9 +16,9 @@
   box-sizing: border-box;
 }
 
-/* =========================================================
+/*      =======
    HEADER
-   ========================================================= */
+        ======= */
 
 .scheme-page-header {
   display: flex;
@@ -118,9 +118,9 @@
   border-radius: 4px;
 }
 
-/* =========================================================
+/*      =======
    SUMMARY CARDS
-   ========================================================= */
+        ======= */
 
 .scheme-summary-grid {
   display: grid;
@@ -175,7 +175,7 @@
   color: #e14b4b;
 }
 
-.scheme-summary-card > div:last-child {
+.scheme-summary-card>div:last-child {
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -200,9 +200,9 @@
   font-size: 11px;
 }
 
-/* =========================================================
+/*      =======
    MAIN CONTENT LAYOUT
-   ========================================================= */
+        ======= */
 
 .scheme-content-layout {
   display: grid;
@@ -215,9 +215,9 @@
   min-width: 0;
 }
 
-/* =========================================================
+/*      =======
    FILTER SECTION
-   ========================================================= */
+        ======= */
 
 .scheme-filter-box {
   background: #ffffff;
@@ -284,7 +284,7 @@
   background: #cbd5e1;
 }
 
-.scheme-filter-box > select {
+.scheme-filter-box>select {
   flex: 1 1 140px;
   min-width: 130px;
   height: 40px;
@@ -341,7 +341,7 @@
   justify-content: center;
   gap: 6px;
   cursor: pointer;
-  white-space: nowrap; 
+  white-space: nowrap;
   border: 1px solid #e0e4ea;
 }
 
@@ -364,9 +364,9 @@
   color: #111827;
 }
 
-/* =========================================================
+/*      =======
    TABLE
-   ========================================================= */
+        ======= */
 
 .scheme-table-card {
   background: #ffffff;
@@ -571,7 +571,7 @@
   gap: 6px;
 }
 
-.scheme-action-buttons > button {
+.scheme-action-buttons>button {
   width: 30px;
   height: 30px;
   border: none;
@@ -591,7 +591,7 @@
   height: 30px;
 }
 
-.scheme-more-wrapper > button {
+.scheme-more-wrapper>button {
   width: 30px;
   height: 30px;
   border: none;
@@ -606,12 +606,12 @@
   padding: 0;
 }
 
-.scheme-more-wrapper > button:hover {
+.scheme-more-wrapper>button:hover {
   background: #f1f5f9;
   color: #0f172a;
 }
 
-.scheme-action-buttons > button:hover {
+.scheme-action-buttons>button:hover {
   background: #fff3ec;
   border-color: #ffd8b8;
   color: #ea580c;
@@ -664,9 +664,9 @@
   background: #fef2f2;
 }
 
-/* =========================================================
+/*      =======
    PAGINATION
-   ========================================================= */
+        ======= */
 
 .scheme-pagination {
   min-height: 54px;
@@ -679,7 +679,7 @@
   gap: 12px;
 }
 
-.scheme-pagination > span:first-child {
+.scheme-pagination>span:first-child {
   color: #64748b;
   font-size: 11.5px;
 }
@@ -738,9 +738,9 @@
   font-size: 11.5px;
 }
 
-/* =========================================================
+/*      =======
    RIGHT SIDEBAR
-   ========================================================= */
+        ======= */
 
 .scheme-right-sidebar {
   display: flex;
@@ -772,7 +772,7 @@
   font-weight: 700;
 }
 
-.side-card-header > span {
+.side-card-header>span {
   color: #94a3b8;
   font-size: 11px;
   font-weight: 500;
@@ -818,7 +818,7 @@
   position: absolute;
 }
 
-.performance-donut > div {
+.performance-donut>div {
   position: relative;
   z-index: 1;
   display: flex;
@@ -889,9 +889,9 @@
   background: #f59e0b;
 }
 
-/* =========================================================
+/*      =======
    RECENT SCHEMES
-   ========================================================= */
+        ======= */
 
 .recent-schemes-list {
   display: flex;
@@ -967,9 +967,9 @@
   padding: 12px 0;
 }
 
-/* =========================================================
+/*      =======
    QUICK ACTIONS
-   ========================================================= */
+        ======= */
 
 .quick-actions-grid {
   display: grid;
@@ -1006,9 +1006,9 @@
   transform: translateY(-1px);
 }
 
-/* =========================================================
+/*      =======
    MODAL
-   ========================================================= */
+        ======= */
 
 .scheme-modal-overlay {
   position: fixed;
@@ -1062,7 +1062,7 @@
   font-size: 12px;
 }
 
-.scheme-modal-header > button {
+.scheme-modal-header>button {
   width: 32px;
   height: 32px;
   min-width: 32px;
@@ -1076,7 +1076,7 @@
   cursor: pointer;
 }
 
-.scheme-modal-header > button:hover {
+.scheme-modal-header>button:hover {
   background: #fef2f2;
   color: #dc2626;
 }
@@ -1211,9 +1211,9 @@
   cursor: not-allowed;
 }
 
-/* =========================================================
+/*      =======
    VIEW MODAL
-   ========================================================= */
+        ======= */
 
 .scheme-view-content {
   padding: 4px 0 8px;
@@ -1244,7 +1244,7 @@
 }
 
 .scheme-view-title span:first-child,
-.scheme-view-title > div > span {
+.scheme-view-title>div>span {
   display: block;
   margin-bottom: 4px;
   color: #94a3b8;
@@ -1259,7 +1259,7 @@
   font-weight: 700;
 }
 
-.scheme-details-grid > div {
+.scheme-details-grid>div {
   padding: 12px 14px;
   border: 1px solid #edf1f6;
   border-radius: 8px;
@@ -1270,7 +1270,7 @@
   grid-column: 1 / -1;
 }
 
-.scheme-details-grid > div > span {
+.scheme-details-grid>div>span {
   display: block;
   margin-bottom: 5px;
   color: #94a3b8;
@@ -1279,7 +1279,7 @@
   text-transform: uppercase;
 }
 
-.scheme-details-grid > div > strong {
+.scheme-details-grid>div>strong {
   display: block;
   color: #0f172a;
   font-size: 12.5px;
@@ -1306,9 +1306,9 @@
   border-color: #ffd8b8;
 }
 
-/* =========================================================
+/*      =======
    SCROLLBAR
-   ========================================================= */
+        ======= */
 
 .scheme-management-page ::-webkit-scrollbar {
   width: 7px;
@@ -1328,9 +1328,9 @@
   background: #94a3b8;
 }
 
-/* =========================================================
+/*      =======
    RESPONSIVE — TABLET (≤1200px)
-   ========================================================= */
+        ======= */
 
 @media (max-width: 1200px) {
   .scheme-summary-grid {
@@ -1342,9 +1342,9 @@
   }
 }
 
-/* =========================================================
+/*      =======
    RESPONSIVE — SMALL TABLET (≤992px)
-   ========================================================= */
+        ======= */
 
 @media (max-width: 992px) {
   .scheme-management-page {
@@ -1373,15 +1373,15 @@
     grid-column: span 2;
   }
 
-  .scheme-filter-box > select,
+  .scheme-filter-box>select,
   .scheme-date-filter {
     flex: 1 1 46%;
   }
 }
 
-/* =========================================================
+/*      =======
    RESPONSIVE — MOBILE (≤700px)
-   ========================================================= */
+        ======= */
 
 @media (max-width: 700px) {
   .scheme-management-page {
@@ -1417,7 +1417,7 @@
   }
 
   .scheme-search-box,
-  .scheme-filter-box > select,
+  .scheme-filter-box>select,
   .scheme-date-filter,
   .scheme-filter-btn,
   .scheme-reset-btn {
@@ -1476,9 +1476,9 @@
   }
 }
 
-/* =========================================================
+/*      =======
    RESPONSIVE — VERY SMALL MOBILE (≤420px)
-   ========================================================= */
+        ======= */
 
 @media (max-width: 420px) {
   .scheme-summary-grid {

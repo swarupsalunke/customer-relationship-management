@@ -128,9 +128,9 @@ const QRManagement = () => {
     },
   };
 
-  // =========================================================
+
   // DATA
-  // =========================================================
+
 
   const [qrs, setQrs] = useState([]);
   const [products, setProducts] = useState([]);
@@ -141,9 +141,9 @@ const QRManagement = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
-  // =========================================================
+
   // FILTERS (live - applied instantly, no extra "apply" step)
-  // =========================================================
+
 
   const [searchInput, setSearchInput] = useState("");
 
@@ -156,9 +156,9 @@ const QRManagement = () => {
     endDate: "",
   });
 
-  // =========================================================
+
   // UI
-  // =========================================================
+
 
   const [activeTab, setActiveTab] = useState("All QR Codes");
 
@@ -180,9 +180,9 @@ const QRManagement = () => {
   const fileInputRef = useRef(null);
   const actionMenuRef = useRef(null);
 
-  // =========================================================
+
   // FETCH QR LIST
-  // =========================================================
+
 
   const fetchQrs = async () => {
     try {
@@ -203,9 +203,9 @@ const QRManagement = () => {
     }
   };
 
-  // =========================================================
+
   // FETCH PRODUCTS
-  // =========================================================
+
 
   const fetchProducts = async () => {
     try {
@@ -220,9 +220,9 @@ const QRManagement = () => {
     }
   };
 
-  // =========================================================
+
   // FETCH DEALERS
-  // =========================================================
+
 
   const fetchDealers = async () => {
     try {
@@ -242,9 +242,9 @@ const QRManagement = () => {
     }
   };
 
-  // =========================================================
+
   // FETCH PAINTERS
-  // =========================================================
+
 
   const fetchPainters = async () => {
     try {
@@ -264,9 +264,9 @@ const QRManagement = () => {
     }
   };
 
-  // =========================================================
+
   // FETCH SCAN HISTORY
-  // =========================================================
+
 
   const fetchScanHistory = async () => {
     try {
@@ -281,9 +281,9 @@ const QRManagement = () => {
     }
   };
 
-  // =========================================================
+
   // INITIAL LOAD
-  // =========================================================
+
 
   useEffect(() => {
     fetchQrs();
@@ -293,9 +293,9 @@ const QRManagement = () => {
     fetchScanHistory();
   }, []);
 
-  // =========================================================
+
   // CLOSE "MORE" ACTION MENU ON OUTSIDE CLICK
-  // =========================================================
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -314,9 +314,9 @@ const QRManagement = () => {
       document.removeEventListener("mousedown", handleClickOutside);
   }, [openActionId]);
 
-  // =========================================================
+
   // UNIQUE BATCHES
-  // =========================================================
+
 
   const batches = useMemo(() => {
     return [
@@ -327,12 +327,6 @@ const QRManagement = () => {
       ),
     ];
   }, [qrs]);
-
-  // =========================================================
-  // FILTER (fully live: search box + dropdowns + date range +
-  // tabs all combine instantly, no separate "apply" click
-  // needed)
-  // =========================================================
 
   const filteredQrs = useMemo(() => {
     const searchValue = searchInput.toLowerCase().trim();
@@ -428,15 +422,13 @@ const QRManagement = () => {
     });
   }, [qrs, searchInput, filterDraft, activeTab]);
 
-  // Reset to page 1 whenever any filter/search/tab changes so the
-  // user isn't stranded on an empty page.
   useEffect(() => {
     setCurrentPage(1);
   }, [searchInput, filterDraft, activeTab]);
 
-  // =========================================================
+
   // RESET FILTER
-  // =========================================================
+
 
   const handleResetFilters = () => {
     setSearchInput("");
@@ -454,9 +446,9 @@ const QRManagement = () => {
     setCurrentPage(1);
   };
 
-  // =========================================================
+
   // STATUS COUNTS
-  // =========================================================
+
 
   const statusCounts = useMemo(() => {
     const counts = {
@@ -499,9 +491,9 @@ const QRManagement = () => {
     return counts;
   }, [qrs]);
 
-  // =========================================================
+
   // STATUS PERCENTAGE
-  // =========================================================
+
 
   const getPercentage = (value) => {
     if (!statusCounts.total) return "0";
@@ -552,9 +544,9 @@ const QRManagement = () => {
     };
   }, [statusCounts]);
 
-  // =========================================================
+
   // PAGINATION
-  // =========================================================
+
 
   const totalPages = Math.max(
     1,
@@ -577,9 +569,9 @@ const QRManagement = () => {
     }
   }, [currentPage, totalPages]);
 
-  // =========================================================
+
   // VIEW QR
-  // =========================================================
+
 
   const handleViewQR = async (qr) => {
     setSelectedQR(qr);
@@ -597,9 +589,9 @@ const QRManagement = () => {
     }
   };
 
-  // =========================================================
+
   // EDIT QR
-  // =========================================================
+
 
   const handleEditQR = (qr) => {
     setEditingQR(qr);
@@ -627,9 +619,9 @@ const QRManagement = () => {
     setOpenActionId(null);
   };
 
-  // =========================================================
+
   // FORM CHANGE
-  // =========================================================
+
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -640,9 +632,9 @@ const QRManagement = () => {
     }));
   };
 
-  // =========================================================
+
   // UPDATE QR
-  // =========================================================
+
 
   const handleUpdateQR = async (e) => {
     e.preventDefault();
@@ -754,9 +746,9 @@ const QRManagement = () => {
     }
   };
 
-  // =========================================================
+
   // DELETE QR
-  // =========================================================
+
 
   const handleDeleteQR = async (id) => {
     setOpenActionId(null);
@@ -783,9 +775,9 @@ const QRManagement = () => {
     }
   };
 
-  // =========================================================
+
   // GENERATE FORM
-  // =========================================================
+
 
   const openGenerateModal = () => {
     setEditingQR(null);
@@ -799,9 +791,9 @@ const QRManagement = () => {
     setShowGenerateModal(true);
   };
 
-  // =========================================================
+
   // CREATE QR
-  // =========================================================
+
 
   const handleCreateQR = async (e) => {
     e.preventDefault();
@@ -902,9 +894,9 @@ const QRManagement = () => {
     }
   };
 
-  // =========================================================
+
   // EXPORT
-  // =========================================================
+
 
   const handleExport = () => {
     if (!filteredQrs.length) {
@@ -979,9 +971,9 @@ const QRManagement = () => {
     URL.revokeObjectURL(url);
   };
 
-  // =========================================================
+
   // IMPORT
-  // =========================================================
+
 
   const handleImportClick = () => {
     fileInputRef.current?.click();
@@ -999,9 +991,9 @@ const QRManagement = () => {
     e.target.value = "";
   };
 
-  // =========================================================
+
   // TOP PRODUCTS BY SCANS
-  // =========================================================
+
 
   const topProducts = useMemo(() => {
     const map = {};
@@ -1036,9 +1028,9 @@ const QRManagement = () => {
       .slice(0, 5);
   }, [scanHistory]);
 
-  // =========================================================
+
   // SCAN SUMMARY
-  // =========================================================
+
 
   const scanSummary = useMemo(() => {
     return {
@@ -1066,9 +1058,9 @@ const QRManagement = () => {
     };
   }, [scanHistory]);
 
-  // =========================================================
+
   // TABS
-  // =========================================================
+
 
   const tabs = [
     "All QR Codes",
@@ -1079,16 +1071,14 @@ const QRManagement = () => {
     "Invalid / Duplicate",
   ];
 
-  // =========================================================
+
   // RENDER
-  // =========================================================
+
 
   return (
     <div className="qr-management-page">
 
-      {/* =====================================================
-          HEADER
-      ===================================================== */}
+      {/*               HEADER           */}
 
       <div className="qr-page-header">
 
@@ -1141,9 +1131,7 @@ const QRManagement = () => {
         </div>
       </div>
 
-      {/* =====================================================
-          STAT CARDS
-      ===================================================== */}
+      {/*               STAT CARDS            */}
 
       <div className="qr-stat-grid">
 
@@ -1253,9 +1241,7 @@ const QRManagement = () => {
 
       </div>
 
-      {/* =====================================================
-          FILTER + RIGHT OVERVIEW AREA
-      ===================================================== */}
+      {/*                FILTER + RIGHT OVERVIEW AREA            */}
 
       <div className="qr-main-grid">
 
@@ -1277,7 +1263,7 @@ const QRManagement = () => {
                   setSearchInput(e.target.value)
                 }
               />
-               <Search size={16} />
+              <Search size={16} />
 
               {searchInput && (
                 <button
@@ -1450,9 +1436,7 @@ const QRManagement = () => {
 
           </div>
 
-          {/* =================================================
-              TABS
-          ================================================= */}
+          {/*                  TABS               */}
 
           <div className="qr-tabs">
 
@@ -1475,9 +1459,7 @@ const QRManagement = () => {
 
           </div>
 
-          {/* =================================================
-              TABLE
-          ================================================= */}
+          {/*                   TABLE               */}
 
           <div className="qr-table-card">
 
@@ -1679,14 +1661,14 @@ const QRManagement = () => {
                               <button
                                 className="qr-icon-btn"
                                 title="More"
-                                // onClick={() =>
-                                //   setOpenActionId(
-                                //     openActionId ===
-                                //       qr._id
-                                //       ? null
-                                //       : qr._id
-                                //   )
-                                // }
+                              // onClick={() =>
+                              //   setOpenActionId(
+                              //     openActionId ===
+                              //       qr._id
+                              //       ? null
+                              //       : qr._id
+                              //   )
+                              // }
                               >
                                 <MoreVertical
                                   size={17}
@@ -1726,9 +1708,7 @@ const QRManagement = () => {
 
             </div>
 
-            {/* =================================================
-                PAGINATION
-            ================================================= */}
+            {/*                     PAGINATION                 */}
 
             <div className="qr-pagination">
 
@@ -1773,8 +1753,6 @@ const QRManagement = () => {
                     ),
                   },
                   (_, index) => {
-                    // Center the visible page-number window
-                    // around the current page for large lists.
                     const windowStart = Math.max(
                       1,
                       Math.min(
@@ -1849,15 +1827,11 @@ const QRManagement = () => {
 
         </div>
 
-        {/* =====================================================
-            RIGHT SIDEBAR
-        ===================================================== */}
+        {/*                  RIGHT SIDEBAR              */}
 
         <aside className="qr-right-sidebar">
 
-          {/* =================================================
-              QR STATUS OVERVIEW
-          ================================================= */}
+          {/*                   QR STATUS OVERVIEW               */}
 
           <div className="qr-side-card">
 
@@ -1930,9 +1904,7 @@ const QRManagement = () => {
 
           </div>
 
-          {/* =================================================
-              SCAN SUMMARY
-          ================================================= */}
+          {/*                   SCAN SUMMARY             */}
 
           <div className="qr-side-card">
 
@@ -1996,9 +1968,7 @@ const QRManagement = () => {
 
           </div>
 
-          {/* =================================================
-              TOP PRODUCTS
-          ================================================= */}
+          {/*                   TOP PRODUCTS               */}
 
           <div className="qr-side-card">
 
@@ -2049,9 +2019,7 @@ const QRManagement = () => {
 
           </div>
 
-          {/* =================================================
-              QUICK ACTIONS
-          ================================================= */}
+          {/*                   QUICK ACTIONS               */}
 
           <div className="qr-side-card">
 
@@ -2128,9 +2096,7 @@ const QRManagement = () => {
         </aside>
       </div>
 
-      {/* =====================================================
-          VIEW MODAL
-      ===================================================== */}
+      {/*                VIEW MODAL            */}
 
       {showViewModal &&
         selectedQR && (
@@ -2290,9 +2256,7 @@ const QRManagement = () => {
           </div>
         )}
 
-      {/* =====================================================
-          GENERATE MODAL
-      ===================================================== */}
+      {/*               GENERATE MODAL            */}
 
       {showGenerateModal && (
         <div
@@ -2509,9 +2473,7 @@ const QRManagement = () => {
         </div>
       )}
 
-      {/* =====================================================
-          EDIT MODAL
-      ===================================================== */}
+      {/*                EDIT MODAL            */}
 
       {showEditModal && editingQR && (
         <div

@@ -1,6 +1,6 @@
-/* =====================================================
+/*      ===
    CRM DASHBOARD
-===================================================== */
+     === */
 
 .crm-dashboard {
   width: 100%;
@@ -10,9 +10,9 @@
   color: #172033;
 }
 
-/* =====================================================
+/*      ===
    PAGE HEADER
-===================================================== */
+     === */
 
 .dashboard-page-header {
   display: flex;
@@ -103,7 +103,9 @@
 }
 
 @keyframes dashboard-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .dashboard-period-wrap {
@@ -130,9 +132,9 @@
   cursor: pointer;
 }
 
-/* =====================================================
+/*      ===
    STAT GRID (5 cards)
-===================================================== */
+     === */
 
 .dashboard-stats-grid {
   display: grid;
@@ -175,10 +177,25 @@
   color: #ff7200;
 }
 
-.dashboard-stat-card-new:nth-child(2) .dashboard-stat-icon { background: #f1e8ff; color: #7b3ff2; }
-.dashboard-stat-card-new:nth-child(3) .dashboard-stat-icon { background: #e5f1ff; color: #1677ff; }
-.dashboard-stat-card-new:nth-child(4) .dashboard-stat-icon { background: #e5f8ee; color: #12a85b; }
-.dashboard-stat-card-new:nth-child(5) .dashboard-stat-icon { background: #fff3d8; color: #eea000; }
+.dashboard-stat-card-new:nth-child(2) .dashboard-stat-icon {
+  background: #f1e8ff;
+  color: #7b3ff2;
+}
+
+.dashboard-stat-card-new:nth-child(3) .dashboard-stat-icon {
+  background: #e5f1ff;
+  color: #1677ff;
+}
+
+.dashboard-stat-card-new:nth-child(4) .dashboard-stat-icon {
+  background: #e5f8ee;
+  color: #12a85b;
+}
+
+.dashboard-stat-card-new:nth-child(5) .dashboard-stat-icon {
+  background: #fff3d8;
+  color: #eea000;
+}
 
 .stat-more-btn {
   border: 0;
@@ -226,7 +243,9 @@
   font-size: 10px;
 }
 
-.trend-up, .trend-down, .trend-warning {
+.trend-up,
+.trend-down,
+.trend-warning {
   display: inline-flex;
   align-items: center;
   gap: 2px;
@@ -235,13 +254,21 @@
   font-weight: 600;
 }
 
-.trend-up { color: #0a9b61; }
-.trend-down { color: #e44747; }
-.trend-warning { color: #d58a00; }
+.trend-up {
+  color: #0a9b61;
+}
 
-/* =====================================================
+.trend-down {
+  color: #e44747;
+}
+
+.trend-warning {
+  color: #d58a00;
+}
+
+/*      ===
    PANEL (shared)
-===================================================== */
+     === */
 
 .dashboard-panel-new {
   min-width: 0;
@@ -296,9 +323,9 @@
   cursor: pointer;
 }
 
-/* =====================================================
+/*      ===
    CHARTS
-===================================================== */
+     === */
 
 .dashboard-chart-grid {
   display: grid;
@@ -367,7 +394,7 @@
   border-bottom: 0;
 }
 
-.order-status-row > div {
+.order-status-row>div {
   display: flex;
   align-items: center;
   gap: 7px;
@@ -403,9 +430,9 @@
   background: #fafbfc;
 }
 
-/* =====================================================
+/*      ===
    QUICK ACTIONS
-===================================================== */
+     === */
 
 .quick-actions-panel {
   margin-bottom: 16px;
@@ -461,9 +488,9 @@
   font-weight: 600;
 }
 
-/* =====================================================
+/*      ===
    LOWER GRID — TABLE + ACTIVITY
-===================================================== */
+     === */
 
 .dashboard-lower-grid {
   display: grid;
@@ -580,9 +607,9 @@
   font-size: 9.5px;
 }
 
-/* =====================================================
+/*      ===
    SYSTEM OVERVIEW
-===================================================== */
+     === */
 
 .system-overview {
   padding: 3px 0 4px;
@@ -609,7 +636,7 @@
   min-width: 0;
 }
 
-.system-overview-left > div {
+.system-overview-left>div {
   display: flex;
   min-width: 0;
   flex-direction: column;
@@ -637,12 +664,17 @@
   background: #12b76a;
 }
 
-.system-status-dot.warning { background: #f79009; }
-.system-status-dot.error { background: #f04438; }
+.system-status-dot.warning {
+  background: #f79009;
+}
 
-/* =====================================================
+.system-status-dot.error {
+  background: #f04438;
+}
+
+/*      ===
    KYC / USER STATUS
-===================================================== */
+     === */
 
 .dashboard-main-grid {
   display: grid;
@@ -674,7 +706,7 @@
   min-width: 0;
 }
 
-.kyc-status-left > div {
+.kyc-status-left>div {
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -698,10 +730,21 @@
   flex-shrink: 0;
 }
 
-.kyc-status-dot.pending { background: #f5b942; }
-.kyc-status-dot.approved { background: #18a66b; }
-.kyc-status-dot.rejected { background: #e45151; }
-.kyc-status-dot.correction { background: #8b5cf6; }
+.kyc-status-dot.pending {
+  background: #f5b942;
+}
+
+.kyc-status-dot.approved {
+  background: #18a66b;
+}
+
+.kyc-status-dot.rejected {
+  background: #e45151;
+}
+
+.kyc-status-dot.correction {
+  background: #8b5cf6;
+}
 
 .kyc-count {
   min-width: 30px;
@@ -745,7 +788,7 @@
   border-radius: 50%;
 }
 
-.user-status-circle > div {
+.user-status-circle>div {
   position: relative;
   z-index: 1;
   text-align: center;
@@ -783,7 +826,7 @@
   border-bottom: 0;
 }
 
-.user-status-row > div {
+.user-status-row>div {
   display: flex;
   align-items: center;
   gap: 9px;
@@ -803,13 +846,21 @@
   flex-shrink: 0;
 }
 
-.status-dot.active { background: #17a86b; }
-.status-dot.inactive { background: #9ba3ae; }
-.status-dot.blocked { background: #e45151; }
+.status-dot.active {
+  background: #17a86b;
+}
 
-/* =====================================================
+.status-dot.inactive {
+  background: #9ba3ae;
+}
+
+.status-dot.blocked {
+  background: #e45151;
+}
+
+/*      ===
    RESPONSIVE
-===================================================== */
+     === */
 
 @media (max-width: 1300px) {
   .dashboard-stats-grid {
@@ -818,6 +869,7 @@
 }
 
 @media (max-width: 1100px) {
+
   .dashboard-chart-grid,
   .dashboard-lower-grid,
   .dashboard-main-grid {

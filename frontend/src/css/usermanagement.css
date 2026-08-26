@@ -1,6 +1,6 @@
-/* =====================================================
+/*      ===
    USER MANAGEMENT
-===================================================== */
+     === */
 
 .user-management-page {
   width: 100%;
@@ -151,7 +151,7 @@
 /* ================= TABLE CARD ================= */
 
 .users-table-card {
-  overflow:hidden;
+  overflow: hidden;
   background: #fff;
   border: 1px solid #e5e8ee;
   border-radius: 10px;
@@ -463,140 +463,140 @@
 }
 
 
-/* =========================================
+/*     
    TABLET / iPAD
    481px - 768px
-========================================= */
+     */
 
 @media (min-width: 481px) and (max-width: 768px) {
 
-    .users-filter-bar {
-        display: grid;
+  .users-filter-bar {
+    display: grid;
 
-        grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 
-        align-items: stretch;
+    align-items: stretch;
 
-        gap: 10px;
+    gap: 10px;
 
-        padding: 15px;
-    }
+    padding: 15px;
+  }
 
-    /* Search - full width */
+  /* Search - full width */
 
-    .users-search-box {
-        width: 100%;
-        height: 40px;
+  .users-search-box {
+    width: 100%;
+    height: 40px;
 
-        box-sizing: border-box;
+    box-sizing: border-box;
 
-        grid-column: 1 / -1;
-    }
+    grid-column: 1 / -1;
+  }
 
-    /* Filters */
+  /* Filters */
 
-    .users-filter {
-        width: 100%;
-        min-width: 0;
+  .users-filter {
+    width: 100%;
+    min-width: 0;
 
-        flex-shrink: 1;
-    }
+    flex-shrink: 1;
+  }
 
-    .users-filter select {
-        width: 100%;
-        height: 40px;
+  .users-filter select {
+    width: 100%;
+    height: 40px;
 
-        box-sizing: border-box;
-    }
+    box-sizing: border-box;
+  }
 
-    /* More Filters */
+  /* More Filters */
 
-    .more-filter-btn {
-        width: 100%;
-        height: 40px;
+  .more-filter-btn {
+    width: 100%;
+    height: 40px;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        gap: 6px;
+    gap: 6px;
 
-        box-sizing: border-box;
+    box-sizing: border-box;
 
-        white-space: nowrap;
-    }
+    white-space: nowrap;
+  }
 
-    /* Reset */
+  /* Reset */
 
-    .reset-filter-btn {
-        width: 100%;
-        height: 40px;
+  .reset-filter-btn {
+    width: 100%;
+    height: 40px;
 
-        box-sizing: border-box;
-    }
+    box-sizing: border-box;
+  }
 }
 
 
-/* =========================================
+/*     
    MOBILE
    480px and below
-========================================= */
+     */
 
 @media (max-width: 480px) {
 
-    .users-filter-bar {
-        display: flex;
+  .users-filter-bar {
+    display: flex;
 
-        flex-direction: column;
+    flex-direction: column;
 
-        align-items: stretch;
+    align-items: stretch;
 
-        gap: 10px;
+    gap: 10px;
 
-        padding: 15px;
-    }
+    padding: 15px;
+  }
 
-    .users-search-box {
-        width: 100%;
-        height: 40px;
+  .users-search-box {
+    width: 100%;
+    height: 40px;
 
-        box-sizing: border-box;
-    }
+    box-sizing: border-box;
+  }
 
-    .users-filter {
-        width: 100%;
+  .users-filter {
+    width: 100%;
 
-        flex-shrink: 1;
-    }
+    flex-shrink: 1;
+  }
 
-    .users-filter select {
-        width: 100%;
-        height: 40px;
+  .users-filter select {
+    width: 100%;
+    height: 40px;
 
-        box-sizing: border-box;
-    }
+    box-sizing: border-box;
+  }
 
-    .more-filter-btn {
-        width: 100%;
-        height: 40px;
+  .more-filter-btn {
+    width: 100%;
+    height: 40px;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        gap: 6px;
+    gap: 6px;
 
-        box-sizing: border-box;
+    box-sizing: border-box;
 
-        white-space: nowrap;
-    }
+    white-space: nowrap;
+  }
 
-    .reset-filter-btn {
-        width: 100%;
-        height: 40px;
+  .reset-filter-btn {
+    width: 100%;
+    height: 40px;
 
-        box-sizing: border-box;
-    }
+    box-sizing: border-box;
+  }
 }
 
 /* ================= LAST LOGIN ================= */
@@ -706,9 +706,9 @@
 }
 
 
-/* =====================================================
+/*      ===
    RESPONSIVE - TABLET
-===================================================== */
+     === */
 
 @media (max-width: 1200px) {
 
@@ -727,9 +727,9 @@
 }
 
 
-/* =====================================================
+/*      ===
    RESPONSIVE - SMALL TABLET
-===================================================== */
+     === */
 
 @media (max-width: 800px) {
 
@@ -758,9 +758,9 @@
 }
 
 
-/* =====================================================
+/*      ===
    RESPONSIVE - MOBILE
-===================================================== */
+     === */
 
 @media (max-width: 600px) {
 
@@ -797,9 +797,9 @@
 }
 
 
-/* =====================================================
+/*      ===
    VERY SMALL MOBILE
-===================================================== */
+     === */
 
 @media (max-width: 450px) {
 
@@ -810,9 +810,9 @@
 
 }
 
-/* ==========================================
+/*     =
    ADD USER MODAL
-========================================== */
+    = */
 
 .add-user-modal-overlay {
   position: fixed;
@@ -942,9 +942,9 @@
 }
 
 
-/* ==========================================
+/*     =
    MOBILE
-========================================== */
+    = */
 
 @media (max-width: 700px) {
 
@@ -973,9 +973,9 @@
 
 }
 
-/* ==========================================
+/*     =
    VIEW USER MODAL
-========================================== */
+    = */
 
 .view-user-modal-overlay {
   position: fixed;
@@ -1175,9 +1175,9 @@
 }
 
 
-/* ==========================================
+/*     =
    MOBILE
-========================================== */
+    = */
 
 @media (max-width: 650px) {
 
@@ -1209,9 +1209,9 @@
 
 }
 
-/* ==========================================
+/*     =
    EDIT USER MODAL
-========================================== */
+    = */
 
 .edit-user-modal-overlay {
   position: fixed;
@@ -1350,9 +1350,9 @@
 }
 
 
-/* ==========================================
+/*     =
    MOBILE
-========================================== */
+    = */
 
 @media (max-width: 700px) {
 
@@ -1385,9 +1385,9 @@
 
 }
 
-/* ==========================================
+/*     =
    KYC ACTION BUTTONS
-========================================== */
+    = */
 
 .kyc-action-buttons {
   display: flex;

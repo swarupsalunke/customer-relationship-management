@@ -14,12 +14,6 @@ const {
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
 
-
-// ==========================================
-// PRODUCT MANAGEMENT
-// ==========================================
-
-
 // ==========================================
 // CREATE PRODUCT
 // ==========================================
@@ -34,7 +28,6 @@ router.post(
   ),
   createProduct
 );
-
 
 // ==========================================
 // GET ALL PRODUCTS
@@ -53,10 +46,8 @@ router.get(
   getProducts
 );
 
-
 // ==========================================
 // PRODUCT STATISTICS
-// IMPORTANT:
 // /stats MUST COME BEFORE /:id
 // ==========================================
 
@@ -70,7 +61,6 @@ router.get(
   ),
   getProductStats
 );
-
 
 // ==========================================
 // GET SINGLE PRODUCT
@@ -89,7 +79,6 @@ router.get(
   getProductById
 );
 
-
 // ==========================================
 // UPDATE PRODUCT
 // ==========================================
@@ -104,7 +93,6 @@ router.put(
   ),
   updateProduct
 );
-
 
 // ==========================================
 // DELETE PRODUCT

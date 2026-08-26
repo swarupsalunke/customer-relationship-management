@@ -28,9 +28,8 @@ import {
 import "../css/leadManagement.css";
 
 const LeadManagement = () => {
-    // =========================================================
+
     // STATES
-    // =========================================================
     const [leads, setLeads] = useState([]);
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -65,9 +64,8 @@ const LeadManagement = () => {
         territory: "",
     });
 
-    // =========================================================
+
     // CONSTANTS
-    // =========================================================
     const leadStatuses = [
         "New",
         "Follow-up",
@@ -86,9 +84,8 @@ const LeadManagement = () => {
         "Trade Show",
     ];
 
-    // =========================================================
+
     // FETCH LEADS
-    // =========================================================
     const fetchLeads = async () => {
         try {
             setLoading(true);
@@ -104,9 +101,8 @@ const LeadManagement = () => {
         }
     };
 
-    // =========================================================
+
     // FETCH USERS
-    // =========================================================
     const fetchUsers = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -120,33 +116,29 @@ const LeadManagement = () => {
         }
     };
 
-    // =========================================================
+
     // INITIAL LOAD
-    // =========================================================
     useEffect(() => {
         fetchLeads();
         fetchUsers();
     }, []);
 
-    // =========================================================
+
     // SALES EXECUTIVES
-    // =========================================================
     const salesExecutives = useMemo(
         () => users.filter((user) => user.role === "SALES_EXECUTIVE"),
         [users]
     );
 
-    // =========================================================
+
     // TERRITORIES
-    // =========================================================
     const territories = useMemo(() => {
         const values = leads.map((lead) => lead.territory).filter(Boolean);
         return [...new Set(values)];
     }, [leads]);
 
-    // =========================================================
+
     // FILTER LEADS
-    // =========================================================
     const filteredLeads = useMemo(() => {
         return leads.filter((lead) => {
             const searchValue = search.toLowerCase().trim();
@@ -187,9 +179,8 @@ const LeadManagement = () => {
         });
     }, [leads, search, status, leadSource, assignedTo, territory, startDate, endDate]);
 
-    // =========================================================
+
     // PAGINATION
-    // =========================================================
     const totalPages = Math.max(1, Math.ceil(filteredLeads.length / leadsPerPage));
     const startIndex = (currentPage - 1) * leadsPerPage;
     const currentLeads = filteredLeads.slice(startIndex, startIndex + leadsPerPage);
@@ -198,34 +189,31 @@ const LeadManagement = () => {
         if (currentPage > totalPages) setCurrentPage(totalPages);
     }, [currentPage, totalPages]);
 
-    // =========================================================
+
     // STATS
-    // =========================================================
     const totalLeads = leads.length;
     const newLeads = leads.filter((lead) => lead.status === "New").length;
     const qualifiedLeads = leads.filter((lead) => lead.status === "Qualified").length;
     const convertedLeads = leads.filter((lead) => lead.status === "Converted").length;
     const lostLeads = leads.filter((lead) => lead.status === "Lost").length;
 
-    // =========================================================
+    
     // PIPELINE DATA
-    // =========================================================
+    
     const pipelineData = leadStatuses.map((item) => ({
         label: item,
         count: leads.filter((lead) => lead.status === item).length,
     }));
 
-    // =========================================================
+
     // LEAD SOURCE DATA
-    // =========================================================
     const sourceData = leadSources.map((source) => ({
         label: source,
         count: leads.filter((lead) => lead.leadSource === source).length,
     }));
 
-    // =========================================================
-    // TOP PERFORMERS
-    // =========================================================
+
+    // TOP PERFORMERS //
     const topPerformers = useMemo(() => {
         const performanceMap = {};
 
@@ -251,9 +239,8 @@ const LeadManagement = () => {
             .slice(0, 3);
     }, [leads]);
 
-    // =========================================================
+
     // STATUS / SOURCE CLASS
-    // =========================================================
     const getStatusClass = (value) => {
         switch (value) {
             case "New":
@@ -292,9 +279,8 @@ const LeadManagement = () => {
         }
     };
 
-    // =========================================================
-    // RESET FILTERS
-    // =========================================================
+
+    // RESET FILTERS  //
     const handleReset = () => {
         setSearch("");
         setStatus("");
@@ -307,9 +293,7 @@ const LeadManagement = () => {
         setSelectedLeads([]);
     };
 
-    // =========================================================
-    // SELECT ALL / SELECT SINGLE
-    // =========================================================
+    // SELECT ALL / SELECT SINGLE  //
     const allCurrentSelected =
         currentLeads.length > 0 &&
         currentLeads.every((lead) => selectedLeads.includes(lead._id));
@@ -332,9 +316,8 @@ const LeadManagement = () => {
         }
     };
 
-    // =========================================================
-    // DELETE LEAD
-    // =========================================================
+
+    // DELETE LEAD  //
     const handleDelete = async (id) => {
         const confirmed = window.confirm("Are you sure you want to delete this lead?");
         if (!confirmed) return;
@@ -352,9 +335,8 @@ const LeadManagement = () => {
         }
     };
 
-    // =========================================================
-    // ADD / EDIT MODAL
-    // =========================================================
+
+    // ADD / EDIT MODAL  //
     const openAddModal = () => {
         setEditingLead(null);
         setFormData({
@@ -388,9 +370,7 @@ const LeadManagement = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    // =========================================================
-    // CREATE / UPDATE LEAD
-    // =========================================================
+    // CREATE / UPDATE LEAD //
     const handleSubmitLead = async (e) => {
         e.preventDefault();
 
@@ -420,17 +400,15 @@ const LeadManagement = () => {
         }
     };
 
-    // =========================================================
-    // VIEW LEAD
-    // =========================================================
+    // VIEW LEAD  //
     const handleViewLead = (lead) => {
         setSelectedLead(lead);
         setShowViewModal(true);
     };
 
-    // =========================================================
+    
     // EXPORT CSV
-    // =========================================================
+    
     const handleExport = () => {
         if (!filteredLeads.length) {
             alert("No leads available to export");
@@ -476,9 +454,9 @@ const LeadManagement = () => {
         URL.revokeObjectURL(url);
     };
 
-    // =========================================================
-    // IMPORT
-    // =========================================================
+
+    // IMPORT //
+
     const handleImportClick = () => {
         fileInputRef.current?.click();
     };
@@ -491,9 +469,8 @@ const LeadManagement = () => {
         e.target.value = "";
     };
 
-    // =========================================================
-    // HELPERS
-    // =========================================================
+
+    // HELPERS //
     const getSalesExecutiveName = (assigned) => {
         if (assigned && typeof assigned === "object") {
             return assigned.name || "N/A";
@@ -530,9 +507,9 @@ const LeadManagement = () => {
         };
     };
 
-    // =========================================================
+    
     // RENDER
-    // =========================================================
+    
     return (
         <div className="lead-management-page">
             {/* PAGE HEADER */}
@@ -1305,9 +1282,7 @@ const LeadManagement = () => {
     );
 };
 
-// =============================================================
-// DONUT GRADIENT
-// =============================================================
+//      DONUT GRADIENT   //     
 const createDonutGradient = (sourceData) => {
     const total = sourceData.reduce((sum, item) => sum + item.count, 0);
 

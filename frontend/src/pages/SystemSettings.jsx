@@ -50,9 +50,9 @@ const SystemSettings = () => {
 
   const [logoPreview, setLogoPreview] = useState("");
 
-  // =========================================
+
   // GET SETTINGS
-  // =========================================
+
 
   const fetchSettings = async () => {
     try {
@@ -113,7 +113,7 @@ const SystemSettings = () => {
 
       setError(
         err.response?.data?.message ||
-          "Failed to load system settings."
+        "Failed to load system settings."
       );
     } finally {
       setLoading(false);
@@ -124,9 +124,9 @@ const SystemSettings = () => {
     fetchSettings();
   }, []);
 
-  // =========================================
+
   // INPUT CHANGE
-  // =========================================
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -141,9 +141,9 @@ const SystemSettings = () => {
     setError("");
   };
 
-  // =========================================
+
   // SAVE CHANGES
-  // =========================================
+
 
   const handleSaveChanges = async (e) => {
     e.preventDefault();
@@ -232,16 +232,16 @@ const SystemSettings = () => {
 
       setError(
         err.response?.data?.message ||
-          "Failed to save system settings."
+        "Failed to save system settings."
       );
     } finally {
       setSaving(false);
     }
   };
 
-  // =========================================
+
   // CHANGE LOGO
-  // =========================================
+
 
   const handleChangeLogo = () => {
     alert(
@@ -249,9 +249,9 @@ const SystemSettings = () => {
     );
   };
 
-  // =========================================
+
   // LOADING
-  // =========================================
+
 
   if (loading) {
     return (
@@ -265,9 +265,7 @@ const SystemSettings = () => {
   return (
     <div className="system-settings-page">
 
-      {/* =====================================
-          PAGE HEADER
-      ====================================== */}
+      {/* ================          PAGE HEADE         ================ */}
 
       <div className="system-settings-header">
 
@@ -303,9 +301,7 @@ const SystemSettings = () => {
 
       </div>
 
-      {/* =====================================
-          MESSAGES
-      ====================================== */}
+      {/* =====================================          MESSAGES      ====================================== */}
 
       {message && (
         <div className="system-success-message">
@@ -334,18 +330,14 @@ const SystemSettings = () => {
         </div>
       )}
 
-      {/* =====================================
-          SETTINGS CONTENT
-      ====================================== */}
+      {/* =====================================          SETTINGS CONTENT      ====================================== */}
 
       <form
         className="system-settings-layout"
         onSubmit={handleSaveChanges}
       >
 
-        {/* ===================================
-            LEFT SETTINGS MENU
-        ==================================== */}
+        {/* ===================================            LEFT SETTINGS MENU        ==================================== */}
 
         <aside className="system-settings-sidebar">
 
@@ -419,15 +411,11 @@ const SystemSettings = () => {
 
         </aside>
 
-        {/* ===================================
-            RIGHT CONTENT
-        ==================================== */}
+        {/* ===================================            RIGHT CONTENT        ==================================== */}
 
         <main className="system-settings-content">
 
-          {/* =================================
-              1. BASIC SETTINGS
-          ================================== */}
+          {/* =================================              1. BASIC SETTINGS          ================================== */}
 
           <section className="settings-section">
 
@@ -630,9 +618,7 @@ const SystemSettings = () => {
             </div>
           </section>
 
-          {/* =================================
-              2. LOCALE SETTINGS
-          ================================== */}
+          {/* =================================              2. LOCALE SETTINGS          ================================== */}
 
           <section className="settings-section">
 
@@ -733,9 +719,7 @@ const SystemSettings = () => {
             </div>
           </section>
 
-          {/* =================================
-              3. DISPLAY SETTINGS
-          ================================== */}
+          {/* =================================              3. DISPLAY SETTINGS          ================================== */}
 
           <section className="settings-section">
 
@@ -935,9 +919,7 @@ const SystemSettings = () => {
             </div>
           </section>
 
-          {/* =================================
-              4. ITEMS PER PAGE
-          ================================== */}
+          {/* =================================              4. ITEMS PER PAGE          ================================== */}
 
           <section className="settings-section">
 
@@ -975,9 +957,7 @@ const SystemSettings = () => {
             </div>
           </section>
 
-          {/* =================================
-              5. FILE UPLOAD SETTINGS
-          ================================== */}
+          {/* =================================              5. FILE UPLOAD SETTINGS          ================================== */}
 
           <section className="settings-section">
 
@@ -1064,9 +1044,7 @@ const SystemSettings = () => {
             </div>
           </section>
 
-          {/* =================================
-              BOTTOM INFO
-          ================================== */}
+          {/* =================================              BOTTOM INFO          ================================== */}
 
           <div className="settings-info-box">
             <div className="settings-info-icon">

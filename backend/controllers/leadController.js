@@ -1,10 +1,6 @@
 const Lead = require("../models/Lead");
 const User = require("../models/User");
 
-// ==========================================
-// CREATE LEAD
-// ==========================================
-
 const createLead = async (req, res) => {
   try {
     const {

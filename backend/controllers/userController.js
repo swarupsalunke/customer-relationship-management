@@ -3,12 +3,6 @@ const User = require("../models/User");
 const Order = require("../models/Order");
 const RewardTransaction = require("../models/RewardTransaction");
 
-// ==========================================
-// CREATE USER
-// POST /api/users
-
-// ==========================================
-
 const createUser = async (req, res) => {
   try {
     const {
@@ -860,110 +854,110 @@ const getUserStats = async (req, res) => {
     ]);
 
     // ==========================================
-// RECENT ACTIVITIES
-// ==========================================
+    // RECENT ACTIVITIES
+    // ==========================================
 
-const recentActivities = await Order.find()
-  .populate("dealer", "name")
-  .sort({
-    createdAt: -1,
-  })
-  .limit(5)
-  .lean();
+    const recentActivities = await Order.find()
+      .populate("dealer", "name")
+      .sort({
+        createdAt: -1,
+      })
+      .limit(5)
+      .lean();
 
-const formattedActivities = recentActivities.map((order) => {
+    const formattedActivities = recentActivities.map((order) => {
 
-  let title = "Order Activity";
-  let description = "";
+      let title = "Order Activity";
+      let description = "";
 
-  switch (order.status) {
+      switch (order.status) {
 
-    case "New":
-      title = "New Order Created";
-      description = `${order.orderNumber} created`;
-      break;
+        case "New":
+          title = "New Order Created";
+          description = `${order.orderNumber} created`;
+          break;
 
-    case "Processing":
-      title = "Order Processing";
-      description = `${order.orderNumber} is being processed`;
-      break;
+        case "Processing":
+          title = "Order Processing";
+          description = `${order.orderNumber} is being processed`;
+          break;
 
-    case "Approved":
-      title = "Order Approved";
-      description = `${order.orderNumber} approved`;
-      break;
+        case "Approved":
+          title = "Order Approved";
+          description = `${order.orderNumber} approved`;
+          break;
 
-    case "Dispatched":
-      title = "Order Dispatched";
-      description = `${order.orderNumber} dispatched`;
-      break;
+        case "Dispatched":
+          title = "Order Dispatched";
+          description = `${order.orderNumber} dispatched`;
+          break;
 
-    case "Delivered":
-      title = "Order Delivered";
-      description = `${order.orderNumber} delivered`;
-      break;
+        case "Delivered":
+          title = "Order Delivered";
+          description = `${order.orderNumber} delivered`;
+          break;
 
-    case "Cancelled":
-      title = "Order Cancelled";
-      description = `${order.orderNumber} cancelled`;
-      break;
+        case "Cancelled":
+          title = "Order Cancelled";
+          description = `${order.orderNumber} cancelled`;
+          break;
 
-    case "Draft":
-      title = "Order Draft Created";
-      description = `${order.orderNumber} saved as draft`;
-      break;
+        case "Draft":
+          title = "Order Draft Created";
+          description = `${order.orderNumber} saved as draft`;
+          break;
 
-    default:
-      title = "Order Updated";
-      description = `${order.orderNumber} updated`;
-  }
+        default:
+          title = "Order Updated";
+          description = `${order.orderNumber} updated`;
+      }
 
-  return {
-    _id: order._id,
-    title,
-    description,
-    time: order.createdAt,
-  };
-});
+      return {
+        _id: order._id,
+        title,
+        description,
+        time: order.createdAt,
+      };
+    });
 
-// ==========================================
-// SYSTEM OVERVIEW
-// ==========================================
+    // ==========================================
+    // SYSTEM OVERVIEW
+    // ==========================================
 
-const systemOverview = [
-  {
-    name: "Database",
-    status: "active",
-    message: "MongoDB connected",
-    icon: "database",
-  },
-  {
-    name: "API Server",
-    status: "active",
-    message: "API server running",
-    icon: "server",
-  },
-  {
-    name: "Order Management",
-    status: "active",
-    message: `${totalOrders} orders available`,
-    icon: "server",
-  },
-  {
-    name: "User Management",
-    status: "active",
-    message: `${totalUsers} users registered`,
-    icon: "server",
-  },
-];
+    const systemOverview = [
+      {
+        name: "Database",
+        status: "active",
+        message: "MongoDB connected",
+        icon: "database",
+      },
+      {
+        name: "API Server",
+        status: "active",
+        message: "API server running",
+        icon: "server",
+      },
+      {
+        name: "Order Management",
+        status: "active",
+        message: `${totalOrders} orders available`,
+        icon: "server",
+      },
+      {
+        name: "User Management",
+        status: "active",
+        message: `${totalUsers} users registered`,
+        icon: "server",
+      },
+    ];
 
-// ==========================================
-// TOTAL REWARDS
-// ==========================================
+    // ==========================================
+    // TOTAL REWARDS
+    // ==========================================
 
-const totalRewards = await RewardTransaction.countDocuments({
-  transactionType: "ADD",
-}); 
+    const totalRewards = await RewardTransaction.countDocuments({
+      transactionType: "ADD",
+    });
 
 
     // ==========================================

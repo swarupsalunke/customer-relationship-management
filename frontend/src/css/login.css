@@ -13,6 +13,7 @@ button,
 input {
   font-family: inherit;
 }
+
 .auth-page {
   min-height: 100vh;
   display: flex;
@@ -479,6 +480,7 @@ input {
     font-size: 25px;
   }
 }
+
 .login-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;

@@ -1,6 +1,6 @@
-/* =========================================================
+/*      =======
    LEAD MANAGEMENT - CLEAN & RESPONSIVE
-========================================================= */
+     ======= */
 
 * {
   box-sizing: border-box;
@@ -24,9 +24,9 @@
   --red: #e63e57;
 }
 
-/* =========================================================
+/*      =======
    PAGE WRAPPER
-========================================================= */
+     ======= */
 
 .lead-management-page {
   width: 100%;
@@ -38,9 +38,9 @@
   color: var(--text-primary);
 }
 
-/* =========================================================
+/*      =======
    PAGE HEADER
-========================================================= */
+     ======= */
 
 .lead-management-header {
   width: 100%;
@@ -52,7 +52,7 @@
   margin-bottom: 18px;
 }
 
-.lead-management-header > div:first-child {
+.lead-management-header>div:first-child {
   min-width: 0;
 }
 
@@ -85,9 +85,9 @@
   flex-shrink: 0;
 }
 
-/* =========================================================
+/*      =======
    BUTTONS
-========================================================= */
+     ======= */
 
 .lead-secondary-btn,
 .lead-primary-btn {
@@ -128,9 +128,9 @@
   border-color: var(--primary-hover);
 }
 
-/* =========================================================
+/*      =======
    MAIN LAYOUT
-========================================================= */
+     ======= */
 
 .lead-dashboard-content {
   width: 100%;
@@ -147,9 +147,9 @@
   min-width: 0;
 }
 
-/* =========================================================
+/*      =======
    STAT CARDS
-========================================================= */
+     ======= */
 
 .lead-stats-grid {
   width: 100%;
@@ -172,7 +172,7 @@
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
 }
 
-.lead-stat-card > div:last-child {
+.lead-stat-card>div:last-child {
   min-width: 0;
 }
 
@@ -240,9 +240,9 @@
   color: #e63e57;
 }
 
-/* =========================================================
+/*      =======
    FILTER CARD
-========================================================= */
+     ======= */
 
 .lead-filter-card {
   width: 100%;
@@ -373,9 +373,9 @@
   border-color: #c5ccd6;
 }
 
-/* =========================================================
+/*      =======
    PIPELINE OVERVIEW
-========================================================= */
+     ======= */
 
 .lead-pipeline-overview {
   width: 100%;
@@ -475,9 +475,9 @@
   color: var(--text-light);
 }
 
-/* =========================================================
+/*      =======
    TABLE
-========================================================= */
+     ======= */
 
 .lead-table-card {
   width: 100%;
@@ -676,7 +676,7 @@
   font-weight: 700;
 }
 
-.assigned-user-cell > span:last-child {
+.assigned-user-cell>span:last-child {
   font-size: 9px;
   color: var(--text-secondary);
 }
@@ -723,9 +723,9 @@
   color: #f28c28;
 }
 
-/* =========================================================
+/*      =======
    TABLE PAGINATION & FOOTER
-========================================================= */
+     ======= */
 
 .lead-table-footer {
   min-height: 48px;
@@ -783,9 +783,9 @@
   color: var(--text-light) !important;
 }
 
-/* =========================================================
+/*      =======
    RIGHT SIDEBAR
-========================================================= */
+     ======= */
 
 .lead-right-sidebar {
   width: 100%;
@@ -837,9 +837,9 @@
   cursor: pointer;
 }
 
-/* =========================================================
+/*      =======
    QUICK ACTIONS
-========================================================= */
+     ======= */
 
 .quick-actions,
 .quick-actions-grid {
@@ -884,9 +884,9 @@
   flex-shrink: 0;
 }
 
-/* =========================================================
+/*      =======
    FUNNEL CHART
-========================================================= */
+     ======= */
 
 .lead-funnel-chart {
   display: flex;
@@ -943,7 +943,7 @@
   gap: 7px;
 }
 
-.funnel-legend > div {
+.funnel-legend>div {
   display: grid;
   grid-template-columns: 8px 1fr auto;
   align-items: center;
@@ -1005,9 +1005,9 @@
   color: var(--text-primary);
 }
 
-/* =========================================================
+/*      =======
    SOURCE DONUT
-========================================================= */
+     ======= */
 
 .source-chart-area {
   display: flex;
@@ -1065,7 +1065,7 @@
   gap: 7px;
 }
 
-.source-legend > div {
+.source-legend>div {
   display: grid;
   grid-template-columns: 7px 1fr auto;
   align-items: center;
@@ -1103,9 +1103,9 @@
   background: #d9d9d9;
 }
 
-/* =========================================================
+/*      =======
    TOP PERFORMERS
-========================================================= */
+     ======= */
 
 .top-performers-list {
   display: flex;
@@ -1133,7 +1133,7 @@
   font-weight: 700;
 }
 
-.performer-item > div {
+.performer-item>div {
   min-width: 0;
 }
 
@@ -1158,9 +1158,9 @@
   color: var(--text-light);
 }
 
-/* =========================================================
+/*      =======
    MODAL
-========================================================= */
+     ======= */
 
 .lead-modal-overlay {
   position: fixed;
@@ -1322,7 +1322,7 @@
   min-width: 0;
 }
 
-.lead-view-item > span:first-child {
+.lead-view-item>span:first-child {
   display: block;
   margin-bottom: 5px;
   font-size: 11px;
@@ -1334,9 +1334,9 @@
   color: var(--text-primary);
 }
 
-/* =========================================================
+/*      =======
    RESPONSIVE DESIGN - BREAKPOINTS
-========================================================= */
+     ======= */
 
 /* Tablets (1400px - 1100px) */
 @media (max-width: 1400px) {

@@ -40,18 +40,18 @@ const EMPTY_ORDER_FORM = {
 };
 
 const OrderManagement = () => {
-    // ==========================================
+    //     =
     // DATA STATE
-    // ==========================================
+    //     =
     const [orders, setOrders] = useState([]);
     const [dealers, setDealers] = useState([]);
     const [salesExecutives, setSalesExecutives] = useState([]);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    // ==========================================
+    //     =
     // FILTER STATE
-    // ==========================================
+    //     =
     const [search, setSearch] = useState("");
     const [status, setStatus] = useState("");
     const [orderType, setOrderType] = useState("");
@@ -60,35 +60,35 @@ const OrderManagement = () => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
-    // ==========================================
+    //     
     // CREATE ORDER STATE
-    // ==========================================
+    //     
     const [showCreateOrderModal, setShowCreateOrderModal] = useState(false);
     const [creatingOrder, setCreatingOrder] = useState(false);
     const [orderForm, setOrderForm] = useState(EMPTY_ORDER_FORM);
 
-    // ==========================================
+    //     
     // VIEW ORDER STATE
-    // ==========================================
+    //     
     const [viewOrder, setViewOrder] = useState(null);
 
-    // ==========================================
+    //     
     // EDIT ORDER STATE
-    // ==========================================
+    //     
     const [showEditOrderModal, setShowEditOrderModal] = useState(false);
     const [updatingOrder, setUpdatingOrder] = useState(false);
     const [editOrderId, setEditOrderId] = useState(null);
     const [editOrderForm, setEditOrderForm] = useState(EMPTY_ORDER_FORM);
 
-    // ==========================================
+    //     
     // PAGINATION / SELECTION
-    // ==========================================
+    //     
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedOrders, setSelectedOrders] = useState([]);
 
-    // ==========================================
+    //     
     // FETCH ORDERS
-    // ==========================================
+    //     
     const fetchOrders = async () => {
         try {
             setLoading(true);
@@ -107,9 +107,9 @@ const OrderManagement = () => {
         }
     };
 
-    // ==========================================
+    //     
     // FETCH USERS (Dealers + Sales Executives come from User Management)
-    // ==========================================
+    //     
     const fetchUsers = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -141,9 +141,9 @@ const OrderManagement = () => {
         }
     };
 
-    // ==========================================
+    //     
     // FETCH PRODUCTS
-    // ==========================================
+    //     
     const fetchProducts = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -165,9 +165,9 @@ const OrderManagement = () => {
         fetchProducts();
     }, []);
 
-    // ==========================================
+    //     
     // ORDER STATS
-    // ==========================================
+    //     
     const totalOrders = orders.length;
     const newOrders = orders.filter((order) => order.status === "New").length;
     const processingOrders = orders.filter((order) => order.status === "Processing").length;
@@ -176,9 +176,9 @@ const OrderManagement = () => {
     const deliveredOrders = orders.filter((order) => order.status === "Delivered").length;
     const cancelledOrders = orders.filter((order) => order.status === "Cancelled").length;
 
-    // ==========================================
+    //     
     // FILTER ORDERS
-    // ==========================================
+    //     
     const filteredOrders = orders.filter((order) => {
         const searchValue = search.toLowerCase().trim();
 
@@ -209,9 +209,9 @@ const OrderManagement = () => {
         );
     });
 
-    // ==========================================
+    //     
     // PAGINATION
-    // ==========================================
+    //     
     const totalPages = Math.ceil(filteredOrders.length / ORDERS_PER_PAGE);
     const startIndex = (currentPage - 1) * ORDERS_PER_PAGE;
     const currentOrders = filteredOrders.slice(startIndex, startIndex + ORDERS_PER_PAGE);
@@ -221,9 +221,9 @@ const OrderManagement = () => {
         setCurrentPage(1);
     }, [search, status, orderType, dealer, salesExecutive, startDate, endDate]);
 
-    // ==========================================
+    //     
     // STATUS CLASS
-    // ==========================================
+    //     
     const getStatusClass = (orderStatus) => {
         switch (orderStatus) {
             case "Draft":
@@ -245,9 +245,9 @@ const OrderManagement = () => {
         }
     };
 
-    // ==========================================
+    //     
     // DELETE ORDER
-    // ==========================================
+    //     
     const handleDelete = async (id) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this order?");
         if (!confirmDelete) return;
@@ -269,9 +269,9 @@ const OrderManagement = () => {
         }
     };
 
-    // ==========================================
-    // ORDER FORM HELPERS
-    // ==========================================
+    //     
+    // ORDER FOR HELPERS
+    //     
     const handleOrderFormChange = (e) => {
         const { name, value } = e.target;
         setOrderForm((prev) => ({ ...prev, [name]: value }));
@@ -300,9 +300,9 @@ const OrderManagement = () => {
         setOrderForm(EMPTY_ORDER_FORM);
     };
 
-    // ==========================================
+    //     
     // CREATE ORDER
-    // ==========================================
+    //     
     const handleCreateOrder = async (e) => {
         e.preventDefault();
 
@@ -315,9 +315,6 @@ const OrderManagement = () => {
         try {
             setCreatingOrder(true);
             const token = localStorage.getItem("token");
-
-            // Agar user ne amount manually enter kiya hai to wahi use hoga,
-            // otherwise product price x quantity se calculate hoga.
             const finalAmount = Number(orderForm.amount || calculatedAmount);
 
             const payload = {
@@ -352,9 +349,9 @@ const OrderManagement = () => {
         }
     };
 
-    // ==========================================
+    //     
     // VIEW ORDER
-    // ==========================================
+    //     
     const openViewOrderModal = (order) => {
         setViewOrder(order);
     };
@@ -363,9 +360,9 @@ const OrderManagement = () => {
         setViewOrder(null);
     };
 
-    // ==========================================
+    //     
     // EDIT ORDER
-    // ==========================================
+    //     
     const openEditOrderModal = (order) => {
         setEditOrderId(order._id);
 
@@ -450,9 +447,9 @@ const OrderManagement = () => {
         }
     };
 
-    // ==========================================
+    //     
     // DERIVED LISTS FOR FILTER DROPDOWNS
-    // ==========================================
+    //     
     const dealerOptions = [
         ...new Map(
             orders.filter((order) => order.dealer).map((order) => [order.dealer._id, order.dealer])
@@ -467,9 +464,9 @@ const OrderManagement = () => {
         ).values(),
     ];
 
-    // ==========================================
+    //     
     // TOP SELLING PRODUCTS (derived from orders)
-    // ==========================================
+    //     
     const topProducts = (() => {
         const productMap = {};
 
@@ -492,16 +489,16 @@ const OrderManagement = () => {
             .slice(0, 5);
     })();
 
-    // ==========================================
+    //     
     // RECENT ORDERS (derived from orders)
-    // ==========================================
+    //     
     const recentOrders = [...orders]
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .slice(0, 5);
 
-    // ==========================================
+    //     
     // ORDER SUMMARY (this month donut)
-    // ==========================================
+    //     
     const statusSummary = {
         New: newOrders,
         Processing: processingOrders,
@@ -548,9 +545,7 @@ const OrderManagement = () => {
 
     return (
         <div className="order-management-page">
-            {/* ========================================
-                HEADER
-            ======================================== */}
+            {/*                HEADER            */}
             <div className="order-management-header">
                 <div>
                     <h1>Order Management</h1>
@@ -578,9 +573,7 @@ const OrderManagement = () => {
                 </div>
             </div>
 
-            {/* ==========================================
-                ORDER SUMMARY CARDS
-            ========================================== */}
+            {/*               ORDER SUMMARY CARDS                */}
             <section className="order-stats-grid">
                 <div className="order-stat-card">
                     <div className="order-stat-icon total">
@@ -649,9 +642,7 @@ const OrderManagement = () => {
                 </div>
             </section>
 
-            {/* ==========================================
-                SEARCH & FILTERS
-            ========================================== */}
+            {/*                     SEARCH & FILTERS                */}
             <section className="order-filter-card">
                 <div className="order-search-box">
                     <Search size={17} />
@@ -741,9 +732,7 @@ const OrderManagement = () => {
                 </button>
             </section>
 
-            {/* ========================================
-                ORDER LIST
-            ======================================== */}
+            {/*                 ORDER LIST             */}
             <section className="order-list-card">
                 <div className="order-list-header">
                     <h3>Order Status Overview</h3>
@@ -977,9 +966,7 @@ const OrderManagement = () => {
                     </table>
                 </div>
 
-                {/* ========================================
-                    PAGINATION
-                ======================================== */}
+                {/*                    PAGINATION           */}
                 {orders.length > 0 && (
                     <div className="order-pagination">
                         <span>
@@ -1012,9 +999,7 @@ const OrderManagement = () => {
                 )}
             </section>
 
-            {/* =====================================================
-                BOTTOM ORDER DASHBOARD
-            ===================================================== */}
+            {/*                      BOTTOM ORDER DASHBOARD                 */}
             <div className="order-bottom-dashboard">
                 {/* TOP SELLING PRODUCTS */}
                 <div className="order-bottom-card">
@@ -1072,9 +1057,9 @@ const OrderManagement = () => {
                                     <span className="recent-order-time">
                                         {order.orderDate
                                             ? new Date(order.orderDate).toLocaleTimeString("en-IN", {
-                                                  hour: "2-digit",
-                                                  minute: "2-digit",
-                                              })
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                            })
                                             : "--"}
                                     </span>
                                 </div>
@@ -1156,9 +1141,7 @@ const OrderManagement = () => {
                 </div>
             </div>
 
-            {/* ==========================================
-                CREATE ORDER MODAL
-            ========================================== */}
+            {/*                     CREATE ORDER MODAL                 */}
             {showCreateOrderModal && (
                 <div className="order-modal-overlay">
                     <div className="order-create-modal">
@@ -1302,9 +1285,7 @@ const OrderManagement = () => {
                 </div>
             )}
 
-            {/* ==========================================
-                VIEW ORDER MODAL
-            ========================================== */}
+            {/*                     VIEW ORDER MODAL                 */}
             {viewOrder && (
                 <div className="order-modal-overlay">
                     <div className="order-view-modal">
@@ -1388,9 +1369,7 @@ const OrderManagement = () => {
                 </div>
             )}
 
-            {/* ==========================================
-                EDIT ORDER MODAL
-            ========================================== */}
+            {/*                     EDIT ORDER MODAL                 */}
             {showEditOrderModal && (
                 <div className="order-modal-overlay">
                     <div className="order-create-modal">

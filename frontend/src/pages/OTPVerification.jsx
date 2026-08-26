@@ -109,7 +109,6 @@ const OTPVerification = () => {
 
       console.log("OTP verification:", response.data);
 
-      // Reset token ko next page ke liye temporarily pass karenge
       navigate("/reset-password", {
         state: {
           resetToken: response.data.resetToken,
@@ -120,7 +119,7 @@ const OTPVerification = () => {
 
       setError(
         error.response?.data?.message ||
-          "Invalid OTP. Please try again."
+        "Invalid OTP. Please try again."
       );
     } finally {
       setLoading(false);
@@ -151,7 +150,7 @@ const OTPVerification = () => {
 
       setError(
         error.response?.data?.message ||
-          "Unable to resend OTP."
+        "Unable to resend OTP."
       );
     } finally {
       setResending(false);

@@ -14,9 +14,6 @@ const {
 
 const router = express.Router();
 
-// ===============================
-// REPORT DASHBOARD
-// ===============================
 router.get("/dashboard", getReportDashboard);
 
 // ===============================

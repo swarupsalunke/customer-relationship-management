@@ -1,9 +1,6 @@
 const Report = require("../models/Report");
 const ScheduledReport = require("../models/ScheduledReport");
 
-// ===============================
-// GET REPORT DASHBOARD
-// ===============================
 exports.getReportDashboard = async (req, res) => {
   try {
     const now = new Date();

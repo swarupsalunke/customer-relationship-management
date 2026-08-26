@@ -44,7 +44,7 @@ const ForgotPassword = () => {
 
       setError(
         error.response?.data?.message ||
-          "Unable to send OTP. Please try again."
+        "Unable to send OTP. Please try again."
       );
     } finally {
       setLoading(false);

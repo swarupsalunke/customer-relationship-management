@@ -1,7 +1,6 @@
 const roleMiddleware = (...allowedRoles) => {
   return (req, res, next) => {
     try {
-      // authMiddleware ne req.user me JWT data rakha hai
       if (!req.user) {
         return res.status(401).json({
           success: false,
@@ -11,7 +10,6 @@ const roleMiddleware = (...allowedRoles) => {
 
       const userRole = req.user.role;
 
-      // Role allowed hai ya nahi
       if (!allowedRoles.includes(userRole)) {
         return res.status(403).json({
           success: false,
