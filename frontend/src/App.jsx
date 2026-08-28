@@ -27,6 +27,8 @@ import ManufacturingBatchManagement from "./pages/ManufacturingBatchManagement";
 import InventoryManagement from "./pages/InventoryManagement";
 import DispatchManagement from "./pages/DispatchOverview";
 import InboundMaterialManagement from "./pages/InboundMaterialOverview";
+import EmployeeHRManagement from "./pages/EmployeeHRManagement";
+import CommissionManagement from "./pages/CommissionManagement";
 
 
 const App = () => {
@@ -220,6 +222,24 @@ const App = () => {
           element={
             <DashboardLayout>
               <InboundMaterialManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/employee-hr-management"
+          element={
+            <DashboardLayout>
+              <EmployeeHRManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/commission-management"
+          element={
+            <DashboardLayout>
+              <CommissionManagement />
             </DashboardLayout>
           }
         />

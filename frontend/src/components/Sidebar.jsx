@@ -10,8 +10,6 @@ import {
   QrCode,
   Gift,
   Factory,
-  Warehouse,
-  UserRoundCog,
   Settings,
   Headphones,
   Phone,
@@ -23,6 +21,8 @@ import {
   Boxes,
   Truck,
   PackageCheck,
+  Users,
+  WalletCards,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
@@ -42,6 +42,8 @@ const Sidebar = () => {
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [dispatchOpen, setDispatchOpen] = useState(false);
   const [inboundOpen, setInboundOpen] = useState(false);
+  const [hrOpen, setHrOpen] = useState(false);
+  const [commissionOpen, setCommissionOpen] = useState(false);
 
   return (
     <aside className="dashboard-sidebar">
@@ -678,18 +680,95 @@ const Sidebar = () => {
 
         </div>
 
-        {/* HR Management */}
-        <NavLink
-          to="/hr"
-          className="dashboard-nav-item"
-        >
-          <UserRoundCog size={19} />
-          <span>HR Management</span>
-        </NavLink>
+        {/* Employee HR Management */}
+        <div className="store-management-menu">
 
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setHrOpen(!hrOpen)}
+          >
+            <Users size={19} />
 
+            <span>Employee HR Management</span>
 
+            {hrOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
 
+          {/* HR Submenu */}
+          {hrOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/employee-hr-management"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <LayoutDashboard size={16} />
+                <span>Overview</span>
+              </NavLink>
+            </div>
+          )}
+
+        </div>
+
+        {/* Commission Management */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setCommissionOpen(!commissionOpen)}
+          >
+            <WalletCards size={19} />
+
+            <span>Commission Management</span>
+
+            {commissionOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Commission Dashboard */}
+          {commissionOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/commission-management"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <FileText size={16} />
+
+                <span>Overview</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
 
         {/* System Settings */}
         <div className="store-management-menu">

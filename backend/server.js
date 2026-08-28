@@ -23,6 +23,10 @@ const inventoryRoutes = require("./routes/inventoryRoutes");
 const stockMovementRoutes = require("./routes/stockMovementRoutes");
 const dispatchRoutes = require("./routes/dispatchRoutes");
 const inboundMaterialRoutes = require("./routes/inboundMaterialRoutes");
+const advanceSalaryRoutes = require("./routes/advanceSalaryRoutes");
+const leaveRoutes = require("./routes/leaveRoutes");
+const employeeRoutes = require("./routes/employeeRoutes");
+const commissionRoutes = require("./routes/commissionRoutes");
 
 const path = require("path");
 dotenv.config();
@@ -54,6 +58,10 @@ app.use("/api/inventory", inventoryRoutes);
 app.use("/api/inventory/movements", stockMovementRoutes);
 app.use("/api/dispatch", dispatchRoutes);
 app.use("/api/inbound", inboundMaterialRoutes);
+app.use("/api/advance-salary", advanceSalaryRoutes);
+app.use("/api/leaves", leaveRoutes);
+app.use("/api/hr/employees", employeeRoutes);
+app.use("/api/commissions", commissionRoutes);
 
 app.get("/", (req, res) => {
   res.json({
