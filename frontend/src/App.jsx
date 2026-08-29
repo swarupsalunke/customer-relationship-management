@@ -29,6 +29,11 @@ import DispatchManagement from "./pages/DispatchOverview";
 import InboundMaterialManagement from "./pages/InboundMaterialOverview";
 import EmployeeHRManagement from "./pages/EmployeeHRManagement";
 import CommissionManagement from "./pages/CommissionManagement";
+import NotificationManagement from "./pages/NotificationManagement";
+import DocumentManagement from "./pages/DocumentManagement";
+import BirthdayManagement from "./pages/BirthdayManagement";
+import FeedbackManagement from "./pages/VoiceOfPainter";
+import LoyaltyTierManagement from "./pages/LoyaltyTierManagement";
 
 
 const App = () => {
@@ -244,6 +249,50 @@ const App = () => {
           }
         />
 
+        <Route
+          path="/notification-management"
+          element={
+            <DashboardLayout>
+              <NotificationManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/document-management"
+          element={
+            <DashboardLayout>
+              <DocumentManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/birthday-management"
+          element={
+            <DashboardLayout>
+              <BirthdayManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/feedback-management"
+          element={
+            <DashboardLayout>
+              <FeedbackManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/loyalty-tier-management"
+          element={
+            <DashboardLayout>
+              <LoyaltyTierManagement />
+            </DashboardLayout>
+          }
+        />
 
       </Routes>
 

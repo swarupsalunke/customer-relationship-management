@@ -1,0 +1,1333 @@
+/* BirthdayManagement.css */
+
+/* =========================================================
+   BIRTHDAY MANAGEMENT PAGE
+========================================================= */
+
+.birthday-management-page {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background: #ffffff;
+  color: #172554;
+  font-family: Arial, sans-serif;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.birthday-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.birthday-page-header h1 {
+  margin: 0 0 7px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #14285a;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: #60708f;
+}
+
+.breadcrumb span {
+  margin: 0 7px;
+  color: #8b98ad;
+}
+
+.birthday-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.primary-btn,
+.secondary-btn,
+.cancel-btn {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.primary-btn {
+  border: 1px solid #172b68;
+  background: #172b68;
+  color: #fff;
+}
+
+.primary-btn:hover {
+  background: #102052;
+}
+
+.secondary-btn {
+  border: 1px solid #d9e0ec;
+  background: #fff;
+  color: #172b68;
+}
+
+.secondary-btn:hover {
+  background: #f6f8fc;
+}
+
+.cancel-btn {
+  border: 1px solid #d8deea;
+  background: #fff;
+  color: #4c5b73;
+}
+
+.cancel-btn:hover {
+  background: #f5f7fa;
+}
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.birthday-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.birthday-stat-card {
+  min-height: 100px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: 1px solid #e5eaf2;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-icon {
+  width: 43px;
+  height: 43px;
+  min-width: 43px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon.purple {
+  background: #f1eaff;
+  color: #7047e8;
+}
+
+.stat-icon.green {
+  background: #e8f8ee;
+  color: #16a34a;
+}
+
+.stat-icon.orange {
+  background: #fff2e4;
+  color: #f97316;
+}
+
+.stat-icon.blue {
+  background: #e9f1ff;
+  color: #2563eb;
+}
+
+.stat-icon.red {
+  background: #ffe9eb;
+  color: #ef4444;
+}
+
+.birthday-stat-card span {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 10px;
+  color: #66758e;
+}
+
+.birthday-stat-card strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 22px;
+  line-height: 1;
+  color: #172b68;
+}
+
+.birthday-stat-card small {
+  display: block;
+  font-size: 9px;
+  color: #71809a;
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.birthday-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.5fr auto;
+  align-items: end;
+  gap: 12px;
+  padding: 15px;
+  margin-bottom: 16px;
+  border: 1px solid #e4e9f1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.filter-group {
+  min-width: 0;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #34466b;
+}
+
+.filter-group input,
+.filter-group select {
+  width: 100%;
+  height: 34px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  border: 1px solid #dce2ec;
+  border-radius: 5px;
+  outline: none;
+  background: #fff;
+  color: #384964;
+  font-size: 11px;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+  border-color: #7c91c7;
+}
+
+.search-filter {
+  min-width: 0;
+}
+
+.search-input {
+  height: 34px;
+  box-sizing: border-box;
+  padding: 0 9px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #dce2ec;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.search-input svg {
+  color: #71809a;
+  flex-shrink: 0;
+}
+
+.search-input input {
+  height: 30px;
+  padding: 0;
+  border: 0;
+}
+
+.search-input input:focus {
+  border: 0;
+}
+
+.reset-filter-btn {
+  height: 34px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #dce2ec;
+  border-radius: 5px;
+  background: #fff;
+  color: #34466b;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.reset-filter-btn:hover {
+  background: #f5f7fb;
+}
+
+
+/* =========================================================
+   COMMON SECTION
+========================================================= */
+
+.birthday-section {
+  margin-bottom: 16px;
+  padding: 15px;
+  border: 1px solid #e4e9f1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #172b68;
+}
+
+.view-calendar-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  border: 0;
+  background: transparent;
+  color: #2364c4;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   BIRTHDAY TABS
+========================================================= */
+
+.birthday-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.birthday-tabs button {
+  padding: 7px 13px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: #53627a;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.birthday-tabs button:hover {
+  background: #f4f7fc;
+}
+
+.birthday-tabs button.active {
+  border-color: #8bb1ff;
+  background: #edf4ff;
+  color: #175ac1;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   UPCOMING BIRTHDAY CARDS
+========================================================= */
+
+.upcoming-birthday-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.upcoming-birthday-card {
+  min-height: 155px;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid #e6eaf1;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.birthday-avatar {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #edf2f8;
+  color: #344d78;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.birthday-card-info {
+  flex: 1;
+}
+
+.birthday-card-info h3 {
+  margin: 0 0 5px;
+  font-size: 11px;
+  color: #20345e;
+}
+
+.birthday-card-info p {
+  margin: 4px 0;
+  font-size: 9px;
+  line-height: 1.3;
+  color: #65738a;
+}
+
+.user-type-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 7px;
+  border-radius: 10px;
+  background: #eaf3ff;
+  color: #2470d0;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.birthday-card-footer {
+  padding-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px;
+  border-top: 1px solid #edf0f5;
+}
+
+.birthday-card-footer > span {
+  font-size: 8px;
+  color: #53627a;
+}
+
+.birthday-card-footer button {
+  width: 100%;
+  height: 25px;
+  margin-top: 5px;
+  border: 0;
+  border-radius: 4px;
+  background: #eaf8ef;
+  color: #168343;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.birthday-card-footer button:hover {
+  background: #dcf3e4;
+}
+
+.empty-birthday {
+  grid-column: 1 / -1;
+  padding: 35px 10px;
+  text-align: center;
+  color: #78869d;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   BIRTHDAY TABLE
+========================================================= */
+
+.birthday-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.birthday-table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+}
+
+.birthday-table th {
+  padding: 9px 7px;
+  border-bottom: 1px solid #e2e7ef;
+  background: #fafbfc;
+  color: #52627d;
+  font-size: 9px;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.birthday-table td {
+  padding: 9px 7px;
+  border-bottom: 1px solid #edf0f4;
+  color: #475a78;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.birthday-table tbody tr:hover {
+  background: #fafcff;
+}
+
+.table-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #20345e;
+  font-weight: 600;
+}
+
+.small-avatar {
+  width: 25px;
+  height: 25px;
+  min-width: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #edf2f8;
+  color: #34527f;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 7px;
+  border-radius: 10px;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.status-badge.scheduled {
+  background: #e8f8ed;
+  color: #178744;
+}
+
+.status-badge.disabled {
+  background: #f1f2f4;
+  color: #7a8493;
+}
+
+
+/* =========================================================
+   TABLE ACTIONS
+========================================================= */
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.table-actions button {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid #e3e8f0;
+  border-radius: 4px;
+  background: #fff;
+  color: #435b83;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.table-actions button:hover {
+  background: #f1f5fb;
+  border-color: #cbd6e7;
+}
+
+.table-actions button:last-child:hover {
+  background: #fff0f0;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.birthday-pagination {
+  min-height: 40px;
+  padding-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.birthday-pagination > span {
+  font-size: 10px;
+  color: #68778e;
+}
+
+.pagination-buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pagination-buttons button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #dfe4ec;
+  border-radius: 4px;
+  background: #fff;
+  color: #52627c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.pagination-buttons button:hover:not(:disabled) {
+  background: #f1f5fb;
+}
+
+.pagination-buttons button.active {
+  border-color: #172b68;
+  background: #172b68;
+  color: #fff;
+}
+
+.pagination-buttons button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.birthday-pagination select {
+  height: 29px;
+  padding: 0 7px;
+  border: 1px solid #dfe4ec;
+  border-radius: 4px;
+  background: #fff;
+  color: #53627a;
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.birthday-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgba(13, 25, 48, 0.48);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.birthday-modal {
+  width: min(650px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 15px 45px rgba(20, 35, 65, 0.2);
+}
+
+.modal-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #e8ecf2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.modal-header h2 {
+  margin: 0 0 5px;
+  color: #172b68;
+  font-size: 17px;
+}
+
+.modal-header p {
+  margin: 0;
+  color: #7a879b;
+  font-size: 10px;
+}
+
+.modal-header > button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #e0e5ed;
+  border-radius: 5px;
+  background: #fff;
+  color: #66758d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.modal-header > button:hover {
+  background: #f4f6f9;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.birthday-modal form {
+  padding: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.form-group {
+  min-width: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #34466b;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  border: 1px solid #dce2eb;
+  border-radius: 5px;
+  outline: none;
+  background: #fff;
+  color: #3e4f6a;
+  font-size: 11px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #7895cc;
+}
+
+.reminder-form-group {
+  grid-column: 1 / -1;
+  padding: 12px;
+  border: 1px solid #e4e9f1;
+  border-radius: 6px;
+  background: #fafbfd;
+}
+
+.reminder-toggle {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  margin: 0 !important;
+  cursor: pointer;
+}
+
+.reminder-toggle input {
+  width: 15px !important;
+  height: 15px !important;
+  margin: 0;
+}
+
+.reminder-form-group small {
+  display: block;
+  margin-top: 6px;
+  color: #7b8799;
+  font-size: 9px;
+}
+
+.modal-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #e8ecf2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+
+/* =========================================================
+   VIEW MODAL
+========================================================= */
+
+.view-modal {
+  max-width: 600px;
+}
+
+.birthday-view-details {
+  padding: 22px;
+  text-align: center;
+}
+
+.view-avatar {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  background: #edf2f8;
+  color: #31527f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.birthday-view-details h3 {
+  margin: 0 0 7px;
+  color: #1d315b;
+  font-size: 17px;
+}
+
+.view-detail-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  text-align: left;
+}
+
+.view-detail-grid > div {
+  padding: 11px;
+  border: 1px solid #e6eaf0;
+  border-radius: 6px;
+  background: #fafbfd;
+}
+
+.view-detail-grid label {
+  display: block;
+  margin-bottom: 5px;
+  color: #7a879a;
+  font-size: 9px;
+}
+
+.view-detail-grid p {
+  margin: 0;
+  color: #314565;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1400px) {
+  .birthday-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .upcoming-birthday-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .birthday-filters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .search-filter {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 900px) {
+  .birthday-page-header {
+    flex-direction: column;
+  }
+
+  .birthday-header-actions {
+    flex-wrap: wrap;
+  }
+
+  .birthday-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .upcoming-birthday-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .birthday-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .search-filter {
+    grid-column: auto;
+  }
+
+  .birthday-pagination {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .birthday-management-page {
+    padding: 12px;
+  }
+
+  .birthday-stats-grid,
+  .upcoming-birthday-grid,
+  .birthday-filters,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-filter {
+    grid-column: auto;
+  }
+
+  .reminder-form-group {
+    grid-column: auto;
+  }
+
+  .birthday-header-actions {
+    width: 100%;
+  }
+
+  .birthday-header-actions button {
+    flex: 1;
+  }
+
+  .birthday-tabs {
+    overflow-x: auto;
+  }
+
+  .birthday-tabs button {
+    white-space: nowrap;
+  }
+
+  .view-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* =========================================================
+   BIRTHDAY PAGE GRID + RIGHT SIDEBAR
+========================================================= */
+
+.birthday-management-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 245px;
+  gap: 16px;
+  align-items: start;
+}
+
+/* Header full width */
+.birthday-page-header {
+  grid-column: 1 / -1;
+}
+
+/* Stats full width */
+.birthday-stats-grid {
+  grid-column: 1 / -1;
+}
+
+/* Filters full width */
+.birthday-filters {
+  grid-column: 1 / -1;
+}
+
+/* Upcoming + Birthday table left side */
+.birthday-management-page > .birthday-section {
+  grid-column: 1;
+}
+
+/* First section = Upcoming Birthdays */
+.birthday-management-page > .birthday-section:nth-of-type(4) {
+  grid-column: 1;
+}
+
+/* Right sidebar */
+.birthday-right-sidebar {
+  grid-column: 2;
+  grid-row: 4 / span 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* =========================================================
+   RIGHT SIDEBAR CARDS
+========================================================= */
+
+.birthday-side-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px;
+  border: 1px solid #e4e9f1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.side-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.side-card-header h3 {
+  margin: 0;
+  color: #172b68;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.side-card-header button {
+  border: 0;
+  background: transparent;
+  color: #2364c4;
+  font-size: 9px;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.side-card-header button:hover {
+  color: #123e91;
+}
+
+
+/* =========================================================
+   BIRTHDAY REMINDER SETTINGS
+========================================================= */
+
+.reminder-setting-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 11px;
+}
+
+.reminder-setting-icon {
+  width: 29px;
+  height: 29px;
+  min-width: 29px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reminder-setting-icon.purple {
+  background: #f1eaff;
+  color: #7047e8;
+}
+
+.reminder-setting-icon.blue {
+  background: #e9f1ff;
+  color: #2563eb;
+}
+
+.reminder-setting-icon.green {
+  background: #e8f8ee;
+  color: #16a34a;
+}
+
+.reminder-setting-row span {
+  display: block;
+  margin-bottom: 2px;
+  color: #71809a;
+  font-size: 8px;
+}
+
+.reminder-setting-row strong {
+  display: block;
+  color: #34466b;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.reminder-status-row {
+  padding-top: 10px;
+  border-top: 1px solid #edf0f4;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 9px;
+  color: #52627d;
+}
+
+.active-status {
+  margin-left: auto;
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.reminder-status-dot {
+  width: 22px;
+  height: 12px;
+  border-radius: 20px;
+  background: #16a34a;
+  position: relative;
+}
+
+.reminder-status-dot::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 2px;
+  right: 2px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+
+/* =========================================================
+   UPCOMING REMINDERS
+========================================================= */
+
+.side-reminder-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.side-reminder-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.side-reminder-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.side-reminder-info strong {
+  display: block;
+  margin-bottom: 2px;
+  color: #314565;
+  font-size: 9px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.side-reminder-info span {
+  display: block;
+  color: #7a879a;
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+.more-reminders-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+  border: 0;
+  background: transparent;
+  color: #2364c4;
+  font-size: 8px;
+  cursor: pointer;
+}
+
+.more-reminders-btn:hover {
+  text-decoration: underline;
+}
+
+.side-empty-text {
+  margin: 0;
+  padding: 12px 0;
+  text-align: center;
+  color: #8792a5;
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   GREETING TEMPLATES
+========================================================= */
+
+.template-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.template-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #465a78;
+  font-size: 9px;
+}
+
+.template-item > span:nth-child(2) {
+  flex: 1;
+}
+
+.template-item strong {
+  color: #52627d;
+  font-size: 9px;
+}
+
+.template-icon {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.template-icon.dealer {
+  background: #f1eaff;
+  color: #7047e8;
+}
+
+.template-icon.painter {
+  background: #fff1e7;
+  color: #f97316;
+}
+
+.template-icon.employee {
+  background: #e8f8ee;
+  color: #16a34a;
+}
+
+.template-icon.custom {
+  background: #e9f1ff;
+  color: #2563eb;
+}
+
+.manage-templates-btn {
+  width: 100%;
+  height: 28px;
+  margin-top: 11px;
+  border: 1px solid #dce2ec;
+  border-radius: 5px;
+  background: #fff;
+  color: #34466b;
+  font-size: 9px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.manage-templates-btn:hover {
+  background: #f5f7fb;
+}
+
+
+/* =========================================================
+   RECENT GREETINGS
+========================================================= */
+
+.recent-greeting-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recent-greeting-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recent-greeting-item > div:last-child {
+  min-width: 0;
+  flex: 1;
+}
+
+.recent-greeting-item strong {
+  display: block;
+  margin-bottom: 2px;
+  color: #314565;
+  font-size: 9px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recent-greeting-item span {
+  display: block;
+  color: #7a879a;
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   RESPONSIVE RIGHT SIDEBAR
+========================================================= */
+
+@media (max-width: 1200px) {
+  .birthday-management-page {
+    grid-template-columns: minmax(0, 1fr) 220px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .birthday-management-page {
+    display: block;
+  }
+
+  .birthday-page-header,
+  .birthday-stats-grid,
+  .birthday-filters,
+  .birthday-management-page > .birthday-section,
+  .birthday-right-sidebar {
+    width: 100%;
+  }
+
+  .birthday-right-sidebar {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .birthday-right-sidebar {
+    gap: 10px;
+  }
+
+  .birthday-side-card {
+    padding: 11px;
+  }
+}

@@ -27,6 +27,17 @@ const advanceSalaryRoutes = require("./routes/advanceSalaryRoutes");
 const leaveRoutes = require("./routes/leaveRoutes");
 const employeeRoutes = require("./routes/employeeRoutes");
 const commissionRoutes = require("./routes/commissionRoutes");
+const notificationRoutes = require("./routes/notificationRoutes");
+const documentRoutes = require("./routes/documentRoutes");
+const documentCategoryRoutes = require("./routes/documentCategoryRoutes");
+const birthdayRoutes = require("./routes/birthdayRoutes");
+const greetingRoutes = require("./routes/greetingRoutes");
+const feedbackRoutes = require("./routes/feedbackRoutes");
+const loyaltyTierRoutes = require("./routes/loyaltyTierRoutes");
+
+
+const { startBirthdayReminderService,
+} = require("./services/birthdayReminderService");
 
 const path = require("path");
 dotenv.config();
@@ -62,6 +73,13 @@ app.use("/api/advance-salary", advanceSalaryRoutes);
 app.use("/api/leaves", leaveRoutes);
 app.use("/api/hr/employees", employeeRoutes);
 app.use("/api/commissions", commissionRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/documents", documentRoutes);
+app.use("/api/document-categories", documentCategoryRoutes);
+app.use("/api/birthdays", birthdayRoutes);
+app.use("/api/greetings", greetingRoutes);
+app.use("/api/feedback", feedbackRoutes);
+app.use("/api/loyalty-tiers", loyaltyTierRoutes);
 
 app.get("/", (req, res) => {
   res.json({
@@ -74,4 +92,6 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+
+  startBirthdayReminderService();
 });
