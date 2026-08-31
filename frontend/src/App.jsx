@@ -34,6 +34,7 @@ import DocumentManagement from "./pages/DocumentManagement";
 import BirthdayManagement from "./pages/BirthdayManagement";
 import FeedbackManagement from "./pages/VoiceOfPainter";
 import LoyaltyTierManagement from "./pages/LoyaltyTierManagement";
+import FollowUpManagement from "./pages/FollowUpManagement";
 
 
 const App = () => {
@@ -43,256 +44,37 @@ const App = () => {
       <Routes>
 
         {/* AUTH PAGES */}
-
-        <Route
-          path="/"
-          element={<Login />}
-        />
-
-        <Route
-          path="/forgot-password"
-          element={<ForgotPassword />}
-        />
-
-        <Route
-          path="/verify-otp"
-          element={<OTPVerification />}
-        />
-
-        <Route
-          path="/reset-password"
-          element={<ResetPassword />}
-        />
-
+        <Route path="/" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/verify-otp" element={<OTPVerification />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* DASHBOARD */}
-
-        <Route
-          path="/dashboard"
-          element={
-            <DashboardLayout>
-              <Dashboard />
-            </DashboardLayout>
-          }
-        />
-
-
-        {/* USER MANAGEMENT */}
-
-        <Route
-          path="/users"
-          element={
-            <DashboardLayout>
-              <UserManagement />
-            </DashboardLayout>
-          }
-        />
-
-
-        {/* PRODUCT MANAGEMENT */}
-
-        <Route
-          path="/products"
-          element={
-            <DashboardLayout>
-              <ProductManagement />
-            </DashboardLayout>
-          }
-        />
-
-
-        {/* PRICE MANAGEMENT */}
-
-        <Route
-          path="/prices"
-          element={
-            <DashboardLayout>
-              <PriceManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/daily-cash-report"
-          element={
-            <DashboardLayout>
-              <DailyCashReport />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/order-management"
-          element={
-            <DashboardLayout>
-              <OrderManagement />
-            </DashboardLayout>
-          }
-        />
-
-        {/* LEAD MANAGEMENT */}
-
-        <Route
-          path="/leads"
-          element={
-            <DashboardLayout>
-              <LeadManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/qr-management"
-          element={
-            <DashboardLayout>
-              <QRManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/reward-dashboard"
-          element={
-            <DashboardLayout>
-              <RewardDashboard />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/scheme-management"
-          element={
-            <DashboardLayout>
-              <SchemeManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/finance-dashboard"
-          element={
-            <DashboardLayout>
-              <FinanceDashboard />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/reports"
-          element={
-            <DashboardLayout>
-              <Reports />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/system-settings"
-          element={
-            <DashboardLayout>
-              <SystemSettings />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/manufacturing-batch-management"
-          element={
-            <DashboardLayout>
-              <ManufacturingBatchManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/inventory-management"
-          element={
-            <DashboardLayout>
-              <InventoryManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/dispatch-management"
-          element={
-            <DashboardLayout>
-              <DispatchManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/inbound-material-management"
-          element={
-            <DashboardLayout>
-              <InboundMaterialManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/employee-hr-management"
-          element={
-            <DashboardLayout>
-              <EmployeeHRManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/commission-management"
-          element={
-            <DashboardLayout>
-              <CommissionManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/notification-management"
-          element={
-            <DashboardLayout>
-              <NotificationManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/document-management"
-          element={
-            <DashboardLayout>
-              <DocumentManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/birthday-management"
-          element={
-            <DashboardLayout>
-              <BirthdayManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/feedback-management"
-          element={
-            <DashboardLayout>
-              <FeedbackManagement />
-            </DashboardLayout>
-          }
-        />
-
-        <Route
-          path="/loyalty-tier-management"
-          element={
-            <DashboardLayout>
-              <LoyaltyTierManagement />
-            </DashboardLayout>
-          }
-        />
+        <Route path="/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+        <Route path="/users" element={<DashboardLayout><UserManagement /></DashboardLayout>} />
+        <Route path="/products" element={<DashboardLayout><ProductManagement /></DashboardLayout>} />
+        <Route path="/prices" element={<DashboardLayout><PriceManagement /></DashboardLayout>} />
+        <Route path="/daily-cash-report" element={<DashboardLayout><DailyCashReport /></DashboardLayout>} />
+        <Route path="/order-management" element={<DashboardLayout><OrderManagement /></DashboardLayout>} />
+        <Route path="/leads" element={<DashboardLayout><LeadManagement /></DashboardLayout>} />
+        <Route path="/qr-management" element={<DashboardLayout><QRManagement /></DashboardLayout>} />
+        <Route path="/reward-dashboard" element={<DashboardLayout><RewardDashboard /></DashboardLayout>} />
+        <Route path="/scheme-management" element={<DashboardLayout><SchemeManagement /></DashboardLayout>} />
+        <Route path="/finance-dashboard" element={<DashboardLayout><FinanceDashboard /></DashboardLayout>} />
+        <Route path="/reports" element={<DashboardLayout><Reports /></DashboardLayout>} />
+        <Route path="/system-settings" element={<DashboardLayout><SystemSettings /></DashboardLayout>} />
+        <Route path="/manufacturing-batch-management" element={<DashboardLayout><ManufacturingBatchManagement /></DashboardLayout>} />
+        <Route path="/inventory-management" element={<DashboardLayout><InventoryManagement /></DashboardLayout>} />
+        <Route path="/dispatch-management" element={<DashboardLayout><DispatchManagement /></DashboardLayout>} />
+        <Route path="/inbound-material-management" element={<DashboardLayout><InboundMaterialManagement /></DashboardLayout>} />
+        <Route path="/employee-hr-management" element={<DashboardLayout><EmployeeHRManagement /></DashboardLayout>} />
+        <Route path="/commission-management" element={<DashboardLayout><CommissionManagement /></DashboardLayout>} />
+        <Route path="/notification-management" element={<DashboardLayout><NotificationManagement /></DashboardLayout>} />
+        <Route path="/document-management" element={<DashboardLayout><DocumentManagement /></DashboardLayout>} />
+        <Route path="/birthday-management" element={<DashboardLayout><BirthdayManagement /></DashboardLayout>} />
+        <Route path="/feedback-management" element={<DashboardLayout><FeedbackManagement /></DashboardLayout>} />
+        <Route path="/loyalty-tier-management" element={<DashboardLayout><LoyaltyTierManagement /></DashboardLayout>} />
+        <Route path="/follow-up-management" element={<DashboardLayout><FollowUpManagement /></DashboardLayout>} />
 
       </Routes>
 

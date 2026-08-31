@@ -1633,11 +1633,11 @@ body {
   color: #a0aaba;
 }
 
-.form-group input:focus,
+/* .form-group input:focus,
 .form-select-wrapper:focus-within {
   border-color: #93c5fd;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
-}
+} */
 
 .form-select-wrapper {
   position: relative;
@@ -1909,12 +1909,12 @@ body {
    FOCUS STYLES
 ========================================================= */
 
-button:focus-visible,
+/* button:focus-visible,
 input:focus-visible,
 select:focus-visible {
   outline: 2px solid rgba(37, 99, 235, 0.35);
   outline-offset: 1px;
-}
+} */
 
 /* =========================================================
    RESPONSIVE - TABLET

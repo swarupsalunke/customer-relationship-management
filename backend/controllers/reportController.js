@@ -150,6 +150,57 @@ exports.getReportById = async (req, res) => {
   }
 };
 
+// ===============================
+// UPDATE REPORT
+// ===============================
+exports.updateReport = async (req, res) => {
+  try {
+    const {
+      reportName,
+      category,
+      reportType,
+      generatedBy,
+      format,
+    } = req.body;
+
+    const report = await Report.findByIdAndUpdate(
+      req.params.id,
+      {
+        reportName,
+        category,
+        reportType,
+        generatedBy,
+        format,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!report) {
+      return res.status(404).json({
+        success: false,
+        message: "Report not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Report updated successfully",
+      report,
+    });
+  } catch (error) {
+    console.error("Update report error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to update report",
+      error: error.message,
+    });
+  }
+};
+
 
 // ===============================
 // MARK REPORT AS DOWNLOADED

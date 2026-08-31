@@ -1386,7 +1386,6 @@
     .inventory-form-group select:focus,
     .inventory-form-group textarea:focus {
         border-color: #ff6900;
-        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.07);
     }
 
     /*      =======

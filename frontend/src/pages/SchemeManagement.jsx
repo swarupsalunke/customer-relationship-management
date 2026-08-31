@@ -49,7 +49,7 @@ const FALLBACK_SCHEMES = [
 const SchemeForm = ({ formData, onChange, onSubmit, onCancel, saving, submitText }) => (
   <form className="scheme-form" onSubmit={onSubmit}>
     <div className="scheme-form-grid">
-      <div className="form-group">
+      <div className="form-groupp">
         <label>Scheme Name *</label>
         <input
           type="text"
@@ -61,7 +61,7 @@ const SchemeForm = ({ formData, onChange, onSubmit, onCancel, saving, submitText
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-groupp">
         <label>Scheme Type *</label>
 
         <select
@@ -76,7 +76,7 @@ const SchemeForm = ({ formData, onChange, onSubmit, onCancel, saving, submitText
         </select>
       </div>
 
-      <div className="form-group full-width">
+      <div className="form-groupp full-width">
         <label>Description *</label>
         <textarea
           name="description"
@@ -88,7 +88,7 @@ const SchemeForm = ({ formData, onChange, onSubmit, onCancel, saving, submitText
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-groupp">
         <label>Applicable To *</label>
         <select
           name="applicableTo"
@@ -102,7 +102,7 @@ const SchemeForm = ({ formData, onChange, onSubmit, onCancel, saving, submitText
         </select>
       </div>
 
-      <div className="form-group">
+      <div className="form-groupp">
         <label>Start Date *</label>
         <input
           type="date"
@@ -113,7 +113,7 @@ const SchemeForm = ({ formData, onChange, onSubmit, onCancel, saving, submitText
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-groupp">
         <label>End Date *</label>
         <input
           type="date"
@@ -125,7 +125,7 @@ const SchemeForm = ({ formData, onChange, onSubmit, onCancel, saving, submitText
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-groupp">
         <label>Banner</label>
         <div className="file-input-wrapper">
           <ImageIcon size={17} />
@@ -138,7 +138,7 @@ const SchemeForm = ({ formData, onChange, onSubmit, onCancel, saving, submitText
         </div>
       </div>
 
-      <div className="form-group">
+      <div className="form-groupp">
         <label>PDF</label>
         <div className="file-input-wrapper">
           <FileText size={17} />
@@ -151,7 +151,7 @@ const SchemeForm = ({ formData, onChange, onSubmit, onCancel, saving, submitText
         </div>
       </div>
 
-      <div className="form-group full-width">
+      <div className="form-groupp full-width">
         <label>Terms & Conditions *</label>
         <textarea
           name="termsAndConditions"

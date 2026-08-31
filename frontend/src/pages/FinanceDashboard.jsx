@@ -51,9 +51,9 @@ const FinanceDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  
+
   // SEARCH / FILTERS
-  
+
 
   const [search, setSearch] = useState("");
 
@@ -67,16 +67,16 @@ const FinanceDashboard = () => {
 
   const [activeTab, setActiveTab] = useState("ALL");
 
-  
+
   // PAGINATION
-  
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  
+
   // MODALS
-  
+
 
   const [showIncomeModal, setShowIncomeModal] = useState(false);
   const [showExpenseModal, setShowExpenseModal] = useState(false);
@@ -84,9 +84,9 @@ const FinanceDashboard = () => {
 
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
-  
+
   // FORM DATA
-  
+
 
   const [incomeForm, setIncomeForm] = useState({
     date: "",
@@ -111,9 +111,9 @@ const FinanceDashboard = () => {
 
   const [formLoading, setFormLoading] = useState(false);
 
-  
+
   // FETCH DASHBOARD
-  
+
 
   const fetchDashboard = async () => {
     try {
@@ -128,9 +128,9 @@ const FinanceDashboard = () => {
     }
   };
 
-  
+
   // FETCH TRANSACTIONS
-  
+
 
   const fetchTransactions = async () => {
     try {
@@ -145,9 +145,9 @@ const FinanceDashboard = () => {
     }
   };
 
-  
+
   // INITIAL LOAD
-  
+
 
   useEffect(() => {
     const loadData = async () => {
@@ -162,9 +162,9 @@ const FinanceDashboard = () => {
     loadData();
   }, []);
 
-  
+
   // REFRESH
-  
+
 
   const refreshData = async () => {
     setLoading(true);
@@ -175,9 +175,9 @@ const FinanceDashboard = () => {
     setLoading(false);
   };
 
-  
+
   // FORMAT CURRENCY
-  
+
 
   const formatCurrency = (value) => {
     return `₹ ${Number(value || 0).toLocaleString("en-IN")}`;
@@ -190,9 +190,9 @@ const FinanceDashboard = () => {
     return `₹${num}`;
   };
 
-  
+
   // FORMAT DATE
-  
+
 
   const formatDate = (date) => {
     if (!date) return "-";
@@ -204,9 +204,9 @@ const FinanceDashboard = () => {
     });
   };
 
-  
+
   // FILTER TRANSACTIONS
-  
+
 
   const filteredTransactions = useMemo(() => {
     let data = [...transactions];
@@ -280,9 +280,9 @@ const FinanceDashboard = () => {
     dateTo,
   ]);
 
-  
+
   // PAGINATION
-  
+
 
   const totalPages = Math.max(1, Math.ceil(filteredTransactions.length / itemsPerPage));
 
@@ -308,9 +308,9 @@ const FinanceDashboard = () => {
     return pages;
   }, [currentPage, totalPages]);
 
-  
+
   // RESET FILTERS
-  
+
 
   const resetFilters = () => {
     setSearch("");
@@ -324,9 +324,9 @@ const FinanceDashboard = () => {
     setCurrentPage(1);
   };
 
-  
+
   // ADD INCOME
-  
+
 
   const handleIncomeSubmit = async (e) => {
     e.preventDefault();
@@ -363,9 +363,9 @@ const FinanceDashboard = () => {
     }
   };
 
-  
+
   // ADD EXPENSE
-  
+
 
   const handleExpenseSubmit = async (e) => {
     e.preventDefault();
@@ -401,18 +401,18 @@ const FinanceDashboard = () => {
     }
   };
 
-  
+
   // VIEW TRANSACTION
-  
+
 
   const handleViewTransaction = (transaction) => {
     setSelectedTransaction(transaction);
     setShowViewModal(true);
   };
 
-  
+
   // QUICK ACTION
-  
+
 
   const handleQuickAction = (action) => {
     if (action === "payment") {
@@ -428,9 +428,9 @@ const FinanceDashboard = () => {
     alert(`${action} feature is not connected yet.`);
   };
 
-  
+
   // CATEGORY BREAKDOWN (DONUTS)
-  
+
 
   const incomeTransactions = transactions.filter((item) => item.type === "PAYMENT_RECEIVED");
   const expenseTransactions = transactions.filter((item) => item.type === "PENDING_PAYMENT");
@@ -473,9 +473,9 @@ const FinanceDashboard = () => {
     return `conic-gradient(${stops.join(", ")})`;
   };
 
-  
+
   // LAST 7 DAYS SERIES (LINE + BAR CHARTS)
-  
+
 
   const chartDays = useMemo(() => {
     const days = [];
@@ -534,9 +534,9 @@ const FinanceDashboard = () => {
   const cashInflowTotal = chartDays.reduce((sum, d) => sum + d.income, 0);
   const cashOutflowTotal = chartDays.reduce((sum, d) => sum + d.expense, 0);
 
-  
+
   // LOADING
-  
+
 
   if (loading) {
     return (

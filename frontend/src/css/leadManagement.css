@@ -124,8 +124,8 @@
 }
 
 .lead-primary-btn:hover {
-  background: var(--primary-hover);
-  border-color: var(--primary-hover);
+  background: #e96000;
+  border-color: #e96000;
 }
 
 /*      =======
@@ -1262,7 +1262,6 @@
 .lead-form-group input:focus,
 .lead-form-group select:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.08);
 }
 
 .lead-modal-footer {
@@ -1303,8 +1302,8 @@
 }
 
 .lead-save-btn:hover {
-  background: var(--primary-hover);
-  border-color: var(--primary-hover);
+  background: #e96d00;
+  border-color: #e96d00;
 }
 
 .lead-view-modal {

@@ -319,14 +319,14 @@
     pointer-events: none;
 }
 
-.search-box input:focus,
+/* .search-box input:focus,
 .select-box select:focus,
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     border-color: #9aa9e6;
     box-shadow: 0 0 0 3px rgba(23, 37, 111, 0.08);
-}
+} */
 
 .reset-filter-btn {
     height: 40px;

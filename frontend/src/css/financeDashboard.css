@@ -1370,7 +1370,7 @@
 .table-actions button {
   width: 30px;
   height: 30px;
-  border: 1px solid var(--fd-border);
+  border: 0;
   border-radius: 6px;
   background: #fff;
   color: #4b5563;
@@ -1382,9 +1382,8 @@
 }
 
 .table-actions button:hover {
-  color: var(--fd-accent);
-  border-color: var(--fd-accent);
-  background: var(--fd-accent-soft);
+  background: #fff0e6;
+  color: #ff6900;
 }
 
 .no-data {
@@ -1641,11 +1640,11 @@
   resize: vertical;
 }
 
-.form-group input:focus,
+/* .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--fd-accent);
-}
+} */
 
 .finance-modal-footer {
   padding: 15px 20px;

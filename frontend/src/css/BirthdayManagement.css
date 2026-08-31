@@ -551,7 +551,7 @@
   width: 26px;
   height: 26px;
   padding: 0;
-  border: 1px solid #e3e8f0;
+  border: 0;
   border-radius: 4px;
   background: #fff;
   color: #435b83;
@@ -562,8 +562,8 @@
 }
 
 .table-actions button:hover {
-  background: #f1f5fb;
-  border-color: #cbd6e7;
+  background: #fff0e6;
+  color: #ff6900;
 }
 
 .table-actions button:last-child:hover {
@@ -742,10 +742,10 @@
   font-size: 11px;
 }
 
-.form-group input:focus,
+/* .form-group input:focus,
 .form-group select:focus {
   border-color: #7895cc;
-}
+} */
 
 .reminder-form-group {
   grid-column: 1 / -1;

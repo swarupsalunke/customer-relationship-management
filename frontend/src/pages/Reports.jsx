@@ -20,6 +20,7 @@ import {
   Users,
   UserRound,
   FileDown,
+  Plus,
 } from "lucide-react";
 
 import "../css/reports.css";
@@ -27,9 +28,6 @@ import "../css/reports.css";
 const API_BASE_URL = "http://localhost:5000/api/reports";
 
 const Reports = () => {
-
-  // STATE
-
 
   const [dashboard, setDashboard] = useState({
     totalReports: 0,
@@ -40,6 +38,19 @@ const Reports = () => {
 
   const [reports, setReports] = useState([]);
   const [scheduledReports, setScheduledReports] = useState([]);
+  // const [selectedReport, setSelectedReport] = useState(null);
+  // const [showViewModal, setShowViewModal] = useState(false);
+
+  const [showAddReportModal, setShowAddReportModal] = useState(false);
+
+  const [addReportForm, setAddReportForm] = useState({
+    reportName: "",
+    category: "",
+    reportType: "",
+    format: "PDF",
+    startDate: "",
+    endDate: "",
+  });
 
   const [loading, setLoading] = useState(false);
 
@@ -54,6 +65,15 @@ const Reports = () => {
 
   const [selectedReport, setSelectedReport] = useState(null);
   const [showViewModal, setShowViewModal] = useState(false);
+
+  const [showEditReportModal, setShowEditReportModal] = useState(false);
+  const [editReport, setEditReport] = useState({
+    reportName: "",
+    category: "",
+    reportType: "",
+    generatedBy: "",
+    format: "PDF",
+  });
 
   const [selectedScheduled, setSelectedScheduled] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -284,6 +304,168 @@ const Reports = () => {
     } catch (error) {
       console.error("View report error:", error);
       alert("Unable to load report.");
+    }
+  };
+
+  // ================= ADD REPORT =================
+
+  const handleAddReportChange = (e) => {
+    const { name, value } = e.target;
+
+    setAddReportForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const openAddReportModal = () => {
+    setAddReportForm({
+      reportName: "",
+      category: "",
+      reportType: "",
+      format: "PDF",
+      startDate: "",
+      endDate: "",
+    });
+
+    setShowAddReportModal(true);
+  };
+
+  const closeAddReportModal = () => {
+    setShowAddReportModal(false);
+  };
+
+  const handleCreateReport = async (e) => {
+    e.preventDefault();
+
+    if (!addReportForm.reportName.trim()) {
+      alert("Please enter report name.");
+      return;
+    }
+
+    if (!addReportForm.category) {
+      alert("Please select report category.");
+      return;
+    }
+
+    if (!addReportForm.reportType.trim()) {
+      alert("Please enter report type.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const payload = {
+        reportName: addReportForm.reportName.trim(),
+        category: addReportForm.category,
+        reportType: addReportForm.reportType.trim(),
+        format: addReportForm.format,
+        startDate: addReportForm.startDate || null,
+        endDate: addReportForm.endDate || null,
+        generatedBy: "Admin",
+      };
+
+      const response = await axios.post(
+        API_BASE_URL,
+        payload
+      );
+
+      if (!response.data.success) {
+        throw new Error(
+          response.data.message || "Unable to create report."
+        );
+      }
+
+      setShowAddReportModal(false);
+
+      setAddReportForm({
+        reportName: "",
+        category: "",
+        reportType: "",
+        format: "PDF",
+        startDate: "",
+        endDate: "",
+      });
+
+      await Promise.all([
+        fetchDashboard(),
+        fetchReports(),
+        fetchScheduledReports(),
+      ]);
+
+      alert("Report created successfully.");
+    } catch (error) {
+      console.error("Create report error:", error);
+
+      alert(
+        error.response?.data?.message ||
+        error.message ||
+        "Unable to create report."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  // ================= EDIT REPORT =================
+
+  const handleEditReportChange = (e) => {
+    const { name, value } = e.target;
+    setEditReport((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const openEditReportModal = (report) => {
+    setSelectedReport(report);
+    setEditReport({
+      reportName: report.reportName || "",
+      category: report.category || "",
+      reportType: report.reportType || "",
+      generatedBy: report.generatedBy || "Admin",
+      format: report.format || "PDF",
+    });
+    setShowEditReportModal(true);
+  };
+
+  const closeEditReportModal = () => {
+    setShowEditReportModal(false);
+    setSelectedReport(null);
+  };
+
+  const handleUpdateReport = async (e) => {
+    e.preventDefault();
+    if (!selectedReport) return;
+
+    if (!editReport.reportName.trim()) { alert("Please enter report name."); return; }
+    if (!editReport.category) { alert("Please select report category."); return; }
+    if (!editReport.reportType.trim()) { alert("Please enter report type."); return; }
+
+    try {
+      setLoading(true);
+      const payload = {
+        reportName: editReport.reportName.trim(),
+        category: editReport.category,
+        reportType: editReport.reportType.trim(),
+        generatedBy: editReport.generatedBy.trim() || "Admin",
+        format: editReport.format,
+      };
+
+      const response = await axios.put(`${API_BASE_URL}/${selectedReport._id}`, payload);
+
+      if (!response.data.success) {
+        throw new Error(response.data.message || "Unable to update report.");
+      }
+
+      setShowEditReportModal(false);
+      setSelectedReport(null);
+      await Promise.all([fetchDashboard(), fetchReports()]);
+      alert("Report updated successfully.");
+    } catch (error) {
+      console.error("Update report error:", error);
+      alert(error.response?.data?.message || error.message || "Unable to update report.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -545,6 +727,14 @@ const Reports = () => {
         >
           <Download size={16} />
           Export Data
+        </button>
+
+        <button
+          className="export-data-btn"
+          onClick={openAddReportModal}
+        >
+          <Plus size={17} />
+          Add Report
         </button>
 
       </div>
@@ -888,6 +1078,13 @@ const Reports = () => {
                           </button>
 
                           <button
+                            title="Edit"
+                            onClick={() => openEditReportModal(report)}
+                          >
+                            <Pencil size={16} />
+                          </button>
+
+                          <button
                             title="View"
                             onClick={() =>
                               handleViewReport(
@@ -1084,6 +1281,264 @@ const Reports = () => {
         </div>
 
       </section>
+
+      {/* ================= ADD REPORT MODAL ================= */}
+
+      {showAddReportModal && (
+        <div
+          className="report-modal-overlay"
+          onClick={closeAddReportModal}
+        >
+          <div
+            className="report-modal add-report-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+
+            <div className="modal-header">
+
+              <div>
+                <h3>Add New Report</h3>
+                <p>Create and generate a new report</p>
+              </div>
+
+              <button
+                type="button"
+                onClick={closeAddReportModal}
+              >
+                <X size={20} />
+              </button>
+
+            </div>
+
+            <form
+              onSubmit={handleCreateReport}
+              className="add-report-form"
+            >
+
+              <div className="add-report-form-grid">
+
+                {/* REPORT NAME */}
+                <div className="form-group full-width">
+                  <label>Report Name *</label>
+
+                  <input
+                    type="text"
+                    name="reportName"
+                    value={addReportForm.reportName}
+                    onChange={handleAddReportChange}
+                    placeholder="Enter report name"
+                    required
+                  />
+                </div>
+
+
+                {/* CATEGORY */}
+                <div className="form-group">
+
+                  <label>Report Category *</label>
+
+                  <select
+                    name="category"
+                    value={addReportForm.category}
+                    onChange={handleAddReportChange}
+                    required
+                  >
+                    <option value="">
+                      Select Category
+                    </option>
+
+                    {categoryData.map((category) => (
+                      <option
+                        key={category.key}
+                        value={category.key}
+                      >
+                        {category.title}
+                      </option>
+                    ))}
+                  </select>
+
+                </div>
+
+
+                {/* REPORT TYPE */}
+                <div className="form-group">
+
+                  <label>Report Type *</label>
+
+                  <input
+                    type="text"
+                    name="reportType"
+                    value={addReportForm.reportType}
+                    onChange={handleAddReportChange}
+                    placeholder="e.g. Monthly Sales"
+                    required
+                  />
+
+                </div>
+
+
+                {/* START DATE */}
+                <div className="form-group">
+
+                  <label>Start Date</label>
+
+                  <input
+                    type="date"
+                    name="startDate"
+                    value={addReportForm.startDate}
+                    onChange={handleAddReportChange}
+                  />
+
+                </div>
+
+
+                {/* END DATE */}
+                <div className="form-group">
+
+                  <label>End Date</label>
+
+                  <input
+                    type="date"
+                    name="endDate"
+                    value={addReportForm.endDate}
+                    onChange={handleAddReportChange}
+                  />
+
+                </div>
+
+
+                {/* FORMAT */}
+                <div className="form-group">
+
+                  <label>Report Format *</label>
+
+                  <select
+                    name="format"
+                    value={addReportForm.format}
+                    onChange={handleAddReportChange}
+                    required
+                  >
+                    <option value="PDF">PDF</option>
+                    <option value="EXCEL">Excel</option>
+                    <option value="CSV">CSV</option>
+                  </select>
+
+                </div>
+
+              </div>
+
+
+              <div className="add-report-info">
+                <FileText size={17} />
+
+                <span>
+                  The report will be generated and added to Recent Reports.
+                </span>
+              </div>
+
+
+              <div className="modal-footer">
+
+                <button
+                  type="button"
+                  className="modal-close-btn"
+                  onClick={closeAddReportModal}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="submit"
+                  className="modal-save-btn"
+                  disabled={loading}
+                >
+                  <Plus size={16} />
+                  {loading ? "Creating..." : "Create Report"}
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      )}
+
+      {/* ================= EDIT REPORT MODAL ================= */}
+
+      {showEditReportModal && selectedReport && (
+        <div
+          className="report-modal-overlay"
+          onClick={closeEditReportModal}
+        >
+          <div
+            className="report-modal edit-report-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modal-header">
+              <div>
+                <h3>Edit Report</h3>
+                <p>Update report details</p>
+              </div>
+              <button type="button" onClick={closeEditReportModal}>
+                <X size={20} />
+              </button>
+            </div>
+
+            <form onSubmit={handleUpdateReport} className="add-report-form">
+              <div className="add-report-form-grid">
+                <div className="form-group full-width">
+                  <label>Report Name *</label>
+                  <input type="text" name="reportName" value={editReport.reportName} onChange={handleEditReportChange} placeholder="Enter report name" required />
+                </div>
+
+                <div className="form-group">
+                  <label>Report Category *</label>
+                  <select name="category" value={editReport.category} onChange={handleEditReportChange} required>
+                    <option value="">Select Category</option>
+                    {categoryData.map((category) => (
+                      <option key={category.key} value={category.key}>{category.title}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label>Report Type *</label>
+                  <input type="text" name="reportType" value={editReport.reportType} onChange={handleEditReportChange} placeholder="e.g. Monthly Sales" required />
+                </div>
+
+                <div className="form-group">
+                  <label>Generated By *</label>
+                  <input type="text" name="generatedBy" value={editReport.generatedBy} onChange={handleEditReportChange} placeholder="Enter generated by" required />
+                </div>
+
+                <div className="form-group">
+                  <label>Report Format *</label>
+                  <select name="format" value={editReport.format} onChange={handleEditReportChange} required>
+                    <option value="PDF">PDF</option>
+                    <option value="EXCEL">Excel</option>
+                    <option value="CSV">CSV</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="add-report-info">
+                <Pencil size={17} />
+                <span>Update the report details and save your changes.</span>
+              </div>
+
+              <div className="modal-footer">
+                <button type="button" className="modal-close-btn" onClick={closeEditReportModal}>Cancel</button>
+                <button type="submit" className="modal-save-btn" disabled={loading}>
+                  <Pencil size={16} />
+                  {loading ? "Updating..." : "Update Report"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
 
       {/* ================= VIEW REPORT MODAL ================= */}
 
@@ -1428,7 +1883,6 @@ const Reports = () => {
         </div>
 
       )}
-
     </div>
   );
 };

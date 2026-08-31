@@ -22,6 +22,8 @@ import {
     History,
 } from "lucide-react";
 
+import "../css/loyaltyTierManagement.css";
+
 const API_URL = "http://localhost:5000/api/loyalty-tiers";
 
 const initialForm = {
@@ -858,8 +860,8 @@ const LoyaltyTierManagement = () => {
                                         <td>
                                             <button
                                                 className={`status-toggle ${tier.status === "ACTIVE"
-                                                        ? "active"
-                                                        : "inactive"
+                                                    ? "active"
+                                                    : "inactive"
                                                     }`}
                                                 onClick={() =>
                                                     handleStatusChange(tier)
@@ -1591,8 +1593,8 @@ const LoyaltyTierManagement = () => {
                                                 className={`checkbox-card ${form.applicableTo.includes(
                                                     type
                                                 )
-                                                        ? "selected"
-                                                        : ""
+                                                    ? "selected"
+                                                    : ""
                                                     }`}
                                                 key={type}
                                             >
@@ -1714,8 +1716,8 @@ const LoyaltyTierManagement = () => {
                                         ].map(([key, label]) => (
                                             <label
                                                 className={`benefit-checkbox ${form.benefits[key]
-                                                        ? "checked"
-                                                        : ""
+                                                    ? "checked"
+                                                    : ""
                                                     }`}
                                                 key={key}
                                             >
@@ -2025,10 +2027,10 @@ const LoyaltyTierManagement = () => {
                                     ].map(([key, label]) => (
                                         <div
                                             className={`view-benefit ${viewingTier.benefits?.[
-                                                    key
-                                                ]
-                                                    ? "enabled"
-                                                    : "disabled"
+                                                key
+                                            ]
+                                                ? "enabled"
+                                                : "disabled"
                                                 }`}
                                             key={key}
                                         >

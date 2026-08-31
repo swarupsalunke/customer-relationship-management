@@ -5,6 +5,7 @@ const {
   getReports,
   createReport,
   getReportById,
+  updateReport,
   downloadReport,
   getScheduledReports,
   createScheduledReport,
@@ -24,6 +25,8 @@ router.get("/", getReports);
 router.post("/", createReport);
 
 router.get("/:id", getReportById);
+
+router.put("/:id", updateReport);
 
 router.get("/:id/download", downloadReport);
 

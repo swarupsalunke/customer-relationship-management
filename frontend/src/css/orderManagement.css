@@ -1174,7 +1174,6 @@
 .order-form-group input:focus,
 .order-form-group select:focus {
     border-color: #ff7900;
-    box-shadow: 0 0 0 3px rgba(255, 121, 0, 0.1);
 }
 
 .order-form-group input:disabled {

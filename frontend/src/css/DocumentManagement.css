@@ -1134,12 +1134,12 @@
     font-family: inherit;
 }
 
-.form-group input:focus,
+/* .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     border-color: #3975d3;
     box-shadow: 0 0 0 3px rgba(57, 117, 211, 0.1);
-}
+} */
 
 .form-group small {
     display: block;

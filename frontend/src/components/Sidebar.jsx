@@ -53,6 +53,7 @@ const Sidebar = () => {
   const [birthdayOpen, setBirthdayOpen] = useState(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [loyaltyTierOpen, setLoyaltyTierOpen] = useState(false);
+  const [followUpOpen, setFollowUpOpen] = useState(false);
 
   return (
     <aside className="dashboard-sidebar">
@@ -915,6 +916,52 @@ const Sidebar = () => {
 
         </div>
 
+        {/* follow up management */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setFollowUpOpen(!followUpOpen)}
+          >
+            <Users size={19} />
+
+            <span>Follow-up Management</span>
+
+            {followUpOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {followUpOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/follow-up-management"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <FileText size={16} />
+                <span>Follow-up Management</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
+
+
+        {/* Loyalty Tier Management */}
         <div className="store-management-menu">
 
           <div
