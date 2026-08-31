@@ -27,6 +27,7 @@ import {
   MessageSquare,
   Cake,
   Award,
+  Map,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
@@ -54,6 +55,7 @@ const Sidebar = () => {
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [loyaltyTierOpen, setLoyaltyTierOpen] = useState(false);
   const [followUpOpen, setFollowUpOpen] = useState(false);
+  const [salesVisitOpen, setSalesVisitOpen] = useState(false);
 
   return (
     <aside className="dashboard-sidebar">
@@ -1000,6 +1002,52 @@ const Sidebar = () => {
                 <FileText size={16} />
 
                 <span>Loyalty Tier Management</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
+
+        {/* Sales Visit Planning */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setSalesVisitOpen(!salesVisitOpen)}
+          >
+            <Map size={19} />
+
+            <span>Sales Visit Planning</span>
+
+            {salesVisitOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Sales Visit Dashboard */}
+          {salesVisitOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/sales-visit-planning"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <FileText size={16} />
+
+                <span>Sales Visit Planning</span>
               </NavLink>
 
             </div>

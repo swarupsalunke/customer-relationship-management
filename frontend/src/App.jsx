@@ -11,6 +11,7 @@ import ResetPassword from "./pages/ResetPassword";
 
 import Dashboard from "./pages/Dashboard";
 import UserManagement from "./pages/UserManagement";
+import AddUser from "./pages/AddUser";
 import ProductManagement from "./pages/ProductManagement";
 import PriceManagement from "./pages/PriceManagement";
 import DailyCashReport from "./pages/DailyCashReport";
@@ -35,6 +36,7 @@ import BirthdayManagement from "./pages/BirthdayManagement";
 import FeedbackManagement from "./pages/VoiceOfPainter";
 import LoyaltyTierManagement from "./pages/LoyaltyTierManagement";
 import FollowUpManagement from "./pages/FollowUpManagement";
+import SalesVisitPlanning from "./pages/SalesVisitPlanning";
 
 
 const App = () => {
@@ -52,6 +54,8 @@ const App = () => {
         {/* DASHBOARD */}
         <Route path="/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
         <Route path="/users" element={<DashboardLayout><UserManagement /></DashboardLayout>} />
+        <Route path="/users/add" element={<DashboardLayout><AddUser /></DashboardLayout>}/>
+        <Route path="/users/edit/:id" element={<DashboardLayout><AddUser /></DashboardLayout>} />
         <Route path="/products" element={<DashboardLayout><ProductManagement /></DashboardLayout>} />
         <Route path="/prices" element={<DashboardLayout><PriceManagement /></DashboardLayout>} />
         <Route path="/daily-cash-report" element={<DashboardLayout><DailyCashReport /></DashboardLayout>} />
@@ -75,6 +79,7 @@ const App = () => {
         <Route path="/feedback-management" element={<DashboardLayout><FeedbackManagement /></DashboardLayout>} />
         <Route path="/loyalty-tier-management" element={<DashboardLayout><LoyaltyTierManagement /></DashboardLayout>} />
         <Route path="/follow-up-management" element={<DashboardLayout><FollowUpManagement /></DashboardLayout>} />
+        <Route path="/sales-visit-planning" element={<DashboardLayout><SalesVisitPlanning /></DashboardLayout>} />
 
       </Routes>
 

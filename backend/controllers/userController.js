@@ -3,28 +3,79 @@ const User = require("../models/User");
 const Order = require("../models/Order");
 const RewardTransaction = require("../models/RewardTransaction");
 
+// ==========================================
+// CREATE USER
+// POST /api/users
+// ==========================================
+
 const createUser = async (req, res) => {
   try {
     const {
       name,
+      userId,
       email,
       mobile,
       password,
       role,
       profilePicture,
+
+      // Personal Details
+      dateOfBirth,
+      gender,
+
+      // Address Details
       address,
+      addressLine1,
+      addressLine2,
+      country,
       state,
       district,
       city,
       pinCode,
+
+      // Role & Reporting
+      reportingTo,
+      department,
+
+      // Account Details
+      loginType,
+      status,
+
+      // Permissions
+      permissions,
+
+      // Notes
+      notes,
+
+      // Existing KYC support
       kyc,
     } = req.body;
 
     // Required fields
-    if (!name || !email || !mobile || !password || !role) {
+    if (
+      !name ||
+      !userId ||
+      !email ||
+      !mobile ||
+      !password ||
+      !role
+    ) {
       return res.status(400).json({
         success: false,
-        message: "Name, email, mobile, password and role are required",
+        message:
+          "Name, user ID, email, mobile, password and role are required",
+      });
+    }
+
+    // Check existing User ID
+    const existingUserId = await User.findOne({
+      userId: userId.trim(),
+    });
+
+    if (existingUserId) {
+      return res.status(409).json({
+        success: false,
+        message: "User ID already exists",
       });
     }
 
@@ -57,17 +108,46 @@ const createUser = async (req, res) => {
 
     // Create user
     const user = await User.create({
-      name,
+      name: name.trim(),
+      userId: userId.trim(),
       email: email.toLowerCase(),
       mobile,
       password: hashedPassword,
       role,
+
       profilePicture: profilePicture || "",
+
+      // Personal Details
+      dateOfBirth: dateOfBirth || null,
+      gender: gender || "",
+
+      // Address Details
       address: address || "",
+      addressLine1: addressLine1 || "",
+      addressLine2: addressLine2 || "",
+      country: country || "",
       state: state || "",
       district: district || "",
       city: city || "",
       pinCode: pinCode || "",
+
+      // Role & Reporting
+      reportingTo: reportingTo || "",
+      department: department || "",
+
+      // Account Details
+      loginType: loginType || "",
+      status: status || "ACTIVE",
+
+      // Permissions
+      permissions: Array.isArray(permissions)
+        ? permissions
+        : [],
+
+      // Notes
+      notes: notes || "",
+
+      // Existing KYC
       kyc: kyc || {},
     });
 
@@ -153,26 +233,47 @@ const getUserById = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const id = req.params.id;
 
     const {
       name,
+      userId,
       email,
       mobile,
       role,
       profilePicture,
+
+      // Personal Details
+      dateOfBirth,
+      gender,
+
+      // Address Details
       address,
+      addressLine1,
+      addressLine2,
+      country,
       state,
       district,
       city,
       pinCode,
+
+      // Role & Reporting
+      reportingTo,
+      department,
+
+      // Account Details
+      loginType,
+      permissions,
+      notes,
+      status,
+
+      // Existing KYC
       kyc,
       kycStatus,
       kycRemarks,
-      status,
     } = req.body;
 
-    const user = await User.findById(userId);
+    const user = await User.findById(id);
 
     if (!user) {
       return res.status(404).json({
@@ -181,11 +282,40 @@ const updateUser = async (req, res) => {
       });
     }
 
-    // Check email uniqueness
-    if (email && email.toLowerCase() !== user.email) {
+    // ==========================================
+    // CHECK USER ID UNIQUENESS
+    // ==========================================
+
+    if (
+      userId !== undefined &&
+      userId.trim() !== user.userId
+    ) {
+      const existingUserId = await User.findOne({
+        userId: userId.trim(),
+        _id: { $ne: id },
+      });
+
+      if (existingUserId) {
+        return res.status(409).json({
+          success: false,
+          message: "User ID already exists",
+        });
+      }
+
+      user.userId = userId.trim();
+    }
+
+    // ==========================================
+    // CHECK EMAIL UNIQUENESS
+    // ==========================================
+
+    if (
+      email &&
+      email.toLowerCase() !== user.email
+    ) {
       const existingEmail = await User.findOne({
         email: email.toLowerCase(),
-        _id: { $ne: userId },
+        _id: { $ne: id },
       });
 
       if (existingEmail) {
@@ -198,11 +328,17 @@ const updateUser = async (req, res) => {
       user.email = email.toLowerCase();
     }
 
-    // Check mobile uniqueness
-    if (mobile && mobile !== user.mobile) {
+    // ==========================================
+    // CHECK MOBILE UNIQUENESS
+    // ==========================================
+
+    if (
+      mobile &&
+      mobile !== user.mobile
+    ) {
       const existingMobile = await User.findOne({
         mobile,
-        _id: { $ne: userId },
+        _id: { $ne: id },
       });
 
       if (existingMobile) {
@@ -215,44 +351,132 @@ const updateUser = async (req, res) => {
       user.mobile = mobile;
     }
 
-    // Update basic information
-    if (name !== undefined) user.name = name;
-    if (role !== undefined) user.role = role;
+    // ==========================================
+    // BASIC INFORMATION
+    // ==========================================
 
-    if (profilePicture !== undefined)
+    if (name !== undefined) {
+      user.name = name;
+    }
+
+    if (role !== undefined) {
+      user.role = role;
+    }
+
+    if (profilePicture !== undefined) {
       user.profilePicture = profilePicture;
+    }
 
-    if (address !== undefined)
+    // ==========================================
+    // PERSONAL DETAILS
+    // ==========================================
+
+    if (dateOfBirth !== undefined) {
+      user.dateOfBirth = dateOfBirth || null;
+    }
+
+    if (gender !== undefined) {
+      user.gender = gender;
+    }
+
+    // ==========================================
+    // ADDRESS DETAILS
+    // ==========================================
+
+    if (address !== undefined) {
       user.address = address;
+    }
 
-    if (state !== undefined)
+    if (addressLine1 !== undefined) {
+      user.addressLine1 = addressLine1;
+    }
+
+    if (addressLine2 !== undefined) {
+      user.addressLine2 = addressLine2;
+    }
+
+    if (country !== undefined) {
+      user.country = country;
+    }
+
+    if (state !== undefined) {
       user.state = state;
+    }
 
-    if (district !== undefined)
+    if (district !== undefined) {
       user.district = district;
+    }
 
-    if (city !== undefined)
+    if (city !== undefined) {
       user.city = city;
+    }
 
-    if (pinCode !== undefined)
+    if (pinCode !== undefined) {
       user.pinCode = pinCode;
+    }
 
-    // Update KYC
+    // ==========================================
+    // ROLE & REPORTING
+    // ==========================================
+
+    if (reportingTo !== undefined) {
+      user.reportingTo = reportingTo;
+    }
+
+    if (department !== undefined) {
+      user.department = department;
+    }
+
+    // ==========================================
+    // ACCOUNT DETAILS
+    // ==========================================
+
+    if (loginType !== undefined) {
+      user.loginType = loginType;
+    }
+
+    if (status !== undefined) {
+      user.status = status;
+    }
+
+    // ==========================================
+    // PERMISSIONS
+    // ==========================================
+
+    if (permissions !== undefined) {
+      user.permissions = Array.isArray(permissions)
+        ? permissions
+        : [];
+    }
+
+    // ==========================================
+    // NOTES / REMARKS
+    // ==========================================
+
+    if (notes !== undefined) {
+      user.notes = notes;
+    }
+
+    // ==========================================
+    // UPDATE KYC
+    // ==========================================
+
     if (kyc !== undefined) {
       user.kyc = {
-        ...user.kyc.toObject(),
+        ...(user.kyc?.toObject
+          ? user.kyc.toObject()
+          : user.kyc || {}),
         ...kyc,
       };
     }
 
-    if (kycStatus !== undefined)
+    if (kycStatus !== undefined) {
       user.kycStatus = kycStatus;
+    }
 
-    if (kycRemarks !== undefined)
+    if (kycRemarks !== undefined) {
       user.kycRemarks = kycRemarks;
-
-    if (status !== undefined)
-      user.status = status;
+    }
 
     await user.save();
 
@@ -357,7 +581,8 @@ const submitKyc = async (req, res) => {
       bankAccountNumber: bankAccountNumber || "",
       ifscCode: ifscCode || "",
       cancelledChequeImage: cancelledChequeImage || "",
-      shopActLicenceNumber: shopActLicenceNumber || "",
+      shopActLicenceNumber:
+        shopActLicenceNumber || "",
       gstNumber: gstNumber || "",
       emergencyContact: {
         name: emergencyContact?.name || "",
@@ -381,7 +606,6 @@ const submitKyc = async (req, res) => {
       message: "KYC submitted successfully",
       user: userResponse,
     });
-
   } catch (error) {
     console.error("Submit KYC error:", error);
 
@@ -453,6 +677,7 @@ const approveKyc = async (req, res) => {
 const rejectKyc = async (req, res) => {
   try {
     const userId = req.params.id;
+
     const { remarks } = req.body;
 
     const user = await User.findById(userId);
@@ -486,6 +711,7 @@ const rejectKyc = async (req, res) => {
     await user.save();
 
     const userResponse = user.toObject();
+
     delete userResponse.password;
 
     return res.status(200).json({
@@ -511,6 +737,7 @@ const rejectKyc = async (req, res) => {
 const requestKycCorrection = async (req, res) => {
   try {
     const userId = req.params.id;
+
     const { remarks } = req.body;
 
     const user = await User.findById(userId);
@@ -526,7 +753,8 @@ const requestKycCorrection = async (req, res) => {
     if (user.kycStatus !== "PENDING") {
       return res.status(400).json({
         success: false,
-        message: "Only pending KYC can be sent for correction",
+        message:
+          "Only pending KYC can be sent for correction",
       });
     }
 
@@ -549,7 +777,8 @@ const requestKycCorrection = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "KYC correction requested successfully",
+      message:
+        "KYC correction requested successfully",
       user: userResponse,
     });
   } catch (error) {
@@ -567,14 +796,8 @@ const requestKycCorrection = async (req, res) => {
 // GET /api/users/stats
 // ==========================================
 
-// ==========================================
-// GET USER STATS
-// GET /api/users/stats
-// ==========================================
-
 const getUserStats = async (req, res) => {
   try {
-
     // ==========================================
     // BASIC COUNTS
     // ==========================================
@@ -586,7 +809,6 @@ const getUserStats = async (req, res) => {
     });
 
     const totalOrders = await Order.countDocuments();
-
 
     // ==========================================
     // TOTAL SALES
@@ -603,8 +825,8 @@ const getUserStats = async (req, res) => {
       },
     ]);
 
-    const totalSales = totalSalesResult[0]?.total || 0;
-
+    const totalSales =
+      totalSalesResult[0]?.total || 0;
 
     // ==========================================
     // SALES OVERVIEW - LAST 7 DAYS
@@ -613,12 +835,14 @@ const getUserStats = async (req, res) => {
     const today = new Date();
 
     const startDate = new Date();
+
     startDate.setDate(today.getDate() - 6);
+
     startDate.setHours(0, 0, 0, 0);
 
     const endDate = new Date();
-    endDate.setHours(23, 59, 59, 999);
 
+    endDate.setHours(23, 59, 59, 999);
 
     const salesData = await Order.aggregate([
       {
@@ -652,7 +876,6 @@ const getUserStats = async (req, res) => {
       },
     ]);
 
-
     // ==========================================
     // CREATE 7 DAYS DATA
     // ==========================================
@@ -660,21 +883,24 @@ const getUserStats = async (req, res) => {
     const salesOverview = [];
 
     for (let i = 6; i >= 0; i--) {
-
       const date = new Date();
 
       date.setDate(today.getDate() - i);
 
-      const dateKey = date.toISOString().split("T")[0];
+      const dateKey =
+        date.toISOString().split("T")[0];
 
       const found = salesData.find(
         (item) => item._id === dateKey
       );
 
       salesOverview.push({
-        label: date.toLocaleDateString("en-IN", {
-          weekday: "short",
-        }),
+        label: date.toLocaleDateString(
+          "en-IN",
+          {
+            weekday: "short",
+          }
+        ),
 
         sales: found ? found.sales : 0,
       });
@@ -705,90 +931,93 @@ const getUserStats = async (req, res) => {
       "Cancelled",
     ];
 
-    const orderStatus = orderStatuses.map((status) => {
-      const found = orderStatusData.find(
-        (item) => item._id === status
-      );
+    const orderStatus = orderStatuses.map(
+      (status) => {
+        const found = orderStatusData.find(
+          (item) => item._id === status
+        );
 
-      return {
-        label: status,
-        value: found ? found.value : 0,
-      };
-    });
+        return {
+          label: status,
+          value: found ? found.value : 0,
+        };
+      }
+    );
 
     // ==========================================
     // TOP SELLING PRODUCTS
     // ==========================================
 
-    const topSellingProducts = await Order.aggregate([
-      {
-        $unwind: "$items",
-      },
+    const topSellingProducts =
+      await Order.aggregate([
+        {
+          $unwind: "$items",
+        },
 
-      {
-        $group: {
-          _id: "$items.product",
+        {
+          $group: {
+            _id: "$items.product",
 
-          soldUnits: {
-            $sum: "$items.quantity",
+            soldUnits: {
+              $sum: "$items.quantity",
+            },
+
+            revenue: {
+              $sum: "$items.total",
+            },
           },
+        },
 
-          revenue: {
-            $sum: "$items.total",
+        {
+          $sort: {
+            soldUnits: -1,
           },
         },
-      },
 
-      {
-        $sort: {
-          soldUnits: -1,
+        {
+          $limit: 5,
         },
-      },
 
-      {
-        $limit: 5,
-      },
-
-      {
-        $lookup: {
-          from: "products",
-          localField: "_id",
-          foreignField: "_id",
-          as: "product",
-        },
-      },
-
-      {
-        $unwind: {
-          path: "$product",
-          preserveNullAndEmptyArrays: true,
-        },
-      },
-
-      {
-        $project: {
-          _id: 0,
-
-          name: {
-            $ifNull: [
-              "$product.productName",
-              "Unknown Product",
-            ],
+        {
+          $lookup: {
+            from: "products",
+            localField: "_id",
+            foreignField: "_id",
+            as: "product",
           },
-
-          category: {
-            $ifNull: [
-              "$product.category",
-              "Unknown",
-            ],
-          },
-
-          soldUnits: 1,
-
-          revenue: 1,
         },
-      },
-    ]);
+
+        {
+          $unwind: {
+            path: "$product",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+
+        {
+          $project: {
+            _id: 0,
+
+            name: {
+              $ifNull: [
+                "$product.productName",
+                "Unknown Product",
+              ],
+            },
+
+            category: {
+              $ifNull: [
+                "$product.category",
+                "Unknown",
+              ],
+            },
+
+            soldUnits: 1,
+
+            revenue: 1,
+          },
+        },
+      ]);
 
     // ==========================================
     // TOP DEALERS
@@ -865,60 +1094,66 @@ const getUserStats = async (req, res) => {
       .limit(5)
       .lean();
 
-    const formattedActivities = recentActivities.map((order) => {
+    const formattedActivities =
+      recentActivities.map((order) => {
+        let title = "Order Activity";
+        let description = "";
 
-      let title = "Order Activity";
-      let description = "";
+        switch (order.status) {
+          case "New":
+            title = "New Order Created";
+            description = `${order.orderNumber} created`;
+            break;
 
-      switch (order.status) {
+          case "Processing":
+            title = "Order Processing";
+            description =
+              `${order.orderNumber} is being processed`;
+            break;
 
-        case "New":
-          title = "New Order Created";
-          description = `${order.orderNumber} created`;
-          break;
+          case "Approved":
+            title = "Order Approved";
+            description =
+              `${order.orderNumber} approved`;
+            break;
 
-        case "Processing":
-          title = "Order Processing";
-          description = `${order.orderNumber} is being processed`;
-          break;
+          case "Dispatched":
+            title = "Order Dispatched";
+            description =
+              `${order.orderNumber} dispatched`;
+            break;
 
-        case "Approved":
-          title = "Order Approved";
-          description = `${order.orderNumber} approved`;
-          break;
+          case "Delivered":
+            title = "Order Delivered";
+            description =
+              `${order.orderNumber} delivered`;
+            break;
 
-        case "Dispatched":
-          title = "Order Dispatched";
-          description = `${order.orderNumber} dispatched`;
-          break;
+          case "Cancelled":
+            title = "Order Cancelled";
+            description =
+              `${order.orderNumber} cancelled`;
+            break;
 
-        case "Delivered":
-          title = "Order Delivered";
-          description = `${order.orderNumber} delivered`;
-          break;
+          case "Draft":
+            title = "Order Draft Created";
+            description =
+              `${order.orderNumber} saved as draft`;
+            break;
 
-        case "Cancelled":
-          title = "Order Cancelled";
-          description = `${order.orderNumber} cancelled`;
-          break;
+          default:
+            title = "Order Updated";
+            description =
+              `${order.orderNumber} updated`;
+        }
 
-        case "Draft":
-          title = "Order Draft Created";
-          description = `${order.orderNumber} saved as draft`;
-          break;
-
-        default:
-          title = "Order Updated";
-          description = `${order.orderNumber} updated`;
-      }
-
-      return {
-        _id: order._id,
-        title,
-        description,
-        time: order.createdAt,
-      };
-    });
+        return {
+          _id: order._id,
+          title,
+          description,
+          time: order.createdAt,
+        };
+      });
 
     // ==========================================
     // SYSTEM OVERVIEW
@@ -931,22 +1166,27 @@ const getUserStats = async (req, res) => {
         message: "MongoDB connected",
         icon: "database",
       },
+
       {
         name: "API Server",
         status: "active",
         message: "API server running",
         icon: "server",
       },
+
       {
         name: "Order Management",
         status: "active",
-        message: `${totalOrders} orders available`,
+        message:
+          `${totalOrders} orders available`,
         icon: "server",
       },
+
       {
         name: "User Management",
         status: "active",
-        message: `${totalUsers} users registered`,
+        message:
+          `${totalUsers} users registered`,
         icon: "server",
       },
     ];
@@ -955,10 +1195,10 @@ const getUserStats = async (req, res) => {
     // TOTAL REWARDS
     // ==========================================
 
-    const totalRewards = await RewardTransaction.countDocuments({
-      transactionType: "ADD",
-    });
-
+    const totalRewards =
+      await RewardTransaction.countDocuments({
+        transactionType: "ADD",
+      });
 
     // ==========================================
     // USER STATUS
@@ -968,10 +1208,10 @@ const getUserStats = async (req, res) => {
       status: "ACTIVE",
     });
 
-    const inactiveUsers = await User.countDocuments({
-      status: "INACTIVE",
-    });
-
+    const inactiveUsers =
+      await User.countDocuments({
+        status: "INACTIVE",
+      });
 
     // ==========================================
     // KYC
@@ -989,17 +1229,16 @@ const getUserStats = async (req, res) => {
       kycStatus: "REJECTED",
     });
 
-    const correctionRequired = await User.countDocuments({
-      kycStatus: "CORRECTION_REQUIRED",
-    });
-
+    const correctionRequired =
+      await User.countDocuments({
+        kycStatus: "CORRECTION_REQUIRED",
+      });
 
     // ==========================================
     // RESPONSE
     // ==========================================
 
     return res.status(200).json({
-
       success: true,
 
       stats: {
@@ -1011,7 +1250,7 @@ const getUserStats = async (req, res) => {
         orderStatus,
         topSellingProducts,
         topDealers,
-        recentActivities,
+        recentActivities: formattedActivities,
         systemOverview,
         totalRewards,
         activeUsers,
@@ -1024,24 +1263,25 @@ const getUserStats = async (req, res) => {
           correctionRequired,
         },
       },
-
     });
-
   } catch (error) {
-
-    console.error("Get user stats error:", error);
+    console.error(
+      "Get user stats error:",
+      error
+    );
 
     return res.status(500).json({
-
       success: false,
-
-      message: "Failed to fetch user statistics",
-
+      message:
+        "Failed to fetch user statistics",
       error: error.message,
-
     });
   }
 };
+
+// ==========================================
+// EXPORTS
+// ==========================================
 
 module.exports = {
   createUser,

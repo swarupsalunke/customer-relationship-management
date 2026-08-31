@@ -12,6 +12,13 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
 
+    userId: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+
     email: {
       type: String,
       required: true,
@@ -32,7 +39,34 @@ const userSchema = new mongoose.Schema(
       default: "",
     },
 
-    address: {
+    dateOfBirth: {
+      type: Date,
+      default: null,
+    },
+
+    gender: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    // =========================
+    // ADDRESS INFORMATION
+    // =========================
+
+    addressLine1: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    addressLine2: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    country: {
       type: String,
       default: "",
       trim: true,
@@ -62,6 +96,14 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
 
+    // Existing address field
+    // Kept for existing project compatibility
+    address: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
     // =========================
     // AUTHENTICATION
     // =========================
@@ -72,7 +114,7 @@ const userSchema = new mongoose.Schema(
     },
 
     // =========================
-    // ROLE
+    // ROLE & REPORTING
     // =========================
 
     role: {
@@ -90,6 +132,61 @@ const userSchema = new mongoose.Schema(
       ],
 
       required: true,
+    },
+
+    reportingTo: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    department: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    // =========================
+    // ACCOUNT DETAILS
+    // =========================
+
+    loginType: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    status: {
+      type: String,
+
+      enum: [
+        "ACTIVE",
+        "INACTIVE",
+        "PENDING",
+        "BLOCKED",
+      ],
+
+      default: "ACTIVE",
+    },
+
+    // =========================
+    // PERMISSIONS
+    // =========================
+
+    permissions: {
+      type: [String],
+      default: [],
+    },
+
+    // =========================
+    // NOTES / REMARKS
+    // =========================
+
+    notes: {
+      type: String,
+      default: "",
+      trim: true,
+      maxlength: 500,
     },
 
     // =========================
@@ -193,23 +290,6 @@ const userSchema = new mongoose.Schema(
     kycRemarks: {
       type: String,
       default: "",
-    },
-
-    // =========================
-    // ACCOUNT STATUS
-    // =========================
-
-    status: {
-      type: String,
-
-      enum: [
-        "ACTIVE",
-        "INACTIVE",
-        "PENDING",
-        "BLOCKED",
-      ],
-
-      default: "ACTIVE",
     },
 
     // =========================

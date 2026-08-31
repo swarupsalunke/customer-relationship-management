@@ -35,6 +35,7 @@ const greetingRoutes = require("./routes/greetingRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const loyaltyTierRoutes = require("./routes/loyaltyTierRoutes");
 const followUpRoutes = require("./routes/followUpRoutes");
+const salesVisitRoutes = require("./routes/salesVisitRoutes");
 
 
 const { startBirthdayReminderService,
@@ -82,6 +83,7 @@ app.use("/api/greetings", greetingRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/loyalty-tiers", loyaltyTierRoutes);
 app.use("/api/follow-ups", followUpRoutes);
+app.use("/api/sales-visits", salesVisitRoutes);
 
 app.get("/", (req, res) => {
   res.json({

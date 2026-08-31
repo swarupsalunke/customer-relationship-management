@@ -28,24 +28,47 @@ const registerUser = async (req, res) => {
       });
     }
 
-    // 3. Hash password
+    // 3. Generate User ID
+    const lastUser = await User.findOne(
+      {},
+      { userId: 1 }
+    ).sort({ createdAt: -1 });
+
+    let nextNumber = 1;
+
+    if (lastUser && lastUser.userId) {
+      const lastNumber = parseInt(
+        lastUser.userId.replace("USR", ""),
+        10
+      );
+
+      if (!isNaN(lastNumber)) {
+        nextNumber = lastNumber + 1;
+      }
+    }
+
+    const userId = `USR${String(nextNumber).padStart(3, "0")}`;
+
+    // 4. Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 4. Create user
+    // 5. Create user
     const user = await User.create({
       name,
+      userId,
       email,
       mobile,
       password: hashedPassword,
       role,
     });
 
-    // 5. Response
+    // 6. Response
     res.status(201).json({
       success: true,
       message: "User registered successfully",
       user: {
         id: user._id,
+        userId: user.userId,
         name: user.name,
         email: user.email,
         mobile: user.mobile,
@@ -62,8 +85,6 @@ const registerUser = async (req, res) => {
     });
   }
 };
-
-
 
 const loginUser = async (req, res) => {
   try {
