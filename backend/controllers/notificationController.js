@@ -180,7 +180,7 @@ exports.updateNotification = async (req, res) => {
               : true,
         },
         {
-          new: true,
+          returnDocument: "after",
           runValidators: true,
         }
       );

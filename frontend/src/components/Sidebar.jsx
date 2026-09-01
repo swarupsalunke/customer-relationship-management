@@ -28,6 +28,9 @@ import {
   Cake,
   Award,
   Map,
+  FileSpreadsheet,
+  FileCheck,
+  Contact,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
@@ -56,6 +59,9 @@ const Sidebar = () => {
   const [loyaltyTierOpen, setLoyaltyTierOpen] = useState(false);
   const [followUpOpen, setFollowUpOpen] = useState(false);
   const [salesVisitOpen, setSalesVisitOpen] = useState(false);
+  const [bankPaymentOpen, setBankPaymentOpen] = useState(false);
+  const [approvalOpen, setApprovalOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
 
   return (
     <aside className="dashboard-sidebar">
@@ -962,6 +968,142 @@ const Sidebar = () => {
 
         </div>
 
+        {/* Bank Payment Sheet */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setBankPaymentOpen(!bankPaymentOpen)}
+          >
+            <Wallet size={19} />
+
+            <span>Bank Payment Sheet</span>
+
+            {bankPaymentOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Bank Payment Sheet */}
+          {bankPaymentOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/bank-payment-sheet"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <FileSpreadsheet size={16} />
+
+                <span>Generate Sheet</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
+
+        {/* Approval Workflow */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setApprovalOpen(!approvalOpen)}
+          >
+            <FileCheck size={19} />
+
+            <span>Approval Workflow</span>
+
+            {approvalOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Approval Workflow Submenu */}
+          {approvalOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/approval-workflow"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <FileText size={16} />
+
+                <span>Approval Workflow</span>
+              </NavLink>
+
+            </div>
+          )}
+        </div>
+
+        {/* Contact / Directory */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setContactOpen(!contactOpen)}
+          >
+            <Users size={19} />
+
+            <span>Directory</span>
+
+            {contactOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Directory */}
+          {contactOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/directory"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <Contact size={16} />
+
+                <span>Directory</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
 
         {/* Loyalty Tier Management */}
         <div className="store-management-menu">

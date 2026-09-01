@@ -489,7 +489,7 @@ const updateInbound = async (
         id,
         updateData,
         {
-          new: true,
+          returnDocument: "after",
           runValidators: true,
         }
       ).populate(
@@ -576,7 +576,7 @@ const updateInboundStatus =
           id,
           updateData,
           {
-            new: true,
+            returnDocument: "after",
             runValidators: true,
           }
         ).populate(
@@ -667,7 +667,7 @@ const updateQualityCheck =
           id,
           updateData,
           {
-            new: true,
+            returnDocument: "after",
             runValidators: true,
           }
         ).populate(
@@ -740,7 +740,7 @@ const updateQuantityCheck =
             quantityCheck,
           },
           {
-            new: true,
+            returnDocument: "after",
             runValidators: true,
           }
         ).populate(

@@ -260,7 +260,7 @@ const updateLead = async (req, res) => {
         territory,
       },
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     ).populate("assignedTo", "name email role");

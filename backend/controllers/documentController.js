@@ -269,7 +269,7 @@ exports.updateDocument = async (req, res) => {
         req.params.id,
         updateData,
         {
-          new: true,
+          returnDocument: "after",
           runValidators: true,
         }
       );
@@ -304,7 +304,7 @@ exports.publishDocument = async (req, res) => {
           publishedAt: new Date(),
         },
         {
-          new: true,
+          returnDocument: "after",
           runValidators: true,
         }
       );
@@ -346,7 +346,7 @@ exports.disableDocument = async (req, res) => {
           publishedAt: null,
         },
         {
-          new: true,
+          returnDocument: "after",
           runValidators: true,
         }
       );

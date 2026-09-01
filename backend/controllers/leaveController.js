@@ -125,7 +125,7 @@ exports.updateLeave = async (req, res) => {
       req.params.id,
       req.body,
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     ).populate("employee", "name email");

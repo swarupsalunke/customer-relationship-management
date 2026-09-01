@@ -221,7 +221,7 @@ const updateOrder = async (req, res) => {
             req.params.id,
             req.body,
             {
-                new: true,
+                returnDocument: "after",
                 runValidators: true,
             }
         );
@@ -280,7 +280,7 @@ const updateOrderStatus = async (req, res) => {
             req.params.id,
             { status },
             {
-                new: true,
+                returnDocument: "after",
                 runValidators: true,
             }
         );

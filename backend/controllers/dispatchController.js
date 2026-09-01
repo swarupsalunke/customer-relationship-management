@@ -484,7 +484,7 @@ const updateDispatch = async (
         id,
         updateData,
         {
-          new: true,
+          returnDocument: "after",
           runValidators: true,
         }
       ).populate(
@@ -564,7 +564,7 @@ const updateDispatchStatus =
           id,
           updateData,
           {
-            new: true,
+            returnDocument: "after",
             runValidators: true,
           }
         ).populate(

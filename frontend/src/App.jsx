@@ -37,6 +37,9 @@ import FeedbackManagement from "./pages/VoiceOfPainter";
 import LoyaltyTierManagement from "./pages/LoyaltyTierManagement";
 import FollowUpManagement from "./pages/FollowUpManagement";
 import SalesVisitPlanning from "./pages/SalesVisitPlanning";
+import BankPaymentSheet from "./pages/BankPaymentSheet";
+import ApprovalWorkflow from "./pages/ApprovalWorkflow";
+import Directory from "./pages/Directory";
 
 
 const App = () => {
@@ -80,6 +83,9 @@ const App = () => {
         <Route path="/loyalty-tier-management" element={<DashboardLayout><LoyaltyTierManagement /></DashboardLayout>} />
         <Route path="/follow-up-management" element={<DashboardLayout><FollowUpManagement /></DashboardLayout>} />
         <Route path="/sales-visit-planning" element={<DashboardLayout><SalesVisitPlanning /></DashboardLayout>} />
+        <Route path="/bank-payment-sheet" element={<DashboardLayout><BankPaymentSheet /></DashboardLayout>} />
+        <Route path="/approval-workflow" element={<DashboardLayout><ApprovalWorkflow /></DashboardLayout>} />
+        <Route path="/directory" element={<DashboardLayout><Directory /></DashboardLayout>} />
 
       </Routes>
 

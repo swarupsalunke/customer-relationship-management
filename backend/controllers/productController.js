@@ -224,7 +224,7 @@ const updateProduct = async (
         id,
         req.body,
         {
-          new: true,
+          returnDocument: "after",
           runValidators: true,
         }
       );

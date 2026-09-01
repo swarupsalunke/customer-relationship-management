@@ -118,7 +118,7 @@ exports.updateLoyaltyTier = async (req, res) => {
             req.params.id,
             req.body,
             {
-                new: true,
+                returnDocument: "after",
                 runValidators: true,
             }
         );
@@ -157,7 +157,7 @@ exports.updateLoyaltyTierStatus = async (req, res) => {
             req.params.id,
             { status },
             {
-                new: true,
+                returnDocument: "after",
                 runValidators: true,
             }
         );

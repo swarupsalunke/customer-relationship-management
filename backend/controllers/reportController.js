@@ -173,7 +173,7 @@ exports.updateReport = async (req, res) => {
         format,
       },
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     );
@@ -313,7 +313,7 @@ exports.updateScheduledReport = async (req, res) => {
       req.params.id,
       req.body,
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     );

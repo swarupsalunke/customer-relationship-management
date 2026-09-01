@@ -264,7 +264,7 @@ exports.updateVisit = async (req, res) => {
       req.params.id,
       req.body,
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     );
@@ -344,7 +344,7 @@ exports.updateVisitStatus = async (req, res) => {
         visitStatus,
       },
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     );
@@ -398,7 +398,7 @@ exports.updateGPSLocation = async (req, res) => {
         "gpsTracking.lastTrackedAt": new Date(),
       },
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     );
@@ -494,7 +494,7 @@ exports.updateBeat = async (req, res) => {
       req.params.id,
       req.body,
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     );
@@ -593,7 +593,7 @@ exports.updateTerritory = async (req, res) => {
         req.params.id,
         req.body,
         {
-          new: true,
+          returnDocument: "after",
           runValidators: true,
         }
       );
@@ -692,7 +692,7 @@ exports.updateRoute = async (req, res) => {
         req.params.id,
         req.body,
         {
-          new: true,
+          returnDocument: "after",
           runValidators: true,
         }
       );

@@ -342,7 +342,7 @@ exports.updateCommission = async (req, res) => {
                 req.params.id,
                 updateData,
                 {
-                    new: true,
+                    returnDocument: "after",
                     runValidators: true,
                 }
             );
@@ -379,7 +379,7 @@ exports.updateCommissionStatus = async (req, res) => {
                 req.params.id,
                 { commissionStatus },
                 {
-                    new: true,
+                    returnDocument: "after",
                     runValidators: true,
                 }
             );

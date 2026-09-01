@@ -117,7 +117,7 @@ exports.updateCategory = async (req, res) => {
               : "ACTIVE",
         },
         {
-          new: true,
+          returnDocument: "after",
           runValidators: true,
         }
       );

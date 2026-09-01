@@ -141,7 +141,7 @@ exports.updateFollowUp = async (req, res) => {
       req.params.id,
       req.body,
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     );
@@ -191,7 +191,7 @@ exports.addRemarks = async (req, res) => {
         remarks: remarks.trim(),
       },
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     );
@@ -246,7 +246,7 @@ exports.scheduleFollowUp = async (req, res) => {
         status: "IN_PROGRESS",
       },
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     );
@@ -297,7 +297,7 @@ exports.assignOwnership = async (req, res) => {
         status: "IN_PROGRESS",
       },
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     );
@@ -339,7 +339,7 @@ exports.closeFollowUp = async (req, res) => {
         closedAt: new Date(),
       },
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     );
