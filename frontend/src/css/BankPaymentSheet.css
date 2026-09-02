@@ -172,7 +172,7 @@
     display: block;
     margin-bottom: 5px;
     color: #5f6984;
-    font-size: 8px;
+    font-size: 9px;
     font-weight: 600;
 }
 
@@ -188,7 +188,7 @@
     display: block;
     margin-top: 5px;
     color: #8991a5;
-    font-size: 7px;
+    font-size: 8.5px;
 }
 
 /* Cards */
@@ -230,7 +230,7 @@
     display: block;
     margin-bottom: 5px;
     color: #48536f;
-    font-size: 8px;
+    font-size: 9px;
     font-weight: 600;
 }
 
@@ -250,7 +250,7 @@
     border: 1px solid #dfe4ed;
     border-radius: 5px;
     outline: none;
-    font-size: 8px;
+    font-size: 9px;
 }
 
 .bank-form-group input:focus,
@@ -325,7 +325,7 @@
     color: #46516e;
     border: 0;
     outline: 0;
-    font-size: 8px;
+    font-size: 9px;
 }
 
 .bank-filter-panel {
@@ -373,7 +373,7 @@
     color: #4d5875;
     background: #fafbfc;
     border-bottom: 1px solid #e7eaf0;
-    font-size: 7.5px;
+    font-size: 9px;
     font-weight: 700;
     text-align: left;
     white-space: nowrap;
@@ -384,7 +384,7 @@
     padding: 7px 9px;
     color: #4f5b78;
     border-bottom: 1px solid #f0f2f6;
-    font-size: 7.5px;
+    font-size: 9px;
     white-space: nowrap;
 }
 
@@ -476,7 +476,7 @@
     background: #fff;
     border: 0;
     border-radius: 4px;
-    font-size: 8px;
+    font-size: 9px;
     text-align: left;
 }
 
@@ -498,7 +498,7 @@
 
 .pagination-info {
     color: #6f7893;
-    font-size: 7.5px;
+    font-size: 9px;
 }
 
 .pagination-buttons {
@@ -518,7 +518,7 @@
     background: #fff;
     border: 1px solid #dfe4ed;
     border-radius: 4px;
-    font-size: 8px;
+    font-size: 9px;
 }
 
 .pagination-buttons button.active {
@@ -535,7 +535,7 @@
 .pagination-dots {
     padding: 5px;
     color: #8b93a6;
-    font-size: 8px;
+    font-size: 9px;
 }
 
 .bank-pagination>select {
@@ -545,7 +545,7 @@
     background: #fff;
     border: 1px solid #dfe4ed;
     border-radius: 4px;
-    font-size: 8px;
+    font-size: 9px;
 }
 
 /* Bottom Summary */
@@ -573,7 +573,7 @@
 
 .bank-bottom-summary span {
     color: #778198;
-    font-size: 8px;
+    font-size: 9px;
 }
 
 .bank-bottom-summary strong {
@@ -667,7 +667,7 @@
 .bank-modal-header p {
     margin: 0;
     color: #7d869d;
-    font-size: 8px;
+    font-size: 9px;
 }
 
 .bank-modal-header>button {
@@ -724,7 +724,7 @@
     display: block;
     margin-bottom: 5px;
     color: #8991a5;
-    font-size: 8px;
+    font-size: 9px;
 }
 
 .generate-summary-box strong,
@@ -754,7 +754,7 @@
     display: block;
     margin-bottom: 5px;
     color: #8991a5;
-    font-size: 7.5px;
+    font-size: 9px;
 }
 
 .bank-view-details strong {

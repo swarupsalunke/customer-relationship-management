@@ -1,249 +1,306 @@
-/*      =======
-   MANUFACTURING BATCH MANAGEMENT
-     ======= */
-
-* {
-    box-sizing: border-box;
-}
 
 .manufacturing-batch-page {
     width: 100%;
     min-width: 0;
-    max-width: 100%;
-    min-height: 100%;
-    padding: 20px;
     box-sizing: border-box;
-    background: #ffffff;
-    color: #101828;
-    overflow-x: hidden;
-
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    padding: 24px 28px 34px;
+    color: #18244d;
+    background: #fff;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/*      =======
-   HEADER
-     ======= */
+.manufacturing-batch-page *,
+.manufacturing-batch-page *::before,
+.manufacturing-batch-page *::after {
+    box-sizing: border-box;
+}
+
+/* =========================
+   PAGE HEADER
+========================= */
 
 .manufacturing-page-header {
-    width: 100%;
-
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 18px;
-}
-
-.manufacturing-page-header>div {
-    min-width: 0;
+    gap: 20px;
+    margin-bottom: 22px;
 }
 
 .manufacturing-page-header h1 {
     margin: 0;
-    color: #101828;
-    font-size: 23px;
+    color: #16213f;
+    font-size: 22px;
     line-height: 1.25;
     font-weight: 700;
+    letter-spacing: -0.25px;
 }
 
 .manufacturing-breadcrumb {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 7px;
     margin-top: 7px;
-
-    color: #667085;
-    font-size: 10px;
+    color: #7c879d;
+    font-size: 11px;
+    line-height: 1.4;
 }
 
-.manufacturing-breadcrumb span:last-child {
-    color: #344054;
-    font-weight: 600;
+.manufacturing-breadcrumb span:nth-child(even) {
+    color: #aab2c1;
 }
 
-/*      =======
-   COMMON BUTTONS
-     ======= */
+/* =========================
+   BUTTONS
+========================= */
 
 .manufacturing-primary-btn,
 .manufacturing-secondary-btn,
+.manufacturing-danger-btn,
 .manufacturing-filter-btn,
 .manufacturing-reset-btn,
-.manufacturing-danger-btn {
-    min-height: 36px;
-    padding: 0 12px;
-    box-sizing: border-box;
-
-    border-radius: 6px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-
-    font-size: 10px;
-    font-weight: 600;
-    white-space: nowrap;
-
+.manufacturing-icon-btn,
+.manufacturing-close-btn {
+    appearance: none;
+    font-family: inherit;
     cursor: pointer;
     transition:
-        background 0.18s ease,
-        border-color 0.18s ease,
-        color 0.18s ease,
-        box-shadow 0.18s ease;
+        background-color .18s ease,
+        border-color .18s ease,
+        color .18s ease,
+        box-shadow .18s ease,
+        transform .18s ease;
 }
 
 .manufacturing-primary-btn {
-    border: 1px solid #ff6900;
-    background: #ff6900;
-    color: #ffffff;
+    min-height: 38px;
+    padding: 0 15px;
+    border: 1px solid #ff6700;
+    border-radius: 6px;
+    background: #ff6700;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 3px 8px rgba(255, 103, 0, .10);
 }
 
 .manufacturing-primary-btn:hover {
-    background: #e96000;
-    border-color: #e96000;
+    background: #eb5d00;
+    border-color: #eb5d00;
+}
+
+.manufacturing-secondary-btn {
+    min-height: 38px;
+    padding: 0 14px;
+    border: 1px solid #dbe1eb;
+    border-radius: 6px;
+    background: #fff;
+    color: #44516f;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.manufacturing-secondary-btn:hover {
+    border-color: #b9c4d7;
+    color: #18244d;
+    background: #f8faff;
+}
+
+.manufacturing-danger-btn {
+    min-height: 38px;
+    padding: 0 14px;
+    border: 1px solid #ef7777;
+    border-radius: 6px;
+    background: #fff;
+    color: #e54848;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.manufacturing-danger-btn:hover {
+    background: #fff5f5;
+    border-color: #e54848;
 }
 
 .manufacturing-primary-btn:disabled,
 .manufacturing-secondary-btn:disabled,
-.manufacturing-danger-btn:disabled {
-    opacity: 0.6;
+.manufacturing-danger-btn:disabled,
+.manufacturing-close-btn:disabled {
+    opacity: .55;
     cursor: not-allowed;
 }
 
-.manufacturing-secondary-btn {
-    border: 1px solid #d9dee7;
-    background: #ffffff;
-    color: #344054;
-}
-
-.manufacturing-secondary-btn:hover {
-    border-color: #bfc7d4;
-    background: #f8fafc;
-}
-
-.manufacturing-danger-btn {
-    border: 1px solid #fecaca;
-    background: #fff1f2;
-    color: #dc2626;
-}
-
-.manufacturing-danger-btn:hover {
-    border-color: #fca5a5;
-    background: #fee2e2;
-}
-
-/*      =======
-   STATS
-     ======= */
-
-.manufacturing-stats-grid {
-    width: 100%;
-    min-width: 0;
-
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 12px;
-}
-
-.manufacturing-stat-card {
-    min-width: 0;
-    min-height: 86px;
-    padding: 13px;
-    box-sizing: border-box;
-
-    border: 1px solid #e4e7ec;
-    border-radius: 8px;
-    background: #ffffff;
-
-    display: flex;
+.manufacturing-filter-btn,
+.manufacturing-reset-btn {
+    min-height: 38px;
+    padding: 0 14px;
+    border: 1px solid #dbe1eb;
+    border-radius: 6px;
+    background: #fff;
+    color: #33415f;
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
-
-    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+    justify-content: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
-.manufacturing-stat-icon {
-    width: 34px;
-    height: 34px;
-    min-width: 34px;
+.manufacturing-filter-btn:hover,
+.manufacturing-reset-btn:hover {
+    border-color: #b9c4d7;
+    background: #f8faff;
+}
 
-    border-radius: 7px;
-
+.manufacturing-icon-btn {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background: transparent;
+    color: #596783;
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
-.manufacturing-stat-icon.blue {
-    background: #eff6ff;
-    color: #2563eb;
+.manufacturing-icon-btn:hover {
+    border-color: #dce2ec;
+    background: #f5f7fb;
+    color: #17264a;
 }
 
-.manufacturing-stat-icon.orange {
-    background: #fff7ed;
-    color: #ea580c;
+.manufacturing-close-btn {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    padding: 0;
+    border: 1px solid #dfe4ed;
+    border-radius: 6px;
+    background: #fff;
+    color: #5c6880;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.manufacturing-stat-icon.green {
-    background: #ecfdf3;
-    color: #16a34a;
+.manufacturing-close-btn:hover {
+    color: #e34d4d;
+    border-color: #f0c8cc;
+    background: #fff8f8;
 }
 
-.manufacturing-stat-icon.purple {
-    background: #f5f3ff;
-    color: #7c3aed;
+/* =========================
+   STAT CARDS
+========================= */
+
+.manufacturing-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
 }
 
-.manufacturing-stat-icon.red {
-    background: #fff1f2;
-    color: #dc2626;
+.manufacturing-stat-card {
+    min-height: 92px;
+    padding: 17px 16px;
+    border: 1px solid #e3e8f0;
+    border-radius: 8px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    box-shadow: 0 2px 7px rgba(27, 42, 74, .025);
 }
 
-.manufacturing-stat-card>div:last-child {
+.manufacturing-stat-card > div:last-child {
     min-width: 0;
 }
 
 .manufacturing-stat-card span {
     display: block;
     margin-bottom: 4px;
-
-    color: #667085;
-    font-size: 9px;
+    color: #697590;
+    font-size: 10px;
     line-height: 1.3;
+    font-weight: 500;
 }
 
 .manufacturing-stat-card strong {
     display: block;
-
-    color: #101828;
-    font-size: 19px;
-    line-height: 1.2;
+    color: #17244a;
+    font-size: 20px;
+    line-height: 1.1;
     font-weight: 700;
 }
 
-/*      =======
-   FILTER CARD
-     ======= */
+.manufacturing-stat-icon {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.manufacturing-stat-icon.blue {
+    color: #1769e0;
+    background: #eaf3ff;
+}
+
+.manufacturing-stat-icon.orange {
+    color: #f17a16;
+    background: #fff0dc;
+}
+
+.manufacturing-stat-icon.green {
+    color: #13a661;
+    background: #e8f8ef;
+}
+
+.manufacturing-stat-icon.purple {
+    color: #7b43d5;
+    background: #f1eaff;
+}
+
+.manufacturing-stat-icon.red {
+    color: #e94848;
+    background: #ffe9e9;
+}
+
+/* =========================
+   FILTER BAR
+========================= */
 
 .manufacturing-filter-card {
     width: 100%;
     min-width: 0;
-    padding: 13px;
-    box-sizing: border-box;
-
-    border: 1px solid #e4e7ec;
+    padding: 15px;
+    border: 1px solid #e3e8f0;
     border-radius: 8px;
-    background: #ffffff;
-
+    background: #fff;
     display: grid;
-    grid-template-columns: 1.35fr 0.9fr 1fr 1fr auto;
-    gap: 10px;
+    grid-template-columns: 1.15fr .9fr .9fr .9fr auto;
+    gap: 12px;
     align-items: end;
-
-    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+    margin-bottom: 16px;
 }
 
 .manufacturing-date-group,
@@ -254,950 +311,735 @@
 .manufacturing-date-group label,
 .manufacturing-filter-field label {
     display: block;
-    margin-bottom: 5px;
-
-    color: #344054;
-    font-size: 9px;
+    margin: 0 0 6px;
+    color: #52607b;
+    font-size: 10px;
     font-weight: 600;
 }
 
 .manufacturing-date-inputs {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    gap: 6px;
-    align-items: center;
-}
-
-.manufacturing-date-inputs span {
-    color: #98a2b3;
-    font-size: 9px;
-}
-
-.manufacturing-filter-card input,
-.manufacturing-filter-card select {
-    width: 100%;
-    height: 36px;
     min-width: 0;
-    padding: 0 9px;
-    box-sizing: border-box;
-
-    border: 1px solid #d9dee7;
+    min-height: 38px;
+    padding: 0 8px;
+    border: 1px solid #dce2ec;
     border-radius: 6px;
-
-    background: #ffffff;
-    color: #344054;
-
-    font-size: 10px;
-    outline: none;
-
-    transition:
-        border-color 0.18s ease,
-        box-shadow 0.18s ease;
-}
-
-
-
-.manufacturing-filter-actions {
+    background: #fff;
     display: flex;
     align-items: center;
     gap: 7px;
 }
 
-.manufacturing-filter-btn {
-    border: 1px solid #d9dee7;
-    background: #ffffff;
-    color: #475467;
+.manufacturing-date-inputs input {
+    width: 100%;
+    min-width: 0;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #2d3a59;
+    font: inherit;
+    font-size: 10px;
 }
 
-.manufacturing-filter-btn:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
+.manufacturing-date-inputs span {
+    flex: 0 0 auto;
+    color: #9aa3b4;
+    font-size: 10px;
 }
 
-.manufacturing-reset-btn {
-    border: 1px solid #d9dee7;
-    background: #ffffff;
-    color: #475467;
+.manufacturing-filter-field select {
+    width: 100%;
+    height: 38px;
+    padding: 0 30px 0 10px;
+    border: 1px solid #dce2ec;
+    border-radius: 6px;
+    outline: 0;
+    background-color: #fff;
+    color: #2d3a59;
+    font-family: inherit;
+    font-size: 10px;
+    cursor: pointer;
 }
 
-.manufacturing-reset-btn:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
+.manufacturing-date-inputs:focus-within,
+.manufacturing-filter-field select:focus {
+    border-color: #a9b8d2;
+    box-shadow: 0 0 0 2px rgba(39, 103, 214, .06);
 }
 
-/*      =======
+.manufacturing-filter-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* =========================
    TABS
-     ======= */
+========================= */
 
 .manufacturing-tabs {
     width: 100%;
-    min-width: 0;
-
+    min-height: 48px;
+    padding: 0 16px;
+    border: 1px solid #e3e8f0;
+    border-radius: 8px;
+    background: #fff;
     display: flex;
-    align-items: center;
-    gap: 4px;
-
-    border-bottom: 1px solid #e4e7ec;
+    align-items: stretch;
+    gap: 25px;
+    margin-bottom: 16px;
 }
 
 .manufacturing-tab {
-    min-height: 38px;
-    padding: 0 13px;
-
-    border: none;
+    position: relative;
+    min-height: 47px;
+    padding: 0 5px;
+    border: 0;
     border-bottom: 2px solid transparent;
+    outline: 0;
     background: transparent;
-
-    color: #667085;
-
-    font-size: 10px;
+    color: #68748d;
+    font-family: inherit;
+    font-size: 11px;
     font-weight: 600;
-
     cursor: pointer;
 }
 
 .manufacturing-tab:hover {
-    color: #ff6900;
+    color: #1769e0;
 }
 
 .manufacturing-tab.active {
-    color: #ff6900;
-    border-bottom-color: #ff6900;
+    color: #1769e0;
+    border-bottom-color: #1769e0;
 }
 
-/*      =======
-   GENERIC CARD SHELL (listing / details / qc / cost)
-     ======= */
+/* =========================
+   COMMON PANEL
+========================= */
 
 .manufacturing-listing-panel,
-.manufacturing-details-card,
-.manufacturing-qc-card,
+.manufacturing-cost-panel,
 .manufacturing-cost-section,
-.manufacturing-cost-panel {
-    width: 100%;
-    min-width: 0;
-
-    border: 1px solid #e4e7ec;
+.manufacturing-details-card,
+.manufacturing-qc-card {
+    border: 1px solid #e3e8f0;
     border-radius: 8px;
-    background: #ffffff;
-
-    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+    background: #fff;
+    box-shadow: 0 2px 7px rgba(27, 42, 74, .025);
 }
-
-/*      =======
-   PANEL / CARD HEADER
-     ======= */
 
 .manufacturing-panel-header,
 .manufacturing-card-header {
     min-height: 62px;
-    padding: 12px 14px;
-    box-sizing: border-box;
-
+    padding: 13px 15px;
+    border-bottom: 1px solid #edf0f5;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    flex-wrap: wrap;
-
-    border-bottom: 1px solid #edf1f5;
+    gap: 15px;
 }
 
 .manufacturing-panel-header h2,
 .manufacturing-card-header h2 {
     margin: 0;
-
-    color: #101828;
-    font-size: 13px;
+    color: #1b294d;
+    font-size: 14px;
+    line-height: 1.3;
     font-weight: 700;
 }
 
 .manufacturing-panel-header p,
 .manufacturing-card-header p {
     margin: 4px 0 0;
-
-    color: #98a2b3;
+    color: #8a94a8;
     font-size: 9px;
+    line-height: 1.35;
 }
 
-.manufacturing-card-header>div:first-child {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    flex-wrap: wrap;
-}
-
-.manufacturing-card-header-actions,
 .manufacturing-panel-header-right {
+    min-width: 0;
     display: flex;
     align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
 }
-
-.manufacturing-record-count {
-    padding: 5px 8px;
-
-    border-radius: 20px;
-    background: #f2f4f7;
-    color: #667085;
-
-    font-size: 8px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-/* Search box inside the batch listing header */
 
 .manufacturing-search-box {
+    width: 210px;
     height: 34px;
-    padding: 0 10px;
-    box-sizing: border-box;
-
-    border: 1px solid #d9dee7;
+    padding: 0 9px;
+    border: 1px solid #dfe4ed;
     border-radius: 6px;
-    background: #ffffff;
-
-    display: inline-flex;
+    background: #fff;
+    color: #75819a;
+    display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
+}
 
-    color: #98a2b3;
+.manufacturing-search-box:focus-within {
+    border-color: #aab9d3;
+    box-shadow: 0 0 0 2px rgba(36, 102, 216, .05);
 }
 
 .manufacturing-search-box input {
-    border: none;
-    outline: none;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    outline: 0;
     background: transparent;
-
-    width: 150px;
-    max-width: 40vw;
-
-    color: #344054;
+    color: #2e3b5c;
+    font-family: inherit;
     font-size: 10px;
 }
 
-/*      =======
-   TABLE
-     ======= */
+.manufacturing-search-box input::placeholder {
+    color: #a1a9b8;
+}
+
+.manufacturing-record-count {
+    color: #8791a6;
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+/* =========================
+   BATCH TABLE
+========================= */
 
 .manufacturing-table-wrapper {
     width: 100%;
-    max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
 }
 
 .manufacturing-table {
     width: 100%;
-    min-width: 920px;
-
+    min-width: 900px;
     border-collapse: collapse;
     table-layout: auto;
 }
 
 .manufacturing-table th {
     height: 38px;
-    padding: 0 10px;
-    box-sizing: border-box;
-
-    border-bottom: 1px solid #e4e7ec;
-
-    background: #f8fafc;
-    color: #667085;
-
-    font-size: 8px;
+    padding: 0 12px;
+    border-bottom: 1px solid #e8ecf2;
+    background: #fbfcfe;
+    color: #68748d;
+    font-size: 9px;
+    line-height: 1;
     font-weight: 700;
     text-align: left;
     white-space: nowrap;
 }
 
 .manufacturing-table td {
-    min-height: 49px;
-    padding: 9px 10px;
-
-    border-bottom: 1px solid #f0f2f5;
-
-    color: #475467;
-    font-size: 9px;
+    height: 48px;
+    padding: 7px 12px;
+    border-bottom: 1px solid #edf0f4;
+    color: #394764;
+    font-size: 10px;
+    line-height: 1.35;
     vertical-align: middle;
-}
-
-.manufacturing-table tbody tr {
-    cursor: pointer;
-    transition: background 0.16s ease;
-}
-
-.manufacturing-table tbody tr:hover {
-    background: #f8fbff;
-}
-
-.manufacturing-table tbody tr.selected-row {
-    background: #eff6ff;
-}
-
-.manufacturing-table td strong {
-    color: #344054;
-    font-weight: 600;
-}
-
-.manufacturing-empty-cell {
-    height: 180px !important;
-    text-align: center;
-    color: #98a2b3 !important;
-    font-size: 10px !important;
-}
-
-/*      =======
-   STATUS
-     ======= */
-
-.manufacturing-status {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 21px;
-    padding: 0 7px;
-
-    border-radius: 20px;
-
-    font-size: 7px;
-    font-weight: 700;
     white-space: nowrap;
 }
 
-.manufacturing-status.planned {
-    background: #f2f4f7;
-    color: #667085;
+.manufacturing-table tbody tr {
+    transition: background-color .15s ease;
+    cursor: pointer;
 }
 
-.manufacturing-status.production {
-    background: #fff7ed;
-    color: #c2410c;
+.manufacturing-table tbody tr:hover {
+    background: #fafcff;
 }
 
-.manufacturing-status.completed {
-    background: #ecfdf3;
-    color: #15803d;
+.manufacturing-table tbody tr.selected-row {
+    background: #f1f6ff;
 }
 
-.manufacturing-status.qc-pending {
-    background: #eff6ff;
-    color: #2563eb;
+.manufacturing-table td strong {
+    color: #263454;
+    font-weight: 600;
 }
-
-.manufacturing-status.rejected {
-    background: #fff1f2;
-    color: #be123c;
-}
-
-/*      =======
-   ACTIONS
-     ======= */
 
 .manufacturing-action-group {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.manufacturing-icon-btn {
-    width: 28px;
-  height: 28px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-right: 5px;
-
-  border: 0;
-  border-radius: 5px;
-
-  background: transparent;
-
-  color: #657080;
-
-  font-size: 11px;
-
-  cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
-}
-
-.manufacturing-icon-btn:hover {
-   background: #fff0e6;
-  color: #ff6900;
-}
-
-/*      =======
-   BATCH DETAILS + LAB QC ROW  (full width, side by side)
-     ======= */
-
-.manufacturing-details-row {
-    width: 100%;
-    min-width: 0;
-
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 16px;
-    align-items: start;
-}
-
-.manufacturing-details-card,
-.manufacturing-qc-card {
-    overflow: hidden;
-}
-
-.manufacturing-detail-section {
-    padding: 14px;
-    border-bottom: 1px solid #edf1f5;
-}
-
-.manufacturing-detail-section:last-child {
-    border-bottom: none;
-}
-
-.manufacturing-detail-section h3 {
-    margin: 0 0 11px;
-
-    color: #344054;
-    font-size: 11px;
-    font-weight: 700;
-}
-
-.manufacturing-section-heading {
-    margin-bottom: 11px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-}
-
-.manufacturing-section-heading h3 {
-    margin: 0;
-}
-
-.manufacturing-section-heading>span {
-    color: #667085;
-    font-size: 8px;
-    font-weight: 600;
-}
-
-/*      =======
-   DETAIL GRID (boxed key/value cards)
-     ======= */
-
-.manufacturing-detail-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-}
-
-.manufacturing-detail-grid>div {
-    min-width: 0;
-    padding: 8px;
-
-    border: 1px solid #eef1f4;
-    border-radius: 6px;
-    background: #fafbfc;
-}
-
-.manufacturing-detail-grid>div.full-width-detail {
-    grid-column: 1 / -1;
-}
-
-.manufacturing-detail-grid span {
-    display: block;
-    margin-bottom: 4px;
-
-    color: #98a2b3;
-    font-size: 8px;
-}
-
-.manufacturing-detail-grid strong {
-    display: block;
-
-    color: #344054;
-    font-size: 9px;
-    line-height: 1.4;
-    font-weight: 600;
-    word-break: break-word;
-}
-
-/*      =======
-   KV LIST (plain label / value rows - matches reference UI
-   for Lab QC panel and Cost Verification panel)
-     ======= */
-
-.manufacturing-kv-list {
-    display: flex;
-    flex-direction: column;
-}
-
-.manufacturing-kv-row {
-    padding: 10px 0;
-
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-
-    border-bottom: 1px solid #f0f2f5;
-}
-
-.manufacturing-kv-row:last-child {
-    border-bottom: none;
-}
-
-.manufacturing-kv-row span {
-    min-width: 120px;
-    color: #98a2b3;
-    font-size: 9px;
-}
-
-.manufacturing-kv-row strong {
-    flex: 1;
-    text-align: right;
-
-    color: #344054;
-    font-size: 10px;
-    font-weight: 600;
-    word-break: break-word;
-}
-
-.manufacturing-muted-text {
-    margin: 4px 0 14px;
-    color: #98a2b3;
-    font-size: 9px;
-    line-height: 1.6;
-}
-
-/*      =======
-   PACKING
-     ======= */
-
-.manufacturing-packing-table {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.manufacturing-packing-row {
-    min-width: 0;
-    padding: 8px;
-
-    border: 1px solid #eef1f4;
-    border-radius: 6px;
-
-    background: #fafbfc;
-
-    display: grid;
-    grid-template-columns: 0.7fr 1fr 1fr auto;
-    gap: 8px;
-    align-items: center;
-}
-
-.manufacturing-packing-row strong {
-    color: #344054;
-    font-size: 9px;
-}
-
-.manufacturing-packing-row span {
-    color: #667085;
-    font-size: 8px;
-}
-
-.label-success,
-.label-pending {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-
-    min-height: 20px;
-    padding: 0 6px;
-    border-radius: 20px;
-
-    font-size: 7px;
-    font-weight: 700;
+    gap: 2px;
 }
 
-.label-success {
-    background: #ecfdf3;
-    color: #15803d;
+.manufacturing-empty-cell {
+    height: 100px !important;
+    color: #8a94a8 !important;
+    text-align: center !important;
+    white-space: normal !important;
 }
 
-.label-pending {
-    background: #fff7ed;
-    color: #c2410c;
+.manufacturing-empty-small {
+    padding: 22px !important;
+    color: #8993a8 !important;
+    font-size: 10px !important;
+    text-align: center !important;
 }
 
-/*      =======
-   FILE LINK
-     ======= */
+/* =========================
+   STATUS BADGES
+========================= */
 
-.manufacturing-file-link {
-    display: inline-flex !important;
-    align-items: center;
-    gap: 5px;
-
-    color: #2563eb !important;
-}
-
-/*      =======
-   NO SELECTION / EMPTY
-     ======= */
-
-.manufacturing-no-selection {
-    min-height: 220px;
-    padding: 30px 18px;
-    box-sizing: border-box;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    text-align: center;
-    color: #98a2b3;
-}
-
-.manufacturing-no-selection-standalone {
-    width: 100%;
-
-    border: 1px dashed #e4e7ec;
-    border-radius: 8px;
-    background: #ffffff;
-}
-
-.manufacturing-no-selection svg {
-    color: #cbd5e1;
-    margin-bottom: 8px;
-}
-
-.manufacturing-no-selection h3 {
-    margin: 0 0 5px;
-
-    color: #475467;
-    font-size: 12px;
-}
-
-.manufacturing-no-selection p {
-    max-width: 280px;
-    margin: 0;
-
-    color: #98a2b3;
-    font-size: 9px;
-    line-height: 1.5;
-}
-
-/*      =======
-   COST VERIFICATION SECTION (shared, used in both tabs)
-     ======= */
-
-.manufacturing-cost-section {
-    width: 100%;
-    overflow: hidden;
-}
-
-.manufacturing-cost-section-grid {
-    padding: 16px;
-
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 20px;
-    align-items: start;
-}
-
-.manufacturing-cost-left {
-    min-width: 0;
-}
-
-.manufacturing-cost-right {
-    min-width: 0;
-    padding: 14px;
-
-    border: 1px solid #eef1f4;
-    border-radius: 8px;
-    background: #fafbfc;
-}
-
-.manufacturing-cost-right h3 {
-    margin: 0 0 10px;
-
-    color: #344054;
-    font-size: 11px;
-    font-weight: 700;
-}
-
-.manufacturing-cost-right-actions {
-    margin-top: 14px;
-    padding-top: 14px;
-
-    border-top: 1px solid #edf1f5;
-
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-}
-
-.manufacturing-cost-right-actions button {
-    flex: 1;
-    min-width: 110px;
-}
-
+.manufacturing-status,
 .manufacturing-cost-status {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     min-height: 23px;
-    padding: 0 8px;
-
-    border-radius: 20px;
-
-    font-size: 8px;
-    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 5px;
+    font-size: 9px;
+    line-height: 1;
+    font-weight: 600;
     white-space: nowrap;
 }
 
-.manufacturing-cost-status.pending {
-    background: #fff7ed;
-    color: #c2410c;
+.manufacturing-status.production {
+    color: #1269d7;
+    background: #e8f2ff;
+}
+
+.manufacturing-status.completed {
+    color: #15945a;
+    background: #e6f7ee;
+}
+
+.manufacturing-status.qc-pending {
+    color: #df7411;
+    background: #fff0dc;
+}
+
+.manufacturing-status.rejected {
+    color: #dc4141;
+    background: #ffe8e8;
+}
+
+.manufacturing-status.planned {
+    color: #66738c;
+    background: #eef1f5;
 }
 
 .manufacturing-cost-status.verified {
-    background: #ecfdf3;
-    color: #15803d;
+    color: #128b55;
+    background: #e5f7ed;
 }
 
 .manufacturing-cost-status.rejected {
-    background: #fff1f2;
-    color: #be123c;
+    color: #db4444;
+    background: #ffe9e9;
+}
+
+.manufacturing-cost-status.pending {
+    color: #d97a11;
+    background: #fff0dc;
+}
+
+/* =========================
+   BATCH DETAILS
+========================= */
+
+.manufacturing-details-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(320px, .85fr);
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.manufacturing-details-card,
+.manufacturing-qc-card {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.manufacturing-card-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.manufacturing-detail-section {
+    padding: 16px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.manufacturing-detail-section:last-child {
+    border-bottom: 0;
+}
+
+.manufacturing-detail-section h3,
+.manufacturing-section-heading {
+    margin: 0 0 14px;
+    color: #1769df;
+    font-size: 12px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.manufacturing-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px 24px;
+}
+
+.manufacturing-detail-grid > div {
+    min-width: 0;
+}
+
+.manufacturing-detail-grid span,
+.full-width-detail span {
+    display: block;
+    margin-bottom: 5px;
+    color: #7a859b;
+    font-size: 9px;
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+.manufacturing-detail-grid strong,
+.full-width-detail strong {
+    display: block;
+    color: #283657;
+    font-size: 10px;
+    line-height: 1.45;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.full-width-detail {
+    grid-column: 1 / -1;
+}
+
+.manufacturing-packing-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.manufacturing-packing-row {
+    min-width: 520px;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr 1fr .8fr;
+    align-items: center;
+    min-height: 38px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.manufacturing-packing-row:first-child {
+    border-top: 1px solid #edf0f4;
+}
+
+.manufacturing-packing-row > span,
+.manufacturing-packing-row > strong {
+    padding: 7px 9px;
+    color: #34415f;
+    font-size: 9px;
+}
+
+.manufacturing-packing-row:first-child > span,
+.manufacturing-packing-row:first-child > strong {
+    color: #68748d;
+    font-weight: 700;
+}
+
+.manufacturing-file-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #e34c4c;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+/* =========================
+   QC CARD
+========================= */
+
+.manufacturing-qc-card .manufacturing-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+
+.manufacturing-qc-card .manufacturing-detail-grid > div {
+    padding: 12px 0;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.manufacturing-qc-card .manufacturing-detail-grid > div:last-child {
+    border-bottom: 0;
+}
+
+.manufacturing-qc-card .manufacturing-card-header {
+    align-items: center;
+}
+
+/* =========================
+   COST VERIFICATION
+========================= */
+
+.manufacturing-cost-section {
+    margin-top: 16px;
+    overflow: hidden;
+}
+
+.manufacturing-cost-section-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(300px, .8fr);
+    gap: 16px;
+    padding: 16px;
+}
+
+.manufacturing-cost-left,
+.manufacturing-cost-right {
+    min-width: 0;
+}
+
+.manufacturing-cost-right {
+    padding: 16px;
+    border: 1px solid #e4e9f0;
+    border-radius: 7px;
+    background: #fcfdff;
+}
+
+.manufacturing-cost-right h3 {
+    margin: 0 0 14px;
+    color: #263454;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.manufacturing-kv-list {
+    border: 1px solid #e5e9f0;
+    border-radius: 7px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.manufacturing-kv-row {
+    min-height: 43px;
+    padding: 9px 12px;
+    display: grid;
+    grid-template-columns: minmax(145px, .8fr) minmax(0, 1.4fr);
+    gap: 16px;
+    align-items: center;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.manufacturing-kv-row:last-child {
+    border-bottom: 0;
+}
+
+.manufacturing-kv-row span {
+    color: #7b869c;
+    font-size: 9px;
+    line-height: 1.35;
+}
+
+.manufacturing-kv-row strong {
+    color: #293756;
+    font-size: 10px;
+    line-height: 1.4;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.manufacturing-cost-right .manufacturing-kv-list {
+    border: 0;
+}
+
+.manufacturing-cost-right .manufacturing-kv-row {
+    padding-left: 0;
+    padding-right: 0;
+    grid-template-columns: minmax(115px, .8fr) minmax(0, 1fr);
+}
+
+.manufacturing-cost-right-actions {
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .manufacturing-inline-error {
     margin-bottom: 12px;
-    padding: 9px 10px;
-
-    border: 1px solid #fecaca;
+    padding: 10px 12px;
+    border: 1px solid #f2cccc;
     border-radius: 6px;
-
-    background: #fff1f2;
-    color: #be123c;
-
-    font-size: 9px;
+    background: #fff7f7;
+    color: #c43e3e;
+    font-size: 10px;
 }
 
-/*      =======
-   BATCH COST VERIFICATION TAB (dedicated batch picker view)
-     ======= */
+.manufacturing-muted-text {
+    margin: 0;
+    color: #8a94a8;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+/* Cost verification second tab */
 
 .manufacturing-cost-panel {
     overflow: hidden;
 }
 
 .manufacturing-cost-layout {
+    min-height: 330px;
     display: grid;
-    grid-template-columns: 250px minmax(0, 1fr);
-    gap: 0;
-    min-width: 0;
+    grid-template-columns: 245px minmax(0, 1fr);
 }
 
 .manufacturing-cost-batch-list {
-    min-width: 0;
-    padding: 14px;
-
-    border-right: 1px solid #edf1f5;
-}
-
-.manufacturing-cost-batch-list h3 {
-    margin: 0 0 10px;
-
-    color: #344054;
-    font-size: 11px;
+    padding: 12px;
+    border-right: 1px solid #e7ebf1;
+    background: #fbfcfe;
 }
 
 .manufacturing-cost-batch {
     width: 100%;
-    min-height: 52px;
-    margin-bottom: 6px;
-    padding: 8px;
-
-    border: 1px solid #e4e7ec;
-    border-radius: 6px;
-
-    background: #ffffff;
-    color: #344054;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-
+    padding: 12px;
+    margin-bottom: 7px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background: transparent;
+    color: #34415f;
     text-align: left;
     cursor: pointer;
-    transition: 0.18s ease;
 }
 
-.manufacturing-cost-batch:hover,
+.manufacturing-cost-batch:hover {
+    border-color: #dfe5ee;
+    background: #fff;
+}
+
 .manufacturing-cost-batch.active {
-    border-color: #bfdbfe;
-    background: #eff6ff;
-}
-
-.manufacturing-cost-batch span {
-    min-width: 0;
-}
-
-.manufacturing-cost-batch strong,
-.manufacturing-cost-batch small {
-    display: block;
+    border-color: #cbdcf8;
+    background: #eef5ff;
 }
 
 .manufacturing-cost-batch strong {
-    margin-bottom: 3px;
-    color: #344054;
-    font-size: 9px;
+    display: block;
+    margin-bottom: 4px;
+    color: #283657;
+    font-size: 10px;
 }
 
-.manufacturing-cost-batch small {
-    overflow: hidden;
-    color: #667085;
-    font-size: 8px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.manufacturing-cost-batch span {
+    display: block;
+    color: #7c879c;
+    font-size: 9px;
 }
 
 .manufacturing-cost-details {
     min-width: 0;
+    padding: 16px;
 }
 
-.manufacturing-empty-small {
-    padding: 14px 0;
-    color: #98a2b3;
-    font-size: 9px;
+.manufacturing-no-selection {
+    min-height: 220px;
+    padding: 24px;
+    border: 1px dashed #dce2eb;
+    border-radius: 7px;
+    color: #8a94a8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 10px;
 }
 
-/*      =======
-   MODAL
-     ======= */
+.manufacturing-no-selection-standalone {
+    min-height: 180px;
+    margin: 16px;
+}
+
+/* =========================
+   MODALS
+========================= */
 
 .manufacturing-modal-overlay {
     position: fixed;
     inset: 0;
     z-index: 9999;
-
-    padding: 18px;
-    box-sizing: border-box;
-
-    background: rgba(15, 23, 42, 0.48);
-
+    padding: 24px;
+    background: rgba(13, 22, 43, .48);
     display: flex;
     align-items: center;
     justify-content: center;
-
     overflow-y: auto;
 }
 
 .manufacturing-modal {
-    width: min(650px, 100%);
-    max-height: calc(100vh - 36px);
-
-    background: #ffffff;
-    border: 1px solid #e4e7ec;
-    border-radius: 10px;
-
-    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.2);
-
-    overflow-y: auto;
+    width: min(680px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow: hidden;
+    border: 1px solid #dfe4ed;
+    border-radius: 9px;
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(18, 27, 55, .24);
+    display: flex;
+    flex-direction: column;
 }
 
 .manufacturing-modal.large {
-    width: min(920px, 100%);
+    width: min(940px, 100%);
 }
-
-/*      =======
-   MODAL HEADER
-     ======= */
 
 .manufacturing-modal-header {
-    min-height: 62px;
-    padding: 13px 16px;
-    box-sizing: border-box;
-
+    min-height: 68px;
+    padding: 15px 18px;
+    border-bottom: 1px solid #edf0f4;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    gap: 12px;
-
-    border-bottom: 1px solid #edf1f5;
-}
-
-.manufacturing-modal-header>div {
-    min-width: 0;
+    gap: 15px;
+    flex: 0 0 auto;
 }
 
 .manufacturing-modal-header h2 {
     margin: 0;
-
-    color: #101828;
-    font-size: 15px;
+    color: #18264c;
+    font-size: 16px;
+    line-height: 1.3;
     font-weight: 700;
 }
 
 .manufacturing-modal-header p {
-    margin: 4px 0 0;
-
-    color: #98a2b3;
+    margin: 5px 0 0;
+    color: #8993a7;
     font-size: 9px;
+    line-height: 1.35;
 }
-
-.manufacturing-close-btn {
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    padding: 0;
-
-    border: 1px solid #e4e7ec;
-    border-radius: 6px;
-
-    background: #ffffff;
-    color: #667085;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-}
-
-.manufacturing-close-btn:hover {
-    background: #f8fafc;
-    color: #dc2626;
-}
-
-/*      =======
-   MODAL FORM
-     ======= */
 
 .manufacturing-modal-form {
-    padding: 16px;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 18px;
 }
 
 .manufacturing-form-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 13px 15px;
+    column-gap: 18px;
+    row-gap: 15px;
 }
 
 .manufacturing-form-group {
     min-width: 0;
+    margin: 0;
 }
 
 .manufacturing-form-group.full-width {
@@ -1206,10 +1048,10 @@
 
 .manufacturing-form-group label {
     display: block;
-    margin-bottom: 5px;
-
-    color: #344054;
-    font-size: 12px;
+    margin: 0 0 6px;
+    color: #52607b;
+    font-size: 10px;
+    line-height: 1.3;
     font-weight: 600;
 }
 
@@ -1217,247 +1059,204 @@
 .manufacturing-form-group select,
 .manufacturing-form-group textarea {
     width: 100%;
-    box-sizing: border-box;
-
-    border: 1px solid #d9dee7;
+    min-width: 0;
+    min-height: 39px;
+    padding: 8px 10px;
+    border: 1px solid #dbe1eb;
     border-radius: 6px;
-
-    background: #ffffff;
-    color: #344054;
-
+    outline: 0;
+    background: #fff;
+    color: #2d3a59;
+    font-family: inherit;
     font-size: 10px;
-    outline: none;
-
-    transition:
-        border-color 0.18s ease,
-        box-shadow 0.18s ease;
-}
-
-.manufacturing-form-group input,
-.manufacturing-form-group select {
-    height: 40px;
-    padding: 0 9px;
+    line-height: 1.4;
+    transition: border-color .18s ease, box-shadow .18s ease;
 }
 
 .manufacturing-form-group textarea {
-    min-height: 75px;
-    padding: 9px;
+    min-height: 82px;
     resize: vertical;
-    line-height: 1.45;
+}
+
+.manufacturing-form-group input::placeholder,
+.manufacturing-form-group textarea::placeholder {
+    color: #a2aaba;
 }
 
 .manufacturing-form-group input:focus,
 .manufacturing-form-group select:focus,
 .manufacturing-form-group textarea:focus {
-    border-color: #ff6900;
+    border-color: #9fb2d2;
+    box-shadow: 0 0 0 2px rgba(42, 105, 210, .06);
 }
-
-.manufacturing-form-group input:disabled {
-    background: #f8fafc;
-    color: #98a2b3;
-}
-
-/*      =======
-   FORM SECTION
-     ======= */
 
 .manufacturing-form-section {
-    margin-top: 18px;
-    padding-top: 16px;
-
-    border-top: 1px solid #edf1f5;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #edf0f4;
 }
 
 .manufacturing-form-section h3 {
-    margin: 0 0 11px;
-
-    color: #344054;
-    font-size: 11px;
+    margin: 0 0 14px;
+    color: #1c6ce1;
+    font-size: 13px;
+    line-height: 1.3;
     font-weight: 700;
 }
-
-/*      =======
-   PACKING FORM
-     ======= */
 
 .manufacturing-packing-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 9px;
+    gap: 10px;
 }
 
 .manufacturing-packing-card {
     min-width: 0;
-    padding: 9px;
-
-    border: 1px solid #e4e7ec;
+    padding: 12px;
+    border: 1px solid #e1e6ee;
     border-radius: 7px;
-
-    background: #fafbfc;
-
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
+    background: #fbfcfe;
 }
 
-.manufacturing-packing-card>strong {
-    color: #344054;
-    font-size: 9px;
+.manufacturing-packing-card strong {
+    display: block;
+    margin-bottom: 10px;
+    color: #2a3858;
+    font-size: 10px;
+    font-weight: 700;
 }
 
 .manufacturing-packing-card input {
     width: 100%;
-    height: 32px;
-    padding: 0 8px;
-    box-sizing: border-box;
-
-    border: 1px solid #d9dee7;
+    height: 34px;
+    margin-bottom: 8px;
+    padding: 6px 8px;
+    border: 1px solid #dce2eb;
     border-radius: 5px;
-
-    background: #ffffff;
-    color: #344054;
-
+    outline: 0;
+    background: #fff;
+    color: #2e3b5c;
+    font-family: inherit;
     font-size: 9px;
-    outline: none;
 }
 
 .manufacturing-packing-card input:focus {
-    border-color: #ff6900;
+    border-color: #9fb2d2;
 }
 
 .manufacturing-check-label {
     display: flex !important;
     align-items: center;
-    gap: 5px;
-
-    margin: 0 !important;
-
-    color: #667085 !important;
-    font-size: 8px !important;
+    gap: 6px;
+    margin: 2px 0 0 !important;
+    color: #69758c !important;
+    font-size: 9px !important;
     font-weight: 500 !important;
+    cursor: pointer;
 }
 
 .manufacturing-check-label input {
-    width: 13px !important;
-    height: 13px !important;
-    margin: 0;
+    width: 14px !important;
+    height: 14px !important;
+    min-height: 14px !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
-
-/*      =======
-   UPLOAD FIELD
-     ======= */
 
 .manufacturing-upload-field {
     width: 100%;
-    min-height: 36px;
-    padding: 0 10px;
-    box-sizing: border-box;
-
-    border: 1px dashed #cbd5e1;
+    min-height: 39px;
+    padding: 8px 10px;
+    border: 1px dashed #cfd7e4;
     border-radius: 6px;
-
-    background: #f8fafc;
-    color: #667085;
-
+    background: #fafbfe;
+    color: #77839a;
     display: flex;
     align-items: center;
-    gap: 7px;
-
+    gap: 8px;
     font-size: 9px;
+    line-height: 1.4;
+    overflow: hidden;
 }
 
-/*      =======
-   MODAL FOOTER
-     ======= */
+.manufacturing-upload-field svg {
+    flex: 0 0 auto;
+    color: #4f6da4;
+}
+
+.manufacturing-upload-field span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 .manufacturing-modal-footer {
-    margin-top: 17px;
-    padding-top: 13px;
-
-    border-top: 1px solid #edf1f5;
-
+    min-height: 65px;
+    padding: 12px 18px 15px;
+    border-top: 1px solid #edf0f4;
+    background: #fff;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 7px;
+    gap: 8px;
+    flex: 0 0 auto;
 }
-.manufacturing-modal-footer button{
-    height: 40px;
-}
-
-/*      =======
-   VIEW CONTENT
-     ======= */
-
-.manufacturing-view-content {
-    padding: 16px;
-}
-
-/*      =======
-   LOADING
-     ======= */
 
 .manufacturing-modal-loading {
-    min-height: 200px;
-    padding: 20px;
-
+    min-height: 180px;
+    padding: 30px;
+    color: #818ca2;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    color: #98a2b3;
+    text-align: center;
     font-size: 10px;
 }
 
-/*      =======
-   RESPONSIVE - 1280
-     ======= */
+/* =========================
+   SCROLLBARS
+========================= */
 
-@media (max-width: 1280px) {
-
-    .manufacturing-batch-page {
-        padding: 18px;
-        gap: 14px;
-    }
-
-    .manufacturing-stats-grid {
-        gap: 10px;
-    }
-
-    .manufacturing-filter-card {
-        grid-template-columns:
-            1.25fr 0.9fr 0.9fr 0.9fr auto;
-    }
-
-    .manufacturing-details-row {
-        grid-template-columns: 1.15fr 1fr;
-    }
-
-    .manufacturing-cost-section-grid {
-        grid-template-columns: 1.2fr 1fr;
-    }
-
+.manufacturing-table-wrapper::-webkit-scrollbar,
+.manufacturing-packing-table::-webkit-scrollbar,
+.manufacturing-modal-form::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
 }
 
-/*      =======
-   RESPONSIVE - 1100
-     ======= */
+.manufacturing-table-wrapper::-webkit-scrollbar-track,
+.manufacturing-packing-table::-webkit-scrollbar-track,
+.manufacturing-modal-form::-webkit-scrollbar-track {
+    background: #f5f7fa;
+}
 
-@media (max-width: 1100px) {
+.manufacturing-table-wrapper::-webkit-scrollbar-thumb,
+.manufacturing-packing-table::-webkit-scrollbar-thumb,
+.manufacturing-modal-form::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #cbd2de;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1200px) {
+    .manufacturing-batch-page {
+        padding: 20px;
+    }
 
     .manufacturing-stats-grid {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .manufacturing-filter-card {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .manufacturing-filter-actions {
-        grid-column: 1 / -1;
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
 
     .manufacturing-details-row {
@@ -1467,119 +1266,20 @@
     .manufacturing-cost-section-grid {
         grid-template-columns: 1fr;
     }
-
-    .manufacturing-cost-right-actions button {
-        flex: unset;
-        width: 100%;
-    }
-
-    .manufacturing-packing-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
 }
 
-/*      =======
-   RESPONSIVE - 850
-     ======= */
-
-@media (max-width: 850px) {
-
+@media (max-width: 900px) {
     .manufacturing-page-header {
-        flex-direction: column;
         align-items: stretch;
+        flex-direction: column;
     }
 
-    .manufacturing-page-header .manufacturing-primary-btn {
+    .manufacturing-page-header > .manufacturing-primary-btn {
         align-self: flex-start;
     }
 
-    .manufacturing-cost-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .manufacturing-cost-batch-list {
-        border-right: none;
-        border-bottom: 1px solid #edf1f5;
-
-        display: grid;
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-        gap: 7px;
-    }
-
-    .manufacturing-cost-batch-list h3 {
-        grid-column: 1 / -1;
-    }
-
-    .manufacturing-cost-batch {
-        margin-bottom: 0;
-    }
-
-    .manufacturing-cost-details {
-        padding: 0;
-    }
-
-    .manufacturing-panel-header,
-    .manufacturing-card-header {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .manufacturing-panel-header-right,
-    .manufacturing-card-header-actions {
-        justify-content: flex-start;
-    }
-
-    .manufacturing-search-box input {
-        width: 100%;
-        max-width: none;
-    }
-
-}
-
-/*      =======
-   RESPONSIVE - 700
-     ======= */
-
-@media (max-width: 700px) {
-
-    .manufacturing-batch-page {
-        padding: 13px;
-        gap: 12px;
-    }
-
-    .manufacturing-page-header h1 {
-        font-size: 20px;
-    }
-
     .manufacturing-stats-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .manufacturing-filter-card {
-        grid-template-columns: 1fr;
-    }
-
-    .manufacturing-filter-actions {
-        grid-column: auto;
-        justify-content: flex-start;
-    }
-
-    .manufacturing-date-inputs {
-        grid-template-columns:
-            minmax(0, 1fr) auto minmax(0, 1fr);
-    }
-
-    .manufacturing-tabs {
-        overflow-x: auto;
-        scrollbar-width: thin;
-    }
-
-    .manufacturing-tab {
-        flex-shrink: 0;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .manufacturing-form-grid {
@@ -1591,40 +1291,42 @@
     }
 
     .manufacturing-packing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .manufacturing-cost-layout {
         grid-template-columns: 1fr;
     }
 
     .manufacturing-cost-batch-list {
-        grid-template-columns: 1fr;
+        border-right: 0;
+        border-bottom: 1px solid #e7ebf1;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
     }
 
-    .manufacturing-modal-overlay {
-        padding: 10px;
-        align-items: flex-start;
+    .manufacturing-cost-batch {
+        margin-bottom: 0;
     }
-
-    .manufacturing-modal {
-        max-height: calc(100vh - 20px);
-    }
-
-    .manufacturing-modal.large {
-        width: 100%;
-    }
-
 }
 
-/*      =======
-   RESPONSIVE - 520
-     ======= */
+@media (max-width: 650px) {
+    .manufacturing-batch-page {
+        padding: 16px 12px 25px;
+    }
 
-@media (max-width: 520px) {
+    .manufacturing-page-header h1 {
+        font-size: 18px;
+    }
 
     .manufacturing-stats-grid {
         grid-template-columns: 1fr;
     }
 
-    .manufacturing-stat-card {
-        min-height: 75px;
+    .manufacturing-filter-card {
+        grid-template-columns: 1fr;
+        padding: 12px;
     }
 
     .manufacturing-filter-actions {
@@ -1636,77 +1338,88 @@
         flex: 1;
     }
 
-    .manufacturing-detail-grid {
-        grid-template-columns: 1fr;
+    .manufacturing-tabs {
+        gap: 12px;
+        padding: 0 10px;
+        overflow-x: auto;
     }
 
-    .manufacturing-detail-grid>div.full-width-detail {
-        grid-column: auto;
+    .manufacturing-tab {
+        white-space: nowrap;
     }
 
-    .manufacturing-packing-row {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .manufacturing-packing-row strong {
-        grid-column: 1 / -1;
-    }
-
-    .manufacturing-section-heading {
+    .manufacturing-panel-header {
         align-items: flex-start;
         flex-direction: column;
     }
 
-    .manufacturing-kv-row {
-        flex-direction: column;
-        gap: 3px;
-    }
-
-    .manufacturing-kv-row strong {
-        text-align: left;
-    }
-
-    .manufacturing-card-header-actions {
+    .manufacturing-panel-header-right {
         width: 100%;
+        justify-content: space-between;
     }
 
-    .manufacturing-card-header-actions button {
+    .manufacturing-search-box {
         flex: 1;
+        width: auto;
     }
 
-}
-
-/*      =======
-   VERY SMALL MOBILE
-     ======= */
-
-@media (max-width: 380px) {
-
-    .manufacturing-batch-page {
-        padding: 9px;
+    .manufacturing-details-row {
+        grid-template-columns: 1fr;
     }
 
-    .manufacturing-page-header h1 {
-        font-size: 18px;
+    .manufacturing-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
     }
 
-    .manufacturing-modal-form,
-    .manufacturing-view-content,
+    .manufacturing-packing-grid {
+        grid-template-columns: 1fr;
+    }
+
     .manufacturing-cost-section-grid {
         padding: 12px;
     }
 
+    .manufacturing-kv-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .manufacturing-cost-right-actions {
+        justify-content: stretch;
+    }
+
+    .manufacturing-cost-right-actions button {
+        flex: 1;
+    }
+
+    .manufacturing-modal-overlay {
+        padding: 10px;
+    }
+
+    .manufacturing-modal,
+    .manufacturing-modal.large {
+        max-height: calc(100vh - 20px);
+        border-radius: 8px;
+    }
+
     .manufacturing-modal-header {
-        padding: 11px 12px;
+        padding: 13px 14px;
+    }
+
+    .manufacturing-modal-form {
+        padding: 14px;
     }
 
     .manufacturing-modal-footer {
-        flex-direction: column-reverse;
-        align-items: stretch;
+        padding: 10px 14px 13px;
     }
 
     .manufacturing-modal-footer button {
-        width: 100%;
+        flex: 1;
     }
 
+    .manufacturing-cost-batch-list {
+        grid-template-columns: 1fr;
+    }
 }

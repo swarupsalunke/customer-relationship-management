@@ -31,6 +31,7 @@ import {
   FileSpreadsheet,
   FileCheck,
   Contact,
+  Share2,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
@@ -62,6 +63,7 @@ const Sidebar = () => {
   const [bankPaymentOpen, setBankPaymentOpen] = useState(false);
   const [approvalOpen, setApprovalOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [socialMediaOpen, setSocialMediaOpen] = useState(false);
 
   return (
     <aside className="dashboard-sidebar">
@@ -1098,6 +1100,52 @@ const Sidebar = () => {
                 <Contact size={16} />
 
                 <span>Directory</span>
+              </NavLink>
+
+            </div>
+          )}
+
+        </div>
+
+        {/* Social Media Activities */}
+        <div className="store-management-menu">
+
+          <div
+            className="dashboard-nav-item"
+            onClick={() => setSocialMediaOpen(!socialMediaOpen)}
+          >
+            <Share2 size={19} />
+
+            <span>Marketing</span>
+
+            {socialMediaOpen ? (
+              <ChevronDown
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            ) : (
+              <ChevronRight
+                className="menu-arrow"
+                size={16}
+                style={{ marginLeft: "auto" }}
+              />
+            )}
+          </div>
+
+          {/* Social Media Activities */}
+          {socialMediaOpen && (
+            <div className="store-submenu">
+
+              <NavLink
+                to="/social-media-activities"
+                className={({ isActive }) =>
+                  `store-submenu-item ${isActive ? "active" : ""}`
+                }
+              >
+                <Share2 size={16} />
+
+                <span>Social Media Activities</span>
               </NavLink>
 
             </div>

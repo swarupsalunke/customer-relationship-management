@@ -24,6 +24,7 @@ import {
 
 import "../css/loyaltyTierManagement.css";
 
+
 const API_URL = "http://localhost:5000/api/loyalty-tiers";
 
 const initialForm = {

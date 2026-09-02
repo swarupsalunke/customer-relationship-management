@@ -46,18 +46,19 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req, file, cb) => {
   const allowedExtensions = [
-  ".pdf",
-  ".jpg",
-  ".jpeg",
-  ".png",
-  ".doc",
-  ".docx",
-  ".mp3",
-  ".wav",
-  ".mp4",
-  ".mov",
-  ".avi",
-];
+    ".pdf",
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".webp",
+    ".doc",
+    ".docx",
+    ".mp3",
+    ".wav",
+    ".mp4",
+    ".mov",
+    ".avi",
+  ];
 
   const extension = path
     .extname(file.originalname)
@@ -68,7 +69,7 @@ const fileFilter = (req, file, cb) => {
   } else {
     cb(
       new Error(
-        "Only PDF, JPG, JPEG, PNG, DOC and DOCX files are allowed"
+        "File type not allowed"
       ),
       false
     );

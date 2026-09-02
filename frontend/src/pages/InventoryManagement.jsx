@@ -882,8 +882,8 @@ const InventoryManagement = () => {
                             </div>
 
                             <div className="inventory-panel">
-                                <div className="inventory-panel-header"><div><h2>Quick Actions</h2><p>Common inventory operations</p></div></div>
-                                <div className="inventory-quick-actions">
+                                <div className="inventory-panel-headers"><div><h2>Quick Actions</h2><p>Common inventory operations</p></div></div>
+                                <div className="inventory-quick-actionss">
                                     <button type="button" onClick={() => handleQuickAction("ADD")}><Plus size={16} /><span>Add Stock</span></button>
                                     <button type="button" onClick={() => handleQuickAction("TRANSFER")}><ArrowLeftRight size={16} /><span>Stock Transfer</span></button>
                                     <button type="button" onClick={() => handleQuickAction("ADJUSTMENT")}><SlidersHorizontal size={16} /><span>Stock Adjustment</span></button>

@@ -902,7 +902,7 @@ const EmployeeHRManagement = () => {
                                     </option>
                                 ))}
                             </select>
-                            <ChevronDown size={15} />
+                            {/* <ChevronDown size={15} /> */}
                         </div>
                     </div>
 
@@ -917,7 +917,7 @@ const EmployeeHRManagement = () => {
                                     </option>
                                 ))}
                             </select>
-                            <ChevronDown size={15} />
+                            {/* <ChevronDown size={15} /> */}
                         </div>
                     </div>
 
@@ -932,7 +932,7 @@ const EmployeeHRManagement = () => {
                                     </option>
                                 ))}
                             </select>
-                            <ChevronDown size={15} />
+                            {/* <ChevronDown size={15} /> */}
                         </div>
                     </div>
 
@@ -948,7 +948,7 @@ const EmployeeHRManagement = () => {
                                 <option value="CONTRACTUAL">Contractual</option>
                                 <option value="TEMPORARY">Temporary</option>
                             </select>
-                            <ChevronDown size={15} />
+                            {/* <ChevronDown size={15} /> */}
                         </div>
                     </div>
 
@@ -962,7 +962,7 @@ const EmployeeHRManagement = () => {
                                 <option value="ON_LEAVE">On Leave</option>
                                 <option value="RESIGNED">Resigned</option>
                             </select>
-                            <ChevronDown size={15} />
+                            {/* <ChevronDown size={15} /> */}
                         </div>
                     </div>
 
@@ -1006,7 +1006,7 @@ const EmployeeHRManagement = () => {
                     {/* DEPARTMENT CHART — fully dynamic */}
 
                     <div className="dashboard-card department-chart-card">
-                        <div className="card-heading">
+                        <div className="card-headings">
                             <h3>Employees by Department</h3>
                         </div>
 
@@ -1038,7 +1038,7 @@ const EmployeeHRManagement = () => {
                     {/* DESIGNATION CHART */}
 
                     <div className="dashboard-card designation-chart-card">
-                        <div className="card-heading">
+                        <div className="card-headings">
                             <h3>Employees by Designation</h3>
                         </div>
 
@@ -1068,7 +1068,7 @@ const EmployeeHRManagement = () => {
                     {/* EMPLOYMENT TYPE */}
 
                     <div className="dashboard-card employment-chart-card">
-                        <div className="card-heading">
+                        <div className="card-headings">
                             <h3>Employment Type</h3>
                         </div>
 
@@ -1120,14 +1120,14 @@ const EmployeeHRManagement = () => {
 
                     {/* QUICK ACTIONS */}
 
-                    <div className="dashboard-card quick-actions-card">
-                        <div className="card-heading">
+                    <div className="dashboard-card quick-actions-cards">
+                        <div className="card-headings">
                             <h3>Quick Actions</h3>
                         </div>
 
-                        <div className="quick-actions-list">
-                            <button type="button" className="quick-action-item" onClick={() => handleQuickAction("add")}>
-                                <span className="quick-action-icon">
+                        <div className="quick-actions-lists">
+                            <button type="button" className="quick-action-items" onClick={() => handleQuickAction("add")}>
+                                <span className="quick-action-icons">
                                     <UserRoundPlus size={18} />
                                 </span>
                                 <span className="quick-action-text">
@@ -1137,8 +1137,8 @@ const EmployeeHRManagement = () => {
                                 <ChevronRight size={15} />
                             </button>
 
-                            <button type="button" className="quick-action-item" onClick={() => handleQuickAction("attendance")}>
-                                <span className="quick-action-icon">
+                            <button type="button" className="quick-action-items" onClick={() => handleQuickAction("attendance")}>
+                                <span className="quick-action-icons">
                                     <ClipboardCheck size={18} />
                                 </span>
                                 <span className="quick-action-text">
@@ -1148,8 +1148,8 @@ const EmployeeHRManagement = () => {
                                 <ChevronRight size={15} />
                             </button>
 
-                            <button type="button" className="quick-action-item" onClick={() => handleQuickAction("leave")}>
-                                <span className="quick-action-icon">
+                            <button type="button" className="quick-action-items" onClick={() => handleQuickAction("leave")}>
+                                <span className="quick-action-icons">
                                     <CalendarCheck size={18} />
                                 </span>
                                 <span className="quick-action-text">
@@ -1159,8 +1159,8 @@ const EmployeeHRManagement = () => {
                                 <ChevronRight size={15} />
                             </button>
 
-                            <button type="button" className="quick-action-item" onClick={() => handleQuickAction("payroll")}>
-                                <span className="quick-action-icon">
+                            <button type="button" className="quick-action-items" onClick={() => handleQuickAction("payroll")}>
+                                <span className="quick-action-icons">
                                     <WalletCards size={18} />
                                 </span>
                                 <span className="quick-action-text">
@@ -1170,8 +1170,8 @@ const EmployeeHRManagement = () => {
                                 <ChevronRight size={15} />
                             </button>
 
-                            <button type="button" className="quick-action-item" onClick={() => handleQuickAction("performance")}>
-                                <span className="quick-action-icon">
+                            <button type="button" className="quick-action-items" onClick={() => handleQuickAction("performance")}>
+                                <span className="quick-action-icons">
                                     <Award size={18} />
                                 </span>
                                 <span className="quick-action-text">
@@ -1192,7 +1192,7 @@ const EmployeeHRManagement = () => {
                     {/* RECENT EMPLOYEES */}
 
                     <div className="dashboard-card recent-employees-card" id="employee-table">
-                        <div className="table-card-heading">
+                        <div className="table-card-headings">
                             <div>
                                 <h3>Recent Employees</h3>
                                 <span>Latest employees added to the system</span>
@@ -1350,7 +1350,7 @@ const EmployeeHRManagement = () => {
                     {/* TODAY ATTENDANCE */}
 
                     <div className="dashboard-card attendance-card">
-                        <div className="card-heading">
+                        <div className="card-headings">
                             <h3>Today's Attendance Summary</h3>
                         </div>
 
@@ -1399,7 +1399,7 @@ const EmployeeHRManagement = () => {
                     {/* LEAVE SUMMARY */}
 
                     <div className="dashboard-card leave-summary-card" id="leave-summary-section">
-                        <div className="card-heading">
+                        <div className="card-headings">
                             <h3>Leave Summary (This Month)</h3>
                             <button
                                 type="button"
@@ -1466,7 +1466,7 @@ const EmployeeHRManagement = () => {
                     {/* DOCUMENT EXPIRY */}
 
                     <div className="dashboard-card document-alert-card">
-                        <div className="card-heading">
+                        <div className="card-headings">
                             <h3>Document Expiry Alerts</h3>
                             <button type="button" className="small-link-button">
                                 View All
@@ -1485,7 +1485,7 @@ const EmployeeHRManagement = () => {
                     {/* WORK ANNIVERSARIES */}
 
                     <div className="dashboard-card anniversary-card">
-                        <div className="card-heading">
+                        <div className="card-headings">
                             <h3>Upcoming Work Anniversaries</h3>
                             <button type="button" className="small-link-button">
                                 View All
@@ -1523,7 +1523,7 @@ const EmployeeHRManagement = () => {
 
                 <section className="birthday-section">
                     <div className="dashboard-card birthdays-card">
-                        <div className="card-heading">
+                        <div className="card-headings">
                             <h3>Upcoming Birthdays</h3>
                             <button type="button" className="small-link-button">
                                 View All

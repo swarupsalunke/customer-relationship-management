@@ -39,6 +39,7 @@ const salesVisitRoutes = require("./routes/salesVisitRoutes");
 const bankPaymentRoutes = require("./routes/bankPaymentRoutes");
 const approvalRoutes = require("./routes/approvalRoutes");
 const contactRoutes = require("./routes/contactRoutes");
+const socialMediaRoutes = require("./routes/socialMediaRoutes");
 
 
 const { startBirthdayReminderService,
@@ -90,6 +91,7 @@ app.use("/api/sales-visits", salesVisitRoutes);
 app.use("/api/bank-payments", bankPaymentRoutes);
 app.use("/api/approvals", approvalRoutes);
 app.use("/api/contacts", contactRoutes);
+app.use("/api/social-media", socialMediaRoutes);
 
 
 app.get("/", (req, res) => {

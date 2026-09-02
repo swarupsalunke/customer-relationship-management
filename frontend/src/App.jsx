@@ -40,6 +40,7 @@ import SalesVisitPlanning from "./pages/SalesVisitPlanning";
 import BankPaymentSheet from "./pages/BankPaymentSheet";
 import ApprovalWorkflow from "./pages/ApprovalWorkflow";
 import Directory from "./pages/Directory";
+import SocialMediaActivities from "./pages/SocialMediaActivities";
 
 
 const App = () => {
@@ -86,6 +87,7 @@ const App = () => {
         <Route path="/bank-payment-sheet" element={<DashboardLayout><BankPaymentSheet /></DashboardLayout>} />
         <Route path="/approval-workflow" element={<DashboardLayout><ApprovalWorkflow /></DashboardLayout>} />
         <Route path="/directory" element={<DashboardLayout><Directory /></DashboardLayout>} />
+        <Route path="/social-media-activities" element={<DashboardLayout><SocialMediaActivities /></DashboardLayout>} />
 
       </Routes>
 
