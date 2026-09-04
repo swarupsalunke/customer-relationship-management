@@ -68,25 +68,25 @@
 }
 
 .inventory-primary-btn {
-    min-height: 36px;
+    min-height: 35px;
     padding: 0 13px;
-    border: 1px solid #1769e8;
+    border: 1px solid #ff7100;
     border-radius: 5px;
-    background: #1769e8;
-    color: #ffffff;
+    background: #ff7100;
+    color: #fff;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 7px;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 600;
     white-space: nowrap;
     box-shadow: 0 3px 7px rgba(23, 105, 232, 0.12);
 }
 
 .inventory-primary-btn:hover {
-    background: #0f5dcc;
-    border-color: #0f5dcc;
+    background: #ea6500;
+    border-color: #ea6500;
 }
 
 .inventory-primary-btn:disabled {
@@ -977,6 +977,8 @@
 .inventory-quick-actionss {
     padding: 8px 13px 10px;
     font-size: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .inventory-quick-actionss button {
@@ -1409,7 +1411,7 @@
     }
 
     .inventory-stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 8px;
     }
 
@@ -1418,7 +1420,7 @@
     }
 
     .inventory-filter-card {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 9px;
     }
 
@@ -1436,7 +1438,7 @@
     }
 
     .inventory-overview-cards {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .inventory-overview-grid {

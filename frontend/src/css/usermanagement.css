@@ -957,11 +957,11 @@
     }
 
     .users-stat-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .users-filter-bar {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         padding: 12px;
     }
 

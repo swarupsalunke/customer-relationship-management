@@ -18,6 +18,8 @@ const {
   getInventoryOverview,
   syncInventoryProductData,
   getTopConsumedItems,
+  updateStockMovement,
+  deleteStockMovement,
 } = require("../controllers/inventoryController");
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -217,6 +219,28 @@ router.get(
     "ACCOUNTANT"
   ),
   getTopConsumedItems
+);
+
+router.put(
+  "/movements/:id",
+  authMiddleware,
+  roleMiddleware(
+    "SUPER_ADMIN",
+    "DIRECTOR",
+    "MANAGER"
+  ),
+  updateStockMovement
+);
+
+router.delete(
+  "/movements/:id",
+  authMiddleware,
+  roleMiddleware(
+    "SUPER_ADMIN",
+    "DIRECTOR",
+    "MANAGER"
+  ),
+  deleteStockMovement
 );
 
 module.exports = router;

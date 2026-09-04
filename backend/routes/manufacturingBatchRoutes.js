@@ -10,6 +10,7 @@ const {
   updateBatch,
   closeBatch,
   updateBatchQC,
+  deleteBatch,
 } = require("../controllers/manufacturingBatchController");
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -105,6 +106,18 @@ router.put(
     "ACCOUNTANT"
   ),
   updateBatchQC
+);
+
+// DELETE BATCH
+router.delete(
+  "/:id",
+  authMiddleware,
+  roleMiddleware(
+    "SUPER_ADMIN",
+    "DIRECTOR",
+    "MANAGER"
+  ),
+  deleteBatch
 );
 
 module.exports = router;

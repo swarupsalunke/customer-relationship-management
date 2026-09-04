@@ -130,8 +130,8 @@
 }
 
 .secondary-action-button:hover {
-    background: #f8faff;
-    border-color: #bac6d7;
+  border-color: #c9c1e9;
+    color: #5420d6;
 }
 
 /* =========================================================
@@ -275,7 +275,7 @@
 
 .stat-content small {
     display: block;
-    font-size: 6.7px;
+    font-size: 8.2px;
     line-height: 1.25;
     white-space: nowrap;
     overflow: hidden;
@@ -844,7 +844,7 @@
     display: block;
     margin-top: 3px;
     color: #8993a6;
-    font-size: 6.7px;
+    font-size: 8.2px;
     line-height: 1.25;
 }
 
@@ -879,7 +879,7 @@
     padding: 5px 8px;
     border-bottom: 1px solid #edf0f4;
     color: #43506a;
-    font-size: 6.7px;
+    font-size: 8.2px;
     line-height: 1.3;
     vertical-align: middle;
     white-space: nowrap;
@@ -1967,7 +1967,7 @@
     }
 
     .filter-panel {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .filter-button {
@@ -2036,7 +2036,7 @@
     }
 
     .statistics-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .stat-card {

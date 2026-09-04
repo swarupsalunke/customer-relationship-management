@@ -18,6 +18,7 @@ import {
     ArrowUpCircle,
     ArrowDownCircle,
     Download,
+    Trash2,
 } from "lucide-react";
 
 import "../css/rewardDashboard.css";
@@ -279,6 +280,37 @@ const RewardDashboard = () => {
         }
     };
 
+    const handleDeleteTransaction = async (id) => {
+        const confirmDelete = window.confirm(
+            "Are you sure you want to delete this reward transaction?"
+        );
+
+        if (!confirmDelete) return;
+
+        try {
+            setLoading(true);
+
+            await axios.delete(
+                `${API_BASE_URL}/api/rewards/transactions/${id}`
+            );
+
+            alert("Reward transaction deleted successfully");
+
+            await fetchDashboard();
+        } catch (error) {
+            console.error(
+                "Delete reward transaction error:",
+                error.response?.data || error.message
+            );
+
+            alert(
+                error.response?.data?.message ||
+                "Failed to delete reward transaction"
+            );
+        } finally {
+            setLoading(false);
+        }
+    };
     /* ========================= JSX ========================= */
 
     return (
@@ -635,6 +667,12 @@ const RewardDashboard = () => {
                                                         </button>
                                                         <button title="Edit" onClick={() => setEditTransaction({ ...item })}>
                                                             <Pencil size={17} />
+                                                        </button>
+                                                        <button
+                                                            title="Delete"
+                                                            onClick={() => handleDeleteTransaction(item._id)}
+                                                        >
+                                                            <Trash2 size={17} />
                                                         </button>
                                                     </div>
                                                 </td>

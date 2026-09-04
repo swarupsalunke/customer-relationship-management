@@ -665,6 +665,43 @@ const updateBatchQC = async (req, res) => {
 };
 
 // ======================================================
+// DELETE BATCH
+// ======================================================
+
+const deleteBatch = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const batch = await ManufacturingBatch.findById(id);
+
+    if (!batch) {
+      return res.status(404).json({
+        success: false,
+        message: "Manufacturing batch not found",
+      });
+    }
+
+    await ManufacturingBatch.findByIdAndDelete(id);
+
+    res.status(200).json({
+      success: true,
+      message: "Manufacturing batch deleted successfully",
+    });
+  } catch (error) {
+    console.error(
+      "Delete manufacturing batch error:",
+      error
+    );
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete manufacturing batch",
+      error: error.message,
+    });
+  }
+};
+
+// ======================================================
 // EXPORT
 // ======================================================
 
@@ -676,4 +713,5 @@ module.exports = {
   updateBatch,
   closeBatch,
   updateBatchQC,
+  deleteBatch,
 };

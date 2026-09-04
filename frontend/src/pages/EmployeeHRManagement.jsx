@@ -1517,11 +1517,9 @@ const EmployeeHRManagement = () => {
                     </div>
                 </section>
 
-                {/* ===================================================
-            BIRTHDAYS
-        =================================================== */}
+                {/* ==========           BIRTHDAYS            ======= */}
 
-                <section className="birthday-section">
+                {/* <section className="birthday-section">
                     <div className="dashboard-card birthdays-card">
                         <div className="card-headings">
                             <h3>Upcoming Birthdays</h3>
@@ -1558,7 +1556,7 @@ const EmployeeHRManagement = () => {
                             </div>
                         )}
                     </div>
-                </section>
+                </section> */}
             </main>
 
             {/* =====================================================

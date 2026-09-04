@@ -61,7 +61,7 @@
     align-items: center;
     justify-content: center;
     gap: 7px;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 600;
 }
 
@@ -1280,7 +1280,7 @@
 
     .lead-stats-grid,
     .lead-filter-card {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .lead-search-box,

@@ -312,6 +312,74 @@ const rejectRequest = async (req, res) => {
   }
 };
 
+// Update Approval Request
+const updateApprovalRequest = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updatedRequest = await ApprovalRequest.findByIdAndUpdate(
+      id,
+      {
+        moduleType: req.body.moduleType,
+        requestType: req.body.requestType,
+        requestDetails: req.body.requestDetails,
+        requestedBy: req.body.requestedBy,
+        amount: req.body.amount,
+        currentStage: req.body.currentStage,
+        maker: req.body.maker,
+        checker: req.body.checker,
+        remarks: req.body.remarks,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!updatedRequest) {
+      return res.status(404).json({
+        message: "Approval request not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Approval request updated successfully",
+      request: updatedRequest,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to update approval request",
+      error: error.message,
+    });
+  }
+};
+
+// Delete Approval Request
+const deleteApprovalRequest = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedRequest = await ApprovalRequest.findByIdAndDelete(id);
+
+    if (!deletedRequest) {
+      return res.status(404).json({
+        message: "Approval request not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Approval request deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to delete approval request",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   getApprovalDashboard,
   getApprovalRequests,
@@ -319,4 +387,6 @@ module.exports = {
   createApprovalRequest,
   approveRequest,
   rejectRequest,
+  updateApprovalRequest,
+  deleteApprovalRequest,
 };

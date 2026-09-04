@@ -1,6 +1,4 @@
 
-
-
 .social-media-page{
   width:100%;
   min-height:100%;
@@ -1574,11 +1572,11 @@
   }
 
   .stats-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr 1fr;
   }
 
   .filter-box{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr 1fr;
     gap:9px;
     padding:11px;
   }

@@ -527,7 +527,7 @@
   padding: 5px 6px;
   border-bottom: 1px solid #edf0f4;
   color: #34415f;
-  font-size: 6.7px;
+  font-size: 8.2px;
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -564,7 +564,7 @@
 .date-cell small,
 .user-cell small {
   color: #808aa1;
-  font-size: 5.8px;
+  font-size: 8.2px;
 }
 
 .user-cell {
@@ -599,7 +599,7 @@
   min-height: 16px;
   padding: 3px 6px;
   border-radius: 4px;
-  font-size: 5.8px;
+  font-size: 8.2px;
   font-weight: 700;
 }
 
@@ -887,7 +887,7 @@
 .wallet-balance span {
   margin-bottom: 4px;
   color: #7a849c;
-  font-size: 5.8px;
+  font-size: 8.2px;
 }
 
 .wallet-counts strong {
@@ -941,7 +941,7 @@
 
 .side-card-heading span {
   color: #6d4dc0;
-  font-size: 5.8px;
+  font-size: 8.2px;
 }
 
 .redemption-empty {
@@ -989,7 +989,7 @@
 }
 
 .quick-actions-grid button span {
-  font-size: 5.8px;
+  font-size: 8.2px;
   text-align: center;
   line-height: 1.15;
 }
@@ -1398,12 +1398,12 @@
     flex: 1 1 100%;
   }
 
-  .reward-summary-grid,
+  /* .reward-summary-grid,
   .reward-filter-card,
   .reward-mini-summary,
   .reward-bottom-grid {
     grid-template-columns: 1fr;
-  }
+  } */
 
   .reward-search-box,
   .reward-date-field {

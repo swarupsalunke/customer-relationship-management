@@ -1502,7 +1502,7 @@
     }
 
     .sales-visit-stats {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr 1fr;
     }
 
     .sales-visit-feature-grid {
@@ -1514,7 +1514,7 @@
     }
 
     .filter-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr 1fr;
     }
 
     .search-field {
@@ -1618,7 +1618,7 @@
     }
 
     .quick-actions-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr 1fr 1fr
     }
 
     .report-summary-grid {

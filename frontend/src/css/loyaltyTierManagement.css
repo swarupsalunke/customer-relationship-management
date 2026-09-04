@@ -1861,7 +1861,7 @@
     }
 
     .loyalty-filter-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .loyalty-right-sidebar {
@@ -1906,7 +1906,7 @@
     }
 
     .loyalty-stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .loyalty-stat-card {

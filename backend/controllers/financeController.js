@@ -256,10 +256,93 @@ const getFinanceDashboard = async (req, res) => {
   }
 };
 
+// Update Finance Transaction
+const updateFinanceTransaction = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updatedTransaction =
+      await FinanceTransaction.findByIdAndUpdate(
+        id,
+        {
+          transactionId: req.body.transactionId,
+          type: req.body.type,
+          date: req.body.date,
+          description: req.body.description,
+          category: req.body.category,
+          account: req.body.account,
+          amount: req.body.amount,
+          paymentMode: req.body.paymentMode,
+          status: req.body.status,
+          invoice: req.body.invoice,
+          vendor: req.body.vendor,
+          assignedTo: req.body.assignedTo || null,
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+    if (!updatedTransaction) {
+      return res.status(404).json({
+        success: false,
+        message: "Finance transaction not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Finance transaction updated successfully",
+      data: updatedTransaction,
+    });
+  } catch (error) {
+    console.error("Update Finance Transaction Error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+// Delete Finance Transaction
+const deleteFinanceTransaction = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedTransaction =
+      await FinanceTransaction.findByIdAndDelete(id);
+
+    if (!deletedTransaction) {
+      return res.status(404).json({
+        success: false,
+        message: "Finance transaction not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Finance transaction deleted successfully",
+      data: deletedTransaction,
+    });
+  } catch (error) {
+    console.error("Delete Finance Transaction Error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 
 module.exports = {
   createIncome,
   createExpense,
   getFinanceTransactions,
   getFinanceDashboard,
+  updateFinanceTransaction,
+  deleteFinanceTransaction,
 };

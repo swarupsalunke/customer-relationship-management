@@ -1,8 +1,3 @@
-/* =========================================================
-   BIRTHDAY MANAGEMENT
-   Responsive CSS
-   JSX mein koi change nahi karna
-   ========================================================= */
 
 .birthday-management-page {
     width: 100%;
@@ -284,7 +279,7 @@
     color: #3f4c65;
 
     font-family: inherit;
-    font-size: 6.7px;
+    font-size: 8.2px;
 }
 
 .filter-group input::placeholder {
@@ -818,7 +813,7 @@
 
 .birthday-pagination > span {
     color: #7e899c;
-    font-size: 5.8px;
+    font-size: 8.2px;
     white-space: nowrap;
 }
 
@@ -878,7 +873,7 @@
     color: #526079;
 
     font-family: inherit;
-    font-size: 5.8px;
+    font-size: 8.2px;
 
     outline: none;
 }
@@ -1301,7 +1296,7 @@
     margin: 10px 0 5px;
 
     color: #8b95a7;
-    font-size: 5.8px;
+    font-size: 8.2px;
 
     text-align: center;
 }
@@ -1505,7 +1500,7 @@
     margin-top: 5px;
 
     color: #8b95a7;
-    font-size: 5.8px;
+    font-size: 8.2px;
     line-height: 1.3;
 }
 
@@ -1782,11 +1777,11 @@
     }
 
     .birthday-stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .birthday-filters {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .upcoming-birthday-grid {

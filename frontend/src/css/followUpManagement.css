@@ -36,6 +36,7 @@
   opacity: 0.55;
 }
 
+
 .followup-page h1,
 .followup-page h2,
 .followup-page h3,
@@ -100,21 +101,21 @@
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
+  font-size: 9px;
 }
 
 .followup-report-btn,
 .new-followup-btn {
-  height: 34px;
+  height: 35px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
   border-radius: 5px;
-  padding: 0 15px;
-  font-size: 11px;
-  font-weight: 600;
+  padding: 0 15px;font-size: 99px;
   transition: 0.2s ease;
   white-space: nowrap;
+
 }
 
 .followup-report-btn {
@@ -124,8 +125,8 @@
 }
 
 .followup-report-btn:hover {
-  background: #f8f9fd;
-  border-color: #cbd2e2;
+  border-color: #c9c1e9;
+    color: #5420d6;
 }
 
 .new-followup-btn {
@@ -436,133 +437,133 @@
 /* ---------- Filters ---------- */
 
 .followup-filters-card {
-  padding: 12px 13px 13px;
-  margin-bottom: 11px;
+    padding: 12px 13px 13px;
+    margin-bottom: 11px;
 }
 
 .filters-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
 }
 
 .filters-header h2,
 .table-header h2 {
-  color: #17265f;
-  font-size: 12px;
-  font-weight: 700;
+    margin: 0;
+    color: #17265f;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .filters-header p {
-  margin-top: 2px;
-  color: #8a92a7;
-  font-size: 9px;
+    margin: 2px 0 0;
+    color: #8a92a7;
+    font-size: 9px;
 }
 
-.reset-filter-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  min-height: 29px;
-  padding: 0 10px;
-  color: #5d6785;
-  background: #fff;
-  border: 1px solid #e0e4ed;
-  border-radius: 5px;
-  font-size: 10px;
-  font-weight: 600;
-}
-
-.reset-filter-btn:hover {
-  background: #f8f9fc;
-}
-
+/* ALL 8 ITEMS IN ONE ROW */
 .filters-row {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr 1fr 0.9fr 1fr 1.65fr auto;
-  align-items: end;
-  gap: 8px;
+    display: grid;
+    grid-template-columns:
+        1.15fr
+        1fr
+        1fr
+        0.9fr
+        1fr
+        1.5fr
+        auto
+        auto;
+    align-items: end;
+    gap: 8px;
+    width: 100%;
 }
 
 .filter-field {
-  min-width: 0;
+    min-width: 0;
 }
 
 .filter-field label {
-  display: block;
-  margin: 0 0 4px;
-  color: #445070;
-  font-size: 9px;
-  font-weight: 650;
+    display: block;
+    margin: 0 0 4px;
+    color: #445070;
+    font-size: 9px;
+    font-weight: 650;
 }
 
 .filter-input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-width: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 0;
 }
 
 .filter-input-wrapper > svg {
-  position: absolute;
-  left: 9px;
-  color: #7b86a2;
-  pointer-events: none;
+    position: absolute;
+    left: 9px;
+    color: #7b86a2;
+    pointer-events: none;
 }
 
 .filter-input-wrapper input,
 .filter-field select {
-  width: 100%;
-  height: 29px;
-  min-width: 0;
-  color: #34405f;
-  background: #fff;
-  border: 1px solid #dfe4ee;
-  border-radius: 5px;
-  outline: none;
-  font-size: 9px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    width: 100%;
+    height: 29px;
+    min-width: 0;
+    box-sizing: border-box;
+    color: #34405f;
+    background: #fff;
+    border: 1px solid #dfe4ee;
+    border-radius: 5px;
+    outline: none;
+    font-size: 9px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .filter-input-wrapper input {
-  padding: 0 9px 0 28px;
+    padding: 0 9px 0 28px;
 }
 
 .filter-field select {
-  padding: 0 26px 0 9px;
-  appearance: auto;
+    padding: 0 9px;
+    appearance: auto;
 }
 
 .filter-input-wrapper input:focus,
 .filter-field select:focus {
-  border-color: #8d72e7;
-  box-shadow: 0 0 0 2px rgba(84, 33, 214, 0.07);
+    border-color: #8d72e7;
+    box-shadow: 0 0 0 2px rgba(84, 33, 214, 0.07);
 }
 
 .filter-input-wrapper input::placeholder {
-  color: #a0a7b8;
+    color: #a0a7b8;
 }
 
+/* FILTER + RESET BUTTONS */
 .apply-filter-btn {
-  height: 29px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: 0 11px;
-  color: #fff;
-  background: #5421d6;
-  border: 1px solid #5421d6;
-  border-radius: 5px;
-  font-size: 9px;
-  font-weight: 650;
-  white-space: nowrap;
+    height: 29px;
+    min-width: 75px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 11px;
+    box-sizing: border-box;
+    color: #536278;
+    background: #fff;
+    border: 1px solid #e3dfef;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 650;
+    white-space: nowrap;
+    cursor: pointer;
 }
 
 .apply-filter-btn:hover {
-  background: #4216b6;
+    background: #f7f9fc;
+    border-color: #c5ccd7;
+    color: #17233a;
 }
 
 /* ---------- Table Card ---------- */
@@ -1013,6 +1014,8 @@
 
 .quick-actions-list {
   padding: 2px 7px 9px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .quick-actions-list button {
@@ -1645,7 +1648,7 @@
   }
 
   .filters-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .search-filter {
@@ -1815,4 +1818,48 @@
   .followup-table-wrapper {
     max-width: 100%;
   }
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1200px) {
+    .filters-row {
+        grid-template-columns:
+            repeat(5, minmax(0, 1fr))
+            auto
+            auto;
+    }
+}
+
+@media (max-width: 950px) {
+    .filters-row {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .apply-filter-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .filters-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .filters-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .apply-filter-btn {
+        width: 100%;
+    }
 }

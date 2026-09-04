@@ -1349,11 +1349,6 @@ const FollowUpManagement = () => {
       ================================================= */}
 
             <div className="followup-content-grid">
-
-                {/* =================================================
-            LEFT CONTENT
-        ================================================= */}
-
                 <div className="followup-main-content">
 
                     {/* FILTERS */}
@@ -1368,16 +1363,6 @@ const FollowUpManagement = () => {
                                     Manage and track customer follow-ups.
                                 </p>
                             </div>
-
-                            <button
-                                type="button"
-                                className="reset-filter-btn"
-                                onClick={handleResetFilters}
-                            >
-                                <RefreshCcw size={15} />
-                                Reset
-                            </button>
-
                         </div>
 
                         <div className="filters-row">
@@ -1525,7 +1510,7 @@ const FollowUpManagement = () => {
                                 <label>Search</label>
 
                                 <div className="filter-input-wrapper">
-                                    <Search size={15} />
+                                    
 
                                     <input
                                         type="text"
@@ -1537,10 +1522,10 @@ const FollowUpManagement = () => {
                                             )
                                         }
                                     />
+                                  
                                 </div>
                             </div>
-
-
+                                
                             <button
                                 type="button"
                                 className="apply-filter-btn"
@@ -1553,7 +1538,15 @@ const FollowUpManagement = () => {
                                 <Filter size={15} />
                                 Filters
                             </button>
-
+                            <button
+                                type="button"
+                                className="apply-filter-btn"
+                                onClick={handleResetFilters}
+                            >
+                                <RefreshCcw size={15} />
+                                Reset
+                            </button>
+                            
                         </div>
 
                     </div>

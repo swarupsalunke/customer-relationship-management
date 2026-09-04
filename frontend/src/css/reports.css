@@ -59,8 +59,8 @@
 }
 
 .export-data-btn:hover {
-  border-color: #ff6700;
-  color: #ff6700;
+   border-color: #c9c1e9;
+    color: #5420d6;
 }
 
 /* ================= KPI CARDS ================= */
@@ -843,11 +843,11 @@
   }
 
   .reports-kpi-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .reports-filter-section {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .report-filter-actions {
@@ -888,7 +888,7 @@
   }
 
   .category-card-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .modal-footer {

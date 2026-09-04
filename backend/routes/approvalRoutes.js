@@ -7,6 +7,8 @@ const {
   createApprovalRequest,
   approveRequest,
   rejectRequest,
+  updateApprovalRequest, 
+  deleteApprovalRequest,
 } = require("../controllers/approvalController");
 
 const router = express.Router();
@@ -28,5 +30,11 @@ router.put("/:id/approve", approveRequest);
 
 // Reject request
 router.put("/:id/reject", rejectRequest);
+
+// Update approval request
+router.put("/:id", updateApprovalRequest);
+
+// Delete approval request
+router.delete("/:id", deleteApprovalRequest);
 
 module.exports = router;

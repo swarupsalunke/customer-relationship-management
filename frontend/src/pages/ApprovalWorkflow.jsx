@@ -20,6 +20,8 @@ import {
     CheckCircle,
     XCircle,
     X,
+    Pencil,
+    Trash2,
 } from "lucide-react";
 import "../css/ApprovalWorkflow.css";
 
@@ -59,6 +61,7 @@ const ApprovalWorkflow = () => {
     const [itemsPerPage, setItemsPerPage] = useState(10);
 
     const [showNewRequest, setShowNewRequest] = useState(false);
+    const [showEditRequest, setShowEditRequest] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
     const [showView, setShowView] = useState(false);
     const [selectedRequest, setSelectedRequest] = useState(null);
@@ -252,6 +255,104 @@ const ApprovalWorkflow = () => {
             alert(
                 error.response?.data?.message ||
                 "Failed to reject request"
+            );
+        } finally {
+            setActionLoading(false);
+        }
+    };
+
+    const handleEdit = (request) => {
+        setFormData({
+            requestId: request.requestId || "",
+            moduleType: request.moduleType || "",
+            requestType: request.requestType || "",
+            requestDetails: request.requestDetails || "",
+            requestedBy: request.requestedBy || "",
+            amount: request.amount ?? "",
+            remarks: request.remarks || "",
+        });
+
+        setSelectedRequest(request);
+        setShowEditRequest(true);
+        setOpenMenu(null);
+    };
+
+    const handleDelete = async (request) => {
+        const confirmDelete = window.confirm(
+            `Are you sure you want to delete request ${request.requestId}?`
+        );
+
+        if (!confirmDelete) return;
+
+        try {
+            const response = await fetch(`${API_URL}/${request._id}`, {
+                method: "DELETE",
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to delete approval request");
+            }
+
+            setRequests((prevRequests) =>
+                prevRequests.filter((item) => item._id !== request._id)
+            );
+
+            setOpenMenu(null);
+        } catch (error) {
+            console.error("Delete approval request error:", error);
+            alert(error.message);
+        }
+    };
+
+    const handleUpdateRequest = async (e) => {
+        e.preventDefault();
+
+        try {
+            setActionLoading(true);
+
+            const payload = {
+                moduleType: formData.moduleType,
+                requestType: formData.requestType.trim(),
+                requestDetails: formData.requestDetails.trim(),
+                requestedBy: formData.requestedBy.trim(),
+                amount:
+                    formData.amount === ""
+                        ? 0
+                        : Number(formData.amount),
+                currentStage: selectedRequest.currentStage,
+                maker: selectedRequest.maker || "",
+                checker: selectedRequest.checker || "",
+                remarks: formData.remarks.trim(),
+            };
+
+            const response = await axios.put(
+                `${API_URL}/${selectedRequest._id}`,
+                payload
+            );
+
+            if (response.data.success) {
+                alert("Approval request updated successfully");
+
+                setRequests((prevRequests) =>
+                    prevRequests.map((request) =>
+                        request._id === selectedRequest._id
+                            ? response.data.request
+                            : request
+                    )
+                );
+
+                setShowEditRequest(false);
+                setSelectedRequest(null);
+                setOpenMenu(null);
+            }
+        } catch (error) {
+            console.error("Update approval request error:", error);
+
+            alert(
+                error.response?.data?.message ||
+                "Failed to update approval request"
             );
         } finally {
             setActionLoading(false);
@@ -916,6 +1017,21 @@ const ApprovalWorkflow = () => {
                                                                 <Eye size={16} />
                                                             </button>
 
+                                                            <button
+                                                                className="row-icon-btn"
+                                                                onClick={() => handleEdit(request)}
+                                                            >
+                                                                <Pencil size={14} />
+                                                            </button>
+
+                                                            <button
+                                                                className="row-icon-btn"
+                                                                onClick={() => handleDelete(request)}
+                                                                disabled={actionLoading}
+                                                            >
+                                                                <Trash2 size={14} />
+                                                            </button>
+
                                                             {request.status ===
                                                                 "Pending" && (
                                                                     <button
@@ -931,7 +1047,7 @@ const ApprovalWorkflow = () => {
                                                                         }
                                                                     >
                                                                         <CheckCircle
-                                                                            size={16}
+                                                                            size={20}
                                                                         />
                                                                     </button>
                                                                 )}
@@ -1893,6 +2009,157 @@ const ApprovalWorkflow = () => {
                                 Close
                             </button>
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {/* EDIT APPROVAL REQUEST MODAL */}
+            {showEditRequest && selectedRequest && (
+                <div
+                    className="approval-modal-overlay"
+                    onClick={() => setShowEditRequest(false)}
+                >
+                    <div
+                        className="approval-modal"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="approval-modal-header">
+                            <div>
+                                <h2>Edit Approval Request</h2>
+                                <p>
+                                    Update approval request details.
+                                </p>
+                            </div>
+
+                            <button
+                                onClick={() => setShowEditRequest(false)}
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        <form onSubmit={handleUpdateRequest}>
+                            <div className="approval-form-grid">
+
+                                <div className="approval-form-field">
+                                    <label>Request ID</label>
+                                    <input
+                                        type="text"
+                                        value={formData.requestId}
+                                        disabled
+                                    />
+                                </div>
+
+                                <div className="approval-form-field">
+                                    <label>
+                                        Module / Type<span>*</span>
+                                    </label>
+
+                                    <select
+                                        name="moduleType"
+                                        value={formData.moduleType}
+                                        onChange={handleFormChange}
+                                        required
+                                    >
+                                        <option value="">
+                                            Select module / type
+                                        </option>
+
+                                        {MODULE_TYPES.map((module) => (
+                                            <option
+                                                key={module}
+                                                value={module}
+                                            >
+                                                {module}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                <div className="approval-form-field">
+                                    <label>Request Type</label>
+
+                                    <input
+                                        type="text"
+                                        name="requestType"
+                                        value={formData.requestType}
+                                        onChange={handleFormChange}
+                                        placeholder="Enter request type"
+                                    />
+                                </div>
+
+                                <div className="approval-form-field">
+                                    <label>
+                                        Requested By<span>*</span>
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        name="requestedBy"
+                                        value={formData.requestedBy}
+                                        onChange={handleFormChange}
+                                        placeholder="Enter requester name"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="approval-form-field full">
+                                    <label>Request Details</label>
+
+                                    <textarea
+                                        name="requestDetails"
+                                        value={formData.requestDetails}
+                                        onChange={handleFormChange}
+                                        placeholder="Enter request details"
+                                        rows="3"
+                                    />
+                                </div>
+
+                                <div className="approval-form-field">
+                                    <label>Amount (₹)</label>
+
+                                    <input
+                                        type="number"
+                                        name="amount"
+                                        value={formData.amount}
+                                        onChange={handleFormChange}
+                                        placeholder="Enter amount"
+                                        min="0"
+                                    />
+                                </div>
+
+                                <div className="approval-form-field">
+                                    <label>Remarks</label>
+
+                                    <input
+                                        type="text"
+                                        name="remarks"
+                                        value={formData.remarks}
+                                        onChange={handleFormChange}
+                                        placeholder="Enter remarks"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="approval-modal-footer">
+                                <button
+                                    type="button"
+                                    className="approval-cancel-btn"
+                                    onClick={() => setShowEditRequest(false)}
+                                >
+                                    Cancel
+                                </button>
+
+                                <button
+                                    type="submit"
+                                    className="approval-primary-btn"
+                                    disabled={actionLoading}
+                                >
+                                    <Pencil size={16} />
+                                    {actionLoading ? "Updating..." : "Update Request"}
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             )}

@@ -32,12 +32,18 @@ import {
   FileCheck,
   Contact,
   Share2,
+  Menu,
+  X,
+  House,
+  MoreHorizontal,
 } from "lucide-react";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "../css/sidebar.css";
 
 const Sidebar = () => {
+  const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [storeOpen, setStoreOpen] = useState(false);
   const [orderOpen, setOrderOpen] = useState(false);
   const [leadOpen, setLeadOpen] = useState(false);
@@ -65,8 +71,89 @@ const Sidebar = () => {
   const [contactOpen, setContactOpen] = useState(false);
   const [socialMediaOpen, setSocialMediaOpen] = useState(false);
 
+  const mobilePageTitles = {
+    "/dashboard": "Dashboard",
+    "/users": "User Management",
+    "/products": "Product Management",
+    "/prices": "Price Management",
+    "/daily-cash-report": "Daily Reports",
+    "/order-management": "Order Management",
+    "/leads": "Lead Management",
+    "/qr-management": "QR Management",
+    "/reward-dashboard": "Rewards Management",
+    "/scheme-management": "Scheme Management",
+    "/finance-dashboard": "Finance Management",
+    "/reports": "Reports Management",
+    "/manufacturing-batch-management": "Manufacturing",
+    "/inventory-management": "Inventory Management",
+    "/dispatch-management": "Dispatch Management",
+    "/inbound-material-management": "Inbound Material Management",
+    "/employee-hr-management": "Employee HR Management",
+    "/commission-management": "Commission Management",
+    "/document-management": "Downloads & Documents",
+    "/birthday-management": "Birthday Management",
+    "/feedback-management": "Feedback Management",
+    "/follow-up-management": "Follow-up Management",
+    "/bank-payment-sheet": "Bank Payment Sheet",
+    "/approval-workflow": "Approval Workflow",
+    "/directory": "Directory",
+    "/social-media-activities": "Marketing",
+    "/loyalty-tier-management": "Loyalty Tier Management",
+    "/sales-visit-planning": "Sales Visit Planning",
+    "/notification-management": "Notification & Subscription",
+    "/system-settings": "System Settings",
+  };
+
+  const currentPageTitle =
+    mobilePageTitles[location.pathname] || "Dashboard";
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
   return (
-    <aside className="dashboard-sidebar">
+    <>
+      {/* ================= MOBILE HEADER ================= */}
+      <header className="mobile-sidebar-header">
+        <button
+          type="button"
+          className="mobile-header-menu-btn"
+          onClick={() => setMobileMenuOpen(true)}
+          aria-label="Open navigation menu"
+        >
+          <Menu size={21} />
+        </button>
+
+        <div className="mobile-header-title">
+          <strong>{currentPageTitle}</strong>
+          <span>OneplusSpark</span>
+        </div>
+
+        <div className="mobile-header-brand">OS</div>
+      </header>
+
+      {/* ================= MOBILE OVERLAY ================= */}
+      {mobileMenuOpen && (
+        <div
+          className="mobile-sidebar-overlay"
+          onClick={closeMobileMenu}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside
+        className={`dashboard-sidebar ${
+          mobileMenuOpen ? "mobile-sidebar-open" : ""
+        }`}
+      >
+
+        {/* ================= MOBILE DRAWER CLOSE ================= */}
+        <button
+          type="button"
+          className="mobile-sidebar-close"
+          onClick={closeMobileMenu}
+          aria-label="Close navigation menu"
+        >
+          <X size={20} />
+        </button>
 
       {/* ================= LOGO ================= */}
       <div className="dashboard-logo">
@@ -77,7 +164,14 @@ const Sidebar = () => {
 
 
       {/* ================= MAIN MENU ================= */}
-      <nav className="dashboard-nav">
+      <nav
+        className="dashboard-nav"
+        onClick={(event) => {
+          if (event.target.closest("a")) {
+            closeMobileMenu();
+          }
+        }}
+      >
 
         {/* Dashboard */}
         <NavLink
@@ -1366,6 +1460,50 @@ const Sidebar = () => {
       </div>
 
     </aside>
+
+    {/* ================= MOBILE BOTTOM NAV ================= */}
+    <nav className="mobile-bottom-nav" aria-label="Mobile navigation">
+      <NavLink
+        to="/dashboard"
+        className={({ isActive }) =>
+          `mobile-bottom-nav-item ${isActive ? "active" : ""}`
+        }
+      >
+        <House size={19} />
+        <span>Home</span>
+      </NavLink>
+
+      <NavLink
+        to="/products"
+        className={({ isActive }) =>
+          `mobile-bottom-nav-item ${isActive ? "active" : ""}`
+        }
+      >
+        <Package size={19} />
+        <span>Products</span>
+      </NavLink>
+
+      <NavLink
+        to="/order-management"
+        className={({ isActive }) =>
+          `mobile-bottom-nav-item ${isActive ? "active" : ""}`
+        }
+      >
+        <ShoppingCart size={19} />
+        <span>Orders</span>
+      </NavLink>
+
+      <button
+        type="button"
+        className="mobile-bottom-nav-item mobile-more-btn"
+        onClick={() => setMobileMenuOpen(true)}
+        aria-label="Open more navigation options"
+      >
+        <MoreHorizontal size={20} />
+        <span>More</span>
+      </button>
+    </nav>
+    </>
   );
 };
 

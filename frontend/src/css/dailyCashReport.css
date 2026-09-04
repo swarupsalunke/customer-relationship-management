@@ -73,6 +73,11 @@
   border: 1px solid #dce2eb;
 }
 
+.daily-btn.secondary:hover, .daily-btn.icon-btn:hover{
+border-color: #c9c1e9;
+    color: #5420d6;
+}
+
 .daily-btn.primary {
   color: #fff;
   background: #ff7100;
@@ -1012,7 +1017,7 @@
   }
 
   .stats-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .stat-item {
@@ -1029,7 +1034,7 @@
   }
 
   .daily-form-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .credit-bill-form,

@@ -18,6 +18,7 @@ import {
     Save,
     Ban,
     Search,
+    Trash2,
 } from "lucide-react";
 
 import "../css/manufacturingManagement.css";
@@ -86,6 +87,7 @@ const ManufacturingBatchManagement = () => {
     const [savingBatch, setSavingBatch] = useState(false);
     const [savingQc, setSavingQc] = useState(false);
     const [savingCost, setSavingCost] = useState(false);
+    const [deletingBatch, setDeletingBatch] = useState(false);
 
     // CREATE / EDIT BATCH FORM
 
@@ -606,6 +608,55 @@ const ManufacturingBatchManagement = () => {
         }
     };
 
+    // DELETE BATCH - FIXED
+
+    const handleDeleteBatch = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this batch?")) {
+            return;
+        }
+
+        try {
+            setDeletingBatch(true);
+
+            const response = await axios.delete(
+                `${API_BASE_URL}/batches/${id}`,
+                authConfig()
+            );
+
+            if (response.data?.success) {
+                setBatches((prev) =>
+                    prev.filter((batch) => batch._id !== id)
+                );
+
+                if (selectedBatch?._id === id) {
+                    setSelectedBatch(null);
+                }
+
+                await fetchStats();
+
+                alert("Manufacturing batch deleted successfully");
+            } else {
+                alert(
+                    response.data?.message ||
+                    "Failed to delete batch"
+                );
+            }
+        } catch (err) {
+            console.error(
+                "Delete batch error:",
+                err?.response?.data || err
+            );
+
+            const errorMsg =
+                err.response?.data?.message ||
+                "Failed to delete batch";
+
+            alert(errorMsg);
+        } finally {
+            setDeletingBatch(false);
+        }
+    };
+
 
     // EDIT BATCH
 
@@ -822,9 +873,9 @@ const ManufacturingBatchManagement = () => {
         }
     };
 
-    
+
     // CLOSE BATCH
-    
+
 
     const handleCloseBatch = async (batchId) => {
         const confirmed = window.confirm(
@@ -1241,9 +1292,9 @@ const ManufacturingBatchManagement = () => {
         }
     };
 
-    
+
     // STATUS BADGE
-    
+
 
     const getStatusClass = (status) => {
         switch (status) {
@@ -1275,9 +1326,9 @@ const ManufacturingBatchManagement = () => {
         }
     };
 
-    
+
     // FORM COMPONENT
-    
+
 
     const renderBatchForm = () => (
         <form
@@ -2344,7 +2395,7 @@ const ManufacturingBatchManagement = () => {
             </div>
 
 
-            {/*            BATCH MANAGEMENT TAB    (table -> batch details + lab QC -> cost verification,  all full width, stacked - matches the reference UI)  */}
+            {/*            BATCH MANAGEMENT TAB           */}
 
 
             {activeTab ===
@@ -2560,6 +2611,16 @@ const ManufacturingBatchManagement = () => {
                                                                     />
                                                                 </button>
 
+                                                                <button
+                                                                    type="button"
+                                                                    className="manufacturing-icon-btn"
+                                                                    onClick={() => handleDeleteBatch(batch._id)}
+                                                                    disabled={deletingBatch}
+                                                                    title="Delete"
+                                                                >
+                                                                    <Trash2 size={16} />
+                                                                </button>
+
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -2575,7 +2636,7 @@ const ManufacturingBatchManagement = () => {
 
                         </div>
 
-                        {/*     BATCH DETAILS + LAB QC (full width, side by side)            */}
+                        {/*     BATCH DETAILS + LAB QC           */}
 
                         {selectedBatch ? (
                             <>

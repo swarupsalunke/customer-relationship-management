@@ -74,7 +74,7 @@
 }
 
 .manufacturing-primary-btn {
-    min-height: 38px;
+    min-height: 35px;
     padding: 0 15px;
     border: 1px solid #ff6700;
     border-radius: 6px;
@@ -84,7 +84,7 @@
     align-items: center;
     justify-content: center;
     gap: 7px;
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 600;
     white-space: nowrap;
     box-shadow: 0 3px 8px rgba(255, 103, 0, .10);
@@ -1321,11 +1321,11 @@
     }
 
     .manufacturing-stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .manufacturing-filter-card {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         padding: 12px;
     }
 

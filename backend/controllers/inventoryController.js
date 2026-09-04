@@ -1319,8 +1319,108 @@ const getSummaryData = async () => {
 };
 
 // ======================================================
-// EXPORT
+// UPDATE STOCK MOVEMENT
 // ======================================================
+
+const updateStockMovement = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const movement = await StockMovement.findById(id);
+
+        if (!movement) {
+            return res.status(404).json({
+                success: false,
+                message: "Stock movement not found",
+            });
+        }
+
+        const allowedFields = [
+            "product",
+            "warehouse",
+            "quantity",
+            "unit",
+            "reference",
+            "movementDate",
+            "remarks",
+        ];
+
+        allowedFields.forEach((field) => {
+            if (req.body[field] !== undefined) {
+                movement[field] = req.body[field];
+            }
+        });
+
+        await movement.save();
+
+        const updatedMovement =
+            await StockMovement.findById(movement._id)
+                .populate(
+                    "product",
+                    "productName sku category group brand"
+                )
+                .populate(
+                    "user",
+                    "name email"
+                );
+
+        res.status(200).json({
+            success: true,
+            message: "Stock movement updated successfully",
+            movement: updatedMovement,
+        });
+    } catch (error) {
+        console.error(
+            "Update stock movement error:",
+            error
+        );
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to update stock movement",
+            error: error.message,
+        });
+    }
+};
+
+
+// ======================================================
+// DELETE STOCK MOVEMENT
+// ======================================================
+
+const deleteStockMovement = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const movement =
+            await StockMovement.findById(id);
+
+        if (!movement) {
+            return res.status(404).json({
+                success: false,
+                message: "Stock movement not found",
+            });
+        }
+
+        await StockMovement.findByIdAndDelete(id);
+
+        res.status(200).json({
+            success: true,
+            message: "Stock movement deleted successfully",
+        });
+    } catch (error) {
+        console.error(
+            "Delete stock movement error:",
+            error
+        );
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to delete stock movement",
+            error: error.message,
+        });
+    }
+};
 
 module.exports = {
     getInventoryStats,
@@ -1338,4 +1438,6 @@ module.exports = {
     getStockAgeing,
     getInventoryOverview,
     getTopConsumedItems,
+    updateStockMovement,
+    deleteStockMovement,
 };

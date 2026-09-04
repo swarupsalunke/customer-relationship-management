@@ -1242,7 +1242,7 @@ export default function CommissionManagement() {
                         </select>
                     </div>
 
-                    <div className="commission-filter-bottom">
+                    <div className="commission-field">
                         <button
                             className="commission-filter-btn"
                             onClick={() => setCurrentPage(1)}
@@ -1250,7 +1250,9 @@ export default function CommissionManagement() {
                             <Filter size={17} />
                             Filters
                         </button>
+                    </div>
 
+                    <div className="commission-field">
                         <button
                             className="commission-reset-btn"
                             onClick={resetFilters}
@@ -1259,26 +1261,9 @@ export default function CommissionManagement() {
                             Reset
                         </button>
                     </div>
-
                 </div>
 
-                {/* <div className="commission-filter-bottom">
-                    <button
-                        className="commission-filter-btn"
-                        onClick={() => setCurrentPage(1)}
-                    >
-                        <Filter size={17} />
-                        Filters
-                    </button>
-
-                    <button
-                        className="commission-reset-btn"
-                        onClick={resetFilters}
-                    >
-                        <RotateCcw size={16} />
-                        Reset
-                    </button>
-                </div> */}
+               
             </div>
 
             {/* =========================
@@ -1828,7 +1813,7 @@ export default function CommissionManagement() {
                     <div className="commission-side-card">
 
                         <h3>Quick Actions</h3>
-
+                
                         <button onClick={handleQuickCalculate}>
                             <Calculator size={17} />
                             Calculate Commission

@@ -1296,7 +1296,7 @@ const DocumentManagement = () => {
                                                     <div className="document-actions">
                                                         {/* VIEW */}
                                                         <button
-                                                            className="table-action-btn"
+                                                            className="table-action-btns"
                                                             title="View"
                                                             onClick={() =>
                                                                 handleView(item)
@@ -1307,7 +1307,7 @@ const DocumentManagement = () => {
 
                                                         {/* DOWNLOAD */}
                                                         <button
-                                                            className="table-action-btn"
+                                                            className="table-action-btns"
                                                             title="Download"
                                                             onClick={() =>
                                                                 handleDownload(item)
@@ -1316,10 +1316,19 @@ const DocumentManagement = () => {
                                                             <Download size={16} />
                                                         </button>
 
+                                                        <button
+                                                            className="delete-menu-item"
+                                                            onClick={() =>
+                                                                handleDelete(item)
+                                                            }
+                                                        >
+                                                            <Trash2 size={15} />                                                            
+                                                        </button>
+
                                                         {/* MORE */}
-                                                        <div className="more-action-wrapper">
+                                                        <div className="more-action-wrappers">
                                                             <button
-                                                                className="table-action-btn"
+                                                                className="table-action-btns"
                                                                 title="More"
                                                                 onClick={() =>
                                                                     setOpenMenuId(
@@ -1333,7 +1342,7 @@ const DocumentManagement = () => {
                                                             </button>
 
                                                             {openMenuId === item._id && (
-                                                                <div className="more-action-menu">
+                                                                <div className="more-action-menus">
                                                                     {(item.status ===
                                                                         "DRAFT" ||
                                                                         item.status ===
@@ -1359,16 +1368,6 @@ const DocumentManagement = () => {
                                                                                 Disable
                                                                             </button>
                                                                         )}
-
-                                                                    <button
-                                                                        className="delete-menu-item"
-                                                                        onClick={() =>
-                                                                            handleDelete(item)
-                                                                        }
-                                                                    >
-                                                                        <Trash2 size={15} />
-                                                                        Delete
-                                                                    </button>
                                                                 </div>
                                                             )}
                                                         </div>

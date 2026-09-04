@@ -145,17 +145,17 @@ const Login = () => {
 
                     <h2>Welcome Back!</h2>
 
-                    <p className="login-subtitle">
+                    <p className="login-subtitles">
                         Sign in to continue to your CRM Dashboard.
                     </p>
 
                     <form onSubmit={handleSubmit}>
 
                         {/* Email */}
-                        <div className="form-group">
+                        <div className="form-groups">
                             <label>Username / Email</label>
 
-                            <div className="input-wrapper">
+                            <div className="input-wrappers">
                                 <User size={20} />
 
                                 <input
@@ -170,10 +170,10 @@ const Login = () => {
                         </div>
 
                         {/* Password */}
-                        <div className="form-group">
+                        <div className="form-groups">
                             <label>Password</label>
 
-                            <div className="input-wrapper">
+                            <div className="input-wrappers">
                                 <Lock size={20} />
 
                                 <input

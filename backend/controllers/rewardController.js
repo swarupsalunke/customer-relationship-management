@@ -452,6 +452,37 @@ const updateRewardTransaction = async (req, res) => {
   }
 };
 
+// Delete Reward Transaction
+const deleteRewardTransaction = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const transaction = await RewardTransaction.findById(id);
+
+    if (!transaction) {
+      return res.status(404).json({
+        success: false,
+        message: "Reward transaction not found",
+      });
+    }
+
+    await RewardTransaction.findByIdAndDelete(id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Reward transaction deleted successfully",
+    });
+  } catch (error) {
+    console.error("Delete reward transaction error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to delete reward transaction",
+      error: error.message,
+    });
+  }
+};
+
 
 module.exports = {
   getRewardDashboard,
@@ -462,4 +493,5 @@ module.exports = {
   deductCash,
   getRewardTransactions,
   updateRewardTransaction,
+  deleteRewardTransaction
 };

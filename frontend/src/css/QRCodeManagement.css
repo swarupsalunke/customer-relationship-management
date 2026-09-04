@@ -977,7 +977,7 @@
 .qr-quick-actions small {
   margin-top: 3px;
   color: #818aa2;
-  font-size: 5.8px;
+  font-size: 8.2px;
 }
 
 /* Modals */
@@ -1274,7 +1274,7 @@
 
   .qr-stat-grid,
   .qr-filter-card {
-    grid-template-columns: 1fr;
+    grid-template-columns:  1fr 1fr;
   }
 
   .qr-search-box,
@@ -1308,3 +1308,4 @@
     max-height: 94vh;
   }
 }
+

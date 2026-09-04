@@ -9,6 +9,7 @@ const {
   deductCash,
   getRewardTransactions,
   updateRewardTransaction,
+  deleteRewardTransaction,
 } = require("../controllers/rewardController");
 
 const router = express.Router();
@@ -31,5 +32,7 @@ router.post("/cash/deduct", deductCash);
 router.get("/transactions", getRewardTransactions);
 
 router.put("/transactions/:id", updateRewardTransaction);
+
+router.delete("/transactions/:id", deleteRewardTransaction);
 
 module.exports = router;

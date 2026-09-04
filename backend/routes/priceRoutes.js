@@ -6,12 +6,14 @@ const {
   getPriceProducts,
   createPrice,
   updatePrice,
+  deletePrice,
   getPendingPrices,
   approvePrice,
   rejectPrice,
   getPriceHistory,
   getPriceStats,
   bulkCreatePrices,
+  getPriceById,
 } = require("../controllers/priceController");
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -64,6 +66,33 @@ router.get(
     "MANAGER"
   ),
   getPendingPrices
+);
+
+// GET PRICE BY ID
+
+router.get(
+  "/:id",
+  authMiddleware,
+  roleMiddleware(
+    "SUPER_ADMIN",
+    "DIRECTOR",
+    "MANAGER",
+    "ACCOUNTANT",
+    "SALES_EXECUTIVE"
+  ),
+  getPriceById
+);
+// DELETE PRICE
+
+router.delete(
+  "/:id",
+  authMiddleware,
+  roleMiddleware(
+    "SUPER_ADMIN",
+    "DIRECTOR",
+    "MANAGER"
+  ),
+  deletePrice
 );
 
 

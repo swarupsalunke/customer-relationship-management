@@ -18,6 +18,8 @@ import {
     ChevronDown,
     Search,
     Save,
+    Pencil,
+    Trash2,
 } from "lucide-react";
 
 import "../css/inventoryManagement.css";
@@ -526,6 +528,58 @@ const InventoryManagement = () => {
         setModalType("VIEW_MOVEMENT");
     };
 
+    const handleEditMovement = (movement) => {
+        setSelectedMovement(movement);
+
+        setMovementForm({
+            product: movement.product?._id || movement.product || "",
+            warehouse: movement.warehouse || "",
+            quantity: movement.quantity ?? "",
+            unit: movement.unit || "Ltr",
+            reference: movement.reference || "",
+            movementDate: movement.movementDate
+                ? new Date(movement.movementDate).toISOString().slice(0, 16)
+                : "",
+            remarks: movement.remarks || "",
+        });
+
+        setModalType("EDIT_MOVEMENT");
+    };
+
+    const handleDeleteMovement = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this stock movement?")) {
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(
+                `${API_BASE_URL}/inventory/movements/${id}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to delete movement");
+            }
+
+            alert("Stock movement deleted successfully");
+
+            fetchMovements();
+        } catch (error) {
+            console.error("Delete movement error:", error);
+            alert(error.message);
+        }
+    };
+
     const closeModal = () => {
         if (savingAction) return;
         setModalType(null);
@@ -549,6 +603,27 @@ const InventoryManagement = () => {
         e.preventDefault();
         try {
             setSavingAction(true);
+
+            if (modalType === "EDIT_MOVEMENT") {
+                const response = await axios.put(
+                    `${API_BASE_URL}/inventory/movements/${selectedMovement._id}`,
+                    {
+                        ...movementForm,
+                        quantity: Number(movementForm.quantity),
+                    },
+                    authConfig()
+                );
+
+                if (!response.data?.success) {
+                    throw new Error(response.data?.message || "Failed to update movement");
+                }
+
+                closeModal();
+                await refreshInventory();
+                alert(response.data?.message || "Stock movement updated successfully");
+                return;
+            }
+
             const endpointMap = {
                 INWARD: "/inventory/movements/inward",
                 OUTWARD: "/inventory/movements/outward",
@@ -730,6 +805,21 @@ const InventoryManagement = () => {
                                             onClick={() => openViewMovementModal(movement)}
                                         >
                                             <Eye size={15} />
+                                        </button>
+                                        <button
+                                            className="inventory-icon-btn"
+                                            onClick={() => handleEditMovement(movement)}
+                                            title="Edit"
+                                        >
+                                            <Pencil size={16} />
+                                        </button>
+
+                                        <button
+                                            className="inventory-icon-btn"
+                                            onClick={() => handleDeleteMovement(movement._id)}
+                                            title="Delete"
+                                        >
+                                            <Trash2 size={16} />
                                         </button>
                                     </td>
                                 </tr>
@@ -937,32 +1027,41 @@ const InventoryManagement = () => {
                 ))}
             </div>}
 
-            {(modalType === "INWARD" || modalType === "OUTWARD" || modalType === "ADJUSTMENT") && (
-                <div className="inventory-modal-overlay" onClick={() => !savingAction && closeModal()}>
-                    <div className="inventory-modal" onClick={(e) => e.stopPropagation()}>
-                        <div className="inventory-modal-header">
-                            <div>
-                                <h2>{modalType === "INWARD" ? "Add Stock" : modalType === "OUTWARD" ? "Outward Material" : "Stock Adjustment"}</h2>
-                                <p>{modalType === "INWARD" ? "Record incoming material into a warehouse." : modalType === "OUTWARD" ? "Record material consumption." : "Adjust current stock quantity."}</p>
+            {(modalType === "INWARD" ||
+                modalType === "OUTWARD" ||
+                modalType === "ADJUSTMENT" ||
+                modalType === "EDIT_MOVEMENT") && (
+                    <div className="inventory-modal-overlay" onClick={() => !savingAction && closeModal()}>
+                        <div className="inventory-modal" onClick={(e) => e.stopPropagation()}>
+                            <div className="inventory-modal-header">
+                                <div>
+                                    <h2>{modalType === "EDIT_MOVEMENT"
+                                        ? "Edit Stock Movement"
+                                        : modalType === "INWARD"
+                                            ? "Add Stock"
+                                            : modalType === "OUTWARD"
+                                                ? "Outward Material"
+                                                : "Stock Adjustment"}</h2>
+                                    <p>{modalType === "INWARD" ? "Record incoming material into a warehouse." : modalType === "OUTWARD" ? "Record material consumption." : "Adjust current stock quantity."}</p>
+                                </div>
                             </div>
+
+                            <form className="inventory-modal-form" onSubmit={handleMovementSubmit}>
+                                <div className="inventory-form-grid">
+                                    <div className="inventory-form-group"><label>Product *</label><select name="product" value={movementForm.product} onChange={handleMovementFormChange} required><option value="">Select Product</option>{productOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}</select></div>
+                                    <div className="inventory-form-group"><label>Warehouse *</label><input type="text" name="warehouse" value={movementForm.warehouse} onChange={handleMovementFormChange} placeholder="Enter warehouse" required /></div>
+                                    <div className="inventory-form-group"><label>Quantity *</label><input type="number" min={modalType === "ADJUSTMENT" ? undefined : "0"} step="any" name="quantity" value={movementForm.quantity} onChange={handleMovementFormChange} required />{modalType === "ADJUSTMENT" && <small className="inventory-form-help">Use a positive value to increase stock and a negative value to reduce stock.</small>}</div>
+                                    <div className="inventory-form-group"><label>Unit *</label><select name="unit" value={movementForm.unit} onChange={handleMovementFormChange}><option value="Ltr">Ltr</option><option value="MT">MT</option><option value="Kg">Kg</option><option value="Nos">Nos</option></select></div>
+                                    <div className="inventory-form-group"><label>Movement Date</label><input type="datetime-local" name="movementDate" value={movementForm.movementDate} onChange={handleMovementFormChange} /></div>
+                                    <div className="inventory-form-group"><label>Reference</label><input type="text" name="reference" value={movementForm.reference} onChange={handleMovementFormChange} placeholder="Reference number" /></div>
+                                    <div className="inventory-form-group full-width"><label>Remarks</label><textarea name="remarks" rows="3" value={movementForm.remarks} onChange={handleMovementFormChange} placeholder="Enter remarks" /></div>
+                                </div>
+
+                                <div className="inventory-modal-footer"><button type="button" className="inventory-secondary-btn" onClick={closeModal} disabled={savingAction}>Cancel</button><button type="submit" className="inventory-primary-btn" disabled={savingAction}><Save size={14} />{savingAction ? "Saving..." : modalType === "INWARD" ? "Add Stock" : modalType === "OUTWARD" ? "Record Outward" : "Save Adjustment"}</button></div>
+                            </form>
                         </div>
-
-                        <form className="inventory-modal-form" onSubmit={handleMovementSubmit}>
-                            <div className="inventory-form-grid">
-                                <div className="inventory-form-group"><label>Product *</label><select name="product" value={movementForm.product} onChange={handleMovementFormChange} required><option value="">Select Product</option>{productOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}</select></div>
-                                <div className="inventory-form-group"><label>Warehouse *</label><input type="text" name="warehouse" value={movementForm.warehouse} onChange={handleMovementFormChange} placeholder="Enter warehouse" required /></div>
-                                <div className="inventory-form-group"><label>Quantity *</label><input type="number" min={modalType === "ADJUSTMENT" ? undefined : "0"} step="any" name="quantity" value={movementForm.quantity} onChange={handleMovementFormChange} required />{modalType === "ADJUSTMENT" && <small className="inventory-form-help">Use a positive value to increase stock and a negative value to reduce stock.</small>}</div>
-                                <div className="inventory-form-group"><label>Unit *</label><select name="unit" value={movementForm.unit} onChange={handleMovementFormChange}><option value="Ltr">Ltr</option><option value="MT">MT</option><option value="Kg">Kg</option><option value="Nos">Nos</option></select></div>
-                                <div className="inventory-form-group"><label>Movement Date</label><input type="datetime-local" name="movementDate" value={movementForm.movementDate} onChange={handleMovementFormChange} /></div>
-                                <div className="inventory-form-group"><label>Reference</label><input type="text" name="reference" value={movementForm.reference} onChange={handleMovementFormChange} placeholder="Reference number" /></div>
-                                <div className="inventory-form-group full-width"><label>Remarks</label><textarea name="remarks" rows="3" value={movementForm.remarks} onChange={handleMovementFormChange} placeholder="Enter remarks" /></div>
-                            </div>
-
-                            <div className="inventory-modal-footer"><button type="button" className="inventory-secondary-btn" onClick={closeModal} disabled={savingAction}>Cancel</button><button type="submit" className="inventory-primary-btn" disabled={savingAction}><Save size={14} />{savingAction ? "Saving..." : modalType === "INWARD" ? "Add Stock" : modalType === "OUTWARD" ? "Record Outward" : "Save Adjustment"}</button></div>
-                        </form>
                     </div>
-                </div>
-            )}
+                )}
 
             {modalType === "TRANSFER" && (
                 <div className="inventory-modal-overlay" onClick={() => !savingAction && closeModal()}>

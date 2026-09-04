@@ -26,6 +26,7 @@ import {
   Printer,
   FileText,
   RefreshCw,
+  Trash2,
 } from "lucide-react";
 import "../css/QRCodeManagement.css";
 
@@ -1649,51 +1650,22 @@ const QRManagement = () => {
                               <Pencil size={17} />
                             </button>
 
-                            <div
-                              className="qr-more-wrapper"
-                              ref={
-                                openActionId === qr._id
-                                  ? actionMenuRef
-                                  : null
+                            <button
+                              className="qr-icon-btn"
+                              title="More"
+                              onClick={() =>
+                                handleDeleteQR(
+                                  openActionId ===
+                                    qr._id
+                                    ? null
+                                    : qr._id
+                                )
                               }
                             >
-
-                              <button
-                                className="qr-icon-btn"
-                                title="More"
-                              // onClick={() =>
-                              //   setOpenActionId(
-                              //     openActionId ===
-                              //       qr._id
-                              //       ? null
-                              //       : qr._id
-                              //   )
-                              // }
-                              >
-                                <MoreVertical
-                                  size={17}
-                                />
-                              </button>
-
-                              {openActionId ===
-                                qr._id && (
-                                  <div className="qr-more-menu">
-
-                                    <button
-                                      onClick={() =>
-                                        handleDeleteQR(
-                                          qr._id
-                                        )
-                                      }
-                                    >
-                                      Delete
-                                    </button>
-
-                                  </div>
-                                )}
-
-                            </div>
-
+                              <Trash2
+                                size={17}
+                              />
+                            </button>
                           </div>
 
                         </td>

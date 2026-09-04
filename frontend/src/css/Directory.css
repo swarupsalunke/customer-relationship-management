@@ -827,7 +827,7 @@
     }
 
     .directory-stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 9px
     }
 
@@ -840,7 +840,7 @@
     }
 
     .directory-filters {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 10px
     }
 
@@ -850,7 +850,7 @@
 
     .active-filters {
         align-items: flex-start;
-        flex-direction: column
+        /* flex-direction: column */
     }
 
     .directory-table-header {

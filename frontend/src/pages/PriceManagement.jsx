@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import { Upload, Download, Filter, Search, Pencil } from "lucide-react";
+import { Upload, Download, Filter, Search, Pencil, Eye, Trash2, X } from "lucide-react";
 import "../css/pricemanagement.css";
 
 const API_BASE_URL = "http://localhost:5000/api";
@@ -58,6 +58,12 @@ const PriceManagement = () => {
     useState(false);
 
   const [editingPrice, setEditingPrice] =
+    useState(null);
+
+  const [viewingPrice, setViewingPrice] =
+    useState(null);
+
+  const [deletingPriceId, setDeletingPriceId] =
     useState(null);
 
   const [priceForm, setPriceForm] = useState({
@@ -592,6 +598,70 @@ const PriceManagement = () => {
     setShowPriceModal(true);
   };
 
+  const handleViewPrice = async (price) => {
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}/prices/${price._id}`,
+        getAuthConfig()
+      );
+
+      if (response.data?.success) {
+        setViewingPrice(response.data.price);
+      } else {
+        alert(response.data?.message || "Failed to fetch price details");
+      }
+    } catch (error) {
+      console.error("View price error:", error);
+      alert(
+        error.response?.data?.message ||
+        "Failed to load price details"
+      );
+    }
+  };
+
+  const handleDeletePrice = async (price) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${price.productName || "this price list"}"?`
+    );
+
+    if (!confirmed) return;
+
+    try {
+      setDeletingPriceId(price._id);
+
+      const response = await axios.delete(
+        `${API_BASE_URL}/prices/${price._id}`,
+        getAuthConfig()
+      );
+
+      if (response.data?.success) {
+        setProducts((previous) =>
+          previous.filter((item) => item._id !== price._id)
+        );
+
+        setSelectedProducts((previous) =>
+          previous.filter((id) => id !== price._id)
+        );
+
+        await fetchPriceStats();
+      } else {
+        alert(response.data?.message || "Failed to delete price list");
+      }
+    } catch (error) {
+      console.error("Delete price error:", error);
+      alert(
+        error.response?.data?.message ||
+        "Failed to delete price list"
+      );
+    } finally {
+      setDeletingPriceId(null);
+    }
+  };
+
+  const handleCloseViewModal = () => {
+    setViewingPrice(null);
+  };
+
   const handleClosePriceModal = () => {
     setShowPriceModal(false);
     setEditingPrice(null);
@@ -852,7 +922,7 @@ const PriceManagement = () => {
           <div className="price-stat-content">
 
             <span className="price-stat-label">
-              Price Changes (This Month)
+              Price Changes <br></br>(This Month)
             </span>
 
             <strong>
@@ -862,7 +932,7 @@ const PriceManagement = () => {
             </strong>
 
             <small className="price-stat-growth">
-              Price revisions this month
+              Price revisions <br></br>this month
             </small>
 
           </div>
@@ -1424,15 +1494,39 @@ const PriceManagement = () => {
                           <td className="price-table-actions">
 
                             <button
+                              type="button"
+                              className="price-action"
+                              title="View Price"
+                              onClick={() =>
+                                handleViewPrice(product)
+                              }
+                            >
+                              <Eye size={17} />
+                            </button>
+
+                            <button
+                              type="button"
                               className="price-action"
                               title="Edit Price"
                               onClick={() =>
                                 handleEditPrice(product)
                               }
                             >
-
                               <Pencil size={17} />
+                            </button>
 
+                            <button
+                              type="button"
+                              className="price-action"
+                              title="Delete Price"
+                              onClick={() =>
+                                handleDeletePrice(product)
+                              }
+                              disabled={
+                                deletingPriceId === product._id
+                              }
+                            >
+                              <Trash2 size={17} />
                             </button>
 
                           </td>
@@ -1480,6 +1574,178 @@ const PriceManagement = () => {
 
         </div>
 
+      )}
+
+      {/*                 VIEW PRICE LIST MODAL                */}
+
+      {viewingPrice && (
+        <div className="price-modal-overlay">
+          <div className="price-modal">
+
+            <div className="price-modal-header">
+              <div>
+                <h2>Price List Details</h2>
+                <p>View price list details</p>
+              </div>
+
+              <button
+                type="button"
+                className="price-modal-close"
+                onClick={handleCloseViewModal}
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="price-modal-form">
+
+              <div className="price-form-section">
+                <h3>Product Information</h3>
+
+                <div className="price-form-grid">
+
+                  <div className="price-form-group">
+                    <label>Product Name</label>
+                    <input
+                      type="text"
+                      value={viewingPrice.productName || "-"}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="price-form-group">
+                    <label>SKU</label>
+                    <input
+                      type="text"
+                      value={viewingPrice.sku || "-"}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="price-form-group">
+                    <label>Barcode</label>
+                    <input
+                      type="text"
+                      value={viewingPrice.barcode || "-"}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="price-form-group">
+                    <label>Category</label>
+                    <input
+                      type="text"
+                      value={viewingPrice.category || "-"}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="price-form-group">
+                    <label>Brand</label>
+                    <input
+                      type="text"
+                      value={viewingPrice.brand || "-"}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="price-form-group">
+                    <label>Packing Size</label>
+                    <input
+                      type="text"
+                      value={viewingPrice.packingSize || "-"}
+                      readOnly
+                    />
+                  </div>
+
+                </div>
+              </div>
+
+              <div className="price-form-section">
+                <h3>Price Information</h3>
+
+                <div className="price-form-grid">
+
+                  <div className="price-form-group">
+                    <label>Base Price (MRP)</label>
+                    <input
+                      type="text"
+                      value={`₹${formatCurrency(viewingPrice.basePrice)}`}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="price-form-group">
+                    <label>GST %</label>
+                    <input
+                      type="text"
+                      value={`${Number(viewingPrice.gstPercent || 0)}%`}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="price-form-group">
+                    <label>Discount %</label>
+                    <input
+                      type="text"
+                      value={`${Number(viewingPrice.discountPercent || 0)}%`}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="price-form-group">
+                    <label>Discount Price</label>
+                    <input
+                      type="text"
+                      value={`₹${formatCurrency(viewingPrice.discountPrice)}`}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="price-form-group">
+                    <label>Effective Date</label>
+                    <input
+                      type="text"
+                      value={formatDate(viewingPrice.effectiveDate)}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="price-form-group">
+                    <label>Price List</label>
+                    <input
+                      type="text"
+                      value={getPriceListLabel(viewingPrice.priceListType)}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="price-form-group">
+                    <label>Approval Status</label>
+                    <input
+                      type="text"
+                      value={viewingPrice.approvalStatus || "-"}
+                      readOnly
+                    />
+                  </div>
+
+                </div>
+              </div>
+
+              <div className="price-modal-footer">
+                <button
+                  type="button"
+                  className="price-modal-cancel"
+                  onClick={handleCloseViewModal}
+                >
+                  Close
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
       )}
 
       {/*         CREATE / EDIT PRICE LIST MODAL      */}

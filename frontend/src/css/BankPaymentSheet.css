@@ -893,7 +893,7 @@
     }
 
     .bank-payment-header-actions {
-        flex-direction: column;
+       display: grid;
     }
 
     .bank-payment-header-actions .bank-btn {
@@ -901,7 +901,7 @@
     }
 
     .bank-payment-stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .bank-stat-card {
@@ -909,7 +909,7 @@
     }
 
     .bank-sheet-details {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .beneficiary-controls {

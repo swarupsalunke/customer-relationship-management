@@ -85,7 +85,8 @@
 }
 
 .notification-outline-btn:hover {
-  background: #f7f8fc;
+  border-color: #c9c1e9;
+    color: #5420d6;
 }
 
 .notification-primary-btn {
@@ -1190,7 +1191,7 @@
   }
 
   .notification-filter-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .notification-filter-buttons {

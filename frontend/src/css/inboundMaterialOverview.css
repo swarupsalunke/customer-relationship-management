@@ -69,9 +69,13 @@
     cursor: pointer;
     transition: all 0.18s ease;
 }
+.inbound-secondary-btn:hover{
+     border-color: #c9c1e9;
+    color: #5420d6;
+}
 
 .inbound-primary-btn {
-    min-height: 40px;
+    min-height: 35px;
     padding: 0 14px;
     border-radius: 7px;
     display: inline-flex;
@@ -80,7 +84,7 @@
     gap: 7px;
     background: #ff6900;
     color: #fff;
-    font-size: 13px;
+    font-size: 9px;
     font-weight: 600;
 }
 
@@ -97,7 +101,7 @@
 }
 
 .inbound-secondary-btn {
-    min-height: 40px;
+    min-height: 35px;
     padding: 0 14px;
     border: 1px solid #dbe2ea;
     border-radius: 7px;
@@ -107,7 +111,7 @@
     gap: 7px;
     background: #fff;
     color: #334155;
-    font-size: 13px;
+    font-size: 9px;
     font-weight: 600;
 }
 
@@ -119,19 +123,20 @@
 .inbound-filter-btn {
     min-height: 40px;
     padding: 0 15px;
+    border: 1px solid #dbe2ea;
     border-radius: 7px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 7px;
-    background: #2563eb;
-    color: #fff;
+    background: #fff;
+    color: #475569;
     font-size: 13px;
     font-weight: 600;
 }
 
 .inbound-filter-btn:hover {
-    background: #1d4ed8;
+    background: #f8fafc;
 }
 
 .inbound-reset-btn {
@@ -1265,6 +1270,14 @@ label.inbound-secondary-btn input[type="file"] {
     .inbound-monthly-grid {
         grid-template-columns: 1fr;
     }
+    .inbound-stats-grid{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .inbound-monthly-grid{
+        grid-template-columns: 1fr 1fr;
+    }
+ 
 
     .inbound-filter-actions {
         display: grid;
@@ -1277,7 +1290,7 @@ label.inbound-secondary-btn input[type="file"] {
     }
 
     .inbound-date-range {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .inbound-date-range>span {
@@ -1337,7 +1350,7 @@ label.inbound-secondary-btn input[type="file"] {
 
     .inbound-filter-actions,
     .inbound-modal-footer {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .inbound-stat-card {

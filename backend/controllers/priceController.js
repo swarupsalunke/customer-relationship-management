@@ -230,6 +230,73 @@ const updatePrice = async (req, res) => {
   }
 };
 
+// ======================================================
+// GET PRICE BY ID
+// ======================================================
+
+const getPriceById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const price = await Price.findById(id)
+      .populate("createdBy", "name email")
+      .populate("approvedBy", "name email");
+
+    if (!price) {
+      return res.status(404).json({
+        success: false,
+        message: "Price list not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      price,
+    });
+  } catch (error) {
+    console.error("Get price by ID error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch price list",
+    });
+  }
+};
+
+
+// ======================================================
+// DELETE PRICE
+// ======================================================
+
+const deletePrice = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const price = await Price.findById(id);
+
+    if (!price) {
+      return res.status(404).json({
+        success: false,
+        message: "Price list not found",
+      });
+    }
+
+    await Price.findByIdAndDelete(id);
+
+    res.status(200).json({
+      success: true,
+      message: "Price list deleted successfully",
+    });
+  } catch (error) {
+    console.error("Delete price error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete price list",
+    });
+  }
+};
+
 
 // ======================================================
 // GET PENDING PRICE REVISIONS
@@ -572,10 +639,12 @@ module.exports = {
   getPriceProducts,
   createPrice,
   updatePrice,
+  deletePrice,
   getPendingPrices,
   approvePrice,
   rejectPrice,
   getPriceHistory,
   getPriceStats,
   bulkCreatePrices,
+  getPriceById
 };

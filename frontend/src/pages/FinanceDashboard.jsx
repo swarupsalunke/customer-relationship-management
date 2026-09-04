@@ -23,6 +23,8 @@ import {
   Landmark,
   BarChart3,
   RefreshCw,
+  Pencil,
+  Trash2,
 } from "lucide-react";
 
 import "../css/financeDashboard.css";
@@ -81,6 +83,21 @@ const FinanceDashboard = () => {
   const [showIncomeModal, setShowIncomeModal] = useState(false);
   const [showExpenseModal, setShowExpenseModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editForm, setEditForm] = useState({
+    transactionId: "",
+    type: "",
+    date: "",
+    description: "",
+    category: "",
+    account: "",
+    amount: "",
+    paymentMode: "NA",
+    status: "",
+    invoice: "",
+    vendor: "",
+    assignedTo: ""
+  });
 
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
@@ -409,7 +426,86 @@ const FinanceDashboard = () => {
     setSelectedTransaction(transaction);
     setShowViewModal(true);
   };
+  const handleEditTransaction = (transaction) => {
+    setSelectedTransaction(transaction);
 
+    setEditForm({
+      transactionId: transaction.transactionId || "",
+      type: transaction.type || "",
+      date: transaction.date
+        ? new Date(transaction.date).toISOString().split("T")[0]
+        : "",
+      description: transaction.description || "",
+      category: transaction.category || "",
+      account: transaction.account || "",
+      amount: transaction.amount || "",
+      paymentMode: transaction.paymentMode || "NA",
+      status: transaction.status || "",
+      invoice: transaction.invoice || "",
+      vendor: transaction.vendor || "",
+      assignedTo: transaction.assignedTo?._id || transaction.assignedTo || ""
+    });
+
+    setShowEditModal(true);
+  };
+
+  const handleDeleteTransaction = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this transaction?")) {
+      return;
+    }
+
+    try {
+      await axios.delete(`${API_URL}/transactions/${id}`);
+
+      setTransactions((prev) =>
+        prev.filter((transaction) => transaction._id !== id)
+      );
+
+      await fetchDashboard();
+      alert("Transaction deleted successfully");
+    } catch (error) {
+      console.error("Delete transaction error:", error);
+      alert(
+        error.response?.data?.message || "Failed to delete transaction"
+      );
+    }
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!selectedTransaction?._id) {
+      alert("Transaction not selected");
+      return;
+    }
+
+    try {
+      setFormLoading(true);
+
+      await axios.put(
+        `${API_URL}/transactions/${selectedTransaction._id}`,
+        {
+          ...editForm,
+          amount: Number(editForm.amount),
+          assignedTo: editForm.assignedTo || null,
+        }
+      );
+
+      alert("Transaction updated successfully");
+
+      setShowEditModal(false);
+      setSelectedTransaction(null);
+
+      await Promise.all([fetchTransactions(), fetchDashboard()]);
+    } catch (error) {
+      console.error("Update transaction error:", error);
+      alert(
+        error.response?.data?.message || "Failed to update transaction"
+      );
+    } finally {
+      setFormLoading(false);
+    }
+  };
 
   // QUICK ACTION
 
@@ -798,7 +894,7 @@ const FinanceDashboard = () => {
             </select>
           </div>
 
-          <button className="filter-button" onClick={() => setCurrentPage(1)}>
+          <button className="filters-button" onClick={() => setCurrentPage(1)}>
             <Filter size={16} />
             Filters
           </button>
@@ -1240,6 +1336,20 @@ const FinanceDashboard = () => {
                             onClick={() => alert("Download feature will be connected later.")}
                           >
                             <DownloadIcon size={16} />
+                          </button>
+
+                          <button
+                            title="Edit"
+                            onClick={() => handleEditTransaction(transaction)}
+                          >
+                            <Pencil size={16} />
+                          </button>
+
+                          <button
+                            title="Delete"
+                            onClick={() => handleDeleteTransaction(transaction._id)}
+                          >
+                            <Trash2 size={16} />
                           </button>
                         </div>
                       </td>
@@ -1744,6 +1854,194 @@ const FinanceDashboard = () => {
                 Close
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {showEditModal && selectedTransaction && (
+        <div className="finance-modal-overlay">
+          <div className="finance-modal">
+            <div className="finance-modal-header">
+              <h2>Edit Transaction</h2>
+              <button
+                type="button"
+                onClick={() => setShowEditModal(false)}
+                className="finance-modal-close"
+              >
+                ×
+              </button>
+            </div>
+
+            <form onSubmit={handleEditSubmit}>
+              <div className="form-grid">
+
+                <div className="form-group">
+                  <label>Transaction ID</label>
+                  <input
+                    type="text"
+                    value={editForm.transactionId}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, transactionId: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Type</label>
+                  <select
+                    value={editForm.type}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, type: e.target.value })
+                    }
+                    required
+                  >
+                    <option value="">Select Type</option>
+                    <option value="INVOICE">Invoice</option>
+                    <option value="PAYMENT_RECEIVED">Payment Received</option>
+                    <option value="OUTSTANDING">Outstanding</option>
+                    <option value="PENDING_PAYMENT">Pending Payment</option>
+                    <option value="CREDIT_BALANCE">Credit Balance</option>
+                    <option value="FOLLOW_UP">Follow Up</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label>Date</label>
+                  <input
+                    type="date"
+                    value={editForm.date}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, date: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Description</label>
+                  <input
+                    type="text"
+                    value={editForm.description}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, description: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Category</label>
+                  <input
+                    type="text"
+                    value={editForm.category}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, category: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Account</label>
+                  <input
+                    type="text"
+                    value={editForm.account}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, account: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Amount</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={editForm.amount}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, amount: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Payment Mode</label>
+                  <select
+                    value={editForm.paymentMode}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, paymentMode: e.target.value })
+                    }
+                  >
+                    <option value="NA">NA</option>
+                    <option value="CASH">Cash</option>
+                    <option value="BANK_TRANSFER">Bank Transfer</option>
+                    <option value="UPI">UPI</option>
+                    <option value="NEFT">NEFT</option>
+                    <option value="RTGS">RTGS</option>
+                    <option value="CHEQUE">Cheque</option>
+                    <option value="CARD">Card</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label>Status</label>
+                  <select
+                    value={editForm.status}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, status: e.target.value })
+                    }
+                    required
+                  >
+                    <option value="">Select Status</option>
+                    <option value="PAID">Paid</option>
+                    <option value="RECEIVED">Received</option>
+                    <option value="OUTSTANDING">Outstanding</option>
+                    <option value="PENDING">Pending</option>
+                    <option value="CREDIT">Credit</option>
+                    <option value="FOLLOW_UP">Follow Up</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label>Invoice</label>
+                  <input
+                    type="text"
+                    value={editForm.invoice}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, invoice: e.target.value })
+                    }
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Vendor</label>
+                  <input
+                    type="text"
+                    value={editForm.vendor}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, vendor: e.target.value })
+                    }
+                  />
+                </div>
+
+              </div>
+
+              <div className="finance-modal-actions">
+                <button
+                  type="button"
+                  onClick={() => setShowEditModal(false)}
+                >
+                  Cancel
+                </button>
+
+                <button type="submit">
+                  Update Transaction
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

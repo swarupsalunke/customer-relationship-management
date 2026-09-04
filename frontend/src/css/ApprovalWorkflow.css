@@ -559,8 +559,8 @@
 }
 
 .row-icon-btn {
-    width: 27px;
-    height: 27px;
+    width: 31px;
+    height: 31px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -568,7 +568,9 @@
     color: #596580;
     background: #fff;
     border: 1px solid #dce2ec;
-    border-radius: 4px
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .row-icon-btn:hover {
@@ -1364,7 +1366,7 @@
 
     .approval-stats-grid,
     .approval-filter-card {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr 1fr;
     }
 
     .approval-search-box {

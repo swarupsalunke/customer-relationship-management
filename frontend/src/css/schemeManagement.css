@@ -48,8 +48,7 @@
 .scheme-header-actions {
     display: flex;
     align-items: center;
-    gap: 9px;
-    flex-wrap: wrap;
+    gap: 10px;
 }
 
 /* =========================================================
@@ -65,7 +64,7 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
@@ -1347,11 +1346,11 @@
     }
 
     .scheme-summary-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .scheme-filter-box {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .scheme-date-filter {
@@ -1400,7 +1399,8 @@
     }
 
     .scheme-header-actions {
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr;
     }
 
     .scheme-header-actions button {
