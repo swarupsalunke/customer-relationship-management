@@ -22,7 +22,7 @@
   margin-bottom: 15px;
 }
 
-.reports-header > div:first-child {
+.reports-header>div:first-child {
   flex: 1;
 }
 
@@ -59,8 +59,8 @@
 }
 
 .export-data-btn:hover {
-   border-color: #c9c1e9;
-    color: #5420d6;
+  border-color: #c9c1e9;
+  color: #5420d6;
 }
 
 /* ================= KPI CARDS ================= */
@@ -230,7 +230,8 @@
   align-items: center;
   justify-content: space-between;
 }
-.section-header{
+
+.section-header {
   margin-top: 20px;
 }
 
@@ -380,28 +381,23 @@
   font-size: 8.5px;
 }
 
-.category-report-card:nth-child(2)
-.category-card-content strong {
+.category-report-card:nth-child(2) .category-card-content strong {
   color: #16a34a;
 }
 
-.category-report-card:nth-child(3)
-.category-card-content strong {
+.category-report-card:nth-child(3) .category-card-content strong {
   color: #f28a00;
 }
 
-.category-report-card:nth-child(4)
-.category-card-content strong {
+.category-report-card:nth-child(4) .category-card-content strong {
   color: #7040d8;
 }
 
-.category-report-card:nth-child(5)
-.category-card-content strong {
+.category-report-card:nth-child(5) .category-card-content strong {
   color: #00a18b;
 }
 
-.category-report-card:nth-child(6)
-.category-card-content strong {
+.category-report-card:nth-child(6) .category-card-content strong {
   color: #ef4444;
 }
 
@@ -624,7 +620,7 @@
   font-size: 9px;
 }
 
-.modal-header > button {
+.modal-header>button {
   width: 29px;
   height: 29px;
   border: 1px solid #dfe4ed;
@@ -637,7 +633,7 @@
   cursor: pointer;
 }
 
-.modal-header > button:hover {
+.modal-header>button:hover {
   color: #ef4444;
   border-color: #ef4444;
 }
@@ -833,7 +829,7 @@
     flex-wrap: wrap;
   }
 
-  .reports-header > div:first-child {
+  .reports-header>div:first-child {
     width: 100%;
     flex-basis: 100%;
   }

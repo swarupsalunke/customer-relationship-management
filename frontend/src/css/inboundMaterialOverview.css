@@ -1,6 +1,4 @@
-/*      =======
-   INBOUND MATERIAL MANAGEMENT
-     ======= */
+
 
 .inbound-material-management-page {
     width: 100%;
@@ -69,8 +67,9 @@
     cursor: pointer;
     transition: all 0.18s ease;
 }
-.inbound-secondary-btn:hover{
-     border-color: #c9c1e9;
+
+.inbound-secondary-btn:hover {
+    border-color: #c9c1e9;
     color: #5420d6;
 }
 
@@ -1270,14 +1269,15 @@ label.inbound-secondary-btn input[type="file"] {
     .inbound-monthly-grid {
         grid-template-columns: 1fr;
     }
-    .inbound-stats-grid{
+
+    .inbound-stats-grid {
         grid-template-columns: 1fr 1fr;
     }
 
-    .inbound-monthly-grid{
+    .inbound-monthly-grid {
         grid-template-columns: 1fr 1fr;
     }
- 
+
 
     .inbound-filter-actions {
         display: grid;

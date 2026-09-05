@@ -2,6 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
+const uploadProfile = require("../middleware/uploadProfile");
+
 const {
   createUser,
   getUsers,
@@ -30,9 +32,9 @@ router.post(
     "DIRECTOR",
     "MANAGER"
   ),
+  uploadProfile.single("profilePicture"),
   createUser
 );
-
 
 // ==========================================
 // GET ALL USERS
@@ -97,6 +99,7 @@ router.put(
     "DIRECTOR",
     "MANAGER"
   ),
+  uploadProfile.single("profilePicture"),
   updateUser
 );
 

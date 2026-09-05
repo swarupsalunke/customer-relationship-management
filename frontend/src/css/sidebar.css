@@ -166,11 +166,9 @@
    ========================================================= */
 
 .dashboard-nav-item.active {
-  background: linear-gradient(
-    90deg,
-    #ff6500,
-    #ff7b00
-  );
+  background: linear-gradient(90deg,
+      #ff6500,
+      #ff7b00);
 
   color: #ffffff;
 
@@ -984,11 +982,9 @@
   }
 
   .dashboard-nav-item.active:hover {
-    background: linear-gradient(
-      90deg,
-      #ff6500,
-      #ff7b00
-    );
+    background: linear-gradient(90deg,
+        #ff6500,
+        #ff7b00);
 
     color: #ffffff;
   }

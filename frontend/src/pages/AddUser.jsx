@@ -314,20 +314,19 @@ const AddUser = () => {
   // ==========================================
 
   const handleProfilePhoto = (e) => {
-    const file = e.target.files?.[0];
+  const file = e.target.files?.[0];
 
-    if (!file) return;
+  if (!file) return;
 
-    const previewUrl =
-      URL.createObjectURL(file);
+  const previewUrl = URL.createObjectURL(file);
 
-    setProfilePreview(previewUrl);
+  setProfilePreview(previewUrl);
 
-    setFormData((prev) => ({
-      ...prev,
-      profilePicture: previewUrl,
-    }));
-  };
+  setFormData((prev) => ({
+    ...prev,
+    profilePicture: file,
+  }));
+};
 
   // ==========================================
   // PERMISSIONS
@@ -372,191 +371,301 @@ const AddUser = () => {
   // ==========================================
 
   const handleSaveUser = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // ==========================================
-    // PASSWORD VALIDATION
-    // ==========================================
+  // ==========================================
+  // PASSWORD VALIDATION
+  // ==========================================
 
+  if (
+    formData.password ||
+    formData.confirmPassword
+  ) {
     if (
-      formData.password ||
+      formData.password !==
       formData.confirmPassword
     ) {
-      if (
-        formData.password !==
-        formData.confirmPassword
-      ) {
-        alert(
-          "Password and Confirm Password do not match."
-        );
-        return;
-      }
-    }
-
-    // ==========================================
-    // REQUIRED FIELDS
-    // ==========================================
-
-    if (
-      !formData.name ||
-      !formData.userId ||
-      !formData.mobile ||
-      !formData.role
-    ) {
       alert(
-        "Please fill all required fields."
+        "Password and Confirm Password do not match."
       );
       return;
     }
+  }
 
-    // Password required only while adding
-    if (
-      !isEditMode &&
-      !formData.password
-    ) {
-      alert("Password is required.");
-      return;
+  // ==========================================
+  // REQUIRED FIELDS
+  // ==========================================
+
+  if (
+    !formData.name ||
+    !formData.userId ||
+    !formData.mobile ||
+    !formData.role
+  ) {
+    alert(
+      "Please fill all required fields."
+    );
+    return;
+  }
+
+  // Password required only while adding
+  if (
+    !isEditMode &&
+    !formData.password
+  ) {
+    alert("Password is required.");
+    return;
+  }
+
+  try {
+    setSaving(true);
+
+    const token =
+      localStorage.getItem("token");
+
+    // ==========================================
+    // FORM DATA
+    // ==========================================
+
+    const data = new FormData();
+
+    data.append(
+      "name",
+      formData.name || ""
+    );
+
+    data.append(
+      "userId",
+      formData.userId || ""
+    );
+
+    data.append(
+      "mobile",
+      formData.mobile || ""
+    );
+
+    data.append(
+      "email",
+      formData.email || ""
+    );
+
+    data.append(
+      "dateOfBirth",
+      formData.dateOfBirth || ""
+    );
+
+    data.append(
+      "gender",
+      formData.gender || ""
+    );
+
+    data.append(
+      "addressLine1",
+      formData.addressLine1 || ""
+    );
+
+    data.append(
+      "addressLine2",
+      formData.addressLine2 || ""
+    );
+
+    data.append(
+      "city",
+      formData.city || ""
+    );
+
+    data.append(
+      "state",
+      formData.state || ""
+    );
+
+    data.append(
+      "country",
+      formData.country || ""
+    );
+
+    data.append(
+      "pinCode",
+      formData.pinCode || ""
+    );
+
+    data.append(
+      "role",
+      formData.role || ""
+    );
+
+    data.append(
+      "reportingTo",
+      formData.reportingTo || ""
+    );
+
+    data.append(
+      "department",
+      formData.department || ""
+    );
+
+    data.append(
+      "loginType",
+      formData.loginType || ""
+    );
+
+    data.append(
+      "status",
+      formData.status || ""
+    );
+
+    data.append(
+      "notes",
+      formData.notes || ""
+    );
+
+    // ==========================================
+    // PERMISSIONS
+    // ==========================================
+
+    data.append(
+      "permissions",
+      JSON.stringify(
+        Array.isArray(formData.permissions)
+          ? formData.permissions
+          : []
+      )
+    );
+
+    // ==========================================
+    // KYC
+    // ==========================================
+
+    if (formData.kyc) {
+      data.append(
+        "kyc",
+        JSON.stringify(formData.kyc)
+      );
     }
+
+    if (formData.kycStatus) {
+      data.append(
+        "kycStatus",
+        formData.kycStatus
+      );
+    }
+
+    if (formData.kycRemarks) {
+      data.append(
+        "kycRemarks",
+        formData.kycRemarks
+      );
+    }
+
+    // ==========================================
+    // PASSWORD
+    // ==========================================
+
+    // Password only sent when:
+    // 1. Creating a user
+    // 2. User entered a new password while editing
+
+    if (
+      !isEditMode ||
+      formData.password
+    ) {
+      data.append(
+        "password",
+        formData.password || ""
+      );
+    }
+
+    // ==========================================
+    // PROFILE PICTURE
+    // ==========================================
+
+    if (
+      formData.profilePicture instanceof File
+    ) {
+      data.append("profilePicture", formData.profilePicture);
+    }
+
+    // ==========================================
+    // ADD / EDIT URL
+    // ==========================================
+
+    const url = isEditMode
+      ? `http://localhost:5000/api/users/${id}`
+      : "http://localhost:5000/api/users";
+
+    const method = isEditMode
+      ? "PUT"
+      : "POST";
+
+    // ==========================================
+    // API REQUEST
+    // ==========================================
+
+    const response = await fetch(url, {
+      method,
+
+      headers: {
+        ...(token
+          ? {
+              Authorization: `Bearer ${token}`,
+            }
+          : {}),
+      },
+
+      body: data,
+    });
+
+    const responseText =
+      await response.text();
+
+    let result;
 
     try {
-      setSaving(true);
-
-      const token =
-        localStorage.getItem("token");
-
-      // ==========================================
-      // PAYLOAD
-      // ==========================================
-
-      const payload = {
-        name: formData.name,
-        userId: formData.userId,
-        mobile: formData.mobile,
-        email: formData.email,
-
-        dateOfBirth:
-          formData.dateOfBirth || null,
-
-        gender: formData.gender,
-
-        addressLine1:
-          formData.addressLine1,
-
-        addressLine2:
-          formData.addressLine2,
-
-        city: formData.city,
-        state: formData.state,
-        country: formData.country,
-        pinCode: formData.pinCode,
-
-        role: formData.role,
-
-        reportingTo:
-          formData.reportingTo,
-
-        department:
-          formData.department,
-
-        loginType:
-          formData.loginType,
-
-        status:
-          formData.status,
-
-        permissions:
-          formData.permissions,
-
-        notes:
-          formData.notes,
-
-        profilePicture:
-          formData.profilePicture,
-      };
-
-      // Password only sent when:
-      // 1. Creating a user
-      // 2. User entered a new password while editing
-      if (
-        !isEditMode ||
-        formData.password
-      ) {
-        payload.password =
-          formData.password;
-      }
-
-      // ==========================================
-      // ADD / EDIT URL
-      // ==========================================
-
-      const url = isEditMode
-        ? `http://localhost:5000/api/users/${id}`
-        : "http://localhost:5000/api/users";
-
-      const method = isEditMode
-        ? "PUT"
-        : "POST";
-
-      // ==========================================
-      // API REQUEST
-      // ==========================================
-
-      const response = await fetch(url, {
-        method,
-
-        headers: {
-          "Content-Type": "application/json",
-
-          ...(token
-            ? {
-                Authorization: `Bearer ${token}`,
-              }
-            : {}),
-        },
-
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.message ||
-            (isEditMode
-              ? "Failed to update user"
-              : "Failed to create user")
-        );
-      }
-
-      // ==========================================
-      // SUCCESS
-      // ==========================================
-
-      alert(
-        isEditMode
-          ? "User updated successfully."
-          : "User created successfully."
+      result = JSON.parse(responseText);
+    } catch {
+      throw new Error(
+        "Server returned an invalid response."
       );
-
-      navigate("/users");
-    } catch (error) {
-      console.error(
-        isEditMode
-          ? "Update user error:"
-          : "Create user error:",
-        error
-      );
-
-      alert(
-        error.message ||
-          (isEditMode
-            ? "Failed to update user."
-            : "Failed to create user.")
-      );
-    } finally {
-      setSaving(false);
     }
-  };
+
+    if (!response.ok) {
+      throw new Error(
+        result.message ||
+          (isEditMode
+            ? "Failed to update user"
+            : "Failed to create user")
+      );
+    }
+
+    // ==========================================
+    // SUCCESS
+    // ==========================================
+
+    alert(
+      isEditMode
+        ? "User updated successfully."
+        : "User created successfully."
+    );
+
+    navigate("/users");
+  } catch (error) {
+    console.error(
+      isEditMode
+        ? "Update user error:"
+        : "Create user error:",
+      error
+    );
+
+    alert(
+      error.message ||
+        (isEditMode
+          ? "Failed to update user."
+          : "Failed to create user.")
+    );
+  } finally {
+    setSaving(false);
+  }
+};
 
   // ==========================================
   // EMPTY TAB
@@ -836,10 +945,6 @@ const AddUser = () => {
                       className="country-code"
                     >
                       +91
-
-                      <ChevronDown
-                        size={15}
-                      />
                     </button>
 
                     <input

@@ -1274,7 +1274,7 @@
 
   .qr-stat-grid,
   .qr-filter-card {
-    grid-template-columns:  1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .qr-search-box,
@@ -1308,4 +1308,3 @@
     max-height: 94vh;
   }
 }
-

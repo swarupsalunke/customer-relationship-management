@@ -893,7 +893,7 @@
     }
 
     .bank-payment-header-actions {
-       display: grid;
+        display: grid;
     }
 
     .bank-payment-header-actions .bank-btn {

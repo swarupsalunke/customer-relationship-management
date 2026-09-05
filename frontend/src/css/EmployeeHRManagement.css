@@ -130,7 +130,7 @@
 }
 
 .secondary-action-button:hover {
-  border-color: #c9c1e9;
+    border-color: #c9c1e9;
     color: #5420d6;
 }
 
@@ -491,7 +491,7 @@
 .department-chart-card,
 .designation-chart-card,
 .employment-chart-card,
-.quick-actions-cards{
+.quick-actions-cards {
     min-height: 216px;
 }
 
@@ -678,11 +678,9 @@
     width: 126px;
     height: 126px;
     background:
-        conic-gradient(
-            #2563eb 0deg var(--permanent),
+        conic-gradient(#2563eb 0deg var(--permanent),
             #16a34a var(--permanent) calc(var(--permanent) + var(--contractual)),
-            #f59e0b calc(var(--permanent) + var(--contractual)) 360deg
-        );
+            #f59e0b calc(var(--permanent) + var(--contractual)) 360deg);
 }
 
 .employment-legend {
@@ -751,7 +749,7 @@
 }
 
 .quick-action-items:last-child {
-   border: 0;
+    border: 0;
 }
 
 .quick-action-items:hover {
@@ -792,7 +790,7 @@
     white-space: nowrap;
 }
 
-.quick-action-items > svg {
+.quick-action-items>svg {
     color: #a0a9b8;
 }
 
@@ -828,7 +826,7 @@
     gap: 12px;
 }
 
-.table-card-headings > div {
+.table-card-headings>div {
     min-width: 0;
 }
 
@@ -1450,7 +1448,7 @@
     justify-content: center;
 }
 
-.birthday-empty > div:last-child {
+.birthday-empty>div:last-child {
     min-width: 0;
 }
 
@@ -1747,7 +1745,7 @@
     font-size: 13px;
 }
 
-.employee-profile-header > div:last-child {
+.employee-profile-header>div:last-child {
     min-width: 0;
 }
 

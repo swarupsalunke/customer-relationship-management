@@ -941,24 +941,14 @@ const UserManagement = () => {
                                             <div className="table-user">
 
                                                 <div className="table-user-avatar">
-
                                                     {user.profilePicture ? (
-
                                                         <img
-                                                            src={
-                                                                user.profilePicture
-                                                            }
+                                                            src={`http://localhost:5000${user.profilePicture}`}
                                                             alt={user.name}
                                                         />
-
                                                     ) : (
-
-                                                        getInitials(
-                                                            user.name
-                                                        )
-
+                                                        getInitials(user.name)
                                                     )}
-
                                                 </div>
 
                                                 <div className="table-user-info">
@@ -1261,13 +1251,9 @@ const UserManagement = () => {
                                         {selectedUser.profilePicture ? (
 
                                             <img
-                                                src={
-                                                    selectedUser.profilePicture
-                                                }
-                                                alt={
-                                                    selectedUser.name
-                                                }
-                                            />
+                                                            src={`http://localhost:5000${selectedUser.profilePicture}`}
+                                                            alt={selectedUser.name}
+                                                        />
 
                                         ) : (
 
@@ -1555,56 +1541,56 @@ const UserManagement = () => {
                                     {selectedUser?.kycStatus ===
                                         "PENDING" && (
 
-                                        <div className="kyc-action-buttons">
+                                            <div className="kyc-action-buttons">
 
-                                            <button
-                                                type="button"
-                                                className="kyc-approve-btn"
-                                                disabled={
-                                                    kycActionLoading
-                                                }
-                                                onClick={() =>
-                                                    handleKycApprove(
-                                                        selectedUser._id
-                                                    )
-                                                }
-                                            >
-                                                Approve KYC
-                                            </button>
+                                                <button
+                                                    type="button"
+                                                    className="kyc-approve-btn"
+                                                    disabled={
+                                                        kycActionLoading
+                                                    }
+                                                    onClick={() =>
+                                                        handleKycApprove(
+                                                            selectedUser._id
+                                                        )
+                                                    }
+                                                >
+                                                    Approve KYC
+                                                </button>
 
-                                            <button
-                                                type="button"
-                                                className="kyc-reject-btn"
-                                                disabled={
-                                                    kycActionLoading
-                                                }
-                                                onClick={() =>
-                                                    handleKycReject(
-                                                        selectedUser._id
-                                                    )
-                                                }
-                                            >
-                                                Reject KYC
-                                            </button>
+                                                <button
+                                                    type="button"
+                                                    className="kyc-reject-btn"
+                                                    disabled={
+                                                        kycActionLoading
+                                                    }
+                                                    onClick={() =>
+                                                        handleKycReject(
+                                                            selectedUser._id
+                                                        )
+                                                    }
+                                                >
+                                                    Reject KYC
+                                                </button>
 
-                                            <button
-                                                type="button"
-                                                className="kyc-correction-btn"
-                                                disabled={
-                                                    kycActionLoading
-                                                }
-                                                onClick={() =>
-                                                    handleKycCorrection(
-                                                        selectedUser._id
-                                                    )
-                                                }
-                                            >
-                                                Request Correction
-                                            </button>
+                                                <button
+                                                    type="button"
+                                                    className="kyc-correction-btn"
+                                                    disabled={
+                                                        kycActionLoading
+                                                    }
+                                                    onClick={() =>
+                                                        handleKycCorrection(
+                                                            selectedUser._id
+                                                        )
+                                                    }
+                                                >
+                                                    Request Correction
+                                                </button>
 
-                                        </div>
+                                            </div>
 
-                                    )}
+                                        )}
 
                                 </div>
 

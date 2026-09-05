@@ -1,4 +1,3 @@
-
 .commission-page {
     width: 100%;
     min-width: 0;
@@ -86,7 +85,7 @@
 }
 
 .commission-secondary-btn:hover {
-   border-color: #c9c1e9;
+    border-color: #c9c1e9;
     color: #5420d6;
 }
 
@@ -219,7 +218,8 @@
 .commission-field {
     min-width: 0;
 }
-.commission-field button{
+
+.commission-field button {
     width: 100%;
     height: 29px;
     padding: 0 8px;
@@ -383,7 +383,7 @@
     font-weight: 700;
 }
 
-.commission-category-title > span:last-child {
+.commission-category-title>span:last-child {
     min-width: 0;
 }
 
@@ -661,7 +661,7 @@
     font-weight: 700;
 }
 
-.commission-user-cell > span {
+.commission-user-cell>span {
     min-width: 0;
     color: #44516a;
     font-size: 8.5px;
@@ -765,7 +765,7 @@
     gap: 10px;
 }
 
-.commission-pagination > span {
+.commission-pagination>span {
     color: #7e899c;
     font-size: 8.2px;
     white-space: nowrap;
@@ -932,7 +932,7 @@
    QUICK ACTIONS
    ========================================================= */
 
-.commission-side-card > button:not(.cycle-view-all) {
+.commission-side-card>button:not(.cycle-view-all) {
     width: 100%;
     min-height: 25px;
     padding: 4px 0;
@@ -950,16 +950,16 @@
     cursor: pointer;
 }
 
-.commission-side-card > button:not(.cycle-view-all):last-child {
+.commission-side-card>button:not(.cycle-view-all):last-child {
     border-bottom: 0;
 }
 
-.commission-side-card > button:not(.cycle-view-all):hover {
+.commission-side-card>button:not(.cycle-view-all):hover {
     background: #fbfcfe;
     color: #2563eb;
 }
 
-.commission-side-card > button:not(.cycle-view-all) svg {
+.commission-side-card>button:not(.cycle-view-all) svg {
     width: 14px;
     height: 14px;
     flex: 0 0 14px;
@@ -1024,7 +1024,7 @@
     gap: 6px;
 }
 
-.status-summary-row > span {
+.status-summary-row>span {
     min-width: 0;
     color: #58647b;
     display: flex;
@@ -1091,7 +1091,7 @@
     font-weight: 700;
 }
 
-.delayed-payment-card > span {
+.delayed-payment-card>span {
     display: block;
     margin-top: 5px;
     color: #7d8799;
@@ -1167,7 +1167,7 @@
     line-height: 1.3;
 }
 
-.commission-modal-header > button {
+.commission-modal-header>button {
     width: 28px;
     height: 28px;
     padding: 0;
@@ -1181,7 +1181,7 @@
     cursor: pointer;
 }
 
-.commission-modal-header > button:hover {
+.commission-modal-header>button:hover {
     background: #fff6f6;
     border-color: #efcaca;
     color: #df4444;
@@ -1201,12 +1201,12 @@
 }
 
 .commission-form-field,
-.commission-form-grid > .form-group {
+.commission-form-grid>.form-group {
     min-width: 0;
 }
 
 .commission-form-field label,
-.commission-form-grid > .form-group label {
+.commission-form-grid>.form-group label {
     display: block;
     margin-bottom: 4px;
     color: #536079;
@@ -1217,8 +1217,8 @@
 
 .commission-form-field input,
 .commission-form-field select,
-.commission-form-grid > .form-group input,
-.commission-form-grid > .form-group select {
+.commission-form-grid>.form-group input,
+.commission-form-grid>.form-group select {
     width: 100%;
     height: 34px;
     padding: 0 8px;
@@ -1233,8 +1233,8 @@
 
 .commission-form-field input:focus,
 .commission-form-field select:focus,
-.commission-form-grid > .form-group input:focus,
-.commission-form-grid > .form-group select:focus {
+.commission-form-grid>.form-group input:focus,
+.commission-form-grid>.form-group select:focus {
     border-color: #9db3d4;
     box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.05);
 }
@@ -1308,12 +1308,12 @@
     gap: 14px 18px;
 }
 
-.commission-detail-grid > div {
+.commission-detail-grid>div {
     min-width: 0;
     padding-bottom: 4px;
 }
 
-.commission-detail-grid > div span {
+.commission-detail-grid>div span {
     display: block;
     margin-bottom: 4px;
     color: #8791a3;
@@ -1321,7 +1321,7 @@
     line-height: 1.2;
 }
 
-.commission-detail-grid > div strong {
+.commission-detail-grid>div strong {
     display: block;
     color: #35425e;
     font-size: 9px;

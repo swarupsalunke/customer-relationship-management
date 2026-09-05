@@ -17,7 +17,6 @@ const createUser = async (req, res) => {
       mobile,
       password,
       role,
-      profilePicture,
 
       // Personal Details
       dateOfBirth,
@@ -51,7 +50,18 @@ const createUser = async (req, res) => {
       kyc,
     } = req.body;
 
-    // Required fields
+    // ==========================================
+    // PROFILE PICTURE
+    // ==========================================
+
+    const profilePicture = req.file
+      ? `/uploads/profiles/${req.file.filename}`
+      : "";
+
+    // ==========================================
+    // REQUIRED FIELDS
+    // ==========================================
+
     if (
       !name ||
       !userId ||
@@ -67,7 +77,10 @@ const createUser = async (req, res) => {
       });
     }
 
-    // Check existing User ID
+    // ==========================================
+    // CHECK EXISTING USER ID
+    // ==========================================
+
     const existingUserId = await User.findOne({
       userId: userId.trim(),
     });
@@ -79,7 +92,10 @@ const createUser = async (req, res) => {
       });
     }
 
-    // Check existing email
+    // ==========================================
+    // CHECK EXISTING EMAIL
+    // ==========================================
+
     const existingEmail = await User.findOne({
       email: email.toLowerCase(),
     });
@@ -91,7 +107,10 @@ const createUser = async (req, res) => {
       });
     }
 
-    // Check existing mobile
+    // ==========================================
+    // CHECK EXISTING MOBILE
+    // ==========================================
+
     const existingMobile = await User.findOne({
       mobile,
     });
@@ -103,10 +122,53 @@ const createUser = async (req, res) => {
       });
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // ==========================================
+    // HASH PASSWORD
+    // ==========================================
 
-    // Create user
+    const hashedPassword = await bcrypt.hash(
+      password,
+      10
+    );
+
+    // ==========================================
+    // PARSE PERMISSIONS
+    // ==========================================
+
+    let parsedPermissions = [];
+
+    if (permissions) {
+      try {
+        parsedPermissions =
+          Array.isArray(permissions)
+            ? permissions
+            : JSON.parse(permissions);
+      } catch (error) {
+        parsedPermissions = [];
+      }
+    }
+
+    // ==========================================
+    // PARSE KYC
+    // ==========================================
+
+    let parsedKyc = {};
+
+    if (kyc) {
+      try {
+        parsedKyc =
+          typeof kyc === "string"
+            ? JSON.parse(kyc)
+            : kyc;
+      } catch (error) {
+        parsedKyc = {};
+      }
+    }
+
+    // ==========================================
+    // CREATE USER
+    // ==========================================
+
     const user = await User.create({
       name: name.trim(),
       userId: userId.trim(),
@@ -115,13 +177,20 @@ const createUser = async (req, res) => {
       password: hashedPassword,
       role,
 
-      profilePicture: profilePicture || "",
+      // Profile Picture
+      profilePicture,
 
-      // Personal Details
+      // ========================================
+      // PERSONAL DETAILS
+      // ========================================
+
       dateOfBirth: dateOfBirth || null,
       gender: gender || "",
 
-      // Address Details
+      // ========================================
+      // ADDRESS DETAILS
+      // ========================================
+
       address: address || "",
       addressLine1: addressLine1 || "",
       addressLine2: addressLine2 || "",
@@ -131,29 +200,50 @@ const createUser = async (req, res) => {
       city: city || "",
       pinCode: pinCode || "",
 
-      // Role & Reporting
+      // ========================================
+      // ROLE & REPORTING
+      // ========================================
+
       reportingTo: reportingTo || "",
       department: department || "",
 
-      // Account Details
+      // ========================================
+      // ACCOUNT DETAILS
+      // ========================================
+
       loginType: loginType || "",
       status: status || "ACTIVE",
 
-      // Permissions
-      permissions: Array.isArray(permissions)
-        ? permissions
-        : [],
+      // ========================================
+      // PERMISSIONS
+      // ========================================
 
-      // Notes
+      permissions: parsedPermissions,
+
+      // ========================================
+      // NOTES
+      // ========================================
+
       notes: notes || "",
 
-      // Existing KYC
-      kyc: kyc || {},
+      // ========================================
+      // KYC
+      // ========================================
+
+      kyc: parsedKyc,
     });
 
-    // Remove password from response
+    // ==========================================
+    // REMOVE PASSWORD FROM RESPONSE
+    // ==========================================
+
     const userResponse = user.toObject();
+
     delete userResponse.password;
+
+    // ==========================================
+    // SUCCESS RESPONSE
+    // ==========================================
 
     return res.status(201).json({
       success: true,
@@ -161,11 +251,15 @@ const createUser = async (req, res) => {
       user: userResponse,
     });
   } catch (error) {
-    console.error("Create user error:", error);
+    console.error(
+      "Create user error:",
+      error
+    );
 
     return res.status(500).json({
       success: false,
       message: "Failed to create user",
+      error: error.message,
     });
   }
 };
@@ -241,7 +335,6 @@ const updateUser = async (req, res) => {
       email,
       mobile,
       role,
-      profilePicture,
 
       // Personal Details
       dateOfBirth,
@@ -363,8 +456,13 @@ const updateUser = async (req, res) => {
       user.role = role;
     }
 
-    if (profilePicture !== undefined) {
-      user.profilePicture = profilePicture;
+    // ==========================================
+    // PROFILE PICTURE
+    // ==========================================
+
+    if (req.file) {
+      user.profilePicture =
+        `/uploads/profiles/${req.file.filename}`;
     }
 
     // ==========================================
@@ -478,9 +576,18 @@ const updateUser = async (req, res) => {
       user.kycRemarks = kycRemarks;
     }
 
+    // ==========================================
+    // SAVE USER
+    // ==========================================
+
     await user.save();
 
+    // ==========================================
+    // REMOVE PASSWORD FROM RESPONSE
+    // ==========================================
+
     const userResponse = user.toObject();
+
     delete userResponse.password;
 
     return res.status(200).json({

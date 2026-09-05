@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
 }
@@ -65,8 +64,8 @@
     transition: 0.2s ease;
 }
 
-.order-header-btn:hover{
-     border-color: #c9c1e9;
+.order-header-btn:hover {
+    border-color: #c9c1e9;
     color: #5420d6;
 }
 
@@ -153,7 +152,7 @@
     flex-direction: column;
 }
 
-.order-stat-content > span {
+.order-stat-content>span {
     margin-bottom: 3px;
     color: #748198;
     font-size: 11px;
@@ -920,7 +919,7 @@
     cursor: not-allowed;
 }
 
-.pagination-buttons > span {
+.pagination-buttons>span {
     min-width: 48px;
     text-align: center;
     color: #56657b;
@@ -1509,14 +1508,14 @@
 }
 
 .order-modal-submit {
-    border: 1px solid #1570ef;
+    border: 1px solid #ff7100;
 
-    background: #1570ef;
+    background: #ff7100;
     color: #ffffff;
 }
 
 .order-modal-submit:hover:not(:disabled) {
-    background: #0d5fce;
+    background: #ea6500;
 }
 
 .order-modal-submit:disabled {
@@ -1825,7 +1824,7 @@
 
     .order-status-overview {
         padding-bottom: 5px;
-        
+
     }
 
     .order-pagination {
@@ -1957,7 +1956,7 @@
         font-size: 19px;
     }
 
-    .order-stat-content > span {
+    .order-stat-content>span {
         font-size: 10px;
     }
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv"); 
 
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
@@ -49,6 +49,15 @@ const path = require("path");
 dotenv.config();
 const app = express();
 
+app.use(express.json());
+
+app.use(
+  "/uploads",
+  express.static(
+    path.join(__dirname, "uploads")
+  )
+);
+
 app.use(cors());
 app.use(express.json());
 
@@ -65,7 +74,6 @@ app.use("/api/leads", leadRoutes);
 app.use("/api/qr", qrRoutes);
 app.use("/api/rewards", rewardRoutes);
 app.use("/api/schemes", schemeRoutes);
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/finance", financeRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/system-settings", systemSettingsRoutes);
@@ -92,6 +100,9 @@ app.use("/api/bank-payments", bankPaymentRoutes);
 app.use("/api/approvals", approvalRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/social-media", socialMediaRoutes);
+
+
+
 
 
 app.get("/", (req, res) => {

@@ -75,8 +75,9 @@
         color 0.18s ease,
         box-shadow 0.18s ease;
 }
-.dispatch-secondary-btn:hover{
-     border-color: #c9c1e9;
+
+.dispatch-secondary-btn:hover {
+    border-color: #c9c1e9;
     color: #5420d6;
 }
 
@@ -226,7 +227,7 @@
     box-shadow: 0 1px 5px rgba(28, 45, 76, 0.025);
 }
 
-.dispatch-stat-card > div:last-child {
+.dispatch-stat-card>div:last-child {
     min-width: 0;
 }
 
@@ -445,7 +446,7 @@
     background: #ffffff;
 }
 
-.dispatch-donut > div {
+.dispatch-donut>div {
     position: relative;
     z-index: 1;
     text-align: center;
@@ -481,7 +482,7 @@
     font-size: 9px;
 }
 
-.dispatch-status-row > span {
+.dispatch-status-row>span {
     min-width: 0;
     display: flex;
     align-items: center;
@@ -582,7 +583,7 @@
     border-bottom: 0;
 }
 
-.dispatch-transporter-row > div {
+.dispatch-transporter-row>div {
     min-width: 0;
     display: flex;
     align-items: center;
@@ -607,7 +608,7 @@
     white-space: nowrap;
 }
 
-.dispatch-transporter-row > span:last-child {
+.dispatch-transporter-row>span:last-child {
     flex: 0 0 auto;
     color: #42506b;
     font-size: 9px;
@@ -625,7 +626,7 @@
     align-items: start;
 }
 
-.dispatch-main-grid > div {
+.dispatch-main-grid>div {
     min-width: 0;
 }
 
@@ -818,7 +819,7 @@
     gap: 9px;
 }
 
-.dispatch-monthly-card > div:last-child {
+.dispatch-monthly-card>div:last-child {
     min-width: 0;
 }
 
@@ -877,7 +878,7 @@
     border-bottom: 0;
 }
 
-.dispatch-quick-actions button > svg {
+.dispatch-quick-actions button>svg {
     width: 18px;
     height: 18px;
     padding: 3px;
@@ -886,7 +887,7 @@
     color: #f45a17;
 }
 
-.dispatch-quick-actions button > span:nth-child(2) {
+.dispatch-quick-actions button>span:nth-child(2) {
     min-width: 0;
 }
 
@@ -906,14 +907,14 @@
     line-height: 1.25;
 }
 
-.dispatch-quick-actions button > span:last-child {
+.dispatch-quick-actions button>span:last-child {
     color: #8792a6;
     font-size: 15px;
     text-align: right;
 }
 
 .dispatch-quick-actions button:hover strong,
-.dispatch-quick-actions button:hover > span:last-child {
+.dispatch-quick-actions button:hover>span:last-child {
     color: #f45a17;
 }
 
@@ -925,7 +926,7 @@
     padding: 7px 13px 9px;
 }
 
-.dispatch-summary-list > div {
+.dispatch-summary-list>div {
     min-height: 34px;
     padding: 6px 0;
     border-bottom: 1px solid #edf0f4;
@@ -935,7 +936,7 @@
     gap: 10px;
 }
 
-.dispatch-summary-list > div:last-child {
+.dispatch-summary-list>div:last-child {
     border-bottom: 0;
 }
 
@@ -1156,7 +1157,7 @@
     gap: 16px 20px;
 }
 
-.dispatch-detail-grid > div {
+.dispatch-detail-grid>div {
     min-width: 0;
 }
 
@@ -1195,7 +1196,7 @@
     gap: 7px;
 }
 
-.dispatch-status-controls > span:first-child {
+.dispatch-status-controls>span:first-child {
     margin-right: 3px;
     color: #52617d;
     font-size: 9px;
@@ -1317,7 +1318,7 @@
     gap: 10px;
 }
 
-.dispatch-report-summary > div {
+.dispatch-report-summary>div {
     min-height: 68px;
     padding: 12px;
     border: 1px solid #e4e9f0;
@@ -1451,7 +1452,7 @@
         justify-content: flex-start;
     }
 
-    .dispatch-header-actions > * {
+    .dispatch-header-actions>* {
         flex: 1;
     }
 

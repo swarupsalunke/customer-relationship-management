@@ -248,6 +248,7 @@
   justify-content: center;
   gap: 5px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .profile-upload-area {
@@ -438,7 +439,7 @@
   flex-shrink: 0;
 }
 
-.permission-item input:checked + .custom-checkbox {
+.permission-item input:checked+.custom-checkbox {
   background: #ff6500;
   border-color: #ff6500;
   color: #ffffff;
@@ -541,6 +542,7 @@
 }
 
 @media (max-width: 950px) {
+
   .add-user-grid,
   .add-user-bottom-grid {
     grid-template-columns: 1fr;
